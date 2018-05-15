@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapideFix", "RapideFix\RapideFix.csproj", "{3B28A210-BFB6-4513-982C-7473DAE77CA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RapideFix", "src\RapideFix\RapideFix.csproj", "{3B28A210-BFB6-4513-982C-7473DAE77CA2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleRapideFix", "samples\SampleRapideFix\SampleRapideFix.csproj", "{CAA108E9-953E-402C-9CF6-F8E4D8013AA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidFixFixture", "tests\RapidFixFixture\RapidFixFixture.csproj", "{6EB73ADF-005C-4239-92AF-34EDA1E0AF9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{3B28A210-BFB6-4513-982C-7473DAE77CA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B28A210-BFB6-4513-982C-7473DAE77CA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B28A210-BFB6-4513-982C-7473DAE77CA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAA108E9-953E-402C-9CF6-F8E4D8013AA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAA108E9-953E-402C-9CF6-F8E4D8013AA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAA108E9-953E-402C-9CF6-F8E4D8013AA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAA108E9-953E-402C-9CF6-F8E4D8013AA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EB73ADF-005C-4239-92AF-34EDA1E0AF9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EB73ADF-005C-4239-92AF-34EDA1E0AF9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EB73ADF-005C-4239-92AF-34EDA1E0AF9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EB73ADF-005C-4239-92AF-34EDA1E0AF9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
