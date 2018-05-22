@@ -3,6 +3,8 @@
   internal static class Constant
   {
     internal const char SOHChar = '\u0001';
+    internal const char VerticalBar = '|';
+    internal const char Equal = '=';
 
     internal const byte SOHByte = 1;
 

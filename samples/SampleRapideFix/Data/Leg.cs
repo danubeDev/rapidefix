@@ -1,4 +1,4 @@
-﻿using RapideFix;
+﻿using RapideFix.Attributes;
 
 namespace SampleRapideFix.Data
 {
