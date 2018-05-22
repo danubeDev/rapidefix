@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RapideFix", "src\RapideFix\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleRapideFix", "samples\SampleRapideFix\SampleRapideFix.csproj", "{CAA108E9-953E-402C-9CF6-F8E4D8013AA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidFixFixture", "tests\RapidFixFixture\RapidFixFixture.csproj", "{6EB73ADF-005C-4239-92AF-34EDA1E0AF9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RapideFixFixture", "tests\RapidFixFixture\RapideFixFixture.csproj", "{6EB73ADF-005C-4239-92AF-34EDA1E0AF9D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CEC862DD-7066-4735-8790-33BE78C200FB}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

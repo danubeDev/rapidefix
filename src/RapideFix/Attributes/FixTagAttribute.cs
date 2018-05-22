@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RapideFix
+namespace RapideFix.Attributes
 {
   [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
   public class FixTagAttribute : Attribute
