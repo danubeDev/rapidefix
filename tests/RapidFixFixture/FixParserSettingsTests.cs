@@ -1,7 +1,7 @@
 using RapideFix;
 using Xunit;
 
-namespace RapidFixFixture
+namespace RapideFixFixture
 {
   public class FixParserSettingsTests
   {
