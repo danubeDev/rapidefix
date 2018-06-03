@@ -24,7 +24,7 @@ namespace RapideFix.StringProcessing
 
     private static int GetTagValueSeparatorIndex(this ReadOnlyMemory<char> fixElement)
     {
-      return fixElement.Span.IndexOf(Constant.Equal);
+      return fixElement.Span.IndexOf(Constants.Equal);
     }
   }
 }

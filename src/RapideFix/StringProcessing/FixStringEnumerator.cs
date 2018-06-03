@@ -39,7 +39,7 @@ namespace RapideFix.StringProcessing
     {
       if (_index < _fixString.Length)
       {
-        int nextSeparator = _fixString.IndexOf(Constant.VerticalBar, _index);
+        int nextSeparator = _fixString.IndexOf(Constants.VerticalBar, _index);
         if (0 < nextSeparator)
         {
           Current = _fixString.AsMemory(_index, nextSeparator - _index);

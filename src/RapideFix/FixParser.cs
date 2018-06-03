@@ -1,11 +1,9 @@
-﻿using System;
+﻿using RapideFix.Attributes;
+using RapideFix.StringProcessing;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Buffers.Text;
-using RapideFix.StringProcessing;
-using RapideFix.Attributes;
 
 namespace RapideFix
 {
@@ -21,6 +19,7 @@ namespace RapideFix
     public TMessage Parse<TMessage>(string data) where TMessage : new()
     {
       TMessage message = new TMessage();
+
       Dictionary<int, PropertyInfo> tagFixTagAttributeMap = GetPropertyFixTagAttributes(typeof(TMessage));
 
       foreach (ReadOnlyMemory<char> item in new FixStringEnumerable(data))
@@ -49,14 +48,14 @@ namespace RapideFix
 
     private ReadOnlySpan<char> GetNextElement(int start, string str)
     {
-      return str.AsSpan(start, str.IndexOf(Constant.VerticalBar, start)-start);
+      return str.AsSpan(start, str.IndexOf(Constants.VerticalBar, start)-start);
     }
 
     #region Private Methods
 
     private ReadOnlySpan<char> GetValue(ReadOnlySpan<char> element)
     {
-      int index = element.IndexOf(Constant.Equal) + 1;
+      int index = element.IndexOf(Constants.Equal) + 1;
       return element.Slice(index, element.Length - index);
     }
 
