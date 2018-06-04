@@ -1,10 +1,9 @@
-﻿using RapideFix;
+﻿using RapideFix.DataTypes;
 using System;
-using System.Runtime.CompilerServices;
 
-namespace RapideFixFixture.Validation
+namespace RapideFix.Validation
 {
-  public class LengthValidator
+  public class LengthValidator : IValidator
   {
     private readonly IntegerToFixConverter _converter;
     public LengthValidator(IntegerToFixConverter converter)
@@ -12,21 +11,10 @@ namespace RapideFixFixture.Validation
       _converter = converter ?? throw new ArgumentNullException(nameof(converter));
     }
 
-    public bool IsValid(string data)
+    public bool IsValid(Span<byte> data, FixMessageContext msgContext)
     {
-      throw new NotImplementedException();
-    }
-
-    public bool IsValid(Span<byte> data)
-    {
-      int endingTagPos = data.LastIndexOf(KnownFixTags.Checksum);
-      return IsValid(data, endingTagPos);
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool IsValid(Span<byte> data, int endingTagPos)
-    {
-      int startingTagPos = data.IndexOf(KnownFixTags.MessageType);
+      var endingTagPos = msgContext.ChecksumTagStartIndex;
+      int startingTagPos = msgContext.MessageTypeTagStartIndex;
       int expectedLength = endingTagPos - startingTagPos;
       if(expectedLength <= 0)
       {
@@ -37,7 +25,7 @@ namespace RapideFixFixture.Validation
       _converter.Convert(number: expectedLength, into: expectedDigits, count: digitsCount);
       expectedDigits[digitsCount] = Constants.SOHByte;
 
-      int lengthTagPos = data.IndexOf(KnownFixTags.Length);
+      int lengthTagPos = msgContext.LengthTagStartIndex;
       var fromLengthStart = data.Slice(lengthTagPos + KnownFixTags.Length.Length);
 
       return fromLengthStart.StartsWith(expectedDigits);

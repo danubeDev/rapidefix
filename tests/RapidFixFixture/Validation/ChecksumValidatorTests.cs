@@ -1,4 +1,5 @@
 ﻿using RapideFix;
+using RapideFix.Factories;
 using RapideFix.Validation;
 using System;
 using Xunit;
@@ -13,7 +14,8 @@ namespace RapideFixFixture.Validation
     {
       byte[] message = new TestFixMessageBuilder(input).Build();
       var uut = new ChecksumValidator(new IntegerToFixConverter());
-      var result = uut.IsValid(message.AsSpan());
+      var msgContext = new MessageContextFactory().Create(message);
+      var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.True(result);
     }
 
@@ -22,7 +24,8 @@ namespace RapideFixFixture.Validation
     {
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).Build(checksum: "10=023|");
       var uut = new ChecksumValidator(new IntegerToFixConverter());
-      var result = uut.IsValid(message.AsSpan());
+      var msgContext = new MessageContextFactory().Create(message);
+      var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.False(result);
     }
 
@@ -31,7 +34,8 @@ namespace RapideFixFixture.Validation
     {
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).Build(checksum: "10=3|");
       var uut = new ChecksumValidator(new IntegerToFixConverter());
-      var result = uut.IsValid(message.AsSpan());
+      var msgContext = new MessageContextFactory().Create(message);
+      var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.False(result);
     }
 
@@ -40,7 +44,8 @@ namespace RapideFixFixture.Validation
     {
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).Build(checksum: "11=3|");
       var uut = new ChecksumValidator(new IntegerToFixConverter());
-      var result = uut.IsValid(message.AsSpan());
+      var msgContext = new MessageContextFactory().Create(message);
+      var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.False(result);
     }
 

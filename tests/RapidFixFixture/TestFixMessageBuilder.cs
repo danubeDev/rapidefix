@@ -9,6 +9,7 @@ namespace RapideFixFixture
   {
     private StringBuilder _tags;
     private string _length;
+    private string _beginString;
 
     public static readonly string DefaultBody = "35=A|49=SERVER|56=CLIENT|34=177|52=20090107-18:15:16|98=0|108=30|";
 
@@ -51,10 +52,22 @@ namespace RapideFixFixture
       return this;
     }
 
+    public TestFixMessageBuilder AddBeginString(SupportedFixVersion version)
+    {
+      _beginString = $"8={version}|";
+      return this;
+    }
+
+    public TestFixMessageBuilder AddBeginString(string beginString)
+    {
+      _beginString = beginString;
+      return this;
+    }
+
     public byte[] Build()
     {
       StringBuilder sb = new StringBuilder();
-      sb.Append("8=FIX.4.2|");
+      sb.Append(_beginString ?? "8=FIX.4.2|");
       sb.Append(GetLength());
       sb.Append(_tags, 0, _tags.Length);
       var headerAndBody = sb.Replace(Constants.VerticalBar, Constants.SOHChar).ToString();
@@ -64,7 +77,7 @@ namespace RapideFixFixture
     public byte[] Build(string checksum)
     {
       StringBuilder sb = new StringBuilder();
-      sb.Append("8=FIX.4.2|");
+      sb.Append(_beginString ?? "8=FIX.4.2|");
       sb.Append(GetLength());
       this.AddTag(checksum);
       sb.Append(_tags, 0, _tags.Length);
@@ -76,7 +89,7 @@ namespace RapideFixFixture
     {
       if(string.IsNullOrEmpty(_length))
       {
-        return  $"9={_tags.Length}{Constants.VerticalBar}";
+        return $"9={_tags.Length}{Constants.VerticalBar}";
       }
       return _length;
     }

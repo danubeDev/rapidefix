@@ -1,10 +1,9 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using System.Text;
+﻿using RapideFix.DataTypes;
+using System;
 
 namespace RapideFix.Validation
 {
-  public class ChecksumValidator
+  public class ChecksumValidator : IValidator
   {
     private static readonly int Modulus = 256;
     private static readonly int ChecksumLength = 3;
@@ -15,20 +14,9 @@ namespace RapideFix.Validation
       _converter = converter ?? throw new ArgumentNullException(nameof(converter));
     }
 
-    public bool IsValid(string data)
+    public bool IsValid(Span<byte> data, FixMessageContext msgContext)
     {
-      throw new NotImplementedException();
-    }
-
-    public bool IsValid(Span<byte> data)
-    {
-      int endingTagPos = data.LastIndexOf(KnownFixTags.Checksum);
-      return IsValid(data, endingTagPos);
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool IsValid(Span<byte> data, int endingTagPos)
-    {
+      var endingTagPos = msgContext.ChecksumTagStartIndex;
       if(endingTagPos < 0 || (endingTagPos + KnownFixTags.Checksum.Length + ChecksumLength + 1) != data.Length)
       {
         return false;

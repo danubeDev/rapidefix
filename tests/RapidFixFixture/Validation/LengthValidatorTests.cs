@@ -1,4 +1,6 @@
 ﻿using RapideFix;
+using RapideFix.Factories;
+using RapideFix.Validation;
 using System;
 using System.Diagnostics;
 using Xunit;
@@ -20,7 +22,8 @@ namespace RapideFixFixture.Validation
     {
       byte[] message = new TestFixMessageBuilder(input).Build();
       var uut = new LengthValidator(new IntegerToFixConverter());
-      var result = uut.IsValid(message.AsSpan());
+      var msgContext = new MessageContextFactory().Create(message);
+      var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.True(result);
     }
 
@@ -30,12 +33,13 @@ namespace RapideFixFixture.Validation
       byte[] message = TestFixMessageBuilder.CreateDefaultMessage();
 
       var uut = new LengthValidator(new IntegerToFixConverter());
-      var result = uut.IsValid(message.AsSpan());
+      var msgContext = new MessageContextFactory().Create(message);
+      var result = uut.IsValid(message.AsSpan(), msgContext);
       Stopwatch sw = new Stopwatch();
       sw.Start();
       for(int i = 0; i < 100; i++)
       {
-        result = uut.IsValid(message.AsSpan());
+        result = uut.IsValid(message.AsSpan(), msgContext);
       }
       sw.Stop();
 
@@ -47,7 +51,8 @@ namespace RapideFixFixture.Validation
     {
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddLength("9=023|").Build();
       var uut = new LengthValidator(new IntegerToFixConverter());
-      var result = uut.IsValid(message.AsSpan());
+      var msgContext = new MessageContextFactory().Create(message);
+      var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.False(result);
     }
 
@@ -56,7 +61,8 @@ namespace RapideFixFixture.Validation
     {
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddLength("9=|").Build();
       var uut = new LengthValidator(new IntegerToFixConverter());
-      var result = uut.IsValid(message.AsSpan());
+      var msgContext = new MessageContextFactory().Create(message);
+      var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.False(result);
     }
 
@@ -65,7 +71,8 @@ namespace RapideFixFixture.Validation
     {
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddLength("9=3|").Build();
       var uut = new LengthValidator(new IntegerToFixConverter());
-      var result = uut.IsValid(message.AsSpan());
+      var msgContext = new MessageContextFactory().Create(message);
+      var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.False(result);
     }
 

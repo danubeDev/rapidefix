@@ -1,6 +1,5 @@
-﻿using System;
+﻿using RapideFix.Extensions;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace RapideFix
 {
@@ -8,9 +7,12 @@ namespace RapideFix
   {
     static KnownFixTags()
     {
-      MessageType = CreateKnownTag(35);
-      Checksum = CreateKnownTag(10);
-      Length = CreateKnownTag(9);
+      MessageType = 35.ToSOHAndKnownTag();
+      Checksum = 10.ToSOHAndKnownTag();
+      Length = 9.ToSOHAndKnownTag();
+      FixVersion = 8.ToKnownTag();
+      SenderCompId = 49.ToSOHAndKnownTag();
+      TargetCompId = 56.ToSOHAndKnownTag();
     }
 
     public static byte[] MessageType { get; }
@@ -19,18 +21,15 @@ namespace RapideFix
 
     public static byte[] Length { get; }
 
+    public static byte[] FixVersion { get; }
+
+    public static byte[] SenderCompId { get; }
+
+    public static byte[] TargetCompId { get; }
+
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
     public static void Initialize()
     {
-    }
-
-    private static byte[] CreateKnownTag(int fixTag)
-    {
-      var tag = Encoding.ASCII.GetBytes($"{fixTag}=");
-      var result = new byte[tag.Length + 1];
-      result[0] = Constants.SOHByte;
-      Array.Copy(tag, 0, result, 1, tag.Length);
-      return result;
     }
 
   }
