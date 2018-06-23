@@ -1,34 +1,49 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RapideFix;
+using RapideFix.DataTypes;
 
 namespace RapideFixFixture
 {
   internal class TestFixMessageBuilder
   {
-    private StringBuilder _tags;
+    private List<IFixTagValue> _fixTags;
+    private MessageEncoding _encoding;
     private string _length;
     private string _beginString;
+    private string _checksum;
 
     public static readonly string DefaultBody = "35=A|49=SERVER|56=CLIENT|34=177|52=20090107-18:15:16|98=0|108=30|";
 
     public TestFixMessageBuilder()
     {
-      _tags = new StringBuilder();
+      _fixTags = new List<IFixTagValue>();
     }
 
-    public TestFixMessageBuilder(string message)
+    public TestFixMessageBuilder(string message) : this()
     {
-      _tags = new StringBuilder(message);
+      _fixTags.Add(new FixTagRaw(message));
     }
 
     public TestFixMessageBuilder AddTag(int tag, string value)
     {
-      _tags.Append(tag);
-      _tags.Append(Constants.Equal);
-      _tags.Append(value);
-      _tags.Append(Constants.VerticalBar);
+      _fixTags.Add(new FixTagValue(tag, value));
+      return this;
+    }
+
+    public TestFixMessageBuilder AddTag(int tag, string value, MessageEncoding encoding)
+    {
+      if(_encoding == null)
+      {
+        _encoding = encoding;
+      }
+      else if(_encoding != encoding)
+      {
+        throw new InvalidOperationException("Encoding is already set");
+      }
+      _fixTags.Add(new FixTagValue(tag, value, encoding));
       return this;
     }
 
@@ -42,7 +57,7 @@ namespace RapideFixFixture
       {
         throw new ArgumentException("Missing SOH char");
       }
-      _tags.Append(tagAndValue);
+      _fixTags.Add(new FixTagRaw(tagAndValue));
       return this;
     }
 
@@ -58,51 +73,74 @@ namespace RapideFixFixture
       return this;
     }
 
-    public TestFixMessageBuilder AddBeginString(string beginString)
+    public TestFixMessageBuilder AddBeginString(string tagAndValue)
     {
-      _beginString = beginString;
+      _beginString = tagAndValue;
+      return this;
+    }
+
+    public TestFixMessageBuilder AddChecksum(string tagAndValue)
+    {
+      _checksum = tagAndValue;
       return this;
     }
 
     public byte[] Build()
     {
-      StringBuilder sb = new StringBuilder();
-      sb.Append(_beginString ?? "8=FIX.4.2|");
-      sb.Append(GetLength());
-      sb.Append(_tags, 0, _tags.Length);
-      var headerAndBody = sb.Replace(Constants.VerticalBar, Constants.SOHChar).ToString();
-      return Encoding.ASCII.GetBytes(AddChecksum(headerAndBody));
+      IFixTagValue begin = new FixTagRaw(_beginString ?? "8=FIX.4.2|");
+      byte[] body = GetBody();
+      IFixTagValue length = new FixTagRaw(_length ?? $"9={body.Length}{Constants.VerticalBar}");
+      IFixTagValue checksum = GetChecksum(begin.ToBytes(), length.ToBytes(), body);
+
+      var result = new byte[begin.GetLength() + length.GetLength() + body.Length + checksum.GetLength()];
+      int offset = 0;
+      offset = begin.CopyTo(result, offset);
+      offset = length.CopyTo(result, offset);
+      body.CopyTo(result, offset);
+      checksum.CopyTo(result, offset + body.Length);
+
+      return result;
     }
 
-    public byte[] Build(string checksum)
+    private byte[] GetBody()
     {
-      StringBuilder sb = new StringBuilder();
-      sb.Append(_beginString ?? "8=FIX.4.2|");
-      sb.Append(GetLength());
-      this.AddTag(checksum);
-      sb.Append(_tags, 0, _tags.Length);
-      var headerBodyTail = sb.Replace(Constants.VerticalBar, Constants.SOHChar).ToString();
-      return Encoding.ASCII.GetBytes(headerBodyTail);
-    }
-
-    private string GetLength()
-    {
-      if(string.IsNullOrEmpty(_length))
+      var bodyLength = _fixTags.Sum(x => x.GetLength());
+      byte[] result = new byte[bodyLength];
+      int offset = 0;
+      foreach(var encoded in _fixTags)
       {
-        return $"9={_tags.Length}{Constants.VerticalBar}";
+        offset = encoded.CopyTo(result, offset);
       }
-      return _length;
+      return result;
     }
 
-    private static string AddChecksum(string headerAndBody)
+    public override string ToString()
     {
-      var tail = "10=" + CalculateChecksum(headerAndBody) + Constants.SOHChar;
-      return headerAndBody + tail;
+      var begin = new FixTagRaw(_beginString ?? "8=FIX.4.2|");
+      var body = GetBody();
+      var length = new FixTagRaw(_length ?? $"9={body.Length}{Constants.VerticalBar}");
+      IFixTagValue checksum = GetChecksum(begin.ToBytes(), length.ToBytes(), body);
+
+      StringBuilder sb = new StringBuilder();
+      sb.Append(begin);
+      sb.Append(length);
+      foreach(var item in _fixTags)
+      {
+        sb.Append(item);
+      }
+      sb.Append(checksum);
+      return sb.ToString();
     }
 
-    private static string CalculateChecksum(string message)
+    private IFixTagValue GetChecksum(byte[] begin, byte[] length, byte[] body)
     {
-      return (Encoding.ASCII.GetBytes(message).Sum(x => x) % 256).ToString("000");
+      if(_checksum != null)
+      {
+        return new FixTagRaw(_checksum);
+      }
+      var checksum = ((begin.Sum(x => x) + length.Sum(x => x) + body.Sum(x => x)) % 256).ToString("000");
+      var tail = "10=" + checksum + Constants.SOHChar;
+      return new FixTagRaw(tail);
     }
 
     public static byte[] CreateDefaultMessage()

@@ -22,7 +22,7 @@ namespace RapideFixFixture.Validation
     [Fact]
     public void GivenIncorrectChecksum_Validate_ReturnsFalse()
     {
-      var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).Build(checksum: "10=023|");
+      var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddChecksum("10=023|").Build();
       var uut = new ChecksumValidator(new IntegerToFixConverter());
       var msgContext = new MessageContextFactory().Create(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
@@ -32,7 +32,7 @@ namespace RapideFixFixture.Validation
     [Fact]
     public void GivenInvalidChecksum_Validate_ReturnsFalse()
     {
-      var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).Build(checksum: "10=3|");
+      var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddChecksum("10=3|").Build();
       var uut = new ChecksumValidator(new IntegerToFixConverter());
       var msgContext = new MessageContextFactory().Create(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
@@ -42,7 +42,7 @@ namespace RapideFixFixture.Validation
     [Fact]
     public void GivenNoChecksum_Validate_ReturnsFalse()
     {
-      var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).Build(checksum: "11=3|");
+      var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddChecksum("10=3|").Build();
       var uut = new ChecksumValidator(new IntegerToFixConverter());
       var msgContext = new MessageContextFactory().Create(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);

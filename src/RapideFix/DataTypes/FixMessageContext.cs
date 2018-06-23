@@ -10,6 +10,6 @@
 
     public int ChecksumTagStartIndex { get; set; }
 
-
+    public MessageEncoding EncodedFields { get; set; }
   }
 }
