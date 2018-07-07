@@ -1,4 +1,6 @@
-﻿namespace RapideFix.DataTypes
+﻿using System.Collections.Generic;
+
+namespace RapideFix.DataTypes
 {
   public class FixMessageContext
   {
@@ -11,5 +13,7 @@
     public int ChecksumTagStartIndex { get; set; }
 
     public MessageEncoding EncodedFields { get; set; }
+
+    public Dictionary<int, int> RepeatingGroupCounters { get; set; }
   }
 }

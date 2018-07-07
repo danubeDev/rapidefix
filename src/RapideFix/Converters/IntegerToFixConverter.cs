@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace RapideFix
 {
   public class IntegerToFixConverter
   {
-    private readonly byte[] asciiCachedNumbers = new byte[10];
+    private readonly byte[] digitToAsciiByte = new byte[10];
+    private readonly Dictionary<byte, int> asciiByteToInt = new Dictionary<byte, int>();
 
-    public IntegerToFixConverter()
+    public static IntegerToFixConverter Instance { get; } = new IntegerToFixConverter();
+
+    private IntegerToFixConverter()
     {
       for(int i = 0; i < 10; i++)
       {
@@ -16,7 +20,8 @@ namespace RapideFix
         {
           throw new InvalidOperationException($"Cannot create ASCII byte representation of digits for {i}");
         }
-        asciiCachedNumbers[i] = numberEncoded[0];
+        digitToAsciiByte[i] = numberEncoded[0];
+        asciiByteToInt.Add(numberEncoded[0], i);
       }
     }
 
@@ -24,9 +29,22 @@ namespace RapideFix
     {
       for(int i = count - 1; i >= 0; i--)
       {
-        into[i] = asciiCachedNumbers[number % 10];
+        into[i] = digitToAsciiByte[number % 10];
         number = number / 10;
       }
+    }
+
+    public int ConvertBack(Span<byte> data)
+    {
+      int result = 0;
+      foreach(byte b in data)
+      {
+        if(asciiByteToInt.TryGetValue(b, out int digit))
+        {
+          result = result * 10 + digit;
+        }
+      }
+      return result;
     }
   }
 }

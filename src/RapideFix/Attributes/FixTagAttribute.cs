@@ -2,7 +2,7 @@
 
 namespace RapideFix.Attributes
 {
-  [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
+  [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
   public class FixTagAttribute : Attribute
   {
     public FixTagAttribute(int tag)

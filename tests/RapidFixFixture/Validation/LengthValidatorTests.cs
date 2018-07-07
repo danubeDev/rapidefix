@@ -21,7 +21,7 @@ namespace RapideFixFixture.Validation
     public void GivenCorrectLength_Validate_ReturnsTrue(string input)
     {
       byte[] message = new TestFixMessageBuilder(input).Build();
-      var uut = new LengthValidator(new IntegerToFixConverter());
+      var uut = new LengthValidator(IntegerToFixConverter.Instance);
       var msgContext = new MessageContextFactory().Create(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.True(result);
@@ -32,7 +32,7 @@ namespace RapideFixFixture.Validation
     {
       byte[] message = TestFixMessageBuilder.CreateDefaultMessage();
 
-      var uut = new LengthValidator(new IntegerToFixConverter());
+      var uut = new LengthValidator(IntegerToFixConverter.Instance);
       var msgContext = new MessageContextFactory().Create(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
       Stopwatch sw = new Stopwatch();
@@ -50,7 +50,7 @@ namespace RapideFixFixture.Validation
     public void GivenIncorrectLength_Validate_ReturnsFalse()
     {
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddLength("9=023|").Build();
-      var uut = new LengthValidator(new IntegerToFixConverter());
+      var uut = new LengthValidator(IntegerToFixConverter.Instance);
       var msgContext = new MessageContextFactory().Create(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.False(result);
@@ -60,7 +60,7 @@ namespace RapideFixFixture.Validation
     public void GivenInvalidLength_Validate_ReturnsFalse()
     {
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddLength("9=|").Build();
-      var uut = new LengthValidator(new IntegerToFixConverter());
+      var uut = new LengthValidator(IntegerToFixConverter.Instance);
       var msgContext = new MessageContextFactory().Create(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.False(result);
@@ -70,7 +70,7 @@ namespace RapideFixFixture.Validation
     public void GivenNoLength_Validate_ReturnsFalse()
     {
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddLength("9=3|").Build();
-      var uut = new LengthValidator(new IntegerToFixConverter());
+      var uut = new LengthValidator(IntegerToFixConverter.Instance);
       var msgContext = new MessageContextFactory().Create(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.False(result);

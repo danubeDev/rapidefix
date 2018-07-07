@@ -11,14 +11,14 @@ namespace RapideFixFixture.Validation
     [Fact]
     public void GivenDependencies_Construct_DoesNotThrow()
     {
-      var record = Record.Exception(() => new ValidatorCollection(new IntegerToFixConverter()));
+      var record = Record.Exception(() => new ValidatorCollection(IntegerToFixConverter.Instance));
       Assert.Null(record);
     }
 
     [Fact]
     public void GivenMessageContext_IsValid_ReturnsTrue()
     {
-      var uut = new ValidatorCollection(new IntegerToFixConverter());
+      var uut = new ValidatorCollection(IntegerToFixConverter.Instance);
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).Build();
       var msgCtx = new MessageContextFactory().Create(message);
 
@@ -28,7 +28,7 @@ namespace RapideFixFixture.Validation
     [Fact]
     public void GivenNoMessageContext_IsValid_ThrowsArgumentNullException()
     {
-      var uut = new ValidatorCollection(new IntegerToFixConverter());
+      var uut = new ValidatorCollection(IntegerToFixConverter.Instance);
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).Build();
       Assert.Throws<ArgumentNullException>(() => uut.IsValid(message, null));
     }

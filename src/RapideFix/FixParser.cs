@@ -10,7 +10,7 @@ namespace RapideFix
   public class FixParser
   {
     private readonly FixParserSettings _settings;
-    
+
     public FixParser(FixParserSettings settings)
     {
       _settings = settings;
@@ -22,12 +22,12 @@ namespace RapideFix
 
       Dictionary<int, PropertyInfo> tagFixTagAttributeMap = GetPropertyFixTagAttributes(typeof(TMessage));
 
-      foreach (ReadOnlyMemory<char> item in new FixStringEnumerable(data))
+      foreach(ReadOnlyMemory<char> item in new FixStringEnumerable(data))
       {
         (ReadOnlyMemory<char> fixTagChars, ReadOnlyMemory<char> value) = item.GetTagAndValue();
         int fixTag = int.Parse(fixTagChars.Span);
 
-        if (tagFixTagAttributeMap.TryGetValue(fixTag, out var propertyInfo))
+        if(tagFixTagAttributeMap.TryGetValue(fixTag, out var propertyInfo))
         {
           propertyInfo.SetValue(message, Parse(propertyInfo.PropertyType, value));
         }
@@ -46,12 +46,17 @@ namespace RapideFix
       throw new NotImplementedException();
     }
 
-    private ReadOnlySpan<char> GetNextElement(int start, string str)
+    public void InitializeType<T>()
     {
-      return str.AsSpan(start, str.IndexOf(Constants.VerticalBar, start)-start);
+
     }
 
     #region Private Methods
+
+    private ReadOnlySpan<char> GetNextElement(int start, string str)
+    {
+      return str.AsSpan(start, str.IndexOf(Constants.VerticalBar, start) - start);
+    }
 
     private ReadOnlySpan<char> GetValue(ReadOnlySpan<char> element)
     {
@@ -64,7 +69,7 @@ namespace RapideFix
       Dictionary<int, PropertyInfo> fixTagPropertyInfoMap = new Dictionary<int, PropertyInfo>();
       PropertyInfo[] properties = type.GetProperties();
 
-      foreach (PropertyInfo propertyInfo in properties)
+      foreach(PropertyInfo propertyInfo in properties)
       {
         FixTagAttribute fixTagAttribute = (FixTagAttribute)propertyInfo.GetCustomAttribute(typeof(FixTagAttribute), false);
         fixTagPropertyInfoMap.Add(fixTagAttribute.Tag, propertyInfo);
@@ -75,7 +80,7 @@ namespace RapideFix
 
     private object Parse(Type type, ReadOnlyMemory<char> value)
     {
-      switch (type.Name)
+      switch(type.Name)
       {
         case "Int32":
           return int.Parse(value.Span);

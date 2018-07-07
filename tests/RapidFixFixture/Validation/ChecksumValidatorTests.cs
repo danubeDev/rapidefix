@@ -13,7 +13,7 @@ namespace RapideFixFixture.Validation
     public void GivenCorrectChecksum_Validate_ReturnsTrue(string input)
     {
       byte[] message = new TestFixMessageBuilder(input).Build();
-      var uut = new ChecksumValidator(new IntegerToFixConverter());
+      var uut = new ChecksumValidator(IntegerToFixConverter.Instance);
       var msgContext = new MessageContextFactory().Create(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.True(result);
@@ -23,7 +23,7 @@ namespace RapideFixFixture.Validation
     public void GivenIncorrectChecksum_Validate_ReturnsFalse()
     {
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddChecksum("10=023|").Build();
-      var uut = new ChecksumValidator(new IntegerToFixConverter());
+      var uut = new ChecksumValidator(IntegerToFixConverter.Instance);
       var msgContext = new MessageContextFactory().Create(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.False(result);
@@ -33,7 +33,7 @@ namespace RapideFixFixture.Validation
     public void GivenInvalidChecksum_Validate_ReturnsFalse()
     {
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddChecksum("10=3|").Build();
-      var uut = new ChecksumValidator(new IntegerToFixConverter());
+      var uut = new ChecksumValidator(IntegerToFixConverter.Instance);
       var msgContext = new MessageContextFactory().Create(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.False(result);
@@ -43,7 +43,7 @@ namespace RapideFixFixture.Validation
     public void GivenNoChecksum_Validate_ReturnsFalse()
     {
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddChecksum("10=3|").Build();
-      var uut = new ChecksumValidator(new IntegerToFixConverter());
+      var uut = new ChecksumValidator(IntegerToFixConverter.Instance);
       var msgContext = new MessageContextFactory().Create(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.False(result);
