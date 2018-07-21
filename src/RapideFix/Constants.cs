@@ -11,5 +11,11 @@ namespace RapideFix
 
     internal const byte SOHByte = 1;
 
+    internal const char True = 'Y';
+    internal const char TrueNumber = '1';
+
+    internal const char False = 'N';
+    internal const char FalseNumber = '0';
+
   }
 }

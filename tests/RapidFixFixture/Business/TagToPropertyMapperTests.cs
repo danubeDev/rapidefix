@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-using RapideFix.Attributes;
+using RapideFix.Business;
 using RapideFix.Extensions;
 using RapideFixFixture.TestTypes;
 using Xunit;
 
-namespace RapideFixFixture.Attributes
+namespace RapideFixFixture.Business
 {
   public partial class TagToPropertyMapperTests
   {
@@ -26,9 +26,9 @@ namespace RapideFixFixture.Attributes
       Assert.False(result.IsEncoded);
       Assert.False(result.IsRepeating);
       Assert.NotNull(result.Current);
-      Assert.Equal(1, result.Parent.Count);
-      Assert.False(result.Parent.First().IsRepeating);
-      Assert.Null(result.Parent.First().RepeatingTag);
+      Assert.Equal(1, result.Parents.Count);
+      Assert.False(result.Parents.First().IsRepeating);
+      Assert.Null(result.Parents.First().RepeatingTag);
     }
 
     [Fact]
@@ -41,7 +41,7 @@ namespace RapideFixFixture.Attributes
       Assert.False(result.IsEncoded);
       Assert.False(result.IsRepeating);
       Assert.NotNull(result.Current);
-      Assert.Empty(result.Parent);
+      Assert.Empty(result.Parents);
     }
 
     [Fact]
@@ -54,7 +54,7 @@ namespace RapideFixFixture.Attributes
       Assert.False(result.IsEncoded);
       Assert.False(result.IsRepeating);
       Assert.NotNull(result.Current);
-      Assert.Empty(result.Parent);
+      Assert.Empty(result.Parents);
       Assert.NotNull(result.TypeConverterName);
     }
 
@@ -69,13 +69,13 @@ namespace RapideFixFixture.Attributes
       Assert.False(repeatingTag.IsEncoded);
       Assert.False(repeatingTag.IsRepeating);
       Assert.NotNull(repeatingTag.Current);
-      Assert.Empty(repeatingTag.Parent);
+      Assert.Empty(repeatingTag.Parents);
       Assert.Null(repeatingTag.TypeConverterName);
 
       Assert.False(actualTag.IsEncoded);
       Assert.True(actualTag.IsRepeating);
       Assert.NotNull(actualTag.Current);
-      Assert.Empty(actualTag.Parent);
+      Assert.Empty(actualTag.Parents);
       Assert.NotNull(actualTag.RepeatingTag);
     }
 
@@ -90,15 +90,15 @@ namespace RapideFixFixture.Attributes
       Assert.False(repeatingTag.IsEncoded);
       Assert.False(repeatingTag.IsRepeating);
       Assert.NotNull(repeatingTag.Current);
-      Assert.Empty(repeatingTag.Parent);
+      Assert.Empty(repeatingTag.Parents);
       Assert.Null(repeatingTag.TypeConverterName);
 
       Assert.False(actualTag.IsEncoded);
       Assert.False(actualTag.IsRepeating);
       Assert.NotNull(actualTag.Current);
-      Assert.Equal(1, actualTag.Parent.Count);
-      Assert.True(actualTag.Parent.First().IsRepeating);
-      Assert.NotNull(actualTag.Parent.First().RepeatingTag);
+      Assert.Equal(1, actualTag.Parents.Count);
+      Assert.True(actualTag.Parents.First().IsRepeating);
+      Assert.NotNull(actualTag.Parents.First().RepeatingTag);
     }
 
   }

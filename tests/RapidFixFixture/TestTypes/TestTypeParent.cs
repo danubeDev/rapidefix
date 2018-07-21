@@ -21,6 +21,12 @@ namespace RapideFixFixture.TestTypes
     [FixTag(61)]
     [TypeConverter(typeof(TestConverter))]
     public TestConvertable Tag61 { get; set; }
+
+    [FixTag(62)]
+    public int Tag62 { get; set; }
+
+    [FixTag(63)]
+    public int Tag63 { get; set; }
   }
 
 }

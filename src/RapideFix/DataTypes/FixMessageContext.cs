@@ -15,5 +15,7 @@ namespace RapideFix.DataTypes
     public MessageEncoding EncodedFields { get; set; }
 
     public Dictionary<int, int> RepeatingGroupCounters { get; set; }
+
+    public HashSet<int> CreatedParentTypes { get; set; }
   }
 }

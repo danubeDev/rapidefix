@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using RapideFix.Attributes;
 using RapideFix.Extensions;
 
-namespace RapideFix.Attributes
+namespace RapideFix.Business
 {
   public class TagToPropertyMapper
   {
@@ -20,7 +21,7 @@ namespace RapideFix.Attributes
 
     public class TagMapLeaf : TagMapNode
     {
-      public IList<TagMapNode> Parent { get; set; }
+      public IList<TagMapNode> Parents { get; set; }
 
       public string TypeConverterName { get; set; }
 
@@ -127,7 +128,7 @@ namespace RapideFix.Attributes
       TagMapLeaf value = new TagMapLeaf()
       {
         Current = property,
-        Parent = parents.ToList(),
+        Parents = parents.ToList(),
         IsEncoded = fixTagAttribute.Encoded,
         IsRepeating = false,
         TypeConverterName = typeConverter?.ConverterTypeName
@@ -141,7 +142,7 @@ namespace RapideFix.Attributes
       TagMapLeaf value = new TagMapLeaf()
       {
         Current = property,
-        Parent = parents.ToList(),
+        Parents = parents.ToList(),
         IsEncoded = fixTagAttribute.Encoded,
         IsRepeating = true,
         RepeatingTag = repeatingGroup.Tag.ToKnownTag(),
@@ -156,7 +157,7 @@ namespace RapideFix.Attributes
       var value = new TagMapLeaf()
       {
         Current = property,
-        Parent = parents.ToList(),
+        Parents = parents.ToList(),
         IsRepeating = false,
       };
       _map.Add(repeatingGroup.Tag, value);
