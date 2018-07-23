@@ -6,6 +6,9 @@ namespace RapideFixFixture.TestTypes
   {
     [FixTag(60)]
     public string Tag60 { get; set; }
+
+    [FixTag(601)]
+    public string Tag601 { get; set; }
   }
 
 }

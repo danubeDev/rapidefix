@@ -1,4 +1,5 @@
 ﻿using RapideFix.DataTypes;
+using RapideFix.Extensions;
 using System;
 using System.Text;
 using Xunit;
@@ -18,7 +19,7 @@ namespace RapideFixFixture.DataTypes
     }
 
     [Fact]
-    public void GivenEncoding_ToSting_NotNull()
+    public void GivenEncoding_ToString_NotNull()
     {
       Assert.NotNull(MessageEncoding.EUC.ToString());
       Assert.NotNull(MessageEncoding.JIS.ToString());
@@ -38,25 +39,19 @@ namespace RapideFixFixture.DataTypes
     }
 
     [Fact]
-    public void GivenBytes_TryParse_ReturnsFalse()
-    {
-      Assert.False(MessageEncoding.TryParse((new byte[3]).AsSpan(), out var dummy));
-    }
-
-    [Fact]
     public void GivenBytes_Parse_ReturnsEncoding()
     {
-      Assert.NotNull(MessageEncoding.Parse(MessageEncoding.EUC.FixEncodedValue()));
-      Assert.NotNull(MessageEncoding.Parse(MessageEncoding.JIS.FixEncodedValue()));
-      Assert.NotNull(MessageEncoding.Parse(MessageEncoding.UTF8.FixEncodedValue()));
+      Assert.NotNull(MessageEncoding.Parse("EUC-JP".ToByteValueAndSOH()));
+      Assert.NotNull(MessageEncoding.Parse("ISO-2022-JP".ToByteValueAndSOH()));
+      Assert.NotNull(MessageEncoding.Parse("UTF-8".ToByteValueAndSOH()));
     }
 
     [Fact]
     public void GivenBytes_TryParse_ReturnsTrue()
     {
-      Assert.True(MessageEncoding.TryParse(MessageEncoding.EUC.FixEncodedValue(), out var dummyEUC));
-      Assert.True(MessageEncoding.TryParse(MessageEncoding.JIS.FixEncodedValue(), out var dummyJIS));
-      Assert.True(MessageEncoding.TryParse(MessageEncoding.UTF8.FixEncodedValue(), out var dummyUTF8));
+      Assert.True(MessageEncoding.TryParse("EUC-JP".ToByteValueAndSOH(), out var dummyEUC));
+      Assert.True(MessageEncoding.TryParse("ISO-2022-JP".ToByteValueAndSOH(), out var dummyJIS));
+      Assert.True(MessageEncoding.TryParse("UTF-8".ToByteValueAndSOH(), out var dummyUTF8));
     }
   }
 }

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using RapideFix;
 using RapideFix.DataTypes;
 
@@ -18,6 +19,23 @@ namespace RapideFixFixture
       Tag = tag;
       Encoder = Encoding.ASCII;
       Value = Encoder.GetBytes(value);
+    }
+
+    public FixTagValue(int tag, int value)
+    {
+      Tag = tag;
+      Encoder = Encoding.ASCII;
+      int digitsCount = (int)Math.Floor(Math.Log10(value) + 1);
+      var encodedData = new byte[digitsCount];
+      IntegerToFixConverter.Instance.Convert(value, into: encodedData, count: digitsCount);
+      Value = encodedData;
+    }
+
+    public FixTagValue(int tag, double value)
+    {
+      Tag = tag;
+      Encoder = Encoding.ASCII;
+      Value = Encoder.GetBytes(value.ToString());
     }
 
     public int Tag { get; }

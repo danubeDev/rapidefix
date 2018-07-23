@@ -27,6 +27,14 @@ namespace RapideFixFixture.TestTypes
 
     [FixTag(63)]
     public int Tag63 { get; set; }
+
+    [RepeatingGroup(64)]
+    [FixTag(65)]
+    [TypeConverter(typeof(TestConverter))]
+    public IEnumerable<TestConvertable> Tag65s { get; set; }
+
+    [FixTag(67)]
+    public double Tag67 { get; set; }
   }
 
 }

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Linq;
 using RapideFix.Business;
+using RapideFix.Business.Data;
 using RapideFix.DataTypes;
 using RapideFixFixture.TestTypes;
 using Xunit;
-using static RapideFix.Business.TagToPropertyMapper;
 
 namespace RapideFixFixture.Business
 {
@@ -49,6 +50,96 @@ namespace RapideFixFixture.Business
       Assert.NotNull(targetObject.CustomType);
       Assert.Equal(result, targetObject.CustomType);
     }
+
+    [Fact]
+    public void GivenEnumeratedParents_Set_ReturnsFirstElement()
+    {
+      var targetObject = new TestTypeParent() { Tag59s = new TestMany[3] };
+      var uut = new ParentTypeSetter();
+      var valueToSet = new byte[1].AsSpan();
+      var mappingDetails = new TagMapLeaf()
+      {
+        Current = typeof(TestMany).GetProperty("Tag60"),
+        Parents = new[]
+        {
+          new EnumerableTagMapNode()
+          {
+            Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag59s)),
+            InnerType = typeof(TestMany)
+          }
+        }
+      };
+      var messageContext = new FixMessageContext();
+      var result = uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
+
+      Assert.NotNull(targetObject.Tag59s.First());
+      Assert.Equal(result, targetObject.Tag59s.First());
+    }
+
+    [Fact]
+    public void GivenSecondTagOnEnumerated_Set_ReturnsFirstElement()
+    {
+      var targetObject = new TestTypeParent() { Tag59s = new TestMany[3] };
+      var uut = new ParentTypeSetter();
+      var valueToSet = new byte[1].AsSpan();
+      var mappingTag60 = new TagMapLeaf()
+      {
+        Current = typeof(TestMany).GetProperty("Tag60"),
+        Parents = new[]
+       {
+          new EnumerableTagMapNode()
+          {
+            Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag59s)),
+            InnerType = typeof(TestMany)
+          }
+        }
+      };
+      var mappingTag601 = new TagMapLeaf()
+      {
+        Current = typeof(TestMany).GetProperty("Tag601"),
+        Parents = new[]
+        {
+          new EnumerableTagMapNode()
+          {
+            Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag59s)),
+            InnerType = typeof(TestMany)
+          }
+        }
+      };
+      var messageContext = new FixMessageContext();
+      uut.Set(valueToSet, mappingTag60, messageContext, targetObject);
+      var result = uut.Set(valueToSet, mappingTag601, messageContext, targetObject);
+
+      Assert.NotNull(targetObject.Tag59s.First());
+      Assert.Equal(result, targetObject.Tag59s.First());
+    }
+
+    [Fact]
+    public void GivenEnumeratedParents_SetTwice_ReturnsSecondElement()
+    {
+      var targetObject = new TestTypeParent() { Tag59s = new TestMany[3] };
+      var uut = new ParentTypeSetter();
+      var valueToSet = new byte[1].AsSpan();
+      var mappingDetails = new TagMapLeaf()
+      {
+        Current = typeof(TestMany).GetProperty("Tag60"),
+        Parents = new[]
+        {
+          new EnumerableTagMapNode()
+          {
+            Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag59s)),
+            InnerType = typeof(TestMany)
+          }
+        }
+      };
+      var messageContext = new FixMessageContext();
+      uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
+      var result = uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
+
+      Assert.NotNull(targetObject.Tag59s.First());
+      Assert.Equal(result, targetObject.Tag59s.Skip(1).First());
+    }
+
 
   }
 }

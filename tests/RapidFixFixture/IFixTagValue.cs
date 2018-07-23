@@ -7,13 +7,12 @@
   {
     /// <summary>
     /// Copies the values of the tag to the data byte array to the given offset of data.
-    /// Returns the new offset.
     /// </summary>
     /// <returns>The new offset.</returns>
     int CopyTo(byte[] data, int offset);
 
     /// <summary>
-    /// Returns the encoded length of data in bytes.
+    /// Returns the length of byte encoded data.
     /// </summary>
     /// <returns>Number of bytes.</returns>
     int GetLength();

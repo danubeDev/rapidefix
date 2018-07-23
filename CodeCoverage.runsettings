@@ -7,7 +7,7 @@
           <CodeCoverage>  
             <ModulePaths>  
               <Include>  
-                <ModulePath>.*RapideFix.*</ModulePath>  
+                <ModulePath>.*RapideFix\.dll</ModulePath>  
               </Include> 
               <Exclude>  
                 <ModulePath>.*moq.*</ModulePath>  

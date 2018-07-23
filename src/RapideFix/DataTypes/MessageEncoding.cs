@@ -20,7 +20,7 @@ namespace RapideFix.DataTypes
     {
       _byteValue = encoding.ToByteValueAndSOH();
       _encoding = encoding.ToLowerInvariant();
-      _encoder = new Lazy<Encoding>(SetEncoder, LazyThreadSafetyMode.None);
+      _encoder = new Lazy<Encoding>(LoadEncoder, LazyThreadSafetyMode.None);
     }
 
     public static MessageEncoding Parse(ReadOnlySpan<byte> fixValue)
@@ -58,14 +58,11 @@ namespace RapideFix.DataTypes
       return _encoding;
     }
 
-    public byte[] FixEncodedValue()
-    {
-      return _byteValue;
-    }
+    public byte[] FixEncodedValue =>  _byteValue;
 
     public Encoding GetEncoder() => _encoder.Value;
 
-    private Encoding SetEncoder()
+    private Encoding LoadEncoder()
     {
       return Encoding.GetEncoding(_encoding);
     }

@@ -14,7 +14,7 @@ namespace RapideFixFixture
 
     public int GetLength()
     {
-      return Encoding.ASCII.GetByteCount(Value.ToString());
+      return Encoding.ASCII.GetByteCount(Value);
     }
 
     public int CopyTo(byte[] toArray, int offset)

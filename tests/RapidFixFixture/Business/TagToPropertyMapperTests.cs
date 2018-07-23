@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using RapideFix.Business;
+using RapideFix.Business.Data;
 using RapideFix.Extensions;
 using RapideFixFixture.TestTypes;
 using Xunit;
@@ -21,14 +22,13 @@ namespace RapideFixFixture.Business
     {
       var uut = new TagToPropertyMapper();
       uut.Map<TestTypeParent>();
-      var result = uut.Get(58.ToKnownTag());
+      TagMapLeaf result = uut.Get(58.ToKnownTag());
 
       Assert.False(result.IsEncoded);
-      Assert.False(result.IsRepeating);
+      Assert.False(result is IEnumerableTag);
       Assert.NotNull(result.Current);
       Assert.Equal(1, result.Parents.Count);
-      Assert.False(result.Parents.First().IsRepeating);
-      Assert.Null(result.Parents.First().RepeatingTag);
+      Assert.False(result.Parents.First() is IEnumerableTag);
     }
 
     [Fact]
@@ -39,7 +39,7 @@ namespace RapideFixFixture.Business
       var result = uut.Get(55.ToKnownTag());
 
       Assert.False(result.IsEncoded);
-      Assert.False(result.IsRepeating);
+      Assert.False(result is IEnumerableTag);
       Assert.NotNull(result.Current);
       Assert.Empty(result.Parents);
     }
@@ -52,7 +52,7 @@ namespace RapideFixFixture.Business
       var result = uut.Get(61.ToKnownTag());
 
       Assert.False(result.IsEncoded);
-      Assert.False(result.IsRepeating);
+      Assert.False(result is IEnumerableTag);
       Assert.NotNull(result.Current);
       Assert.Empty(result.Parents);
       Assert.NotNull(result.TypeConverterName);
@@ -67,16 +67,17 @@ namespace RapideFixFixture.Business
       var actualTag = uut.Get(57.ToKnownTag());
 
       Assert.False(repeatingTag.IsEncoded);
-      Assert.False(repeatingTag.IsRepeating);
+      Assert.False(repeatingTag is IEnumerableTag);
+      Assert.True(repeatingTag is RepeatingGroupTagMapLeaf);
       Assert.NotNull(repeatingTag.Current);
       Assert.Empty(repeatingTag.Parents);
       Assert.Null(repeatingTag.TypeConverterName);
 
       Assert.False(actualTag.IsEncoded);
-      Assert.True(actualTag.IsRepeating);
+      Assert.True(actualTag is IEnumerableTag);
       Assert.NotNull(actualTag.Current);
       Assert.Empty(actualTag.Parents);
-      Assert.NotNull(actualTag.RepeatingTag);
+      Assert.NotEqual(0, ((IEnumerableTag)actualTag).RepeatingTagNumber);
     }
 
     [Fact]
@@ -88,17 +89,18 @@ namespace RapideFixFixture.Business
       var actualTag = uut.Get(60.ToKnownTag());
 
       Assert.False(repeatingTag.IsEncoded);
-      Assert.False(repeatingTag.IsRepeating);
+      Assert.False(repeatingTag is IEnumerableTag);
+      Assert.True(repeatingTag is RepeatingGroupTagMapLeaf);
       Assert.NotNull(repeatingTag.Current);
       Assert.Empty(repeatingTag.Parents);
       Assert.Null(repeatingTag.TypeConverterName);
 
       Assert.False(actualTag.IsEncoded);
-      Assert.False(actualTag.IsRepeating);
+      Assert.False(actualTag is IEnumerableTag);
       Assert.NotNull(actualTag.Current);
       Assert.Equal(1, actualTag.Parents.Count);
-      Assert.True(actualTag.Parents.First().IsRepeating);
-      Assert.NotNull(actualTag.Parents.First().RepeatingTag);
+      Assert.True(actualTag.Parents.First() is IEnumerableTag);
+      Assert.NotEqual(0, actualTag.Parents.OfType<IEnumerableTag>().First().RepeatingTagNumber);
     }
 
   }

@@ -1,207 +1,164 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Text;
+using RapideFix.Business.Data;
 using RapideFix.DataTypes;
-using static RapideFix.Business.TagToPropertyMapper;
 
 namespace RapideFix.Business
 {
-  public class SimpleTypeSetter
+  public class SimpleTypeSetter : BaseTypeSetter, IPropertySetter
   {
-    protected readonly Dictionary<int, Delegate> _propertySetters = new Dictionary<int, Delegate>();
-
     public object Set(Span<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
       int valueLength = value.Length;
       Span<char> valueChars = stackalloc char[valueLength];
       valueLength = Decode(value, mappingDetails, fixMessageContext, valueChars);
+      valueChars = valueChars.Slice(0, valueLength);
+      var propertyType = !(mappingDetails is IEnumerableTag enumerableLeaf) ?
+        mappingDetails.Current.PropertyType : enumerableLeaf.InnerType;
 
-      if(mappingDetails.Current.PropertyType == typeof(int))
+
+      if(propertyType == typeof(int))
       {
         if(int.TryParse(valueChars, out var parsedValue))
         {
-          GetILSetterAction<int>(mappingDetails.Current).Invoke(targetObject, parsedValue);
+          SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
-      else if(mappingDetails.Current.PropertyType == typeof(double))
+      else if(propertyType == typeof(double))
       {
         if(double.TryParse(valueChars, out var parsedValue))
         {
-          GetILSetterAction<double>(mappingDetails.Current).Invoke(targetObject, parsedValue);
+          SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
-      else if(mappingDetails.Current.PropertyType == typeof(decimal))
+      else if(propertyType == typeof(decimal))
       {
         if(decimal.TryParse(valueChars, out var parsedValue))
         {
-          GetILSetterAction<decimal>(mappingDetails.Current).Invoke(targetObject, parsedValue);
+          SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
-      else if(mappingDetails.Current.PropertyType == typeof(long))
+      else if(propertyType == typeof(long))
       {
         if(long.TryParse(valueChars, out var parsedValue))
         {
-          GetILSetterAction<long>(mappingDetails.Current).Invoke(targetObject, parsedValue);
+          SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
-      else if(mappingDetails.Current.PropertyType == typeof(short))
+      else if(propertyType == typeof(short))
       {
         if(short.TryParse(valueChars, out var parsedValue))
         {
-          GetILSetterAction<short>(mappingDetails.Current).Invoke(targetObject, parsedValue);
+          SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
-      else if(mappingDetails.Current.PropertyType == typeof(float))
+      else if(propertyType == typeof(float))
       {
         if(float.TryParse(valueChars, out var parsedValue))
         {
-          GetILSetterAction<float>(mappingDetails.Current).Invoke(targetObject, parsedValue);
+          SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
-      else if(mappingDetails.Current.PropertyType == typeof(bool))
+      else if(propertyType == typeof(bool))
       {
         if(bool.TryParse(valueChars, out var parsedValue))
         {
-          GetILSetterAction<bool>(mappingDetails.Current).Invoke(targetObject, parsedValue);
+          SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
         else
         {
           if(valueChars[0] == Constants.True || valueChars[0] == Constants.TrueNumber)
           {
-            GetILSetterAction<bool>(mappingDetails.Current).Invoke(targetObject, true);
+            SetValue(mappingDetails, fixMessageContext, targetObject, true);
           }
           if(valueChars[0] == Constants.False || valueChars[0] == Constants.FalseNumber)
           {
-            GetILSetterAction<bool>(mappingDetails.Current).Invoke(targetObject, true);
+            SetValue(mappingDetails, fixMessageContext, targetObject, false);
           }
         }
       }
-      else if(mappingDetails.Current.PropertyType == typeof(byte))
+      else if(propertyType == typeof(byte))
       {
-        GetILSetterAction<byte>(mappingDetails.Current).Invoke(targetObject, value[0]);
+        SetValue(mappingDetails, fixMessageContext, targetObject, value[0]);
       }
-      else if(mappingDetails.Current.PropertyType == typeof(char))
+      else if(propertyType == typeof(char))
       {
-        GetILSetterAction<char>(mappingDetails.Current).Invoke(targetObject, valueChars[0]);
+        SetValue(mappingDetails, fixMessageContext, targetObject, valueChars[0]);
       }
-      else if(mappingDetails.Current.PropertyType == typeof(string))
+      else if(propertyType == typeof(string))
       {
-        GetILSetterAction<string>(mappingDetails.Current).Invoke(targetObject, valueChars.ToString());
+        SetValue(mappingDetails, fixMessageContext, targetObject, valueChars.ToString());
       }
-      if(mappingDetails.Current.PropertyType == typeof(int?))
+      if(propertyType == typeof(int?))
       {
         if(int.TryParse(valueChars, out var parsedValue))
         {
-          GetILSetterAction<int?>(mappingDetails.Current).Invoke(targetObject, parsedValue);
+          SetValue<int?>(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
-      else if(mappingDetails.Current.PropertyType == typeof(double?))
+      else if(propertyType == typeof(double?))
       {
         if(double.TryParse(valueChars, out var parsedValue))
         {
-          GetILSetterAction<double?>(mappingDetails.Current).Invoke(targetObject, parsedValue);
+          SetValue<double?>(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
-      else if(mappingDetails.Current.PropertyType == typeof(decimal?))
+      else if(propertyType == typeof(decimal?))
       {
         if(decimal.TryParse(valueChars, out var parsedValue))
         {
-          GetILSetterAction<decimal?>(mappingDetails.Current).Invoke(targetObject, parsedValue);
+          SetValue<decimal?>(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
-      else if(mappingDetails.Current.PropertyType == typeof(long?))
+      else if(propertyType == typeof(long?))
       {
         if(long.TryParse(valueChars, out var parsedValue))
         {
-          GetILSetterAction<long?>(mappingDetails.Current).Invoke(targetObject, parsedValue);
+          SetValue<long?>(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
-      else if(mappingDetails.Current.PropertyType == typeof(short?))
+      else if(propertyType == typeof(short?))
       {
         if(short.TryParse(valueChars, out var parsedValue))
         {
-          GetILSetterAction<short?>(mappingDetails.Current).Invoke(targetObject, parsedValue);
+          SetValue<short?>(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
-      else if(mappingDetails.Current.PropertyType == typeof(float?))
+      else if(propertyType == typeof(float?))
       {
         if(float.TryParse(valueChars, out var parsedValue))
         {
-          GetILSetterAction<float?>(mappingDetails.Current).Invoke(targetObject, parsedValue);
+          SetValue<float?>(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
-      else if(mappingDetails.Current.PropertyType == typeof(bool?))
+      else if(propertyType == typeof(bool?))
       {
         if(bool.TryParse(valueChars, out var parsedValue))
         {
-          GetILSetterAction<bool?>(mappingDetails.Current).Invoke(targetObject, parsedValue);
+          SetValue<bool?>(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
         else
         {
           if(valueChars[0] == Constants.True || valueChars[0] == Constants.TrueNumber)
           {
-            GetILSetterAction<bool?>(mappingDetails.Current).Invoke(targetObject, true);
+            SetValue<bool?>(mappingDetails, fixMessageContext, targetObject, true);
           }
           if(valueChars[0] == Constants.False || valueChars[0] == Constants.FalseNumber)
           {
-            GetILSetterAction<bool?>(mappingDetails.Current).Invoke(targetObject, true);
+            SetValue<bool?>(mappingDetails, fixMessageContext, targetObject, false);
           }
         }
       }
-      else if(mappingDetails.Current.PropertyType == typeof(byte?))
+      else if(propertyType == typeof(byte?))
       {
-        GetILSetterAction<byte?>(mappingDetails.Current).Invoke(targetObject, value[0]);
+        SetValue<byte?>(mappingDetails, fixMessageContext, targetObject, value[0]);
       }
-      else if(mappingDetails.Current.PropertyType == typeof(char?))
+      else if(propertyType == typeof(char?))
       {
-        GetILSetterAction<char?>(mappingDetails.Current).Invoke(targetObject, valueChars[0]);
+        SetValue<char?>(mappingDetails, fixMessageContext, targetObject, valueChars[0]);
       }
 
       return targetObject;
     }
 
-    protected int Decode(Span<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, Span<char> result)
-    {
-      int valueLength;
-      if(mappingDetails.IsEncoded)
-      {
-        valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, result);
-      }
-      else
-      {
-        valueLength = Encoding.ASCII.GetChars(value, result);
-      }
-      result = result.Slice(0, valueLength);
-      return valueLength;
-    }
-
-    protected Action<object, TypeOfProperty> GetILSetterAction<TypeOfProperty>(PropertyInfo property)
-    {
-      Delegate generatedDelegate;
-      if(!_propertySetters.TryGetValue(GetKey(property), out generatedDelegate))
-      {
-        var sourceType = typeof(TypeOfProperty);
-        if(!property.PropertyType.IsAssignableFrom(sourceType))
-        {
-          throw new ArgumentException($"Property {property.Name}'s type is not assignable from type {sourceType.Name}");
-        }
-        var dynamicMethod = new DynamicMethod("SetValueFor" + property.DeclaringType.AssemblyQualifiedName + property.Name, null, new[] { typeof(object), sourceType }, typeof(SimpleTypeSetter));
-        var ilGenerator = dynamicMethod.GetILGenerator();
-        ilGenerator.Emit(OpCodes.Ldarg_0);
-        ilGenerator.Emit(OpCodes.Ldarg_1);
-        ilGenerator.Emit(OpCodes.Call, property.SetMethod);
-        ilGenerator.Emit(OpCodes.Ret);
-        generatedDelegate = dynamicMethod.CreateDelegate(typeof(Action<object, TypeOfProperty>));
-        _propertySetters.TryAdd(GetKey(property), generatedDelegate);
-      }
-      return (Action<object, TypeOfProperty>)generatedDelegate;
-    }
-
-    protected int GetKey(PropertyInfo property)
-    {
-      return Tuple.Create(property.DeclaringType.AssemblyQualifiedName, property.Name).GetHashCode();
-    }
   }
 }

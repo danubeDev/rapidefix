@@ -19,5 +19,6 @@ namespace RapideFix.Extensions
       var tag = Encoding.ASCII.GetBytes($"{fixTag}=");
       return tag;
     }
+
   }
 }

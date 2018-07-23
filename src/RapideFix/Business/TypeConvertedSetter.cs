@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Buffers;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
+using RapideFix.Business.Data;
 using RapideFix.DataTypes;
-using static RapideFix.Business.TagToPropertyMapper;
 
 namespace RapideFix.Business
 {
-  public class TypeConvertedSetter : SimpleTypeSetter
+  public class TypeConvertedSetter : BaseTypeSetter, IPropertySetter
   {
-    private readonly Dictionary<string, TypeConverter> _typeConverters = new Dictionary<string, TypeConverter>();
-    private readonly Dictionary<Type, Delegate> _delegateFactory = new Dictionary<Type, Delegate>();
+    private readonly ConcurrentDictionary<string, TypeConverter> _typeConverters = new ConcurrentDictionary<string, TypeConverter>();
+    private readonly ConcurrentDictionary<int, Delegate> _delegateFactory = new ConcurrentDictionary<int, Delegate>();
 
-    public new object Set(Span<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
+    public object Set(Span<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
       if(mappingDetails.TypeConverterName == null)
       {
@@ -22,6 +23,7 @@ namespace RapideFix.Business
       int valueLength = value.Length;
       Span<char> valueChars = stackalloc char[valueLength];
       valueLength = Decode(value, mappingDetails, fixMessageContext, valueChars);
+      valueChars = valueChars.Slice(0, valueLength);
 
       TypeConverter converter;
       if(!_typeConverters.TryGetValue(mappingDetails.TypeConverterName, out converter))
@@ -40,20 +42,30 @@ namespace RapideFix.Business
         valueChars.CopyTo(tempCharsArray.AsSpan());
         object converted = converter.ConvertFrom(tempCharsArray);
         var convertedType = converted.GetType();
-        if(!_delegateFactory.TryGetValue(convertedType, out Delegate delegateMethod))
+        if(!_delegateFactory.TryGetValue(GetKey(mappingDetails.Current), out Delegate delegateMethod))
         {
-          var methodInfo = typeof(SimpleTypeSetter).GetMethod("GetILSetterAction", BindingFlags.NonPublic | BindingFlags.Instance);
+          string methodGeneratingMethodName = mappingDetails is IEnumerableTag ? "GetEnumeratedILSetterAction" : "GetILSetterAction";
+
+          var methodInfo = typeof(SimpleTypeSetter).GetMethod(methodGeneratingMethodName, BindingFlags.NonPublic | BindingFlags.Instance);
           delegateMethod = (Delegate)methodInfo
             .MakeGenericMethod(convertedType)
             .Invoke(this, new[] { mappingDetails.Current });
-          _delegateFactory.TryAdd(convertedType, delegateMethod);
-        }
+          _delegateFactory.TryAdd(GetKey(mappingDetails.Current), delegateMethod);
 
-        delegateMethod.DynamicInvoke(targetObject, converted);
+        }
+        if(mappingDetails is EnumerableTagMapLeaf enumerableLeaf)
+        {
+          int index = GetAdvancedIndex(enumerableLeaf, fixMessageContext);
+          delegateMethod.DynamicInvoke(targetObject, converted, index);
+        }
+        else
+        {
+          delegateMethod.DynamicInvoke(targetObject, converted);
+        }
       }
       finally
       {
-        ArrayPool<char>.Shared.Return(tempCharsArray);
+        ArrayPool<char>.Shared.Return(tempCharsArray, true);
       }
 
       return targetObject;
