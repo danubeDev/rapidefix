@@ -15,7 +15,7 @@ namespace RapideFix.Business
   {
     private readonly ConcurrentDictionary<Type, Delegate> _delegateFactoryCache = new ConcurrentDictionary<Type, Delegate>();
 
-    public object Set(Span<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
+    public object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
       // mappingDetails is a leaf node for the repeating tag
       // parents are expected to be set by parents setter
@@ -27,12 +27,12 @@ namespace RapideFix.Business
       return targetObject;
     }
 
-    public object CreateEnumerable(Span<byte> value, RepeatingGroupTagMapLeaf repeatingLeaf, FixMessageContext fixMessageContext, object targetObject)
+    public object CreateEnumerable(ReadOnlySpan<byte> value, RepeatingGroupTagMapLeaf repeatingLeaf, FixMessageContext fixMessageContext, object targetObject)
     {
       //This is handled as a parent. The incremental counting is set by the first tag of the repeating group.
-      if(fixMessageContext.CreatedParentTypes == null || !fixMessageContext.CreatedParentTypes.Contains(GetKey(repeatingLeaf.Current)))
+      if(fixMessageContext.CreatedParentTypes is null || !fixMessageContext.CreatedParentTypes.Contains(GetKey(repeatingLeaf.Current)))
       {
-        if(fixMessageContext.CreatedParentTypes == null)
+        if(fixMessageContext.CreatedParentTypes is null)
         {
           fixMessageContext.CreatedParentTypes = new HashSet<int>();
         }

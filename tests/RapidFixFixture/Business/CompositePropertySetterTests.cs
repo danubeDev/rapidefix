@@ -82,14 +82,36 @@ namespace RapideFixFixture.Business
       Assert.True(mockSetter.IsVerified);
     }
 
-    private class MockPropertySetter : IPropertySetter
+    [Fact]
+    public void GivenTypedSimpleValue_SetTarget_CallsTypedSetter()
+    {
+      var testValue = new byte[0];
+      var mockPropertyFactory = new Mock<ISubPropertySetterFactory>();
+      var mockSimpleTypeSetter = new MockPropertySetter();
+      mockPropertyFactory.Setup(x => x.GetTypedPropertySetter()).Returns(mockSimpleTypeSetter);
+
+      var uut = new CompositePropertySetter(mockPropertyFactory.Object);
+      var targetObject = new object();
+      uut.SetTarget(testValue, new TagMapLeaf(), new FixMessageContext(), ref targetObject);
+
+      Assert.True(mockSimpleTypeSetter.IsVerified);
+    }
+
+    private class MockPropertySetter : ITypedPropertySetter
     {
       public bool IsVerified { get; private set; }
-      public object Set(Span<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
+      public object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
+      {
+        IsVerified = true;
+        return targetObject;
+      }
+
+      public TTarget SetTarget<TTarget>(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject)
       {
         IsVerified = true;
         return targetObject;
       }
     }
+
   }
 }

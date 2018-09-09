@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using RapideFix.Attributes;
 using RapideFix.Business.Data;
 
@@ -11,11 +12,19 @@ namespace RapideFix.Business
   public class TagToPropertyMapper : ITagToPropertyMapper
   {
     private Dictionary<int, TagMapLeaf> _map = new Dictionary<int, TagMapLeaf>();
+    private Dictionary<int, Type> _mapMessageType = new Dictionary<int, Type>();
 
-    public TagMapLeaf Get(byte[] tag)
+    public TagMapLeaf TryGet(ReadOnlySpan<byte> tag)
     {
       int key = IntegerToFixConverter.Instance.ConvertBack(tag);
-      return _map[key];
+      _map.TryGetValue(key, out var result);
+      return result;
+    }
+
+    public Type TryGetMessageType(ReadOnlySpan<byte> tag)
+    {
+      _mapMessageType.TryGetValue(GetTypeKey(tag), out var result);
+      return result;
     }
 
     public void Map<T>()
@@ -31,6 +40,13 @@ namespace RapideFix.Business
 
     private void Map(Type type, Stack<TagMapNode> parents)
     {
+      var messageType = type.GetCustomAttribute<MessageTypeAttribute>();
+      if(messageType != null)
+      {
+        var key = GetTypeKey(Encoding.ASCII.GetBytes(messageType.Value));
+        _mapMessageType.Add(key, type);
+      }
+
       foreach(PropertyInfo property in type.GetProperties())
       {
         FixTagAttribute fixTagAttribute = property.GetCustomAttribute<FixTagAttribute>();
@@ -45,7 +61,7 @@ namespace RapideFix.Business
         }
 
         //If there is no fix tag attribute, we expand custom types and enumerated types with repeating group attribute
-        if(fixTagAttribute == null)
+        if(fixTagAttribute is null)
         {
           if(!isEnumerable)
           {
@@ -167,12 +183,22 @@ namespace RapideFix.Business
       Type innerType = property.PropertyType.GetInterfaces()
          .Where(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IEnumerable<>))
          .Select(t => t.GetGenericArguments()[0]).FirstOrDefault();
-      if(innerType == null)
+      if(innerType is null)
       {
         innerType = property.PropertyType.GetGenericArguments()[0];
       }
 
       return innerType;
+    }
+
+    private int GetTypeKey(ReadOnlySpan<byte> bytes)
+    {
+      int result = 1;
+      foreach(var b in bytes)
+      {
+        result *= b;
+      }
+      return result;
     }
   }
 }

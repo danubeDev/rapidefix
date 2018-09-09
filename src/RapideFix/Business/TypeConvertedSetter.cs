@@ -14,9 +14,9 @@ namespace RapideFix.Business
     private readonly ConcurrentDictionary<string, TypeConverter> _typeConverters = new ConcurrentDictionary<string, TypeConverter>();
     private readonly ConcurrentDictionary<int, Delegate> _delegateFactory = new ConcurrentDictionary<int, Delegate>();
 
-    public object Set(Span<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
+    public object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
-      if(mappingDetails.TypeConverterName == null)
+      if(mappingDetails.TypeConverterName is null)
       {
         return targetObject;
       }

@@ -21,5 +21,10 @@
     {
       return new TypeConvertedSetter();
     }
+
+    public virtual ITypedPropertySetter GetTypedPropertySetter()
+    {
+      return new SimpleTypeSetter();
+    }
   }
 }

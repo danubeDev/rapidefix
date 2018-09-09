@@ -12,7 +12,7 @@ namespace RapideFix.Business
   {
     private readonly ConcurrentDictionary<int, Delegate> _delegateFactoryCache = new ConcurrentDictionary<int, Delegate>();
 
-    public object Set(Span<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
+    public object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
       foreach(var parent in mappingDetails.Parents)
       {
@@ -55,9 +55,9 @@ namespace RapideFix.Business
 
     public object SetSimpleTypeParent(TagMapNode parent, FixMessageContext fixMessageContext, object targetObject)
     {
-      if(fixMessageContext.CreatedParentTypes == null || !fixMessageContext.CreatedParentTypes.Contains(GetKey(parent.Current)))
+      if(fixMessageContext.CreatedParentTypes is null || !fixMessageContext.CreatedParentTypes.Contains(GetKey(parent.Current)))
       {
-        if(fixMessageContext.CreatedParentTypes == null)
+        if(fixMessageContext.CreatedParentTypes is null)
         {
           fixMessageContext.CreatedParentTypes = new HashSet<int>();
         }

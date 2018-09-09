@@ -2,14 +2,14 @@
 
 namespace RapideFix.Attributes
 {
-  [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+  [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = true)]
   public class MessageTypeAttribute : Attribute
   {
     public MessageTypeAttribute(string messageType)
     {
-      MessageType = messageType;
+      Value = messageType;
     }
 
-    public string MessageType { get; }
+    public string Value { get; }
   }
 }

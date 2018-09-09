@@ -7,7 +7,7 @@ using Xunit;
 
 namespace RapideFixFixture.Business
 {
-  public partial class TagToPropertyMapperTests
+  public class TagToPropertyMapperTests
   {
     [Fact]
     public void GivenType_Map_DoesNotThrow()
@@ -22,7 +22,7 @@ namespace RapideFixFixture.Business
     {
       var uut = new TagToPropertyMapper();
       uut.Map<TestTypeParent>();
-      TagMapLeaf result = uut.Get(58.ToKnownTag());
+      TagMapLeaf result = uut.TryGet(58.ToKnownTag());
 
       Assert.False(result.IsEncoded);
       Assert.False(result is IEnumerableTag);
@@ -36,7 +36,7 @@ namespace RapideFixFixture.Business
     {
       var uut = new TagToPropertyMapper();
       uut.Map<TestTypeParent>();
-      var result = uut.Get(55.ToKnownTag());
+      var result = uut.TryGet(55.ToKnownTag());
 
       Assert.False(result.IsEncoded);
       Assert.False(result is IEnumerableTag);
@@ -49,7 +49,7 @@ namespace RapideFixFixture.Business
     {
       var uut = new TagToPropertyMapper();
       uut.Map<TestTypeParent>();
-      var result = uut.Get(61.ToKnownTag());
+      var result = uut.TryGet(61.ToKnownTag());
 
       Assert.False(result.IsEncoded);
       Assert.False(result is IEnumerableTag);
@@ -63,8 +63,8 @@ namespace RapideFixFixture.Business
     {
       var uut = new TagToPropertyMapper();
       uut.Map<TestTypeParent>();
-      var repeatingTag = uut.Get(56.ToKnownTag());
-      var actualTag = uut.Get(57.ToKnownTag());
+      var repeatingTag = uut.TryGet(56.ToKnownTag());
+      var actualTag = uut.TryGet(57.ToKnownTag());
 
       Assert.False(repeatingTag.IsEncoded);
       Assert.False(repeatingTag is IEnumerableTag);
@@ -85,8 +85,8 @@ namespace RapideFixFixture.Business
     {
       var uut = new TagToPropertyMapper();
       uut.Map<TestTypeParent>();
-      var repeatingTag = uut.Get(59.ToKnownTag());
-      var actualTag = uut.Get(60.ToKnownTag());
+      var repeatingTag = uut.TryGet(59.ToKnownTag());
+      var actualTag = uut.TryGet(60.ToKnownTag());
 
       Assert.False(repeatingTag.IsEncoded);
       Assert.False(repeatingTag is IEnumerableTag);

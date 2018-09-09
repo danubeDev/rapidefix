@@ -4,6 +4,7 @@ using RapideFix.Attributes;
 
 namespace RapideFixFixture.TestTypes
 {
+  [MessageType("A")]
   public class TestTypeParent
   {
     [FixTag(55)]

@@ -11,7 +11,7 @@ namespace RapideFix.Validation
       _converter = converter ?? throw new ArgumentNullException(nameof(converter));
     }
 
-    public bool IsValid(Span<byte> data, FixMessageContext msgContext)
+    public bool IsValid(ReadOnlySpan<byte> data, FixMessageContext msgContext)
     {
       var endingTagPos = msgContext.ChecksumTagStartIndex;
       int startingTagPos = msgContext.MessageTypeTagStartIndex;

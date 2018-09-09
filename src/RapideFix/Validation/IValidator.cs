@@ -8,6 +8,6 @@ namespace RapideFix.Validation
     /// <summary>
     /// Returns if the given message is valid.
     /// </summary>
-    bool IsValid(Span<byte> message, FixMessageContext messageContext);
+    bool IsValid(ReadOnlySpan<byte> message, FixMessageContext messageContext);
   }
 }

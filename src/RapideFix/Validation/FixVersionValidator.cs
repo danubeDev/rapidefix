@@ -5,7 +5,7 @@ namespace RapideFix.Validation
 {
   public class FixVersionValidator : IValidator
   {
-    public bool IsValid(Span<byte> data, FixMessageContext messageContext)
+    public bool IsValid(ReadOnlySpan<byte> data, FixMessageContext messageContext)
     {
       if(!data.StartsWith(KnownFixTags.FixVersion))
       {

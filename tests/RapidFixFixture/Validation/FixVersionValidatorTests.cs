@@ -1,7 +1,8 @@
-﻿using RapideFix;
-using RapideFix.Factories;
+﻿using System;
+using RapideFix;
+using RapideFix.DataTypes;
+using RapideFix.Extensions;
 using RapideFix.Validation;
-using System;
 using Xunit;
 
 namespace RapideFixFixture.Validation
@@ -14,7 +15,7 @@ namespace RapideFixFixture.Validation
     {
       byte[] message = new TestFixMessageBuilder(input).Build();
       var uut = new FixVersionValidator();
-      var msgContext = new MessageContextFactory().Create(message);
+      var msgContext = new FixMessageContext().Setup(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.True(result);
     }
@@ -24,7 +25,7 @@ namespace RapideFixFixture.Validation
     {
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddBeginString("8=123|").Build();
       var uut = new FixVersionValidator();
-      var msgContext = new MessageContextFactory().Create(message);
+      var msgContext = new FixMessageContext().Setup(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.False(result);
     }
@@ -34,7 +35,7 @@ namespace RapideFixFixture.Validation
     {
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddBeginString(string.Empty).Build();
       var uut = new FixVersionValidator();
-      var msgContext = new MessageContextFactory().Create(message);
+      var msgContext = new FixMessageContext().Setup(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.False(result);
     }
@@ -44,7 +45,7 @@ namespace RapideFixFixture.Validation
     {
       var message = new TestFixMessageBuilder("35=A|49=SERVER|34=177|52=20090107-18:15:16|98=0|108=30|").AddBeginString(SupportedFixVersion.Fix50).Build();
       var uut = new FixVersionValidator();
-      var msgContext = new MessageContextFactory().Create(message);
+      var msgContext = new FixMessageContext().Setup(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.False(result);
     }
@@ -54,7 +55,7 @@ namespace RapideFixFixture.Validation
     {
       var message = new TestFixMessageBuilder("35=A|56=CLIENT|34=177|52=20090107-18:15:16|98=0|108=30|").AddBeginString(SupportedFixVersion.Fix50).Build();
       var uut = new FixVersionValidator();
-      var msgContext = new MessageContextFactory().Create(message);
+      var msgContext = new FixMessageContext().Setup(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
       Assert.False(result);
     }

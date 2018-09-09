@@ -1,19 +1,21 @@
 ﻿using System;
+using System.Linq;
 using RapideFix.Business.Data;
 using RapideFix.DataTypes;
 
 namespace RapideFix.Business
 {
-  public class CompositePropertySetter : IPropertySetter
+  public class CompositePropertySetter : ITypedPropertySetter
   {
     private readonly IPropertySetter _parentSetter;
     private readonly IPropertySetter _simpleTypeSetter;
     private readonly IPropertySetter _typeConvertedSetter;
     private readonly IPropertySetter _repeatingGroupSetter;
+    private readonly ITypedPropertySetter _typedPropertySetter;
 
     public CompositePropertySetter(ISubPropertySetterFactory propertySetterFactory)
     {
-      if(propertySetterFactory == null)
+      if(propertySetterFactory is null)
       {
         throw new ArgumentNullException(nameof(propertySetterFactory));
       }
@@ -21,9 +23,10 @@ namespace RapideFix.Business
       _simpleTypeSetter = propertySetterFactory.GetSimplePropertySetter();
       _typeConvertedSetter = propertySetterFactory.GetTypeConvertedPropertySetter();
       _repeatingGroupSetter = propertySetterFactory.GetRepeatingGroupTagPropertySetter();
+      _typedPropertySetter = propertySetterFactory.GetTypedPropertySetter();
     }
 
-    public object Set(Span<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
+    public object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
       object parentTarget = targetObject;
       if(mappingDetails.Parents != null)
@@ -46,6 +49,26 @@ namespace RapideFix.Business
       return parentTarget;
     }
 
+    public TTarget SetTarget<TTarget>(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject)
+    {
+      if(mappingDetails.Parents != null && mappingDetails.Parents.Any())
+      {
+        throw new NotSupportedException("Typed setting may only work on flat objects");
+      }
+      switch(mappingDetails)
+      {
+        case RepeatingGroupTagMapLeaf repeatingParent:
+          _repeatingGroupSetter.Set(value, mappingDetails, fixMessageContext, targetObject);
+          break;
+        case TagMapLeaf simpleOrEnumerated when simpleOrEnumerated.TypeConverterName == null:
+          targetObject = _typedPropertySetter.SetTarget(value, mappingDetails, fixMessageContext, ref targetObject);
+          break;
+        case TagMapLeaf withTypeSetter when withTypeSetter.TypeConverterName != null:
+          throw new NotSupportedException("Typed setting may only work on flat objects");
+          break;
+      }
 
+      return targetObject;
+    }
   }
 }

@@ -20,6 +20,8 @@ namespace RapideFix
       _versionFix = name;
     }
 
+    public ReadOnlySpan<byte> Value => _byteValue;
+
     public static SupportedFixVersion Parse(ReadOnlySpan<byte> fixValue)
     {
       if(TryParse(fixValue, out var result))

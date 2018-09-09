@@ -1,7 +1,8 @@
-﻿using RapideFix;
-using RapideFix.Factories;
+﻿using System;
+using RapideFix;
+using RapideFix.DataTypes;
+using RapideFix.Extensions;
 using RapideFix.Validation;
-using System;
 using Xunit;
 
 namespace RapideFixFixture.Validation
@@ -20,7 +21,7 @@ namespace RapideFixFixture.Validation
     {
       var uut = new ValidatorCollection(IntegerToFixConverter.Instance);
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).Build();
-      var msgCtx = new MessageContextFactory().Create(message);
+      var msgCtx = new FixMessageContext().Setup(message);
 
       Assert.True(uut.IsValid(message, msgCtx));
     }

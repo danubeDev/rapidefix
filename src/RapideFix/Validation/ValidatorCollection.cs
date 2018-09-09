@@ -16,9 +16,9 @@ namespace RapideFix.Validation
       _validators.Add(new LengthValidator(integerConverter));
     }
 
-    public bool IsValid(Span<byte> message, FixMessageContext messageContext)
+    public bool IsValid(ReadOnlySpan<byte> message, FixMessageContext messageContext)
     {
-      if(messageContext == null)
+      if(messageContext is null)
       {
         throw new ArgumentNullException(nameof(messageContext));
       }

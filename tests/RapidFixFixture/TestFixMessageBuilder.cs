@@ -7,7 +7,7 @@ using RapideFix.DataTypes;
 
 namespace RapideFixFixture
 {
-  internal class TestFixMessageBuilder
+  public class TestFixMessageBuilder
   {
     private List<IFixTagValue> _fixTags;
     private MessageEncoding _encoding;

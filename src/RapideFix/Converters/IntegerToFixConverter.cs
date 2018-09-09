@@ -34,7 +34,7 @@ namespace RapideFix
       }
     }
 
-    public int ConvertBack(Span<byte> data)
+    public int ConvertBack(ReadOnlySpan<byte> data)
     {
       int result = 0;
       foreach(byte b in data)

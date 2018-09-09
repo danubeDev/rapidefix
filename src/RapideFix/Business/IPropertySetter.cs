@@ -17,6 +17,6 @@ namespace RapideFix.Business
     /// <param name="fixMessageContext">Fix message's context data</param>
     /// <param name="targetObject">Target object of the value setter</param>
     /// <returns>The value se or child object created</returns>
-    object Set(Span<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject);
+    object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject);
   }
 }
