@@ -59,6 +59,6 @@ namespace RapideFixFixture.Parsers
       var uut = new TypedMessageParser<TestTypeStruct>(Mock.Of<ITagToPropertyMapper>(), Mock.Of<ITypedPropertySetter>(), new MockValidator(false), new MessageParserOptions() { ThrowIfInvalidMessage = true });
       Assert.Throws<ArgumentException>(() => uut.Parse(new TestFixMessageBuilder(SampleBody).Build()));
     }
-
+    
   }
 }

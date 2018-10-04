@@ -7,7 +7,7 @@ using RapideFix.Validation;
 
 namespace RapideFix.Parsers
 {
-  public class TypedMessageParser<TTarget> : IMessageParser<TTarget>
+  public class TypedMessageParser<TTarget> : IMessageParser<TTarget> where TTarget : struct
   {
     private readonly ITagToPropertyMapper _propertyMapper;
     private readonly ITypedPropertySetter _typedPropertySetter;
@@ -53,7 +53,7 @@ namespace RapideFix.Parsers
         {
           throw new InvalidCastException("MessageType on type does not match TTarget");
         }
-        TTarget targetObject = Activator.CreateInstance<TTarget>();
+        TTarget targetObject = default;
         return Parse(message, pooledMsgContext.Value, ref targetObject);
       }
     }

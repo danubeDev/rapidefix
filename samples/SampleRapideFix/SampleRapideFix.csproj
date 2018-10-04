@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\RapideFix\RapideFix.csproj" />
+    <ProjectReference Include="..\..\tests\RapidFixFixture\RapideFixFixture.csproj" />
   </ItemGroup>
 
 </Project>

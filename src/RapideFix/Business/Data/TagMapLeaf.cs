@@ -4,7 +4,7 @@ namespace RapideFix.Business.Data
 {
   public class TagMapLeaf : TagMapNode
   {
-    public IList<TagMapNode> Parents { get; set; }
+    public List<TagMapNode> Parents { get; set; }
 
     public string TypeConverterName { get; set; }
 

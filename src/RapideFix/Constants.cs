@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly:InternalsVisibleTo("RapideFixFixture")]
+[assembly: InternalsVisibleTo("RapideFixFixture")]
+[assembly: InternalsVisibleTo("RapideFixBenchmarks")]
 namespace RapideFix
 {
   internal static class Constants

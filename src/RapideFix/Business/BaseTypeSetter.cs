@@ -201,7 +201,8 @@ namespace RapideFix.Business
     /// </summary>
     protected int GetKey(PropertyInfo property)
     {
-      return Tuple.Create(property.DeclaringType.AssemblyQualifiedName, property.Name).GetHashCode();
+      var tuple = (property.DeclaringType.FullName, property.Name);
+      return tuple.GetHashCode();
     }
   }
 }

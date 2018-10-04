@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using RapideFix.Business;
 using RapideFix.Business.Data;
@@ -18,7 +19,7 @@ namespace RapideFixFixture.Business
       var valueToSet = new byte[1].AsSpan();
       var mappingDetails = new TagMapLeaf()
       {
-        Parents = new[]
+        Parents = new List<TagMapNode>
         {
           new TagMapNode() { Current = targetObject.GetType().GetProperty(nameof(targetObject.CustomType)) }
         }
@@ -38,7 +39,7 @@ namespace RapideFixFixture.Business
       var valueToSet = new byte[1].AsSpan();
       var mappingDetails = new TagMapLeaf()
       {
-        Parents = new[]
+        Parents = new List<TagMapNode>
         {
           new TagMapNode() { Current = targetObject.GetType().GetProperty(nameof(targetObject.CustomType)) }
         }
@@ -60,7 +61,7 @@ namespace RapideFixFixture.Business
       var mappingDetails = new TagMapLeaf()
       {
         Current = typeof(TestMany).GetProperty("Tag60"),
-        Parents = new[]
+        Parents = new List<TagMapNode>
         {
           new EnumerableTagMapNode()
           {
@@ -85,7 +86,7 @@ namespace RapideFixFixture.Business
       var mappingTag60 = new TagMapLeaf()
       {
         Current = typeof(TestMany).GetProperty("Tag60"),
-        Parents = new[]
+        Parents = new List<TagMapNode>
        {
           new EnumerableTagMapNode()
           {
@@ -97,7 +98,7 @@ namespace RapideFixFixture.Business
       var mappingTag601 = new TagMapLeaf()
       {
         Current = typeof(TestMany).GetProperty("Tag601"),
-        Parents = new[]
+        Parents = new List<TagMapNode>
         {
           new EnumerableTagMapNode()
           {
@@ -123,7 +124,7 @@ namespace RapideFixFixture.Business
       var mappingDetails = new TagMapLeaf()
       {
         Current = typeof(TestMany).GetProperty("Tag60"),
-        Parents = new[]
+        Parents = new List<TagMapNode>
         {
           new EnumerableTagMapNode()
           {

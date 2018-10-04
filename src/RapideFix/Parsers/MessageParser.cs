@@ -7,8 +7,7 @@ using RapideFix.Validation;
 
 namespace RapideFix.Parsers
 {
-
-  internal class MessageParser : IMessageParser<object>
+  public class MessageParser : IMessageParser<object>
   {
     private readonly ITagToPropertyMapper _propertyMapper;
     private readonly IPropertySetter _compositeSetter;

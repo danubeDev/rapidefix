@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using RapideFix.Business.Data;
 using RapideFix.DataTypes;
 
@@ -29,7 +28,7 @@ namespace RapideFix.Business
     public object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
       object parentTarget = targetObject;
-      if(mappingDetails.Parents != null)
+      if(mappingDetails.Parents != null && mappingDetails.Parents.Count > 0)
       {
         parentTarget = _parentSetter.Set(value, mappingDetails, fixMessageContext, parentTarget);
       }
@@ -51,7 +50,7 @@ namespace RapideFix.Business
 
     public TTarget SetTarget<TTarget>(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject)
     {
-      if(mappingDetails.Parents != null && mappingDetails.Parents.Any())
+      if(mappingDetails.Parents != null && mappingDetails.Parents.Count > 0)
       {
         throw new NotSupportedException("Typed setting may only work on flat objects");
       }

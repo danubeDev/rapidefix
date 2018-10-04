@@ -34,7 +34,7 @@ namespace RapideFixFixture.Business
       mockPropertyFactory.Setup(x => x.GetSimplePropertySetter()).Returns(mockSimpleTypeSetter);
 
       var uut = new CompositePropertySetter(mockPropertyFactory.Object);
-      uut.Set(testValue, new TagMapLeaf() { Parents = new List<TagMapNode>() }, new FixMessageContext(), new object());
+      uut.Set(testValue, new TagMapLeaf() { Parents = new List<TagMapNode>() { new TagMapNode() } }, new FixMessageContext(), new object());
 
       Assert.True(mockParentSetter.IsVerified);
       Assert.True(mockSimpleTypeSetter.IsVerified);
