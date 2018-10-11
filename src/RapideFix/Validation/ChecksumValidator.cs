@@ -1,13 +1,13 @@
-﻿using RapideFix.DataTypes;
-using System;
+﻿using System;
+using RapideFix.DataTypes;
 
 namespace RapideFix.Validation
 {
   public class ChecksumValidator : IValidator
   {
     private static readonly int Modulus = 256;
-    private static readonly int ChecksumLength = 3;
     private readonly IntegerToFixConverter _converter;
+    private static readonly int ChecksumLength = 3;
 
     public ChecksumValidator(IntegerToFixConverter converter)
     {
@@ -21,17 +21,27 @@ namespace RapideFix.Validation
       {
         return false;
       }
+
+      //TODO: This should be Vectorized, once vectors support ReadonlySpan-s.
       int sum = 1;
-      for(int i = 0; i < endingTagPos; i++)
+      int sumB = 0;
+      for(int i = 0; i < endingTagPos; i += 2)
       {
         sum += data[i];
+        int next = i + 1;
+        if(next < endingTagPos)
+        {
+          sumB += data[next];
+        }
       }
-      int expectedChecksum = sum % Modulus;
+
+      int expectedChecksum = (sum + sumB) % Modulus;
       Span<byte> expectedDigits = stackalloc byte[ChecksumLength];
       _converter.Convert(number: expectedChecksum, into: expectedDigits, count: ChecksumLength);
 
       var receivedChecksum = data.Slice(endingTagPos + KnownFixTags.Checksum.Length, ChecksumLength);
       return receivedChecksum.SequenceEqual(expectedDigits);
     }
+
   }
 }

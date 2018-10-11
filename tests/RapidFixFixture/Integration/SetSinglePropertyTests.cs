@@ -47,9 +47,10 @@ namespace RapideFixFixture.Integration
       int testValue = 123;
       var testTag = new FixTagValue(63, testValue);
 
+      _fixture.PropertyMapper.TryGet(testTag.Tag.ToKnownTag(), out var leaf);
       _fixture.CompositeSetter.Set(
         testTag.Value,
-        _fixture.PropertyMapper.TryGet(testTag.Tag.ToKnownTag()),
+        leaf,
         MessageContext,
         TargetObject);
 
@@ -61,10 +62,10 @@ namespace RapideFixFixture.Integration
     {
       string testValue = "TraderEntity";
       var testTag = new FixTagValue(55, testValue);
-
+      _fixture.PropertyMapper.TryGet(testTag.Tag.ToKnownTag(), out var leaf);
       _fixture.CompositeSetter.Set(
               testTag.Value,
-              _fixture.PropertyMapper.TryGet(testTag.Tag.ToKnownTag()),
+              leaf,
               MessageContext,
               TargetObject);
 
@@ -76,10 +77,10 @@ namespace RapideFixFixture.Integration
     {
       double testValue = 23.1;
       var testTag = new FixTagValue(67, testValue);
-
+      _fixture.PropertyMapper.TryGet(testTag.Tag.ToKnownTag(), out var leaf);
       _fixture.CompositeSetter.Set(
         testTag.Value,
-        _fixture.PropertyMapper.TryGet(testTag.Tag.ToKnownTag()),
+        leaf,
         MessageContext,
         TargetObject);
 
@@ -91,10 +92,10 @@ namespace RapideFixFixture.Integration
     {
       string testValue = "VenueName";
       var testTag = new FixTagValue(58, testValue);
-
+      _fixture.PropertyMapper.TryGet(testTag.Tag.ToKnownTag(), out var leaf);
       _fixture.CompositeSetter.Set(
         testTag.Value,
-        _fixture.PropertyMapper.TryGet(testTag.Tag.ToKnownTag()),
+        leaf,
         MessageContext,
         TargetObject);
 
@@ -110,10 +111,10 @@ namespace RapideFixFixture.Integration
           var mo = new FixMessageContext();
           int testValue = 0199 + i;
           var testTag = new FixTagValue(61, testValue);
-
+          _fixture.PropertyMapper.TryGet(testTag.Tag.ToKnownTag(), out var leaf);
           _fixture.CompositeSetter.Set(
             testTag.Value,
-            _fixture.PropertyMapper.TryGet(testTag.Tag.ToKnownTag()),
+            leaf,
             mo,
             to);
 
@@ -130,10 +131,10 @@ namespace RapideFixFixture.Integration
     public void MapAndSetRepeatingGroup()
     {
       var repeatingGroupTag = new FixTagValue(56, 3);
-
+      _fixture.PropertyMapper.TryGet(repeatingGroupTag.Tag.ToKnownTag(), out var leaf);
       _fixture.CompositeSetter.Set(
         repeatingGroupTag.Value,
-        _fixture.PropertyMapper.TryGet(repeatingGroupTag.Tag.ToKnownTag()),
+        leaf,
         MessageContext,
         TargetObject);
 
@@ -148,21 +149,24 @@ namespace RapideFixFixture.Integration
       var testTag0 = new FixTagValue(57, testValue0);
       var testTag1 = new FixTagValue(57, testValue1);
       var repeatingGroupTag = new FixTagValue(56, 3);
+      _fixture.PropertyMapper.TryGet(repeatingGroupTag.Tag.ToKnownTag(), out var repeatingGroupLeaf);
       _fixture.CompositeSetter.Set(
         repeatingGroupTag.Value,
-        _fixture.PropertyMapper.TryGet(repeatingGroupTag.Tag.ToKnownTag()),
+        repeatingGroupLeaf,
         MessageContext,
         TargetObject);
 
+      _fixture.PropertyMapper.TryGet(testTag0.Tag.ToKnownTag(), out var testTag0Leaf);
       _fixture.CompositeSetter.Set(
         testTag0.Value,
-        _fixture.PropertyMapper.TryGet(testTag0.Tag.ToKnownTag()),
+        testTag0Leaf,
         MessageContext,
         TargetObject);
 
+      _fixture.PropertyMapper.TryGet(testTag1.Tag.ToKnownTag(), out var testTag1Leaf);
       _fixture.CompositeSetter.Set(
         testTag1.Value,
-        _fixture.PropertyMapper.TryGet(testTag1.Tag.ToKnownTag()),
+        testTag1Leaf,
         MessageContext,
         TargetObject);
 
@@ -178,21 +182,24 @@ namespace RapideFixFixture.Integration
       var testTag0 = new FixTagValue(60, testValue0);
       var testTag1 = new FixTagValue(60, testValue1);
       var repeatingGroupTag = new FixTagValue(59, 2);
+      _fixture.PropertyMapper.TryGet(repeatingGroupTag.Tag.ToKnownTag(), out var repeatingGroupTagLeaf);
       _fixture.CompositeSetter.Set(
         repeatingGroupTag.Value,
-        _fixture.PropertyMapper.TryGet(repeatingGroupTag.Tag.ToKnownTag()),
+        repeatingGroupTagLeaf,
         MessageContext,
         TargetObject);
 
+      _fixture.PropertyMapper.TryGet(testTag0.Tag.ToKnownTag(), out var testTag0Leaf);
       _fixture.CompositeSetter.Set(
         testTag0.Value,
-        _fixture.PropertyMapper.TryGet(testTag0.Tag.ToKnownTag()),
+        testTag0Leaf,
         MessageContext,
         TargetObject);
 
+      _fixture.PropertyMapper.TryGet(testTag1.Tag.ToKnownTag(), out var testTag1Leaf);
       _fixture.CompositeSetter.Set(
         testTag1.Value,
-        _fixture.PropertyMapper.TryGet(testTag1.Tag.ToKnownTag()),
+        testTag1Leaf,
         MessageContext,
         TargetObject);
 
@@ -212,33 +219,38 @@ namespace RapideFixFixture.Integration
       var testTag10 = new FixTagValue(60, testValue10);
       var testTag11 = new FixTagValue(601, testValue11);
       var repeatingGroupTag = new FixTagValue(59, 2);
+      _fixture.PropertyMapper.TryGet(repeatingGroupTag.Tag.ToKnownTag(), out var repeatingGroupTagLeaf);
       _fixture.CompositeSetter.Set(
         repeatingGroupTag.Value,
-        _fixture.PropertyMapper.TryGet(repeatingGroupTag.Tag.ToKnownTag()),
+        repeatingGroupTagLeaf,
         MessageContext,
         TargetObject);
 
+      _fixture.PropertyMapper.TryGet(testTag00.Tag.ToKnownTag(), out var testTag00Leaf);
       _fixture.CompositeSetter.Set(
         testTag00.Value,
-        _fixture.PropertyMapper.TryGet(testTag00.Tag.ToKnownTag()),
+        testTag00Leaf,
         MessageContext,
         TargetObject);
 
+      _fixture.PropertyMapper.TryGet(testTag01.Tag.ToKnownTag(), out var testTag01Leaf);
       _fixture.CompositeSetter.Set(
         testTag01.Value,
-        _fixture.PropertyMapper.TryGet(testTag01.Tag.ToKnownTag()),
+        testTag01Leaf,
         MessageContext,
         TargetObject);
 
+      _fixture.PropertyMapper.TryGet(testTag10.Tag.ToKnownTag(), out var testTag10Leaf);
       _fixture.CompositeSetter.Set(
         testTag10.Value,
-        _fixture.PropertyMapper.TryGet(testTag10.Tag.ToKnownTag()),
+        testTag10Leaf,
         MessageContext,
         TargetObject);
 
+      _fixture.PropertyMapper.TryGet(testTag11.Tag.ToKnownTag(), out var testTag11Leaf);
       _fixture.CompositeSetter.Set(
               testTag11.Value,
-              _fixture.PropertyMapper.TryGet(testTag11.Tag.ToKnownTag()),
+              testTag11Leaf,
               MessageContext,
               TargetObject);
 
@@ -256,21 +268,24 @@ namespace RapideFixFixture.Integration
       var testTag0 = new FixTagValue(65, testValue0);
       var testTag1 = new FixTagValue(65, testValue1);
       var repeatingGroupTag = new FixTagValue(64, 2);
+      _fixture.PropertyMapper.TryGet(repeatingGroupTag.Tag.ToKnownTag(), out var repeatingGroupTagLeaf);
       _fixture.CompositeSetter.Set(
         repeatingGroupTag.Value,
-        _fixture.PropertyMapper.TryGet(repeatingGroupTag.Tag.ToKnownTag()),
+        repeatingGroupTagLeaf,
         MessageContext,
         TargetObject);
 
+      _fixture.PropertyMapper.TryGet(testTag0.Tag.ToKnownTag(), out var testTag0Leaf);
       _fixture.CompositeSetter.Set(
         testTag0.Value,
-        _fixture.PropertyMapper.TryGet(testTag0.Tag.ToKnownTag()),
+        testTag0Leaf,
         MessageContext,
         TargetObject);
 
+      _fixture.PropertyMapper.TryGet(testTag1.Tag.ToKnownTag(), out var testTag1Leaf);
       _fixture.CompositeSetter.Set(
         testTag1.Value,
-        _fixture.PropertyMapper.TryGet(testTag1.Tag.ToKnownTag()),
+        testTag1Leaf,
         MessageContext,
         TargetObject);
 

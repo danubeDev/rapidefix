@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -14,11 +15,10 @@ namespace RapideFix.Business
     private Dictionary<int, TagMapLeaf> _map = new Dictionary<int, TagMapLeaf>();
     private Dictionary<int, Type> _mapMessageType = new Dictionary<int, Type>();
 
-    public TagMapLeaf TryGet(ReadOnlySpan<byte> tag)
+    public bool TryGet(ReadOnlySpan<byte> tag, out TagMapLeaf result)
     {
       int key = IntegerToFixConverter.Instance.ConvertBack(tag);
-      _map.TryGetValue(key, out var result);
-      return result;
+      return _map.TryGetValue(key, out result);
     }
 
     public Type TryGetMessageType(ReadOnlySpan<byte> tag)
@@ -44,7 +44,7 @@ namespace RapideFix.Business
       if(messageType != null)
       {
         var key = GetTypeKey(Encoding.ASCII.GetBytes(messageType.Value));
-        _mapMessageType.Add(key, type);
+        _mapMessageType.TryAdd(key, type);
       }
 
       foreach(PropertyInfo property in type.GetProperties())
@@ -145,7 +145,7 @@ namespace RapideFix.Business
         TypeConverterName = typeConverter?.ConverterTypeName,
         IsEncoded = fixTagAttribute.Encoded
       };
-      _map.Add(key, value);
+      _map.TryAdd(key, value);
       return value;
     }
 
@@ -161,7 +161,7 @@ namespace RapideFix.Business
         InnerType = innerType
       };
 
-      _map.Add(key, value);
+      _map.TryAdd(key, value);
       return value;
     }
 
@@ -175,7 +175,7 @@ namespace RapideFix.Business
         IsEncoded = false,
         TypeConverterName = null
       };
-      _map.Add(repeatingGroup.Tag, value);
+      _map.TryAdd(repeatingGroup.Tag, value);
     }
 
     private Type GetInnerTypeOfEnumerable(PropertyInfo property)

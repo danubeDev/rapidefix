@@ -15,7 +15,6 @@ namespace RapideFix.Business
       var propertyType = !(mappingDetails is IEnumerableTag enumerableLeaf) ?
         mappingDetails.Current.PropertyType : enumerableLeaf.InnerType;
 
-
       if(propertyType == typeof(int))
       {
         if(int.TryParse(valueChars, out var parsedValue))
@@ -28,6 +27,28 @@ namespace RapideFix.Business
         if(double.TryParse(valueChars, out var parsedValue))
         {
           SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
+        }
+      }
+      else if(propertyType == typeof(string))
+      {
+        SetValue(mappingDetails, fixMessageContext, targetObject, new string(valueChars));
+      }
+      else if(propertyType == typeof(bool))
+      {
+        if(bool.TryParse(valueChars, out var parsedValue))
+        {
+          SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
+        }
+        else
+        {
+          if(valueChars[0] == Constants.True || valueChars[0] == Constants.TrueNumber)
+          {
+            SetValue(mappingDetails, fixMessageContext, targetObject, true);
+          }
+          if(valueChars[0] == Constants.False || valueChars[0] == Constants.FalseNumber)
+          {
+            SetValue(mappingDetails, fixMessageContext, targetObject, false);
+          }
         }
       }
       else if(propertyType == typeof(decimal))
@@ -58,24 +79,6 @@ namespace RapideFix.Business
           SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
-      else if(propertyType == typeof(bool))
-      {
-        if(bool.TryParse(valueChars, out var parsedValue))
-        {
-          SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
-        }
-        else
-        {
-          if(valueChars[0] == Constants.True || valueChars[0] == Constants.TrueNumber)
-          {
-            SetValue(mappingDetails, fixMessageContext, targetObject, true);
-          }
-          if(valueChars[0] == Constants.False || valueChars[0] == Constants.FalseNumber)
-          {
-            SetValue(mappingDetails, fixMessageContext, targetObject, false);
-          }
-        }
-      }
       else if(propertyType == typeof(byte))
       {
         SetValue(mappingDetails, fixMessageContext, targetObject, value[0]);
@@ -83,10 +86,6 @@ namespace RapideFix.Business
       else if(propertyType == typeof(char))
       {
         SetValue(mappingDetails, fixMessageContext, targetObject, valueChars[0]);
-      }
-      else if(propertyType == typeof(string))
-      {
-        SetValue(mappingDetails, fixMessageContext, targetObject, valueChars.ToString());
       }
       else if(propertyType == typeof(int?))
       {
@@ -240,7 +239,7 @@ namespace RapideFix.Business
       }
       else if(propertyType == typeof(string))
       {
-        SetValue<TTarget, string>(mappingDetails, fixMessageContext, ref targetObject, valueChars.ToString());
+        SetValue<TTarget, string>(mappingDetails, fixMessageContext, ref targetObject, new string(valueChars));
       }
       else if(propertyType == typeof(int?))
       {

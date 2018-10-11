@@ -77,19 +77,19 @@ namespace RapideFix.Parsers
 
     private ref readonly TTarget Parse(ReadOnlySpan<byte> message, FixMessageContext messageContext, ref TTarget targetObject)
     {
+      int checksumLength = message.Length - messageContext.ChecksumTagStartIndex - 1;
       ReadOnlySpan<byte> messagePart = message.Slice(messageContext.MessageTypeTagStartIndex + 1);
       int indexSOH = 0;
       int indexEquals = 0;
-      while(indexSOH <= messagePart.Length)
+      while(messagePart.Length > checksumLength)
       {
         indexEquals = messagePart.IndexOf(Constants.EqualsByte);
         if(indexEquals <= 0)
         {
           break;
         }
-        var propertyLeaf = _propertyMapper.TryGet(messagePart.Slice(0, indexEquals));
         indexSOH = messagePart.IndexOf(Constants.SOHByte);
-        if(propertyLeaf != null)
+        if(_propertyMapper.TryGet(messagePart.Slice(0, indexEquals), out var propertyLeaf))
         {
           if(indexSOH <= 0)
           {

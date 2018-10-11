@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using System.Text;
 using RapideFix.Business.Data;
 using RapideFix.DataTypes;
@@ -20,6 +21,7 @@ namespace RapideFix.Business
     /// <summary>
     /// Using custom message encoding, decodes the parsed value. Returns the length of the decoded value
     /// </summary>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     protected int Decode(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, Span<char> result)
     {
       int valueLength;
@@ -199,6 +201,7 @@ namespace RapideFix.Business
     /// <summary>
     /// Generates a has key for a given property info
     /// </summary>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     protected int GetKey(PropertyInfo property)
     {
       var tuple = (property.DeclaringType.FullName, property.Name);

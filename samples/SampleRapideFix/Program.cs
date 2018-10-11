@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using RapideFix;
 using RapideFix.Business;
 using RapideFix.Parsers;
@@ -20,7 +22,7 @@ namespace SampleRapideFix
       //var parser = new FixParser(settings);
       //parser.Parse<Order>("8=FIX.4.2|9=19|35=D|55=AAPL|54=1|10=186|1=account1|44=12.5|");
 
-      string sampleInput = "35=A|55=TestTag55|56=2|57=Enumerable1|57=Enumerable2|62=35|67=56.123|";
+      string sampleInput = "35=A|55=TestTag55|62=35|67=56.123|";
       var message = new TestFixMessageBuilder(sampleInput).Build();
       var propertyMapper = new TagToPropertyMapper();
       propertyMapper.Map<TestTypeParent>();
@@ -31,6 +33,18 @@ namespace SampleRapideFix
       parser.Parse<TestTypeParent>(message);
       parser.Parse<TestTypeParent>(message);
       parser.Parse<TestTypeParent>(message);
+
+      Console.WriteLine("Wait");
+      Thread.Sleep(3000);
+      Console.WriteLine("Start");
+
+      for(int i = 0; i < 1000000; i++)
+      {
+        parser.Parse<TestTypeParent>(message);
+        parser.Parse<TestTypeParent>(message);
+        parser.Parse<TestTypeParent>(message);
+      }
+
     }
   }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace RapideFix
@@ -25,6 +26,7 @@ namespace RapideFix
       }
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Convert(int number, Span<byte> into, int count)
     {
       for(int i = count - 1; i >= 0; i--)
@@ -34,6 +36,7 @@ namespace RapideFix
       }
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int ConvertBack(ReadOnlySpan<byte> data)
     {
       int result = 0;

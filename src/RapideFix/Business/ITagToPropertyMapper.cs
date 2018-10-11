@@ -10,7 +10,7 @@ namespace RapideFix.Business
     /// </summary>
     /// <param name="tag">The byte representation of the tag.</param>
     /// <returns>A tagmap leaf with optional parents.</returns>
-    TagMapLeaf TryGet(ReadOnlySpan<byte> tag);
+    bool TryGet(ReadOnlySpan<byte> tag, out TagMapLeaf result);
 
     /// <summary>
     /// Gets the type to use for deserialization or null.
