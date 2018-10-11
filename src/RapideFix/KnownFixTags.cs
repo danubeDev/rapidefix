@@ -10,7 +10,7 @@ namespace RapideFix
       MessageType = 35.ToSOHAndKnownTag();
       Checksum = 10.ToSOHAndKnownTag();
       Length = 9.ToSOHAndKnownTag();
-      FixVersion = 8.ToKnownTag();
+      FixVersion = 8.ToKnownTagEquals();
       SenderCompId = 49.ToSOHAndKnownTag();
       TargetCompId = 56.ToSOHAndKnownTag();
     }

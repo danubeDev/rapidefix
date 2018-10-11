@@ -16,25 +16,7 @@ namespace RapideFix.Business
 
     protected delegate void ActionRef<TTarget, TValue0, TValue1>(ref TTarget target, TValue0 value0, TValue1 value1);
 
-    protected readonly ConcurrentDictionary<int, Delegate> _propertySetters = new ConcurrentDictionary<int, Delegate>();
-
-    /// <summary>
-    /// Using custom message encoding, decodes the parsed value. Returns the length of the decoded value
-    /// </summary>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    protected int Decode(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, Span<char> result)
-    {
-      int valueLength;
-      if(mappingDetails.IsEncoded)
-      {
-        valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, result);
-      }
-      else
-      {
-        valueLength = Encoding.ASCII.GetChars(value, result);
-      }
-      return valueLength;
-    }
+    protected readonly Dictionary<int, Delegate> _propertySetters = new Dictionary<int, Delegate>();
 
     /// <summary>
     /// Returns an action to set a given typed value on a given property
@@ -49,7 +31,7 @@ namespace RapideFix.Business
         {
           throw new ArgumentException($"Property {property.Name}'s type is not assignable from type {sourceType.Name}");
         }
-        var dynamicMethod = new DynamicMethod("SetValueFor" + property.DeclaringType.AssemblyQualifiedName + property.Name, null, new[] { typeof(object), sourceType }, typeof(SimpleTypeSetter));
+        var dynamicMethod = new DynamicMethod("SetValueFor" + property.DeclaringType.FullName + property.Name, null, new[] { typeof(object), sourceType }, typeof(SimpleTypeSetter));
         var ilGenerator = dynamicMethod.GetILGenerator();
         ilGenerator.Emit(OpCodes.Ldarg_0);
         ilGenerator.Emit(OpCodes.Ldarg_1);
@@ -74,7 +56,7 @@ namespace RapideFix.Business
         {
           throw new ArgumentException($"Property {property.Name}'s type is not assignable from type {sourceType.Name}");
         }
-        var dynamicMethod = new DynamicMethod("SetTypedValueFor" + property.DeclaringType.AssemblyQualifiedName + property.Name, null, new[] { typeof(TTarget).MakeByRefType(), sourceType }, typeof(SimpleTypeSetter));
+        var dynamicMethod = new DynamicMethod("SetTypedValueFor" + property.DeclaringType.FullName + property.Name, null, new[] { typeof(TTarget).MakeByRefType(), sourceType }, typeof(SimpleTypeSetter));
         var ilGenerator = dynamicMethod.GetILGenerator();
         ilGenerator.Emit(OpCodes.Ldarg_0);
         ilGenerator.Emit(OpCodes.Ldarg_1);
@@ -95,7 +77,7 @@ namespace RapideFix.Business
       if(!_propertySetters.TryGetValue(GetKey(property), out generatedDelegate))
       {
         var sourceType = typeof(TypeOfProperty);
-        var dynamicMethod = new DynamicMethod("SetArrayIndexFor" + property.DeclaringType.AssemblyQualifiedName + property.Name, null, new[] { typeof(object), sourceType, typeof(int) }, typeof(SimpleTypeSetter));
+        var dynamicMethod = new DynamicMethod("SetArrayIndexFor" + property.DeclaringType.FullName + property.Name, null, new[] { typeof(object), sourceType, typeof(int) }, typeof(SimpleTypeSetter));
         var ilGenerator = dynamicMethod.GetILGenerator();
         ilGenerator.Emit(OpCodes.Ldarg_0);
         ilGenerator.Emit(OpCodes.Call, property.GetMethod);
@@ -118,7 +100,7 @@ namespace RapideFix.Business
       if(!_propertySetters.TryGetValue(GetKey(property), out generatedDelegate))
       {
         var sourceType = typeof(TypeOfProperty);
-        var dynamicMethod = new DynamicMethod("SetArrayIndexFor" + property.DeclaringType.AssemblyQualifiedName + property.Name, null, new[] { typeof(TTarget).MakeByRefType(), sourceType, typeof(int) }, typeof(SimpleTypeSetter));
+        var dynamicMethod = new DynamicMethod("SetArrayIndexFor" + property.DeclaringType.FullName + property.Name, null, new[] { typeof(TTarget).MakeByRefType(), sourceType, typeof(int) }, typeof(SimpleTypeSetter));
         var ilGenerator = dynamicMethod.GetILGenerator();
         ilGenerator.Emit(OpCodes.Ldarg_0);
         ilGenerator.Emit(OpCodes.Call, property.GetMethod);
@@ -138,9 +120,9 @@ namespace RapideFix.Business
     /// </summary>
     protected void SetValue<T>(TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject, T parsedValue)
     {
-      if(mappingDetails is EnumerableTagMapLeaf enumerableTagLeaf)
+      if(mappingDetails.IsEnumerable)
       {
-        int index = GetAdvancedIndex(enumerableTagLeaf, fixMessageContext);
+        int index = GetAdvancedIndex(mappingDetails, fixMessageContext);
         GetEnumeratedILSetterAction<T>(mappingDetails.Current).Invoke(targetObject, parsedValue, index);
       }
       else
@@ -154,9 +136,9 @@ namespace RapideFix.Business
     /// </summary>
     protected void SetValue<TTarget, T>(TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject, T parsedValue)
     {
-      if(mappingDetails is EnumerableTagMapLeaf enumerableTagLeaf)
+      if(mappingDetails.IsEnumerable)
       {
-        int index = GetAdvancedIndex(enumerableTagLeaf, fixMessageContext);
+        int index = GetAdvancedIndex(mappingDetails, fixMessageContext);
         GetTypedEnumeratedILSetterAction<TTarget, T>(mappingDetails.Current).Invoke(ref targetObject, parsedValue, index);
       }
       else
@@ -168,7 +150,7 @@ namespace RapideFix.Business
     /// <summary>
     /// Advances an index for array properties current value
     /// </summary>
-    protected int GetAdvancedIndex(EnumerableTagMapLeaf mappingDetails, FixMessageContext fixMessageContext)
+    protected int GetAdvancedIndex(TagMapLeaf mappingDetails, FixMessageContext fixMessageContext)
     {
       return GetAdvancedIndex(GetKey(mappingDetails.Current), mappingDetails, fixMessageContext, out var dummy);
     }
@@ -177,7 +159,7 @@ namespace RapideFix.Business
     /// Advances an index for array properties. It uses the <paramref name="leafPropertyKey"/> to map a key
     /// for the delimiter tag
     /// </summary>
-    protected int GetAdvancedIndex(int leafPropertyKey, IEnumerableTag mappingDetails, FixMessageContext fixMessageContext, out bool isAdvanced)
+    protected int GetAdvancedIndex(int leafPropertyKey, TagMapNode mappingDetails, FixMessageContext fixMessageContext, out bool isAdvanced)
     {
       if(fixMessageContext.RepeatingGroupCounters is null)
       {
@@ -204,8 +186,7 @@ namespace RapideFix.Business
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     protected int GetKey(PropertyInfo property)
     {
-      var tuple = (property.DeclaringType.FullName, property.Name);
-      return tuple.GetHashCode();
+      return property.GetHashCode();
     }
   }
 }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace RapideFix.Business.Data
 {
@@ -9,5 +11,19 @@ namespace RapideFix.Business.Data
     public string TypeConverterName { get; set; }
 
     public bool IsEncoded { get; set; }
+
+    public bool IsRepeatingGroupTag { get; set; }
+
+    public static T CreateRepeatingTag<T>(PropertyInfo property, Type innerType)
+      where T : TagMapLeaf, new()
+    {
+      return new T()
+      {
+        Current = property,
+        IsEnumerable = false,
+        IsRepeatingGroupTag = true,
+        InnerType = innerType
+      };
+    }
   }
 }

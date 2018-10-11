@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Buffers;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
+using System.Text;
 using RapideFix.Business.Data;
 using RapideFix.DataTypes;
 
@@ -11,8 +11,8 @@ namespace RapideFix.Business
 {
   public class TypeConvertedSetter : BaseTypeSetter, IPropertySetter
   {
-    private readonly ConcurrentDictionary<string, TypeConverter> _typeConverters = new ConcurrentDictionary<string, TypeConverter>();
-    private readonly ConcurrentDictionary<int, Delegate> _delegateFactory = new ConcurrentDictionary<int, Delegate>();
+    private readonly Dictionary<string, TypeConverter> _typeConverters = new Dictionary<string, TypeConverter>();
+    private readonly Dictionary<int, Delegate> _delegateFactory = new Dictionary<int, Delegate>();
 
     public object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
@@ -22,8 +22,15 @@ namespace RapideFix.Business
       }
       int valueLength = value.Length;
       Span<char> valueChars = stackalloc char[valueLength];
-      valueLength = Decode(value, mappingDetails, fixMessageContext, valueChars);
-      valueChars = valueChars.Slice(0, valueLength);
+      if(mappingDetails.IsEncoded)
+      {
+        valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, valueChars);
+        valueChars = valueChars.Slice(0, valueLength);
+      }
+      else
+      {
+        valueLength = Encoding.ASCII.GetChars(value, valueChars);
+      }
 
       TypeConverter converter;
       if(!_typeConverters.TryGetValue(mappingDetails.TypeConverterName, out converter))
@@ -44,7 +51,7 @@ namespace RapideFix.Business
         var convertedType = converted.GetType();
         if(!_delegateFactory.TryGetValue(GetKey(mappingDetails.Current), out Delegate delegateMethod))
         {
-          string methodGeneratingMethodName = mappingDetails is IEnumerableTag ? "GetEnumeratedILSetterAction" : "GetILSetterAction";
+          string methodGeneratingMethodName = mappingDetails.IsEnumerable ? "GetEnumeratedILSetterAction" : "GetILSetterAction";
 
           var methodInfo = typeof(SimpleTypeSetter).GetMethod(methodGeneratingMethodName, BindingFlags.NonPublic | BindingFlags.Instance);
           delegateMethod = (Delegate)methodInfo
@@ -53,9 +60,9 @@ namespace RapideFix.Business
           _delegateFactory.TryAdd(GetKey(mappingDetails.Current), delegateMethod);
 
         }
-        if(mappingDetails is EnumerableTagMapLeaf enumerableLeaf)
+        if(mappingDetails.IsEnumerable)
         {
-          int index = GetAdvancedIndex(enumerableLeaf, fixMessageContext);
+          int index = GetAdvancedIndex(mappingDetails, fixMessageContext);
           delegateMethod.DynamicInvoke(targetObject, converted, index);
         }
         else

@@ -32,19 +32,19 @@ namespace RapideFix.Business
       {
         parentTarget = _parentSetter.Set(value, mappingDetails, fixMessageContext, parentTarget);
       }
-      switch(mappingDetails)
-      {
-        case RepeatingGroupTagMapLeaf repeatingParent:
-          parentTarget = _repeatingGroupSetter.Set(value, mappingDetails, fixMessageContext, parentTarget);
-          break;
-        case TagMapLeaf simpleOrEnumerated when simpleOrEnumerated.TypeConverterName == null:
-          parentTarget = _simpleTypeSetter.Set(value, mappingDetails, fixMessageContext, parentTarget);
-          break;
-        case TagMapLeaf withTypeSetter when withTypeSetter.TypeConverterName != null:
-          parentTarget = _typeConvertedSetter.Set(value, mappingDetails, fixMessageContext, parentTarget);
-          break;
-      }
 
+      if(mappingDetails.IsRepeatingGroupTag)
+      {
+        parentTarget = _repeatingGroupSetter.Set(value, mappingDetails, fixMessageContext, parentTarget);
+      }
+      else if(mappingDetails.TypeConverterName == null)
+      {
+        parentTarget = _simpleTypeSetter.Set(value, mappingDetails, fixMessageContext, parentTarget);
+      }
+      else if(mappingDetails.TypeConverterName != null)
+      {
+        parentTarget = _typeConvertedSetter.Set(value, mappingDetails, fixMessageContext, parentTarget);
+      }
       return parentTarget;
     }
 
@@ -54,19 +54,19 @@ namespace RapideFix.Business
       {
         throw new NotSupportedException("Typed setting may only work on flat objects");
       }
-      switch(mappingDetails)
-      {
-        case RepeatingGroupTagMapLeaf repeatingParent:
-          _repeatingGroupSetter.Set(value, mappingDetails, fixMessageContext, targetObject);
-          break;
-        case TagMapLeaf simpleOrEnumerated when simpleOrEnumerated.TypeConverterName == null:
-          targetObject = _typedPropertySetter.SetTarget(value, mappingDetails, fixMessageContext, ref targetObject);
-          break;
-        case TagMapLeaf withTypeSetter when withTypeSetter.TypeConverterName != null:
-          throw new NotSupportedException("Typed setting may only work on flat objects");
-          break;
-      }
 
+      if(mappingDetails.IsRepeatingGroupTag)
+      {
+        _repeatingGroupSetter.Set(value, mappingDetails, fixMessageContext, targetObject);
+      }
+      else if(mappingDetails.TypeConverterName == null)
+      {
+        targetObject = _typedPropertySetter.SetTarget(value, mappingDetails, fixMessageContext, ref targetObject);
+      }
+      else if(mappingDetails.TypeConverterName != null)
+      {
+        throw new NotSupportedException("Typed setting may only work on flat objects");
+      }
       return targetObject;
     }
   }

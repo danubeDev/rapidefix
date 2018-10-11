@@ -14,5 +14,10 @@ namespace RapideFix.Extensions
       return result;
     }
 
+    public static byte[] ToByteValue(this string fixValue)
+    {
+      return Encoding.ASCII.GetBytes(fixValue);
+    }
+
   }
 }

@@ -13,21 +13,21 @@ namespace RapideFix.Business
   /// </summary>
   public class RepeatingGroupTagSetter : BaseTypeSetter, IPropertySetter
   {
-    private readonly ConcurrentDictionary<Type, Delegate> _delegateFactoryCache = new ConcurrentDictionary<Type, Delegate>();
+    private readonly Dictionary<Type, Delegate> _delegateFactoryCache = new Dictionary<Type, Delegate>();
 
     public object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
       // mappingDetails is a leaf node for the repeating tag
       // parents are expected to be set by parents setter
-      if(mappingDetails is RepeatingGroupTagMapLeaf repeatingLeaf)
+      if(mappingDetails.IsRepeatingGroupTag)
       {
-        targetObject = CreateEnumerable(value, repeatingLeaf, fixMessageContext, targetObject);
+        targetObject = CreateEnumerable(value, mappingDetails, fixMessageContext, targetObject);
       }
 
       return targetObject;
     }
 
-    public object CreateEnumerable(ReadOnlySpan<byte> value, RepeatingGroupTagMapLeaf repeatingLeaf, FixMessageContext fixMessageContext, object targetObject)
+    public object CreateEnumerable(ReadOnlySpan<byte> value, TagMapLeaf repeatingLeaf, FixMessageContext fixMessageContext, object targetObject)
     {
       //This is handled as a parent. The incremental counting is set by the first tag of the repeating group.
       if(fixMessageContext.CreatedParentTypes is null || !fixMessageContext.CreatedParentTypes.Contains(GetKey(repeatingLeaf.Current)))

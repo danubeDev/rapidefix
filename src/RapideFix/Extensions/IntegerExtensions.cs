@@ -14,9 +14,15 @@ namespace RapideFix.Extensions
       return result;
     }
 
-    public static byte[] ToKnownTag(this int fixTag)
+    public static byte[] ToKnownTagEquals(this int fixTag)
     {
       var tag = Encoding.ASCII.GetBytes($"{fixTag}=");
+      return tag;
+    }
+
+    public static byte[] ToKnownTag(this int fixTag)
+    {
+      var tag = Encoding.ASCII.GetBytes(fixTag.ToString());
       return tag;
     }
 

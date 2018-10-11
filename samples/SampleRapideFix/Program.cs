@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using RapideFix;
 using RapideFix.Business;
@@ -8,7 +7,6 @@ using RapideFix.Parsers;
 using RapideFix.Validation;
 using RapideFixFixture;
 using RapideFixFixture.TestTypes;
-using SampleRapideFix.Data;
 
 namespace SampleRapideFix
 {

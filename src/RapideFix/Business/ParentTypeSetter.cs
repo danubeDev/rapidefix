@@ -10,15 +10,15 @@ namespace RapideFix.Business
 {
   public class ParentTypeSetter : BaseTypeSetter, IPropertySetter
   {
-    private readonly ConcurrentDictionary<int, Delegate> _delegateFactoryCache = new ConcurrentDictionary<int, Delegate>();
+    private readonly Dictionary<int, Delegate> _delegateFactoryCache = new Dictionary<int, Delegate>();
 
     public object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
       foreach(var parent in mappingDetails.Parents)
       {
-        if(parent is EnumerableTagMapNode enumerableParent)
+        if(parent.IsEnumerable)
         {
-          targetObject = SetRepeatingTypeParent(mappingDetails, enumerableParent, fixMessageContext, targetObject);
+          targetObject = SetRepeatingTypeParent(mappingDetails, parent, fixMessageContext, targetObject);
         }
         else
         {
@@ -29,7 +29,7 @@ namespace RapideFix.Business
       return targetObject;
     }
 
-    private object SetRepeatingTypeParent(TagMapLeaf leaf, EnumerableTagMapNode parent, FixMessageContext fixMessageContext, object targetObject)
+    private object SetRepeatingTypeParent(TagMapLeaf leaf, TagMapNode parent, FixMessageContext fixMessageContext, object targetObject)
     {
       int index = GetAdvancedIndex(GetKey(leaf.Current), parent, fixMessageContext, out bool isAdvanced);
 

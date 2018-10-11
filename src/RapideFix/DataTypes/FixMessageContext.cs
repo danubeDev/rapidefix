@@ -25,6 +25,8 @@ namespace RapideFix.DataTypes
 
     public int ChecksumTagStartIndex { get; set; }
 
+    public int ChecksumValue { get; set; }
+
     public MessageEncoding EncodedFields { get; set; }
 
     /// <summary>
@@ -33,5 +35,6 @@ namespace RapideFix.DataTypes
     public Dictionary<int, RepeatingCounter> RepeatingGroupCounters { get; set; }
 
     public HashSet<int> CreatedParentTypes { get; set; }
+
   }
 }

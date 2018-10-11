@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using RapideFix.Business.Data;
 using RapideFix.DataTypes;
 
@@ -10,10 +11,17 @@ namespace RapideFix.Business
     {
       int valueLength = value.Length;
       Span<char> valueChars = stackalloc char[valueLength];
-      valueLength = Decode(value, mappingDetails, fixMessageContext, valueChars);
-      valueChars = valueChars.Slice(0, valueLength);
-      var propertyType = !(mappingDetails is IEnumerableTag enumerableLeaf) ?
-        mappingDetails.Current.PropertyType : enumerableLeaf.InnerType;
+      if(mappingDetails.IsEncoded)
+      {
+        valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, valueChars);
+        valueChars = valueChars.Slice(0, valueLength);
+      }
+      else
+      {
+        valueLength = Encoding.ASCII.GetChars(value, valueChars);
+      }      
+      var propertyType = !(mappingDetails.IsEnumerable) ?
+        mappingDetails.Current.PropertyType : mappingDetails.InnerType;
 
       if(propertyType == typeof(int))
       {
@@ -163,10 +171,17 @@ namespace RapideFix.Business
     {
       int valueLength = value.Length;
       Span<char> valueChars = stackalloc char[valueLength];
-      valueLength = Decode(value, mappingDetails, fixMessageContext, valueChars);
-      valueChars = valueChars.Slice(0, valueLength);
-      var propertyType = !(mappingDetails is IEnumerableTag enumerableLeaf) ?
-        mappingDetails.Current.PropertyType : enumerableLeaf.InnerType;
+      if(mappingDetails.IsEncoded)
+      {
+        valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, valueChars);
+        valueChars = valueChars.Slice(0, valueLength);
+      }
+      else
+      {
+        valueLength = Encoding.ASCII.GetChars(value, valueChars);
+      }
+      var propertyType = !(mappingDetails.IsEnumerable) ?
+        mappingDetails.Current.PropertyType : mappingDetails.InnerType;
 
 
       if(propertyType == typeof(int))

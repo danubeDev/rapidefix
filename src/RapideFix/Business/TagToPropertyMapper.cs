@@ -14,6 +14,7 @@ namespace RapideFix.Business
   {
     private Dictionary<int, TagMapLeaf> _map = new Dictionary<int, TagMapLeaf>();
     private Dictionary<int, Type> _mapMessageType = new Dictionary<int, Type>();
+    private HashSet<Type> _mappedTypes = new HashSet<Type>();
 
     public bool TryGet(ReadOnlySpan<byte> tag, out TagMapLeaf result)
     {
@@ -40,6 +41,11 @@ namespace RapideFix.Business
 
     private void Map(Type type, Stack<TagMapNode> parents)
     {
+      if(_mappedTypes.Contains(type))
+      {
+        return;
+      }
+      _mappedTypes.Add(type);
       var messageType = type.GetCustomAttribute<MessageTypeAttribute>();
       if(messageType != null)
       {
@@ -128,12 +134,7 @@ namespace RapideFix.Business
 
     private TagMapNode CreateRepeatingParentNode(PropertyInfo property, RepeatingGroupAttribute repeatingGroup, Type innerType)
     {
-      return new EnumerableTagMapNode()
-      {
-        Current = property,
-        InnerType = innerType,
-        RepeatingTagNumber = repeatingGroup.Tag
-      };
+      return TagMapNode.CreateEnumerable<TagMapNode>(property, repeatingGroup.Tag, innerType);
     }
 
     private TagMapLeaf AddLeafNode(Stack<TagMapNode> parents, PropertyInfo property, FixTagAttribute fixTagAttribute, TypeConverterAttribute typeConverter, int key)
@@ -149,32 +150,22 @@ namespace RapideFix.Business
       return value;
     }
 
-    private EnumerableTagMapLeaf AddEnumerableLeaf(Stack<TagMapNode> parents, PropertyInfo property, FixTagAttribute fixTagAttribute, RepeatingGroupAttribute repeatingGroup, TypeConverterAttribute typeConverter, int key, Type innerType)
+    private TagMapLeaf AddEnumerableLeaf(Stack<TagMapNode> parents, PropertyInfo property, FixTagAttribute fixTagAttribute, RepeatingGroupAttribute repeatingGroup, TypeConverterAttribute typeConverter, int key, Type innerType)
     {
-      EnumerableTagMapLeaf value = new EnumerableTagMapLeaf()
-      {
-        Current = property,
-        Parents = parents.ToList(),
-        TypeConverterName = typeConverter?.ConverterTypeName,
-        IsEncoded = fixTagAttribute.Encoded,
-        RepeatingTagNumber = repeatingGroup.Tag,
-        InnerType = innerType
-      };
-
+      var value = TagMapNode.CreateEnumerable<TagMapLeaf>(property, repeatingGroup.Tag, innerType);
+      value.Parents = parents.ToList();
+      value.TypeConverterName = typeConverter?.ConverterTypeName;
+      value.IsEncoded = fixTagAttribute.Encoded;
       _map.TryAdd(key, value);
       return value;
     }
 
     private void AddRepeatingGroupLeaf(Stack<TagMapNode> parents, PropertyInfo property, RepeatingGroupAttribute repeatingGroup, Type innerType)
     {
-      var value = new RepeatingGroupTagMapLeaf()
-      {
-        Current = property,
-        Parents = parents.ToList(),
-        InnerType = innerType,
-        IsEncoded = false,
-        TypeConverterName = null
-      };
+      var value = TagMapLeaf.CreateRepeatingTag<TagMapLeaf>(property, innerType);
+      value.Parents = parents.ToList();
+      value.IsEncoded = false;
+      value.TypeConverterName = null;
       _map.TryAdd(repeatingGroup.Tag, value);
     }
 

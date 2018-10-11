@@ -1,13 +1,19 @@
-﻿using RapideFix.DataTypes;
-using System;
+﻿using System;
+using RapideFix.DataTypes;
 
 namespace RapideFix.Validation
 {
+
   public interface IValidator
   {
     /// <summary>
     /// Returns if the given message is valid.
     /// </summary>
-    bool IsValid(ReadOnlySpan<byte> message, FixMessageContext messageContext);
+    bool PreValidate(ReadOnlySpan<byte> message, FixMessageContext messageContext);
+
+    /// <summary>
+    /// Returns if the given message is valid.
+    /// </summary>
+    bool PostValidate(ReadOnlySpan<byte> message, FixMessageContext messageContext);
   }
 }

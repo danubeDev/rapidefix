@@ -3,7 +3,7 @@ using RapideFix.DataTypes;
 
 namespace RapideFix.Validation
 {
-  public class ChecksumValidator : IValidator
+  public class ChecksumValidator : IValidatorInternal
   {
     private static readonly int Modulus = 256;
     private readonly IntegerToFixConverter _converter;
@@ -22,20 +22,7 @@ namespace RapideFix.Validation
         return false;
       }
 
-      //TODO: This should be Vectorized, once vectors support ReadonlySpan-s.
-      int sum = 1;
-      int sumB = 0;
-      for(int i = 0; i < endingTagPos; i += 2)
-      {
-        sum += data[i];
-        int next = i + 1;
-        if(next < endingTagPos)
-        {
-          sumB += data[next];
-        }
-      }
-
-      int expectedChecksum = (sum + sumB) % Modulus;
+      int expectedChecksum = msgContext.ChecksumValue % Modulus;
       Span<byte> expectedDigits = stackalloc byte[ChecksumLength];
       _converter.Convert(number: expectedChecksum, into: expectedDigits, count: ChecksumLength);
 

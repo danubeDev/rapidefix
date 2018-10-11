@@ -7,8 +7,8 @@ namespace RapideFix
 {
   public class IntegerToFixConverter
   {
-    private readonly byte[] digitToAsciiByte = new byte[10];
-    private readonly Dictionary<byte, int> asciiByteToInt = new Dictionary<byte, int>();
+    private readonly byte[] _digitToAsciiByte = new byte[10];
+    private readonly byte _zero;
 
     public static IntegerToFixConverter Instance { get; } = new IntegerToFixConverter();
 
@@ -21,9 +21,9 @@ namespace RapideFix
         {
           throw new InvalidOperationException($"Cannot create ASCII byte representation of digits for {i}");
         }
-        digitToAsciiByte[i] = numberEncoded[0];
-        asciiByteToInt.Add(numberEncoded[0], i);
+        _digitToAsciiByte[i] = numberEncoded[0];
       }
+      _zero = _digitToAsciiByte[0];
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -31,7 +31,7 @@ namespace RapideFix
     {
       for(int i = count - 1; i >= 0; i--)
       {
-        into[i] = digitToAsciiByte[number % 10];
+        into[i] = _digitToAsciiByte[number % 10];
         number = number / 10;
       }
     }
@@ -39,13 +39,25 @@ namespace RapideFix
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int ConvertBack(ReadOnlySpan<byte> data)
     {
+      int digit;
+      if(data.Length == 3)
+      {
+        int digit0 = (data[0] - _zero) * 100;
+        int digit1 = (data[1] - _zero) * 10;
+        int digit2 = (data[2] - _zero);
+        return digit0 + digit1 + digit2;
+      }
+      if(data.Length == 2)
+      {
+        int digit0 = (data[0] - _zero) * 10;
+        int digit1 = (data[1] - _zero);
+        return digit0 + digit1;
+      }
       int result = 0;
       foreach(byte b in data)
       {
-        if(asciiByteToInt.TryGetValue(b, out int digit))
-        {
-          result = result * 10 + digit;
-        }
+        digit = b - _zero;
+        result = result * 10 + digit;
       }
       return result;
     }
