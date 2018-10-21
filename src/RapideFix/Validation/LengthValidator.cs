@@ -1,9 +1,9 @@
-﻿using RapideFix.DataTypes;
-using System;
+﻿using System;
+using RapideFix.DataTypes;
 
 namespace RapideFix.Validation
 {
-  public class LengthValidator : IValidator
+  public class LengthValidator : IValidatorInternal
   {
     private readonly IntegerToFixConverter _converter;
     public LengthValidator(IntegerToFixConverter converter)
@@ -11,7 +11,7 @@ namespace RapideFix.Validation
       _converter = converter ?? throw new ArgumentNullException(nameof(converter));
     }
 
-    public bool IsValid(Span<byte> data, FixMessageContext msgContext)
+    public bool IsValid(ReadOnlySpan<byte> data, FixMessageContext msgContext)
     {
       var endingTagPos = msgContext.ChecksumTagStartIndex;
       int startingTagPos = msgContext.MessageTypeTagStartIndex;
@@ -20,7 +20,7 @@ namespace RapideFix.Validation
       {
         return false;
       }
-      int digitsCount = (int)Math.Floor(Math.Log10(expectedLength) + 1);
+      int digitsCount = (int)(Math.Log10(expectedLength) + 1);
       Span<byte> expectedDigits = stackalloc byte[digitsCount + 1];
       _converter.Convert(number: expectedLength, into: expectedDigits, count: digitsCount);
       expectedDigits[digitsCount] = Constants.SOHByte;

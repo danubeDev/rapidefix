@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly:InternalsVisibleTo("RapideFixFixture")]
+[assembly: InternalsVisibleTo("RapideFixFixture")]
+[assembly: InternalsVisibleTo("RapideFixBenchmarks")]
 namespace RapideFix
 {
   internal static class Constants
@@ -10,6 +11,13 @@ namespace RapideFix
     internal const char Equal = '=';
 
     internal const byte SOHByte = 1;
+    internal const byte EqualsByte = 61;
+
+    internal const char True = 'Y';
+    internal const char TrueNumber = '1';
+
+    internal const char False = 'N';
+    internal const char FalseNumber = '0';
 
   }
 }

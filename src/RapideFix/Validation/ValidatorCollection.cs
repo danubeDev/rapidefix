@@ -1,33 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
 using RapideFix.DataTypes;
 
 namespace RapideFix.Validation
 {
   public class ValidatorCollection : IValidator
   {
-    private readonly List<IValidator> _validators;
+    private readonly FixVersionValidator _versionValidator;
+    private readonly ChecksumValidator _checksumValidator;
+    private readonly LengthValidator _lengthValidator;
 
     public ValidatorCollection(IntegerToFixConverter integerConverter)
     {
-      _validators = new List<IValidator>();
-      _validators.Add(new FixVersionValidator());
-      _validators.Add(new ChecksumValidator(integerConverter));
-      _validators.Add(new LengthValidator(integerConverter));
+      _versionValidator = new FixVersionValidator();
+      _checksumValidator = new ChecksumValidator(integerConverter);
+      _lengthValidator = new LengthValidator(integerConverter);
     }
 
-    public bool IsValid(Span<byte> message, FixMessageContext messageContext)
+    public bool PreValidate(ReadOnlySpan<byte> message, FixMessageContext messageContext)
     {
-      if(messageContext == null)
+      if(messageContext is null)
       {
         throw new ArgumentNullException(nameof(messageContext));
       }
-      foreach(var validator in _validators)
+      if(!_versionValidator.IsValid(message, messageContext))
       {
-        if(!validator.IsValid(message, messageContext))
-        {
-          return false;
-        }
+        return false;
+      }
+      if(!_lengthValidator.IsValid(message, messageContext))
+      {
+        return false;
+      }
+      return true;
+    }
+
+    public bool PostValidate(ReadOnlySpan<byte> message, FixMessageContext messageContext)
+    {
+      if(!_checksumValidator.IsValid(message, messageContext))
+      {
+        return false;
       }
       return true;
     }

@@ -1,19 +1,19 @@
-﻿using RapideFix.DataTypes;
-using System;
+﻿using System;
+using RapideFix.DataTypes;
 
 namespace RapideFix.Validation
 {
-  public class FixVersionValidator : IValidator
+  public class FixVersionValidator : IValidatorInternal
   {
-    public bool IsValid(Span<byte> data, FixMessageContext messageContext)
+    public bool IsValid(ReadOnlySpan<byte> data, FixMessageContext messageContext)
     {
-      if(!data.StartsWith(KnownFixTags.FixVersion))
+      if(!data.Slice(0, SupportedFixVersion.TagAndPrefix.Length).SequenceEqual(SupportedFixVersion.TagAndPrefix))
       {
         return false;
       }
       int beginStringLength = data.IndexOf(Constants.SOHByte);
-      var fixVersionValue = data.Slice(KnownFixTags.FixVersion.Length, beginStringLength - KnownFixTags.FixVersion.Length + 1);
-      if(!SupportedFixVersion.TryParse(fixVersionValue, out var version))
+      var fixVersionValue = data.Slice(SupportedFixVersion.TagAndPrefix.Length, beginStringLength - SupportedFixVersion.TagAndPrefix.Length);
+      if(!SupportedFixVersion.TryParseEnd(fixVersionValue, out var version))
       {
         return false;
       }

@@ -2,7 +2,7 @@
 
 namespace RapideFix.Attributes
 {
-  [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
+  [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
   public class FixTagAttribute : Attribute
   {
     public FixTagAttribute(int tag)
@@ -10,6 +10,13 @@ namespace RapideFix.Attributes
       Tag = tag;
     }
 
+    public FixTagAttribute(int tag, bool encoded) : this(tag)
+    {
+      Encoded = encoded;
+    }
+
     public int Tag { get; }
+
+    public bool Encoded { get; }
   }
 }

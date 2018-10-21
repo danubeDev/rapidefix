@@ -3,6 +3,25 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <LangVersion>latest</LangVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <PackageId>DanubeDev.RapideFix</PackageId>
+    <Title>DanubeDev.RapideFix</Title>
+    <Authors>Bence Molnar;ladeak</Authors>
+    <Description>A superb FIX message parser library. It is designed to deserialize FIX messages efficiently, with minimum number of allocations with high performance.</Description>
+    <PackageLicenseUrl>https://github.com/danubeDev/rapidefix/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/danubeDev/rapidefix</PackageProjectUrl>
+    <IncludeSymbols>True</IncludeSymbols>
+    <IncludeSource>True</IncludeSource>
+    <RepositoryUrl>https://github.com/danubeDev/rapidefix</RepositoryUrl>
+    <PackageTags>FIX;parser;financial;exchange;message;</PackageTags>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Buffers" Version="4.5.0" />
+    <PackageReference Include="System.IO.Pipelines" Version="4.5.2" />
+  </ItemGroup>
 
 </Project>
