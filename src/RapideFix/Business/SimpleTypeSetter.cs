@@ -19,7 +19,28 @@ namespace RapideFix.Business
       else
       {
         valueLength = Encoding.ASCII.GetChars(value, valueChars);
-      }      
+      }
+      return Set(valueChars, mappingDetails, fixMessageContext, targetObject);
+    }
+
+    public TTarget SetTarget<TTarget>(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject)
+    {
+      int valueLength = value.Length;
+      Span<char> valueChars = stackalloc char[valueLength];
+      if(mappingDetails.IsEncoded)
+      {
+        valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, valueChars);
+        valueChars = valueChars.Slice(0, valueLength);
+      }
+      else
+      {
+        valueLength = Encoding.ASCII.GetChars(value, valueChars);
+      }
+      return SetTarget<TTarget>(valueChars, mappingDetails, fixMessageContext, ref targetObject);
+    }
+
+    public object Set(ReadOnlySpan<char> valueChars, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
+    {
       var propertyType = !(mappingDetails.IsEnumerable) ?
         mappingDetails.Current.PropertyType : mappingDetails.InnerType;
 
@@ -27,7 +48,7 @@ namespace RapideFix.Business
       {
         if(int.TryParse(valueChars, out var parsedValue))
         {
-          SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);          
+          SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
       else if(propertyType == typeof(double))
@@ -89,7 +110,7 @@ namespace RapideFix.Business
       }
       else if(propertyType == typeof(byte))
       {
-        SetValue(mappingDetails, fixMessageContext, targetObject, value[0]);
+        SetValue(mappingDetails, fixMessageContext, targetObject, (byte)valueChars[0]);
       }
       else if(propertyType == typeof(char))
       {
@@ -157,7 +178,7 @@ namespace RapideFix.Business
       }
       else if(propertyType == typeof(byte?))
       {
-        SetValue<byte?>(mappingDetails, fixMessageContext, targetObject, value[0]);
+        SetValue<byte?>(mappingDetails, fixMessageContext, targetObject, (byte)valueChars[0]);
       }
       else if(propertyType == typeof(char?))
       {
@@ -167,19 +188,8 @@ namespace RapideFix.Business
       return targetObject;
     }
 
-    public TTarget SetTarget<TTarget>(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject)
+    public TTarget SetTarget<TTarget>(ReadOnlySpan<char> valueChars, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject)
     {
-      int valueLength = value.Length;
-      Span<char> valueChars = stackalloc char[valueLength];
-      if(mappingDetails.IsEncoded)
-      {
-        valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, valueChars);
-        valueChars = valueChars.Slice(0, valueLength);
-      }
-      else
-      {
-        valueLength = Encoding.ASCII.GetChars(value, valueChars);
-      }
       var propertyType = !(mappingDetails.IsEnumerable) ?
         mappingDetails.Current.PropertyType : mappingDetails.InnerType;
 
@@ -246,7 +256,7 @@ namespace RapideFix.Business
       }
       else if(propertyType == typeof(byte))
       {
-        SetValue<TTarget, byte>(mappingDetails, fixMessageContext, ref targetObject, value[0]);
+        SetValue<TTarget, byte>(mappingDetails, fixMessageContext, ref targetObject, (byte)valueChars[0]);
       }
       else if(propertyType == typeof(char))
       {
@@ -318,7 +328,7 @@ namespace RapideFix.Business
       }
       else if(propertyType == typeof(byte?))
       {
-        SetValue<TTarget, byte?>(mappingDetails, fixMessageContext, ref targetObject, value[0]);
+        SetValue<TTarget, byte?>(mappingDetails, fixMessageContext, ref targetObject, (byte)valueChars[0]);
       }
       else if(propertyType == typeof(char?))
       {
