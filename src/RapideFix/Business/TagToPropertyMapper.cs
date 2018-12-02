@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -15,10 +16,21 @@ namespace RapideFix.Business
     private Dictionary<int, TagMapLeaf> _map = new Dictionary<int, TagMapLeaf>();
     private Dictionary<int, Type> _mapMessageType = new Dictionary<int, Type>();
     private HashSet<Type> _mappedTypes = new HashSet<Type>();
+    private static NumberFormatInfo _numberFormatInfo = CultureInfo.CurrentCulture.NumberFormat;
 
     public bool TryGet(ReadOnlySpan<byte> tag, out TagMapLeaf result)
     {
       int key = IntegerToFixConverter.Instance.ConvertBack(tag);
+      return _map.TryGetValue(key, out result);
+    }
+
+    public bool TryGet(ReadOnlySpan<char> tag, out TagMapLeaf result)
+    {
+      if(!int.TryParse(tag, NumberStyles.Integer, _numberFormatInfo, out int key))
+      {
+        result = null;
+        return false;
+      }
       return _map.TryGetValue(key, out result);
     }
 

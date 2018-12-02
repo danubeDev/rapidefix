@@ -7,7 +7,7 @@ using RapideFix.Validation;
 
 namespace RapideFix.Parsers
 {
-  public class TypedMessageParser<TTarget> : IMessageParser<TTarget>
+  public class TypedMessageParser<TTarget> : IMessageParser<TTarget, byte>
   {
     private readonly ITagToPropertyMapper _propertyMapper;
     private readonly ITypedPropertySetter _typedPropertySetter;
@@ -115,6 +115,8 @@ namespace RapideFix.Parsers
         }
         messagePart = messagePart.Slice(indexSOH + 1);
       }
+      messageContext.ChecksumValue = checksumValue;
+      _validators.PostValidate(message, messageContext);
       return ref targetObject;
     }
 

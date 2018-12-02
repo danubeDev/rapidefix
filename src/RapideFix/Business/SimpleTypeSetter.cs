@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Text;
 using RapideFix.Business.Data;
 using RapideFix.DataTypes;
@@ -7,6 +8,8 @@ namespace RapideFix.Business
 {
   public class SimpleTypeSetter : BaseTypeSetter, ITypedPropertySetter
   {
+    private static NumberFormatInfo _numberFormatInfo = CultureInfo.CurrentCulture.NumberFormat;
+
     public object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
       int valueLength = value.Length;
@@ -46,14 +49,14 @@ namespace RapideFix.Business
 
       if(propertyType == typeof(int))
       {
-        if(int.TryParse(valueChars, out var parsedValue))
+        if(int.TryParse(valueChars, NumberStyles.Integer, _numberFormatInfo, out var parsedValue))
         {
           SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
       else if(propertyType == typeof(double))
       {
-        if(double.TryParse(valueChars, out var parsedValue))
+        if(double.TryParse(valueChars, NumberStyles.Float | NumberStyles.AllowThousands, _numberFormatInfo, out var parsedValue))
         {
           SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
@@ -82,28 +85,28 @@ namespace RapideFix.Business
       }
       else if(propertyType == typeof(decimal))
       {
-        if(decimal.TryParse(valueChars, out var parsedValue))
+        if(decimal.TryParse(valueChars, NumberStyles.Number, _numberFormatInfo, out var parsedValue))
         {
           SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
       else if(propertyType == typeof(long))
       {
-        if(long.TryParse(valueChars, out var parsedValue))
+        if(long.TryParse(valueChars, NumberStyles.Integer, _numberFormatInfo, out var parsedValue))
         {
           SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
       else if(propertyType == typeof(short))
       {
-        if(short.TryParse(valueChars, out var parsedValue))
+        if(short.TryParse(valueChars, NumberStyles.Integer, _numberFormatInfo, out var parsedValue))
         {
           SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
       else if(propertyType == typeof(float))
       {
-        if(float.TryParse(valueChars, out var parsedValue))
+        if(float.TryParse(valueChars, NumberStyles.Float | NumberStyles.AllowThousands, _numberFormatInfo, out var parsedValue))
         {
           SetValue(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
@@ -118,42 +121,42 @@ namespace RapideFix.Business
       }
       else if(propertyType == typeof(int?))
       {
-        if(int.TryParse(valueChars, out var parsedValue))
+        if(int.TryParse(valueChars, NumberStyles.Integer, _numberFormatInfo, out var parsedValue))
         {
           SetValue<int?>(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
       else if(propertyType == typeof(double?))
       {
-        if(double.TryParse(valueChars, out var parsedValue))
+        if(double.TryParse(valueChars, NumberStyles.Float | NumberStyles.AllowThousands, _numberFormatInfo, out var parsedValue))
         {
           SetValue<double?>(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
       else if(propertyType == typeof(decimal?))
       {
-        if(decimal.TryParse(valueChars, out var parsedValue))
+        if(decimal.TryParse(valueChars, NumberStyles.Number, _numberFormatInfo, out var parsedValue))
         {
           SetValue<decimal?>(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
       else if(propertyType == typeof(long?))
       {
-        if(long.TryParse(valueChars, out var parsedValue))
+        if(long.TryParse(valueChars, NumberStyles.Integer, _numberFormatInfo, out var parsedValue))
         {
           SetValue<long?>(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
       else if(propertyType == typeof(short?))
       {
-        if(short.TryParse(valueChars, out var parsedValue))
+        if(short.TryParse(valueChars, NumberStyles.Integer, _numberFormatInfo, out var parsedValue))
         {
           SetValue<short?>(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }
       }
       else if(propertyType == typeof(float?))
       {
-        if(float.TryParse(valueChars, out var parsedValue))
+        if(float.TryParse(valueChars, NumberStyles.Float | NumberStyles.AllowThousands, _numberFormatInfo, out var parsedValue))
         {
           SetValue<float?>(mappingDetails, fixMessageContext, targetObject, parsedValue);
         }

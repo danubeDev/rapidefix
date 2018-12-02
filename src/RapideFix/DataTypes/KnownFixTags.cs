@@ -1,7 +1,7 @@
 ﻿using RapideFix.Extensions;
 using System.Runtime.CompilerServices;
 
-namespace RapideFix
+namespace RapideFix.DataTypes
 {
   internal static class KnownFixTags
   {

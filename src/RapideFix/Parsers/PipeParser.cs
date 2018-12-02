@@ -9,22 +9,22 @@ namespace RapideFix.Parsers
   public class PipeParser<T> : ObservableParser<T>
   {
     private readonly PipeReader _reader;
-    private readonly IMessageParser<T> _messageParser;
+    private readonly IMessageParser<T, byte> _messageParser;
     private readonly SupportedFixVersion _fixVersion;
     private readonly Func<ReadOnlyMemory<byte>, T> _targetObjectFactory;
 
-    public PipeParser(PipeReader pipeReader, IMessageParser<T> singleMessageParser, SupportedFixVersion fixVersion)
+    public PipeParser(PipeReader pipeReader, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion)
        : this(pipeReader, singleMessageParser, fixVersion, null)
     {
     }
 
-    public PipeParser(Pipe pipe, IMessageParser<T> singleMessageParser, SupportedFixVersion fixVersion, Func<ReadOnlyMemory<byte>, T> targetObjectFactory)
+    public PipeParser(Pipe pipe, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion, Func<ReadOnlyMemory<byte>, T> targetObjectFactory)
       : this(pipe.Reader, singleMessageParser, fixVersion, targetObjectFactory)
     {
       Pipe = pipe ?? throw new ArgumentNullException(nameof(pipe));
     }
 
-    public PipeParser(PipeReader pipeReader, IMessageParser<T> singleMessageParser, SupportedFixVersion fixVersion, Func<ReadOnlyMemory<byte>, T> targetObjectFactory)
+    public PipeParser(PipeReader pipeReader, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion, Func<ReadOnlyMemory<byte>, T> targetObjectFactory)
     {
       _reader = pipeReader ?? throw new ArgumentNullException(nameof(pipeReader));
       _messageParser = singleMessageParser ?? throw new ArgumentNullException(nameof(singleMessageParser));
@@ -51,7 +51,6 @@ namespace RapideFix.Parsers
             buffer = buffer.Slice(buffer.GetPosition(1, position.Value));
           }
         }
-
         while(position != null && !token.IsCancellationRequested);
 
         _reader.AdvanceTo(buffer.Start, buffer.End);

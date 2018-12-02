@@ -1,9 +1,10 @@
-﻿using RapideFix.Attributes;
-using RapideFix.StringProcessing;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using RapideFix.Attributes;
+using RapideFix.DataTypes;
+using RapideFix.StringProcessing;
 
 namespace RapideFix
 {

@@ -2,7 +2,7 @@
 
 [assembly: InternalsVisibleTo("RapideFixFixture")]
 [assembly: InternalsVisibleTo("RapideFixBenchmarks")]
-namespace RapideFix
+namespace RapideFix.DataTypes
 {
   internal static class Constants
   {
