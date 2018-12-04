@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using RapideFix;
+using RapideFix.DataTypes;
 
 namespace RapideFixFixture
 {
