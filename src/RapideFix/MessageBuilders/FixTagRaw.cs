@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using RapideFix.DataTypes;
 
-namespace RapideFixFixture
+namespace RapideFix.MessageBuilders
 {
   internal struct FixTagRaw : IFixTagValue
   {

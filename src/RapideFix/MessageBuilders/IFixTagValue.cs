@@ -1,9 +1,9 @@
-﻿namespace RapideFixFixture
+﻿namespace RapideFix.MessageBuilders
 {
   /// <summary>
   /// Represents a fix tag and related value in encoded bytes.
   /// </summary>
-  internal interface IFixTagValue
+  public interface IFixTagValue
   {
     /// <summary>
     /// Copies the values of the tag to the data byte array to the given offset of data.

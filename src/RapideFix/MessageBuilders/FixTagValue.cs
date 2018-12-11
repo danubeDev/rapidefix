@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Text;
-using RapideFix;
 using RapideFix.DataTypes;
 
-namespace RapideFixFixture
+namespace RapideFix.MessageBuilders
 {
-  internal struct FixTagValue : IFixTagValue
+  public struct FixTagValue : IFixTagValue
   {
     public FixTagValue(int tag, string value, MessageEncoding encoder)
     {

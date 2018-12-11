@@ -90,7 +90,7 @@ namespace RapideFix.Parsers
       ReadOnlySpan<byte> messagePart = message;
       int indexSOH = 0;
       int indexEquals = 0;
-      int checksumValue = 0;
+      byte checksumValue = 0;
       while(messagePart.Length > checksumLength)
       {
         if(TraverseMessageBody(messagePart, out indexEquals, out indexSOH, ref checksumValue))
@@ -120,11 +120,11 @@ namespace RapideFix.Parsers
       return ref targetObject;
     }
 
-    private bool TraverseMessageBody(ReadOnlySpan<byte> messagePart, out int indexEquals, out int indexSOH, ref int checksumValue)
+    private bool TraverseMessageBody(ReadOnlySpan<byte> messagePart, out int indexEquals, out int indexSOH, ref byte checksumValue)
     {
       indexEquals = -1;
       indexSOH = -1;
-      int checksum = 0;
+      byte checksum = 0;
       int i;
       for(i = 0; i < messagePart.Length; i++)
       {
