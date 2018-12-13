@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text;
 using RapideFix;
 using RapideFix.DataTypes;
@@ -11,6 +12,8 @@ namespace RapideFixFixture
     private string _length;
     private string _checksum;
     private string _beginString;
+    private byte _checksumValue;
+    private int _checksumStart;
 
     public static readonly string DefaultBody = "35=A|49=SERVER|56=CLIENT|34=177|52=20090107-18:15:16|98=0|108=30|";
 
@@ -18,75 +21,109 @@ namespace RapideFixFixture
     {
     }
 
-    public TestFixMessageBuilder(string message) : base(message)
+    public TestFixMessageBuilder(string message) : base()
     {
+      AddRaw(message);
     }
 
-    public TestFixMessageBuilder AddLength(string tagAndValue)
+    public TestFixMessageBuilder AddLength(string value)
     {
-      _length = tagAndValue;
+      _length = value;
       return this;
     }
 
-    public TestFixMessageBuilder AddBeginString(string tagAndValue)
+    public TestFixMessageBuilder AddBeginString(string value)
     {
-      _beginString = tagAndValue;
+      _beginString = value;
       return this;
     }
 
-    public TestFixMessageBuilder AddChecksum(string tagAndValue)
+    public TestFixMessageBuilder AddChecksum(string value)
     {
-      _checksum = tagAndValue;
+      _checksum = value;
       return this;
     }
 
-    public override byte[] Build(out byte checksumValue, out int checksumStart)
+    public byte[] Build(out byte checksumValue, out int checksumStart)
     {
-      IFixTagValue begin = new FixTagRaw(_beginString ?? $"8={_version ?? SupportedFixVersion.Fix44}|");
-      byte[] body = GetBody();
-      IFixTagValue length = new FixTagRaw(_length ?? $"9={body.Length}{Constants.VerticalBar}");
-      IFixTagValue checksum = GetChecksum(begin.ToBytes(), length.ToBytes(), body, out checksumValue);
-
-      var result = new byte[begin.GetLength() + length.GetLength() + body.Length + checksum.GetLength()];
-      int offset = 0;
-      offset = begin.CopyTo(result, offset);
-      offset = length.CopyTo(result, offset);
-      body.CopyTo(result, offset);
-      checksumStart = offset + body.Length - 1;
-      checksum.CopyTo(result, offset + body.Length);
-
+      byte[] result = base.Build();
+      checksumValue = _checksumValue;
+      checksumStart = _checksumStart - 1;
+      _beginString = null;
+      _checksumValue = 0;
       return result;
     }
 
-    public override string ToString()
+    protected override int CalculateRequiredSize()
     {
-      var begin = new FixTagRaw(_beginString ?? "8=FIX.4.2|");
-      var body = GetBody();
-      var length = new FixTagRaw(_length ?? $"9={body.Length}{Constants.VerticalBar}");
-      IFixTagValue checksum = GetChecksum(begin.ToBytes(), length.ToBytes(), body, out var dummy);
-
-      StringBuilder sb = new StringBuilder();
-      sb.Append(begin);
-      sb.Append(length);
-      foreach(var item in _fixTags)
+      int lengthOfLengthValue = (int)Math.Floor(Math.Log10(_currentLength) + 1);
+      if(_length != null)
       {
-        sb.Append(item);
+        lengthOfLengthValue = Encoding.ASCII.GetByteCount(_length);
       }
-      sb.Append(checksum);
-      return sb.ToString();
-    }
-
-    protected override IFixTagValue GetChecksum(byte[] begin, byte[] length, byte[] body, out byte checksumValue)
-    {
+      int lengthOfVersion = _version.Value.Length;
+      if(_beginString != null)
+      {
+        lengthOfVersion = Encoding.ASCII.GetByteCount(_beginString);
+      }
+      int lengthOfChecksum = 3;
       if(_checksum != null)
       {
-        checksumValue = 0;
-        return new FixTagRaw(_checksum);
+        lengthOfChecksum = Encoding.ASCII.GetByteCount(_checksum);
       }
-      checksumValue = (byte)((begin.Sum(x => x) + length.Sum(x => x) + body.Sum(x => x)) % 256);
-      var checksum = checksumValue.ToString("000");
-      var tail = "10=" + checksum + Constants.SOHChar;
-      return new FixTagRaw(tail);
+
+      int expectedLength = _currentLength +
+        KnownFixTags.FixVersion.Length + lengthOfVersion + 1 +
+        KnownFixTags.Length.Length + lengthOfLengthValue +
+        KnownFixTags.Checksum.Length + lengthOfChecksum;
+
+      return expectedLength;
+    }
+
+    protected override int AddVersion(Span<byte> into)
+    {
+      if(_beginString == null)
+      {
+        return base.AddVersion(into);
+      }
+      int offset = _converter.Get(8, _beginString, into);
+      return offset;
+    }
+
+    protected override int AddLength(Span<byte> into, int offset)
+    {
+      if(_length == null)
+      {
+        return base.AddLength(into, offset);
+      }
+      return _converter.Get(9, _length, into);
+    }
+
+    protected override int AddChecksum(Span<byte> into, int offset)
+    {
+      _checksumStart = offset;
+      if(_checksum == null)
+      {
+        _checksumValue = 0;
+        for(int i = 0; i < offset; i++)
+        {
+          _checksumValue += into[i];
+        }
+        return _converter.Get(10, (int)_checksumValue, into.Slice(offset), 3);
+      }
+
+      if(int.TryParse(_checksum, out var parsed))
+      {
+        _checksumValue = (byte)parsed;
+      }
+      return _converter.Get(10, _checksum, into);
+    }
+
+    protected override void Clear()
+    {
+      base.Clear();
+      _length = null;
+      _checksum = null;
     }
 
     public static byte[] CreateDefaultMessage()

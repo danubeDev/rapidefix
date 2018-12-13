@@ -36,6 +36,18 @@ namespace RapideFix
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public int Convert(int number, Span<byte> into)
+    {
+      int digitsCount = (int)Math.Floor(Math.Log10(number) + 1);
+      for(int i = digitsCount - 1; i >= 0; i--)
+      {
+        into[i] = _digitToAsciiByte[number % 10];
+        number = number / 10;
+      }
+      return digitsCount;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int ConvertBack(ReadOnlySpan<byte> data)
     {
       int digit;
