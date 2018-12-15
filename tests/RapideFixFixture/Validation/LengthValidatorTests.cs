@@ -50,7 +50,7 @@ namespace RapideFixFixture.Validation
     [Fact]
     public void GivenIncorrectLength_Validate_ReturnsFalse()
     {
-      var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddLength("9=023|").Build();
+      var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddLength("023").Build();
       var uut = new LengthValidator(IntegerToFixConverter.Instance);
       var msgContext = new FixMessageContext().Setup(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
@@ -60,7 +60,7 @@ namespace RapideFixFixture.Validation
     [Fact]
     public void GivenInvalidLength_Validate_ReturnsFalse()
     {
-      var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddLength("9=|").Build();
+      var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddLength("").Build();
       var uut = new LengthValidator(IntegerToFixConverter.Instance);
       var msgContext = new FixMessageContext().Setup(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);
@@ -70,7 +70,7 @@ namespace RapideFixFixture.Validation
     [Fact]
     public void GivenNoLength_Validate_ReturnsFalse()
     {
-      var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddLength("9=3|").Build();
+      var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddLength("3").Build();
       var uut = new LengthValidator(IntegerToFixConverter.Instance);
       var msgContext = new FixMessageContext().Setup(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);

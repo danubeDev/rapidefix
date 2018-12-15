@@ -1,4 +1,5 @@
 ﻿using System;
+using RapideFix.DataTypes;
 
 namespace RapideFix.StringProcessing
 {

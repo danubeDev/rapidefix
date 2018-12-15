@@ -111,6 +111,18 @@ namespace RapideFixFixture.Business
         IsVerified = true;
         return targetObject;
       }
+
+      public object Set(ReadOnlySpan<char> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
+      {
+        IsVerified = true;
+        return targetObject;
+      }
+
+      public TTarget SetTarget<TTarget>(ReadOnlySpan<char> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject)
+      {
+        IsVerified = true;
+        return targetObject;
+      }
     }
 
   }

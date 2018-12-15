@@ -22,5 +22,12 @@ namespace RapideFix.Extensions
       messageContext.ChecksumTagStartIndex = data.IndexOf(KnownFixTags.Checksum);
       return messageContext;
     }
+
+    public static FixMessageContext Setup(this FixMessageContext messageContext, ReadOnlySpan<char> data)
+    {
+      messageContext.RepeatingGroupCounters?.Clear();
+      messageContext.CreatedParentTypes?.Clear();
+      return messageContext;
+    }
   }
 }

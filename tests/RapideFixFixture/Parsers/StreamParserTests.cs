@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.IO.Pipelines;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
@@ -19,16 +18,16 @@ namespace RapideFixFixture.Parsers
     [Fact]
     public void GivenNulls_Construct_ThrowsArgumentNullException()
     {
-      Assert.Throws<ArgumentNullException>(() => new StreamParser<TestTypeParent>(null, Mock.Of<IMessageParser<TestTypeParent>>(), SupportedFixVersion.Fix42));
+      Assert.Throws<ArgumentNullException>(() => new StreamParser<TestTypeParent>(null, Mock.Of<IMessageParser<TestTypeParent, byte>>(), SupportedFixVersion.Fix42));
       Assert.Throws<ArgumentNullException>(() => new StreamParser<TestTypeParent>(Mock.Of<Stream>(), null, SupportedFixVersion.Fix42));
     }
 
     [Fact]
     public void GivenDependencies_Construct_DoesNotThrow()
     {
-      var ex = Record.Exception(() => new StreamParser<TestTypeParent>(Mock.Of<Stream>(), Mock.Of<IMessageParser<TestTypeParent>>(), SupportedFixVersion.Fix42));
+      var ex = Record.Exception(() => new StreamParser<TestTypeParent>(Mock.Of<Stream>(), Mock.Of<IMessageParser<TestTypeParent, byte>>(), SupportedFixVersion.Fix42));
       Assert.Null(ex);
-      ex = Record.Exception(() => new StreamParser<TestTypeParent>(Mock.Of<Stream>(), Mock.Of<IMessageParser<TestTypeParent>>(), SupportedFixVersion.Fix42, null));
+      ex = Record.Exception(() => new StreamParser<TestTypeParent>(Mock.Of<Stream>(), Mock.Of<IMessageParser<TestTypeParent, byte>>(), SupportedFixVersion.Fix42, null));
       Assert.Null(ex);
     }
 

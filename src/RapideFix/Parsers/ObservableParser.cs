@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Buffers;
 using System.Collections.Generic;
-using System.IO.Pipelines;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,7 +24,7 @@ namespace RapideFix.Parsers
 
     public Task ListenAsync()
     {
-      return ListenAsync(CancellationToken.None);
+      return ListenAsync(default);
     }
 
     public abstract Task ListenAsync(CancellationToken token);

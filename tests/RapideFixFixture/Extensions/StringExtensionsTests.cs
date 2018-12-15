@@ -1,7 +1,7 @@
-﻿using RapideFix;
-using RapideFix.Extensions;
-using System;
+﻿using System;
 using System.Text;
+using RapideFix.DataTypes;
+using RapideFix.Extensions;
 using Xunit;
 
 namespace RapideFixFixture.Extensions

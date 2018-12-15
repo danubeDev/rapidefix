@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -34,6 +33,18 @@ namespace RapideFix
         into[i] = _digitToAsciiByte[number % 10];
         number = number / 10;
       }
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public int Convert(int number, Span<byte> into)
+    {
+      int digitsCount = (int)Math.Floor(Math.Log10(number) + 1);
+      for(int i = digitsCount - 1; i >= 0; i--)
+      {
+        into[i] = _digitToAsciiByte[number % 10];
+        number = number / 10;
+      }
+      return digitsCount;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

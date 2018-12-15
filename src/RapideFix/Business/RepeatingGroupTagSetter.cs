@@ -21,46 +21,79 @@ namespace RapideFix.Business
       // parents are expected to be set by parents setter
       if(mappingDetails.IsRepeatingGroupTag)
       {
-        targetObject = CreateEnumerable(value, mappingDetails, fixMessageContext, targetObject);
+        //This is handled as a parent. The incremental counting is set by the first tag of the repeating group.
+        if(fixMessageContext.CreatedParentTypes is null || !fixMessageContext.CreatedParentTypes.Contains(GetKey(mappingDetails.Current)))
+        {
+          if(fixMessageContext.CreatedParentTypes is null)
+          {
+            fixMessageContext.CreatedParentTypes = new HashSet<int>();
+          }
+          targetObject = CreateEnumerable(value, mappingDetails, fixMessageContext, targetObject);
+        }
+        else
+        {
+          targetObject = mappingDetails.Current.GetValue(targetObject);
+        }
+        return targetObject;
       }
 
       return targetObject;
     }
 
-    public object CreateEnumerable(ReadOnlySpan<byte> value, TagMapLeaf repeatingLeaf, FixMessageContext fixMessageContext, object targetObject)
+    private object CreateEnumerable(ReadOnlySpan<byte> value, TagMapLeaf repeatingLeaf, FixMessageContext fixMessageContext, object targetObject)
     {
-      //This is handled as a parent. The incremental counting is set by the first tag of the repeating group.
-      if(fixMessageContext.CreatedParentTypes is null || !fixMessageContext.CreatedParentTypes.Contains(GetKey(repeatingLeaf.Current)))
+      Span<char> valueChars = stackalloc char[value.Length];
+      Encoding.ASCII.GetChars(value, valueChars);
+      return CreateEnumerable(valueChars, repeatingLeaf, fixMessageContext, targetObject);
+    }
+
+    public object Set(ReadOnlySpan<char> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
+    {
+      // mappingDetails is a leaf node for the repeating tag
+      // parents are expected to be set by parents setter
+      if(mappingDetails.IsRepeatingGroupTag)
       {
-        if(fixMessageContext.CreatedParentTypes is null)
+        //This is handled as a parent. The incremental counting is set by the first tag of the repeating group.
+        if(fixMessageContext.CreatedParentTypes is null || !fixMessageContext.CreatedParentTypes.Contains(GetKey(mappingDetails.Current)))
         {
-          fixMessageContext.CreatedParentTypes = new HashSet<int>();
+          if(fixMessageContext.CreatedParentTypes is null)
+          {
+            fixMessageContext.CreatedParentTypes = new HashSet<int>();
+          }
+          targetObject = CreateEnumerable(value, mappingDetails, fixMessageContext, targetObject);
         }
-        Span<char> valueChars = stackalloc char[value.Length];
-        Encoding.ASCII.GetChars(value, valueChars);
-        if(!int.TryParse(valueChars, out int numberOfItems))
+        else
         {
-          return targetObject;
+          targetObject = mappingDetails.Current.GetValue(targetObject);
         }
-
-        var createdEnumeration = Array.CreateInstance(repeatingLeaf.InnerType, numberOfItems);
-
-        Type typeOfParent = createdEnumeration.GetType();
-        if(!_delegateFactoryCache.TryGetValue(typeOfParent, out Delegate delegateMethod))
-        {
-          var methodInfo = typeof(SimpleTypeSetter).GetMethod("GetILSetterAction", BindingFlags.NonPublic | BindingFlags.Instance);
-          delegateMethod = (Delegate)methodInfo
-            .MakeGenericMethod(typeOfParent)
-            .Invoke(this, new[] { repeatingLeaf.Current });
-          _delegateFactoryCache.TryAdd(typeOfParent, delegateMethod);
-        }
-        delegateMethod.DynamicInvoke(targetObject, createdEnumeration);
-
-        fixMessageContext.CreatedParentTypes.Add(GetKey(repeatingLeaf.Current));
-        return createdEnumeration;
+        return targetObject;
       }
-      targetObject = repeatingLeaf.Current.GetValue(targetObject);
+
       return targetObject;
+    }
+
+    private object CreateEnumerable(ReadOnlySpan<char> valueChars, TagMapLeaf repeatingLeaf, FixMessageContext fixMessageContext, object targetObject)
+    {
+      if(!int.TryParse(valueChars, out int numberOfItems))
+      {
+        return targetObject;
+      }
+
+      var createdEnumeration = Array.CreateInstance(repeatingLeaf.InnerType, numberOfItems);
+
+      Type typeOfParent = createdEnumeration.GetType();
+      if(!_delegateFactoryCache.TryGetValue(typeOfParent, out Delegate delegateMethod))
+      {
+        var methodInfo = typeof(SimpleTypeSetter).GetMethod("GetILSetterAction", BindingFlags.NonPublic | BindingFlags.Instance);
+        delegateMethod = (Delegate)methodInfo
+          .MakeGenericMethod(typeOfParent)
+          .Invoke(this, new[] { repeatingLeaf.Current });
+        _delegateFactoryCache.TryAdd(typeOfParent, delegateMethod);
+      }
+      delegateMethod.DynamicInvoke(targetObject, createdEnumeration);
+
+      fixMessageContext.CreatedParentTypes.Add(GetKey(repeatingLeaf.Current));
+      return createdEnumeration;
     }
   }
 }

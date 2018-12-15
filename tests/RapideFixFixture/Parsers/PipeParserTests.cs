@@ -18,18 +18,18 @@ namespace RapideFixFixture.Parsers
     [Fact]
     public void GivenNulls_Construct_ThrowsArgumentNullException()
     {
-      Assert.Throws<ArgumentNullException>(() => new PipeParser<TestTypeParent>(null, Mock.Of<IMessageParser<TestTypeParent>>(), SupportedFixVersion.Fix42));
+      Assert.Throws<ArgumentNullException>(() => new PipeParser<TestTypeParent>(null, Mock.Of<IMessageParser<TestTypeParent, byte>>(), SupportedFixVersion.Fix42));
       Assert.Throws<ArgumentNullException>(() => new PipeParser<TestTypeParent>(Mock.Of<PipeReader>(), null, SupportedFixVersion.Fix42));
     }
 
     [Fact]
     public void GivenDependencies_Construct_DoesNotThrow()
     {
-      var ex = Record.Exception(() => new PipeParser<TestTypeParent>(Mock.Of<PipeReader>(), Mock.Of<IMessageParser<TestTypeParent>>(), SupportedFixVersion.Fix42));
+      var ex = Record.Exception(() => new PipeParser<TestTypeParent>(Mock.Of<PipeReader>(), Mock.Of<IMessageParser<TestTypeParent, byte>>(), SupportedFixVersion.Fix42));
       Assert.Null(ex);
-      ex = Record.Exception(() => new PipeParser<TestTypeParent>(Mock.Of<PipeReader>(), Mock.Of<IMessageParser<TestTypeParent>>(), SupportedFixVersion.Fix42, null));
+      ex = Record.Exception(() => new PipeParser<TestTypeParent>(Mock.Of<PipeReader>(), Mock.Of<IMessageParser<TestTypeParent, byte>>(), SupportedFixVersion.Fix42, null));
       Assert.Null(ex);
-      ex = Record.Exception(() => new PipeParser<TestTypeParent>(new Pipe(), Mock.Of<IMessageParser<TestTypeParent>>(), SupportedFixVersion.Fix42, null));
+      ex = Record.Exception(() => new PipeParser<TestTypeParent>(new Pipe(), Mock.Of<IMessageParser<TestTypeParent, byte>>(), SupportedFixVersion.Fix42, null));
       Assert.Null(ex);
     }
 

@@ -25,7 +25,7 @@ namespace RapideFix.DataTypes
 
     public int ChecksumTagStartIndex { get; set; }
 
-    public int ChecksumValue { get; set; }
+    public byte ChecksumValue { get; set; }
 
     public MessageEncoding EncodedFields { get; set; }
 

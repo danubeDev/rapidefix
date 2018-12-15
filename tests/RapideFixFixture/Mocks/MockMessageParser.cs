@@ -4,7 +4,7 @@ using RapideFixFixture.TestTypes;
 
 namespace RapideFixFixture.Mocks
 {
-  public class MockMessageParser : IMessageParser<TestTypeParent>
+  public class MockMessageParser : IMessageParser<TestTypeParent, byte>
   {
     public TestTypeParent Parse(ReadOnlySpan<byte> message)
     {

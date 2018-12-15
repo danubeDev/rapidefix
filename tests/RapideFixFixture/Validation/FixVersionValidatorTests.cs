@@ -23,7 +23,7 @@ namespace RapideFixFixture.Validation
     [Fact]
     public void GivenInvalidVersion_Validate_ReturnsFalse()
     {
-      var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddBeginString("8=123|").Build();
+      var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).AddBeginString("123").Build();
       var uut = new FixVersionValidator();
       var msgContext = new FixMessageContext().Setup(message);
       var result = uut.IsValid(message.AsSpan(), msgContext);

@@ -14,7 +14,7 @@ namespace RapideFixBenchmarks
   public class TypedMessageParserBenchmark
   {
     private byte[] _message;
-    private IMessageParser<TestTypeStruct> _parser;
+    private IMessageParser<TestTypeStruct, byte> _parser;
 
     [GlobalSetup]
     public void Setup()

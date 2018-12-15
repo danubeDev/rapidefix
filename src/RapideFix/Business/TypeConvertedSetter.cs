@@ -31,7 +31,15 @@ namespace RapideFix.Business
       {
         valueLength = Encoding.ASCII.GetChars(value, valueChars);
       }
+      return Set(valueChars, mappingDetails, fixMessageContext, targetObject);
+    }
 
+    public object Set(ReadOnlySpan<char> valueChars, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
+    {
+      if(mappingDetails.TypeConverterName is null)
+      {
+        return targetObject;
+      }
       TypeConverter converter;
       if(!_typeConverters.TryGetValue(mappingDetails.TypeConverterName, out converter))
       {
@@ -43,7 +51,7 @@ namespace RapideFix.Business
       {
         return targetObject;
       }
-      var tempCharsArray = ArrayPool<char>.Shared.Rent(valueLength);
+      var tempCharsArray = ArrayPool<char>.Shared.Rent(valueChars.Length);
       try
       {
         valueChars.CopyTo(tempCharsArray.AsSpan());

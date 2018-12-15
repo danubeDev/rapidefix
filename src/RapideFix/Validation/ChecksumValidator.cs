@@ -5,7 +5,6 @@ namespace RapideFix.Validation
 {
   public class ChecksumValidator : IValidatorInternal
   {
-    private static readonly int Modulus = 256;
     private readonly IntegerToFixConverter _converter;
     private static readonly int ChecksumLength = 3;
 
@@ -22,9 +21,8 @@ namespace RapideFix.Validation
         return false;
       }
 
-      int expectedChecksum = msgContext.ChecksumValue % Modulus;
       Span<byte> expectedDigits = stackalloc byte[ChecksumLength];
-      _converter.Convert(number: expectedChecksum, into: expectedDigits, count: ChecksumLength);
+      _converter.Convert(number: msgContext.ChecksumValue, into: expectedDigits, count: ChecksumLength);
 
       var receivedChecksum = data.Slice(endingTagPos + KnownFixTags.Checksum.Length, ChecksumLength);
       return receivedChecksum.SequenceEqual(expectedDigits);

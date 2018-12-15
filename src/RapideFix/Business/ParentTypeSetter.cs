@@ -29,6 +29,23 @@ namespace RapideFix.Business
       return targetObject;
     }
 
+    public object Set(ReadOnlySpan<char> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
+    {
+      foreach(var parent in mappingDetails.Parents)
+      {
+        if(parent.IsEnumerable)
+        {
+          targetObject = SetRepeatingTypeParent(mappingDetails, parent, fixMessageContext, targetObject);
+        }
+        else
+        {
+          targetObject = SetSimpleTypeParent(parent, fixMessageContext, targetObject);
+        }
+      }
+
+      return targetObject;
+    }
+
     private object SetRepeatingTypeParent(TagMapLeaf leaf, TagMapNode parent, FixMessageContext fixMessageContext, object targetObject)
     {
       int index = GetAdvancedIndex(GetKey(leaf.Current), parent, fixMessageContext, out bool isAdvanced);
@@ -53,7 +70,7 @@ namespace RapideFix.Business
       return targetObject;
     }
 
-    public object SetSimpleTypeParent(TagMapNode parent, FixMessageContext fixMessageContext, object targetObject)
+    private object SetSimpleTypeParent(TagMapNode parent, FixMessageContext fixMessageContext, object targetObject)
     {
       if(fixMessageContext.CreatedParentTypes is null || !fixMessageContext.CreatedParentTypes.Contains(GetKey(parent.Current)))
       {

@@ -11,12 +11,12 @@ namespace RapideFix.Parsers
     private readonly Stream _stream;
     private readonly PipeWriter _pipeWriter;
 
-    public StreamParser(Stream stream, IMessageParser<T> singleMessageParser, SupportedFixVersion fixVersion)
+    public StreamParser(Stream stream, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion)
        : this(stream, singleMessageParser, fixVersion, null)
     {
     }
 
-    public StreamParser(Stream stream, IMessageParser<T> singleMessageParser, SupportedFixVersion fixVersion, Func<ReadOnlyMemory<byte>, T> targetObjectFactory)
+    public StreamParser(Stream stream, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion, Func<ReadOnlyMemory<byte>, T> targetObjectFactory)
       : base(new Pipe(), singleMessageParser, fixVersion, targetObjectFactory)
     {
       _stream = stream ?? throw new ArgumentNullException(nameof(stream));

@@ -2,7 +2,7 @@
 
 [assembly: InternalsVisibleTo("RapideFixFixture")]
 [assembly: InternalsVisibleTo("RapideFixBenchmarks")]
-namespace RapideFix
+namespace RapideFix.DataTypes
 {
   internal static class Constants
   {
@@ -12,6 +12,7 @@ namespace RapideFix
 
     internal const byte SOHByte = 1;
     internal const byte EqualsByte = 61;
+    internal const byte VerticalBarByte = 124;
 
     internal const char True = 'Y';
     internal const char TrueNumber = '1';

@@ -20,7 +20,7 @@ namespace RapideFixFixture.Validation
     public void GivenMessageContext_IsValid_ReturnsTrue()
     {
       var uut = new ValidatorCollection(IntegerToFixConverter.Instance);
-      var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).Build(out int checksum);
+      var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).Build(out byte checksum, out var dummy);
       var msgCtx = new FixMessageContext().Setup(message);
       msgCtx.ChecksumValue = checksum;
 
