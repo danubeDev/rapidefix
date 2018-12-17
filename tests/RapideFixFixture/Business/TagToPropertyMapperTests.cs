@@ -27,7 +27,7 @@ namespace RapideFixFixture.Business
       Assert.False(result.IsEncoded);
       Assert.False(result.IsEnumerable);
       Assert.NotNull(result.Current);
-      Assert.Equal(1, result.Parents.Count);
+      Assert.Single(result.Parents);
       Assert.False(result.Parents.First().IsEnumerable);
     }
 
@@ -98,7 +98,7 @@ namespace RapideFixFixture.Business
       Assert.False(actualTag.IsEncoded);
       Assert.False(actualTag.IsEnumerable);
       Assert.NotNull(actualTag.Current);
-      Assert.Equal(1, actualTag.Parents.Count);
+      Assert.Single(actualTag.Parents);
       Assert.True(actualTag.Parents.First().IsEnumerable);
       Assert.NotEqual(0, actualTag.Parents.First(x => x.IsEnumerable).RepeatingTagNumber);
     }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using RapideFix;
 using RapideFix.Business;
@@ -61,6 +62,36 @@ namespace RapideFixFixture.Business
 
       Assert.NotNull(targetObject.Tag57s);
       Assert.Equal(15, targetObject.Tag57s.Count());
+    }
+
+    [Fact]
+    public void GivenIEnumerableT_SetAsString_CreatesArryOfT()
+    {
+      var targetObject = new TestTypeParent();
+      var uut = new RepeatingGroupTagSetter();
+      var valueToSet = "4".AsSpan();
+      PropertyInfo propertyInfo = targetObject.GetType().GetProperty(nameof(targetObject.Tag59s));
+      var mappingDetails = TagMapLeaf.CreateRepeatingTag<TagMapLeaf>(propertyInfo, propertyInfo.PropertyType.GetGenericArguments()[0]);
+      var messageContext = new FixMessageContext();
+      var result = uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
+
+      Assert.NotNull(targetObject.Tag59s);
+      Assert.Equal(4, targetObject.Tag59s.Count());
+    }
+
+    [Fact]
+    public void GivenIEnumerablePrimitive_SetAsString_CreatesArryOfPrimitive()
+    {
+      var targetObject = new TestTypeParent();
+      var uut = new RepeatingGroupTagSetter();
+      var valueToSet = "3".AsSpan();
+      PropertyInfo propertyInfo = targetObject.GetType().GetProperty(nameof(targetObject.Tag57s));
+      var mappingDetails = TagMapLeaf.CreateRepeatingTag<TagMapLeaf>(propertyInfo, propertyInfo.PropertyType.GetGenericArguments()[0]);
+      var messageContext = new FixMessageContext();
+      var result = uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
+
+      Assert.NotNull(targetObject.Tag57s);
+      Assert.Equal(3, targetObject.Tag57s.Count());
     }
   }
 }

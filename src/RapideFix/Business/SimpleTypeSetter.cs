@@ -9,6 +9,7 @@ namespace RapideFix.Business
   public class SimpleTypeSetter : BaseTypeSetter, ITypedPropertySetter
   {
     private static NumberFormatInfo _numberFormatInfo = CultureInfo.CurrentCulture.NumberFormat;
+    private const string DateTimeFormat = "yyyyMMdd-HH:mm:ss";
 
     public object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
@@ -119,6 +120,13 @@ namespace RapideFix.Business
       {
         SetValue(mappingDetails, fixMessageContext, targetObject, valueChars[0]);
       }
+      else if(propertyType == typeof(DateTimeOffset))
+      {
+        if(DateTimeOffset.TryParseExact(valueChars, DateTimeFormat, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AssumeUniversal, out var parsedValue))
+        {
+          SetValue<DateTimeOffset>(mappingDetails, fixMessageContext, targetObject, parsedValue);
+        }
+      }
       else if(propertyType == typeof(int?))
       {
         if(int.TryParse(valueChars, NumberStyles.Integer, _numberFormatInfo, out var parsedValue))
@@ -186,6 +194,13 @@ namespace RapideFix.Business
       else if(propertyType == typeof(char?))
       {
         SetValue<char?>(mappingDetails, fixMessageContext, targetObject, valueChars[0]);
+      }
+      else if(propertyType == typeof(DateTimeOffset?))
+      {
+        if(DateTimeOffset.TryParseExact(valueChars, DateTimeFormat, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AssumeUniversal, out var parsedValue))
+        {
+          SetValue<DateTimeOffset?>(mappingDetails, fixMessageContext, targetObject, parsedValue);
+        }
       }
 
       return targetObject;
@@ -269,6 +284,13 @@ namespace RapideFix.Business
       {
         SetValue<TTarget, string>(mappingDetails, fixMessageContext, ref targetObject, new string(valueChars));
       }
+      else if(propertyType == typeof(DateTimeOffset))
+      {
+        if(DateTimeOffset.TryParseExact(valueChars, DateTimeFormat, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AssumeUniversal, out var parsedValue))
+        {
+          SetValue<DateTimeOffset>(mappingDetails, fixMessageContext, targetObject, parsedValue);
+        }
+      }
       else if(propertyType == typeof(int?))
       {
         if(int.TryParse(valueChars, out var parsedValue))
@@ -336,6 +358,13 @@ namespace RapideFix.Business
       else if(propertyType == typeof(char?))
       {
         SetValue<TTarget, char?>(mappingDetails, fixMessageContext, ref targetObject, valueChars[0]);
+      }
+      else if(propertyType == typeof(DateTimeOffset?))
+      {
+        if(DateTimeOffset.TryParseExact(valueChars, DateTimeFormat, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AssumeUniversal, out var parsedValue))
+        {
+          SetValue<DateTimeOffset?>(mappingDetails, fixMessageContext, targetObject, parsedValue);
+        }
       }
 
       return targetObject;
