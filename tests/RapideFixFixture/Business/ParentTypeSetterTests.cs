@@ -145,6 +145,26 @@ namespace RapideFixFixture.Business
       Assert.Equal(result, targetObject.Tag59s.Skip(1).First());
     }
 
+    [Fact]
+    public void GivenParentsAsString_Set_CreatesParentTypes()
+    {
+      var targetObject = new TestTypeParent();
+      var uut = new ParentTypeSetter();
+      var valueToSet = "test";
+      var mappingDetails = new TagMapLeaf()
+      {
+        Parents = new List<TagMapNode>
+        {
+          new TagMapNode() { Current = targetObject.GetType().GetProperty(nameof(targetObject.CustomType)) }
+        }
+      };
+      var messageContext = new FixMessageContext();
+      var result = uut.Set(valueToSet.AsSpan(), mappingDetails, messageContext, targetObject);
+
+      Assert.NotNull(targetObject.CustomType);
+      Assert.Equal(result, targetObject.CustomType);
+    }
+
 
   }
 }

@@ -2,6 +2,7 @@
 using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using RapideFix.DataTypes;
 
@@ -23,22 +24,22 @@ namespace RapideFix.MessageBuilders
       _currentLength = 0;
       _converter = new FixTagValueConverter();
       _builderArray = ArrayPool<byte>.Shared.Rent(_availableLength);
+      _availableLength = _builderArray.Length;
     }
 
     public MessageBuilder AddTag(int tag, string value)
     {
-      int expectedLength = (int)Math.Floor(Math.Log10(tag) + 1) + value.Length + 2;
-      AddTag(tag, value, expectedLength);
+      int expectedLength = (int)Math.Floor(Math.Log10(tag) + 1) + Encoding.ASCII.GetByteCount(value) + 2;
+      EnsureSize(expectedLength);
+      _currentLength += _converter.Get(tag, value, _builderArray.AsSpan(_currentLength));
       return this;
     }
 
     public MessageBuilder AddRaw(string value)
     {
       int expectedLength = Encoding.ASCII.GetByteCount(value);
-      byte[] currentArray = ArrayPool<byte>.Shared.Rent(expectedLength);
-      int offset = _converter.Get(value, currentArray);
-      Concat(currentArray.AsSpan(0, offset));
-      ArrayPool<byte>.Shared.Return(currentArray, true);
+      EnsureSize(expectedLength);
+      _currentLength += _converter.Get(value, _builderArray.AsSpan(_currentLength));
       return this;
     }
 
@@ -54,7 +55,8 @@ namespace RapideFix.MessageBuilders
       }
 
       int expectedLength = (int)Math.Floor(Math.Log10(tag) + 1) + encoding.GetEncoder().GetByteCount(value) + 2;
-      AddTag(tag, value, expectedLength);
+      EnsureSize(expectedLength);
+      _currentLength += _converter.Get(tag, value, encoding, _builderArray.AsSpan(_currentLength));
       return this;
     }
 
@@ -78,23 +80,12 @@ namespace RapideFix.MessageBuilders
       return this;
     }
 
-    private MessageBuilder AddTag(int tag, string value, int expectedLength)
+    private void EnsureSize(int minimum)
     {
-      byte[] currentArray = ArrayPool<byte>.Shared.Rent(expectedLength);
-      int offset = _converter.Get(tag, value, currentArray);
-      Concat(currentArray.AsSpan(0, offset));
-      ArrayPool<byte>.Shared.Return(currentArray, true);
-      return this;
-    }
-
-    private void Concat(Span<byte> current)
-    {
-      if((_availableLength - _currentLength) < current.Length)
+      if((_availableLength - _currentLength) < minimum)
       {
-        IncreaseSize(current.Length);
+        IncreaseSize(minimum);
       }
-      current.CopyTo(_builderArray.AsSpan(_currentLength));
-      _currentLength += current.Length;
     }
 
     private void IncreaseSize(int minimum)
@@ -143,10 +134,18 @@ namespace RapideFix.MessageBuilders
 
     protected virtual int AddChecksum(Span<byte> into, int offset)
     {
-      byte checksumValue = 0;
-      for(int i = 0; i < offset; i++)
+      var data = into;
+      int vectorLength = Vector<byte>.Count;
+      Vector<byte> sumV = Vector<byte>.Zero;
+      while(data.Length >= vectorLength)
       {
-        checksumValue += into[i];
+        sumV += new Vector<byte>(data);
+        data = data.Slice(vectorLength);
+      }
+      byte checksumValue = Vector.Dot(Vector<byte>.One, sumV);
+      for(int i = 0; i < data.Length; i++)
+      {
+        checksumValue += data[i];
       }
       return _converter.Get(10, (int)checksumValue, into.Slice(offset), 3);
     }

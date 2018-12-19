@@ -14,7 +14,7 @@ namespace RapideFixFixture.Business
   public class TypeConvertedSetterTests
   {
     [Fact]
-    public void GivenTpyeConverter_SetWithTypeConverter_SetsValueOnTargetObject()
+    public void GivenTpyeConverter_Set_SetsValueOnTargetObject()
     {
       var targetObject = new TestTypeParent();
       var uut = new TypeConvertedSetter();
@@ -54,5 +54,23 @@ namespace RapideFixFixture.Business
       Assert.Equal(12358, targetObject.Tag65s.First().Value);
     }
 
+    [Fact]
+    public void GivenString_Set_SetsValueOnTargetObject()
+    {
+      var targetObject = new TestTypeParent();
+      var uut = new TypeConvertedSetter();
+      var valueToSet = "12358";
+      var property = targetObject.GetType().GetProperty(nameof(targetObject.Tag61));
+      var typeConverter = property.GetCustomAttribute<TypeConverterAttribute>();
+      var mappingDetails = new TagMapLeaf()
+      {
+        Current = property,
+        TypeConverterName = typeConverter.ConverterTypeName
+      };
+      var messageContext = new FixMessageContext();
+      uut.Set(valueToSet.AsSpan(), mappingDetails, messageContext, targetObject);
+
+      Assert.Equal(12358, targetObject.Tag61.Value);
+    }
   }
 }

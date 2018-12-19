@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using RapideFix.Attributes;
 
@@ -36,6 +37,18 @@ namespace RapideFixFixture.TestTypes
 
     [FixTag(67)]
     public double Tag67 { get; set; }
+
+    [FixTag(68)]
+    public bool Tag68 { get; set; }
+
+    [FixTag(69)]
+    public bool? Tag69 { get; set; }
+
+    [FixTag(70)]
+    public DateTimeOffset Tag70 { get; set; }
+
+    [FixTag(71)]
+    public DateTimeOffset? Tag71 { get; set; }
   }
 
 }

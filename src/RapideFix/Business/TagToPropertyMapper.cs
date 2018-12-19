@@ -85,7 +85,7 @@ namespace RapideFix.Business
           {
             innerType = property.PropertyType;
             //Avoid recursion for obvious built in types.
-            if(!innerType.IsPrimitive && innerType != typeof(string))
+            if(!AllowedType(innerType))
             {
               parents.Push(CreateParentNode(property));
               Map(innerType, parents);
@@ -96,7 +96,7 @@ namespace RapideFix.Business
           {
             //Finding the tpye of enumeration
             innerType = GetInnerTypeOfEnumerable(property);
-            if(!innerType.IsPrimitive && innerType != typeof(string))
+            if(!AllowedType(innerType))
             {
               parents.Push(CreateRepeatingParentNode(property, repeatingGroup, innerType));
               Map(innerType, parents);
@@ -113,7 +113,7 @@ namespace RapideFix.Business
           {
             //Finding the tpye of enumeration
             innerType = GetInnerTypeOfEnumerable(property);
-            if(innerType.IsPrimitive || innerType == typeof(string) || typeConverter != null)
+            if(AllowedType(innerType) || typeConverter != null)
             {
               value = AddEnumerableLeaf(parents, property, fixTagAttribute, repeatingGroup, typeConverter, fixTagAttribute.Tag, innerType);
             }
@@ -124,8 +124,11 @@ namespace RapideFix.Business
           }
           else if(!isEnumerable)
           {
+            //TODO: Nullable<Types>, IsValueType, IsSerializable
             innerType = property.PropertyType;
-            if(innerType.IsPrimitive || innerType == typeof(string) || typeConverter != null)
+            if(AllowedType(innerType)
+              || AllowedType(GetInnerTypeOfNullable(property, typeof(Nullable<>)))
+              || typeConverter != null)
             {
               value = AddLeafNode(parents, property, fixTagAttribute, typeConverter, fixTagAttribute.Tag);
             }
@@ -137,6 +140,11 @@ namespace RapideFix.Business
         }
       }
 
+    }
+
+    private bool AllowedType(Type type)
+    {
+      return type != null && (type.IsPrimitive || type == typeof(string) || type == typeof(DateTimeOffset));
     }
 
     private TagMapNode CreateParentNode(PropertyInfo property)
@@ -192,6 +200,17 @@ namespace RapideFix.Business
       }
 
       return innerType;
+    }
+
+    private Type GetInnerTypeOfNullable(PropertyInfo property, Type typeOf)
+    {
+      if(property.PropertyType.IsGenericType
+        && property.PropertyType.GetGenericTypeDefinition() == typeOf)
+      {
+        return property.PropertyType.GetGenericArguments()[0];
+      }
+
+      return null;
     }
 
     private int GetTypeKey(ReadOnlySpan<byte> bytes)
