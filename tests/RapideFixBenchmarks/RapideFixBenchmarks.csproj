@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.11.1" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.11.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\tests\RapideFixFixture\RapideFixFixture.csproj" />
-    <ProjectReference Include="..\RapideFix\RapideFix.csproj" />
+    <ProjectReference Include="..\..\src\RapideFix\RapideFix.csproj" />
+    <ProjectReference Include="..\RapideFixFixture\RapideFixFixture.csproj" />
   </ItemGroup>
 
 </Project>

@@ -14,7 +14,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapideFixBenchmarks", "src\RapideFixBenchmarks\RapideFixBenchmarks.csproj", "{32D81F03-E4C7-4E0E-A6D4-0485FD150877}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RapideFixBenchmarks", "tests\RapideFixBenchmarks\RapideFixBenchmarks.csproj", "{32D81F03-E4C7-4E0E-A6D4-0485FD150877}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EFB0ECBB-F311-4419-B648-7831C993DD4A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SamplesDocs", "SamplesDocs", "{F709484D-F753-4EF9-BDC6-1B0865E7BA1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CAA108E9-953E-402C-9CF6-F8E4D8013AA7} = {F709484D-F753-4EF9-BDC6-1B0865E7BA1B}
+		{6EB73ADF-005C-4239-92AF-34EDA1E0AF9D} = {EFB0ECBB-F311-4419-B648-7831C993DD4A}
+		{32D81F03-E4C7-4E0E-A6D4-0485FD150877} = {EFB0ECBB-F311-4419-B648-7831C993DD4A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E74207BD-F0FC-4DE6-85C2-A6B6BA6143F9}
