@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using RapideFix.Business;
 using RapideFix.Business.Data;
 using RapideFix.DataTypes;
@@ -12,7 +11,7 @@ namespace RapideFix.Parsers
   {
     private readonly ITagToPropertyMapper _propertyMapper;
     private readonly ITypedPropertySetter _typedPropertySetter;
-    private readonly StringMessageParserOptions _options;
+    private readonly MessageParserOptions _options;
     private readonly FixMessageContext _messageContext;
     private readonly bool _isValueType;
 
@@ -20,7 +19,7 @@ namespace RapideFix.Parsers
       ITagToPropertyMapper tagToPropertyMapper,
       ITypedPropertySetter typedPropertySetter,
       IValidator validators,
-      StringMessageParserOptions options
+      MessageParserOptions options
       )
     {
       _propertyMapper = tagToPropertyMapper ?? throw new ArgumentNullException(nameof(tagToPropertyMapper));
