@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "C:/Users/ladeak/source/repos/rapidefix/samples/Documentation.DocFx2",
+  "source_base_path": "C:/Users/ladeak/source/repos/rapidefix/samples/Documentation.DocFx",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "w0FEln48STzEzjResT0G/Q=="
+          "hash": "yPHY/nCulpYAykPEYd8Ohg=="
         }
       },
       "is_incremental": false,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "lK4NfiW9puqx4iD/iJIfQA=="
+          "hash": "u2OHo8c8WDT+zQjqpMSDEw=="
         }
       },
       "is_incremental": false,
@@ -33,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "Kjxjf8a/M5ySb/NYmUdk4g=="
+          "hash": "zKY1oP//IkKMWIdDDaNeGA=="
         }
       },
       "is_incremental": false,
@@ -788,7 +788,7 @@
     {
       "status": {
         "can_incremental": false,
-        "details": "Cannot build incrementally because config changed.",
+        "details": "Disable incremental build by force rebuild option.",
         "incrementalPhase": "build"
       },
       "processors": {

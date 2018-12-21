@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EFB0ECBB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SamplesDocs", "SamplesDocs", "{F709484D-F753-4EF9-BDC6-1B0865E7BA1B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Documentation.DocFx2", "samples\Documentation.DocFx2\Documentation.DocFx2.csproj", "{FFC96B76-7CDD-48D6-9B27-17BB655F6D6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Documentation.DocFx", "samples\Documentation.DocFx\Documentation.DocFx.csproj", "{FFC96B76-7CDD-48D6-9B27-17BB655F6D6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
