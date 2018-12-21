@@ -1,0 +1,418 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class PipeParser&lt;T&gt;
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class PipeParser&lt;T&gt;
+   ">
+    <meta name="generator" content="docfx 2.40.5.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="RapideFix.Parsers.PipeParser`1">
+  
+  
+  <h1 id="RapideFix_Parsers_PipeParser_1" data-uid="RapideFix.Parsers.PipeParser`1" class="text-break">Class PipeParser&lt;T&gt;
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="RapideFix.Parsers.ObservableParser-1.html">ObservableParser</a>&lt;T&gt;</div>
+    <div class="level2"><span class="xref">PipeParser&lt;T&gt;</span></div>
+      <div class="level3"><a class="xref" href="RapideFix.Parsers.StreamParser-1.html">StreamParser&lt;T&gt;</a></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IObservable</span>&lt;T&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="RapideFix.Parsers.ObservableParser-1.html#RapideFix_Parsers_ObservableParser_1_Observers">ObservableParser&lt;T&gt;.Observers</a>
+    </div>
+    <div>
+      <a class="xref" href="RapideFix.Parsers.ObservableParser-1.html#RapideFix_Parsers_ObservableParser_1_Subscribe_System_IObserver__0__">ObservableParser&lt;T&gt;.Subscribe(IObserver&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="RapideFix.Parsers.ObservableParser-1.html#RapideFix_Parsers_ObservableParser_1_ListenAsync">ObservableParser&lt;T&gt;.ListenAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="RapideFix.Parsers.ObservableParser-1.html#RapideFix_Parsers_ObservableParser_1_PositionOf_System_Buffers_ReadOnlySequence_System_Byte___System_ReadOnlySpan_System_Byte__">ObservableParser&lt;T&gt;.PositionOf(ReadOnlySequence&lt;Byte&gt;, ReadOnlySpan&lt;Byte&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="RapideFix.Parsers.ObservableParser-1.html#RapideFix_Parsers_ObservableParser_1_PositionOfMultiSegment_System_Buffers_ReadOnlySequence_System_Byte___System_ReadOnlySpan_System_Byte__">ObservableParser&lt;T&gt;.PositionOfMultiSegment(ReadOnlySequence&lt;Byte&gt;, ReadOnlySpan&lt;Byte&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="RapideFix.Parsers.ObservableParser-1.html#RapideFix_Parsers_ObservableParser_1_CompleteObservers">ObservableParser&lt;T&gt;.CompleteObservers()</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="RapideFix.Parsers.html">RapideFix.Parsers</a></h6>
+  <h6><strong>Assembly</strong>: RapideFix.dll</h6>
+  <h5 id="RapideFix_Parsers_PipeParser_1_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class PipeParser&lt;T&gt; : ObservableParser&lt;T&gt;, IObservable&lt;T&gt;</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/danubeDev/rapidefix/new/gh-pages/apiSpec/new?filename=RapideFix_Parsers_PipeParser_1__ctor_System_IO_Pipelines_Pipe_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_System_Func_System_ReadOnlyMemory_System_Byte___0__.md&amp;value=---%0Auid%3A%20RapideFix.Parsers.PipeParser%601.%23ctor(System.IO.Pipelines.Pipe%2CRapideFix.Parsers.IMessageParser%7B%600%2CSystem.Byte%7D%2CRapideFix.SupportedFixVersion%2CSystem.Func%7BSystem.ReadOnlyMemory%7BSystem.Byte%7D%2C%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/danubeDev/rapidefix/blob/gh-pages/src/RapideFix/Parsers/PipeParser.cs/#L21">View Source</a>
+  </span>
+  <a id="RapideFix_Parsers_PipeParser_1__ctor_" data-uid="RapideFix.Parsers.PipeParser`1.#ctor*"></a>
+  <h4 id="RapideFix_Parsers_PipeParser_1__ctor_System_IO_Pipelines_Pipe_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_System_Func_System_ReadOnlyMemory_System_Byte___0__" data-uid="RapideFix.Parsers.PipeParser`1.#ctor(System.IO.Pipelines.Pipe,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Func{System.ReadOnlyMemory{System.Byte},`0})">PipeParser(Pipe, IMessageParser&lt;T, Byte&gt;, SupportedFixVersion, Func&lt;ReadOnlyMemory&lt;Byte&gt;, T&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PipeParser(Pipe pipe, IMessageParser&lt;T, byte&gt; singleMessageParser, SupportedFixVersion fixVersion, Func&lt;ReadOnlyMemory&lt;byte&gt;, T&gt; targetObjectFactory)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IO.Pipelines.Pipe</span></td>
+        <td><span class="parametername">pipe</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RapideFix.Parsers.IMessageParser-2.html">IMessageParser</a>&lt;T, <span class="xref">System.Byte</span>&gt;</td>
+        <td><span class="parametername">singleMessageParser</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RapideFix.SupportedFixVersion.html">SupportedFixVersion</a></td>
+        <td><span class="parametername">fixVersion</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.ReadOnlyMemory</span>&lt;<span class="xref">System.Byte</span>&gt;, T&gt;</td>
+        <td><span class="parametername">targetObjectFactory</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/danubeDev/rapidefix/new/gh-pages/apiSpec/new?filename=RapideFix_Parsers_PipeParser_1__ctor_System_IO_Pipelines_PipeReader_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_.md&amp;value=---%0Auid%3A%20RapideFix.Parsers.PipeParser%601.%23ctor(System.IO.Pipelines.PipeReader%2CRapideFix.Parsers.IMessageParser%7B%600%2CSystem.Byte%7D%2CRapideFix.SupportedFixVersion)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/danubeDev/rapidefix/blob/gh-pages/src/RapideFix/Parsers/PipeParser.cs/#L16">View Source</a>
+  </span>
+  <a id="RapideFix_Parsers_PipeParser_1__ctor_" data-uid="RapideFix.Parsers.PipeParser`1.#ctor*"></a>
+  <h4 id="RapideFix_Parsers_PipeParser_1__ctor_System_IO_Pipelines_PipeReader_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_" data-uid="RapideFix.Parsers.PipeParser`1.#ctor(System.IO.Pipelines.PipeReader,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion)">PipeParser(PipeReader, IMessageParser&lt;T, Byte&gt;, SupportedFixVersion)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PipeParser(PipeReader pipeReader, IMessageParser&lt;T, byte&gt; singleMessageParser, SupportedFixVersion fixVersion)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IO.Pipelines.PipeReader</span></td>
+        <td><span class="parametername">pipeReader</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RapideFix.Parsers.IMessageParser-2.html">IMessageParser</a>&lt;T, <span class="xref">System.Byte</span>&gt;</td>
+        <td><span class="parametername">singleMessageParser</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RapideFix.SupportedFixVersion.html">SupportedFixVersion</a></td>
+        <td><span class="parametername">fixVersion</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/danubeDev/rapidefix/new/gh-pages/apiSpec/new?filename=RapideFix_Parsers_PipeParser_1__ctor_System_IO_Pipelines_PipeReader_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_System_Func_System_ReadOnlyMemory_System_Byte___0__.md&amp;value=---%0Auid%3A%20RapideFix.Parsers.PipeParser%601.%23ctor(System.IO.Pipelines.PipeReader%2CRapideFix.Parsers.IMessageParser%7B%600%2CSystem.Byte%7D%2CRapideFix.SupportedFixVersion%2CSystem.Func%7BSystem.ReadOnlyMemory%7BSystem.Byte%7D%2C%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/danubeDev/rapidefix/blob/gh-pages/src/RapideFix/Parsers/PipeParser.cs/#L27">View Source</a>
+  </span>
+  <a id="RapideFix_Parsers_PipeParser_1__ctor_" data-uid="RapideFix.Parsers.PipeParser`1.#ctor*"></a>
+  <h4 id="RapideFix_Parsers_PipeParser_1__ctor_System_IO_Pipelines_PipeReader_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_System_Func_System_ReadOnlyMemory_System_Byte___0__" data-uid="RapideFix.Parsers.PipeParser`1.#ctor(System.IO.Pipelines.PipeReader,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Func{System.ReadOnlyMemory{System.Byte},`0})">PipeParser(PipeReader, IMessageParser&lt;T, Byte&gt;, SupportedFixVersion, Func&lt;ReadOnlyMemory&lt;Byte&gt;, T&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PipeParser(PipeReader pipeReader, IMessageParser&lt;T, byte&gt; singleMessageParser, SupportedFixVersion fixVersion, Func&lt;ReadOnlyMemory&lt;byte&gt;, T&gt; targetObjectFactory)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IO.Pipelines.PipeReader</span></td>
+        <td><span class="parametername">pipeReader</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RapideFix.Parsers.IMessageParser-2.html">IMessageParser</a>&lt;T, <span class="xref">System.Byte</span>&gt;</td>
+        <td><span class="parametername">singleMessageParser</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RapideFix.SupportedFixVersion.html">SupportedFixVersion</a></td>
+        <td><span class="parametername">fixVersion</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.ReadOnlyMemory</span>&lt;<span class="xref">System.Byte</span>&gt;, T&gt;</td>
+        <td><span class="parametername">targetObjectFactory</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/danubeDev/rapidefix/new/gh-pages/apiSpec/new?filename=RapideFix_Parsers_PipeParser_1_Pipe.md&amp;value=---%0Auid%3A%20RapideFix.Parsers.PipeParser%601.Pipe%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/danubeDev/rapidefix/blob/gh-pages/src/RapideFix/Parsers/PipeParser.cs/#L35">View Source</a>
+  </span>
+  <a id="RapideFix_Parsers_PipeParser_1_Pipe_" data-uid="RapideFix.Parsers.PipeParser`1.Pipe*"></a>
+  <h4 id="RapideFix_Parsers_PipeParser_1_Pipe" data-uid="RapideFix.Parsers.PipeParser`1.Pipe">Pipe</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Pipe Pipe { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IO.Pipelines.Pipe</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/danubeDev/rapidefix/new/gh-pages/apiSpec/new?filename=RapideFix_Parsers_PipeParser_1_ListenAsync_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20RapideFix.Parsers.PipeParser%601.ListenAsync(System.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/danubeDev/rapidefix/blob/gh-pages/src/RapideFix/Parsers/PipeParser.cs/#L37">View Source</a>
+  </span>
+  <a id="RapideFix_Parsers_PipeParser_1_ListenAsync_" data-uid="RapideFix.Parsers.PipeParser`1.ListenAsync*"></a>
+  <h4 id="RapideFix_Parsers_PipeParser_1_ListenAsync_System_Threading_CancellationToken_" data-uid="RapideFix.Parsers.PipeParser`1.ListenAsync(System.Threading.CancellationToken)">ListenAsync(CancellationToken)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Task ListenAsync(CancellationToken token)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">token</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">RapideFix.Parsers.ObservableParser&lt;T&gt;.ListenAsync(System.Threading.CancellationToken)</span></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IObservable&lt;T&gt;</span>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/danubeDev/rapidefix/new/gh-pages/apiSpec/new?filename=RapideFix_Parsers_PipeParser_1.md&amp;value=---%0Auid%3A%20RapideFix.Parsers.PipeParser%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/danubeDev/rapidefix/blob/gh-pages/src/RapideFix/Parsers/PipeParser.cs/#L9" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

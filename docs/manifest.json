@@ -1,0 +1,825 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/Users/ladeak/source/repos/rapidefix/samples/Documentation.DocFx",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "yPHY/nCulpYAykPEYd8Ohg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "u2OHo8c8WDT+zQjqpMSDEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "zKY1oP//IkKMWIdDDaNeGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Attributes.FixTagAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Attributes.FixTagAttribute.html",
+          "hash": "aWhJNgNJj+bFF4Zr7OLGKQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Attributes.MessageTypeAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Attributes.MessageTypeAttribute.html",
+          "hash": "ZTDiNe0FfSTNthQyLJ3x1A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Attributes.RepeatingGroupAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Attributes.RepeatingGroupAttribute.html",
+          "hash": "rGAGt4e3sTFXXLpJsnh3ZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Attributes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Attributes.html",
+          "hash": "3cRAcM+Z42HHll5NUANdsw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.BaseTypeSetter.ActionRef-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.BaseTypeSetter.ActionRef-2.html",
+          "hash": "ezFl8m5xy6/MYR7UGzV2cQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.BaseTypeSetter.ActionRef-3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.BaseTypeSetter.ActionRef-3.html",
+          "hash": "aVwVwor1tuDqKXrXyOPLsw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.BaseTypeSetter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.BaseTypeSetter.html",
+          "hash": "AAQ4e9q1LHGULE/g7TVjgQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.CompositePropertySetter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.CompositePropertySetter.html",
+          "hash": "7HGByE+56L09ejlL7lE9/g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.Data.MessageParserOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.Data.MessageParserOptions.html",
+          "hash": "kXzy8yksI+86Z6EjBp+IoQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.Data.TagMapLeaf.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.Data.TagMapLeaf.html",
+          "hash": "ZsFuREObA3wFVC+WcQuE3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.Data.TagMapNode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.Data.TagMapNode.html",
+          "hash": "hcI2a1PdBn3OZI5DWAgnDg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.Data.html",
+          "hash": "leWSoJDCBIo78dXjWW+TuA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.IPropertySetter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.IPropertySetter.html",
+          "hash": "Hdr+iaQiPEw+aH+kYh84eg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.ISubPropertySetterFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.ISubPropertySetterFactory.html",
+          "hash": "yme2yV3oa6JB94KZUxH0aQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.ITagToPropertyMapper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.ITagToPropertyMapper.html",
+          "hash": "tRVUqxE843v/tlYvcGKCpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.ITypedPropertySetter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.ITypedPropertySetter.html",
+          "hash": "uXas6yAvKzgydywbmcartg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.ParentTypeSetter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.ParentTypeSetter.html",
+          "hash": "tajafal4Ae5m+oEXRzAZLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.RepeatingGroupTagSetter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.RepeatingGroupTagSetter.html",
+          "hash": "HkbNnwDJF+BWbiisssN3Cw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.SimpleTypeSetter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.SimpleTypeSetter.html",
+          "hash": "1cckeO4ASdXFD/7cJ2gzUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.SubPropertySetterFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.SubPropertySetterFactory.html",
+          "hash": "H1gdGOGq/ydnyAdOvjs+ww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.TagToPropertyMapper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.TagToPropertyMapper.html",
+          "hash": "+6yNrFpcezj1hE0p0zqi8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.TypeConvertedSetter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.TypeConvertedSetter.html",
+          "hash": "ZCMGDXX/YUdXCLABTL3pnQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.html",
+          "hash": "YS3aP4HncQ42tpBBTFHenA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.DataTypes.FixMessageContext.RepeatingCounter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.DataTypes.FixMessageContext.RepeatingCounter.html",
+          "hash": "wkqddKNc2dz2gj9RLt08zg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.DataTypes.FixMessageContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.DataTypes.FixMessageContext.html",
+          "hash": "sKUeHzmAj2cmk3XRDRL+rg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.DataTypes.MessageEncoding.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.DataTypes.MessageEncoding.html",
+          "hash": "0meBgUySALGZ8IQlkVMgFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.DataTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.DataTypes.html",
+          "hash": "eRJ+k2HPz8XK50yfq5WxBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Extensions.FixMessageContextExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Extensions.FixMessageContextExtensions.html",
+          "hash": "p2ifYbb/SdLh7JClSfpJog=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Extensions.IntegerExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Extensions.IntegerExtensions.html",
+          "hash": "wK0V7lBtVAriazSw2Ck64g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Extensions.StringExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Extensions.StringExtensions.html",
+          "hash": "Ks3f67hmE3iENxh5/d8EeQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Extensions.html",
+          "hash": "EG7+hR6GzL9pouYG4JIFhQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.FixParser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.FixParser.html",
+          "hash": "IXXvzqsv9CxtB8sICtznwQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.FixParserSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.FixParserSettings.html",
+          "hash": "dsIGEAhHnxV8EDCzcOdZAA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.IntegerToFixConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.IntegerToFixConverter.html",
+          "hash": "PTcbN9xbr7v+WxOvdswt+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.MessageBuilders.FixTagValueConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.MessageBuilders.FixTagValueConverter.html",
+          "hash": "bP8MGLkSRViKOlOHj2oQSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.MessageBuilders.MessageBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.MessageBuilders.MessageBuilder.html",
+          "hash": "4VGr+Ew0WGTz7ETlP1pKYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.MessageBuilders.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.MessageBuilders.html",
+          "hash": "Usw+LQxk8eQoNQV2zk9HvA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.ParserBuilders.ParserBuilder-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.ParserBuilders.ParserBuilder-1.html",
+          "hash": "jghqxg5cUfGmHiyuNsK0QA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.ParserBuilders.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.ParserBuilders.html",
+          "hash": "uxQaRhPB22UGN6sJR+yoWg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Parsers.IMessageParser-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Parsers.IMessageParser-2.html",
+          "hash": "XYx/SM78TRVeY57k+AXqRA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Parsers.MessageParser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Parsers.MessageParser.html",
+          "hash": "S2qjnCBrv/tbyM79ksJNow=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Parsers.ObservableParser-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Parsers.ObservableParser-1.html",
+          "hash": "K7b9JeATf40ESAG1TcAMJw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Parsers.PipeParser-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Parsers.PipeParser-1.html",
+          "hash": "2r+pzecbftD/fLo7YDkKuQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Parsers.StreamParser-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Parsers.StreamParser-1.html",
+          "hash": "11XtKcsQEJnELVYc5g6Wsw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Parsers.TypedMessageParser-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Parsers.TypedMessageParser-1.html",
+          "hash": "rYpLMxTgpiMG8WHn+lTbOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Parsers.TypedStringMessageParser-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Parsers.TypedStringMessageParser-1.html",
+          "hash": "RQpmkAhyX1ElOx492ylzQg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Parsers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Parsers.html",
+          "hash": "1hnHLQiroaP3X9vGKxqxhw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.StringProcessing.FixStringEnumerable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.StringProcessing.FixStringEnumerable.html",
+          "hash": "A3ZV6ZKOuITmPjON1c0oEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.StringProcessing.FixStringEnumerator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.StringProcessing.FixStringEnumerator.html",
+          "hash": "JzXqoNzIroUE12Q9LZDfLg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.StringProcessing.ReadOnlyMemoryExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.StringProcessing.ReadOnlyMemoryExtensions.html",
+          "hash": "FYG32jrcwwoLWLif7gk1Uw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.StringProcessing.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.StringProcessing.html",
+          "hash": "CPAgMvsynlYgvN+1EDu/CQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.SupportedFixVersion.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.SupportedFixVersion.html",
+          "hash": "hc5KDuHXL8tMNIJ9oA1iyw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Validation.ChecksumValidator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Validation.ChecksumValidator.html",
+          "hash": "8ytGY9310LHmP3ZndOSknQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Validation.FixVersionValidator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Validation.FixVersionValidator.html",
+          "hash": "t/9lfo/kIvYGkoexqyVyIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Validation.IValidator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Validation.IValidator.html",
+          "hash": "t4llWbMhpjGggf1RLiLE/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Validation.IValidatorInternal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Validation.IValidatorInternal.html",
+          "hash": "tb++RSSp8JptzCveZHkTbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Validation.LengthValidator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Validation.LengthValidator.html",
+          "hash": "huvW0086738ZtmT+IO9pEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Validation.ValidatorCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Validation.ValidatorCollection.html",
+          "hash": "ypvfk/c4cVFozNbcJ4CpJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Validation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Validation.html",
+          "hash": "RHzVqpiHKbdlgj+cmsjS3A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.html",
+          "hash": "jyn8avNhObllUXDjKM/ksg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "obj/api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "sQjeg7IDQe4xisdLaVTJHw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "9iEAFUBOsFlaNG+63tir0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Disable incremental build by force rebuild option.",
+        "incrementalPhase": "build"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build"
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build"
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: it's disabled.",
+        "incrementalPhase": "postProcessing"
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
