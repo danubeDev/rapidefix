@@ -1,0 +1,15 @@
+``` ini
+
+BenchmarkDotNet=v0.11.3, OS=Windows 10.0.17134.472 (1803/April2018Update/Redstone4), VM=Hyper-V
+Intel Xeon CPU E5-2673 v3 2.40GHz, 1 CPU, 2 logical and 2 physical cores
+.NET Core SDK=2.2.100
+  [Host] : .NET Core 2.2.0 (CoreCLR 4.6.27110.04, CoreFX 4.6.27110.04), 64bit RyuJIT
+  Core   : .NET Core 2.2.0 (CoreCLR 4.6.27110.04, CoreFX 4.6.27110.04), 64bit RyuJIT
+
+Job=Core  Runtime=Core  
+
+```
+|      Method |              Message |     Mean |     Error |    StdDev | Gen 0/1k Op | Gen 1/1k Op | Gen 2/1k Op | Allocated Memory/Op |
+|------------ |--------------------- |---------:|----------:|----------:|------------:|------------:|------------:|--------------------:|
+| **ParseString** | **35=A|(...).123| [34]** | **1.407 us** | **0.0272 us** | **0.0313 us** |      **0.0248** |           **-** |           **-** |               **184 B** |
+| **ParseString** | **35=A|(...)|68=Y [25]** | **1.087 us** | **0.0195 us** | **0.0183 us** |      **0.0172** |           **-** |           **-** |               **136 B** |
