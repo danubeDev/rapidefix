@@ -27,6 +27,9 @@
         "files": [
           "api/*.md",
           "articles/**.md",
+          "articles/toc.yml",
+          "benchmarks/**github.md",
+          "benchmarks/results/toc.yml",
           "toc.yml",
           "*.md"
         ],
@@ -61,6 +64,12 @@
     "dest": "../../docs",
     "template": [
       "default"
-    ]
+    ],
+    "globalMetadata": {
+      "_appTitle": "RapideFix",
+      "_appFooter": "DanubeDev.RapideFix - Documentation",
+      "_appLogoPath": "images/icon.svg",
+      "_enableSearch": "true"
+    }
   }
 }

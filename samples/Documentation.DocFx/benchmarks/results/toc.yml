@@ -1,0 +1,7 @@
+- name: MessageParser
+  href: RapideFixBenchmarks.MessageParserBenchmark-report-github.md
+  homepage: RapideFixBenchmarks.MessageParserBenchmark-report-github.md
+- name: TypedMessageParserBenchmark
+  href: RapideFixBenchmarks.TypedMessageParserBenchmark-report-github.md
+- name: TypedStringMessageParserBenchmark
+  href: RapideFixBenchmarks.TypedStringMessageParserBenchmark-report-github.md
