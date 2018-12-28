@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace SampleRapideFix.Data
 {
-  [MessageType("AB")]
   [MessageType("D")]
   public class Order
   {

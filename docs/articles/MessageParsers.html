@@ -79,6 +79,45 @@
             <article class="content wrap" id="_content" data-uid="">
 <h2 id="message-parsers">Message Parsers</h2>
 
+<p>This article details how to get started with custom message parsers, what type of message parsers we can build, and what dependencies we need to pass to create message parsers.</p>
+<p>The goal of a message parser is to validate and parse a single message from the message type tag to the checksum tag. It creates the desired output type instance and fills the property values according to input message and <code>[FixTag]</code> attributes on the output type.</p>
+<h3 id="types-of-message-parsers">Types of Message Parsers</h3>
+<p>Message parsers implement an interface <code>IMessageParser&lt;TOutput, TData&gt;</code>, where TOutput is the type returned by the parser and TData is the type of the input (<em>char</em> or <em>byte</em>). </p>
+<p>There are three different type of message parser</p>
+<ol>
+<li>MessageParser</li>
+<li>TypedMessageParser<ttarget></ttarget></li>
+<li>TypedStringMessageParser<ttarget></ttarget></li>
+</ol>
+<h4 id="messageparser">MessageParser</h4>
+<p>The message parser is the most generic parser, as it implements <code>IMessageParser&lt;object, byte&gt;</code>. It is designed to accept a byte span and return an object. The runtime type of the returned object is decided by the parser using the <code>MessageTypeAttribute</code> of the registered output types.
+If it is used by registering only a single type (or the actual type of the object is known by the user), convenient overloads for <code>Parse</code> exist to return type <code>T</code> as the return type.</p>
+<p>The parser validates the input message, determines the output type, traverses the input message and tries to parse the tags and set it on the output object. If the object is known by the user, it can be provided as an input argument.</p>
+<p>We can create a MessageParser by using the <code>ParserBuilder</code> on objects and adding our custom output types. In the example below only one Order output type is given.</p>
+<pre><code class="lang-csharp">new ParserBuilder&lt;object&gt;().AddOutputType&lt;Order&gt;().Build&lt;byte&gt;() as MessageParser;
+</code></pre><p>We can also create one by manually providing the dependencies:</p>
+<pre><code class="lang-csharp">// Create a property mapper and map types to be parsed
+var propertyMapper = new TagToPropertyMapper();
+propertyMapper.Map&lt;Order&gt;();
+// Create a property setter. CompositePropertySetter is a compositof sub property setters
+var compositeSetter = new CompositePropertySetter(neSubPropertySetterFactory());
+// Create a validator collection to have all default validators
+var validators = new ValidatorCollecti(IntegerToFixConverter.Instance)
+// Passing empty options
+var options = new MessageParserOptions();
+// Create MessageParser, passing dependencies
+var parser = new MessageParser(propertyMapper, compositeSettervalidators, options);
+</code></pre><blockquote><p>MessageParser does not support parsing into value types, it is a <em>wildcard</em> parser for reference types, if the fix tags are of the types are disjunct.</p>
+</blockquote>
+<p>MessageParser can be configured to return null or throw an <code>ArgumentException</code> in case of a validation error. This behavior can be customized through the <em>ThrowIfInvalidMessage</em> property of <code>MessageParserOptions</code></p>
+<h4 id="typedmessageparser">TypedMessageParser</h4>
+<p><code>TypedMessageParser&lt;TTarget&gt;</code> is a parser which can parse messages into type of <code>TTarger</code>. It cannot parse wildcard types, but it can parse value and reference types at the same time.</p>
+<p>Creating a TypedMessageParser is similar to MessageParser. We can either create it by <code>ParserBuilder</code> or we can pass the dependencies our self. Creating it by parser builder:</p>
+<pre><code class="lang-csharp">IMessageParser&lt;Order, byte&gt; parser = new ParserBuilder&lt;Order&gt;().Build&lt;byte&gt;();
+</code></pre><h4 id="typedstringmessageparser">TypedStringMessageParser</h4>
+<p><code>TypedStringMessageParser&lt;TTarget&gt;</code> is a specialized message parser with input type of span <em>char</em> and out output type of <code>TTarget</code>. It skips validation as it does not apply for char input, hence it is faster for this case. Creating a TypedStringMessageParser by <code>ParserBuilder</code>:</p>
+<pre><code class="lang-csharp">IMessageParser&lt;Quote, char&gt; parser = new ParserBuilder&lt;Quote&gt;().Build&lt;char&gt;(new MessageParserOptions() { SOHChar = &#39;|&#39; });
+</code></pre><p>Note, that in the above case we push the SOH charactor as <code>|</code> a pipe character. To do this, the MessageParserOptions&#39;s SOHChar property is set.</p>
 </article>
           </div>
           
@@ -87,7 +126,7 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/danubeDev/rapidefix/blob/ldeak-documentation/samples/Documentation.DocFx/articles/MessageParsers.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/danubeDev/rapidefix/blob/ladeak-messageParsers/samples/Documentation.DocFx/articles/MessageParsers.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

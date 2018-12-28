@@ -17,6 +17,13 @@ namespace SampleRapideFix
     static void Main(string[] args)
     {
       new GettingStarted().ParserSample();
+      new TypedStringMessageParserSamples().Parser();
+      new MessageParserSamples().ParserByParserBuilder();
+      new MessageParserSamples().ParserByNewParser();
+      new MessageParserSamples().ParserMultipleMessageTypes();
+      new TypedMessageParserSamples().ParserByParserBuilder();
+      new TypedMessageParserSamples().ParserByNewParser();
+      new TypedMessageParserSamples().ParserValueType();
 
       //var settings = new FixParserSettings();
       //settings.RegisterMessageTypes<Order>();

@@ -4,14 +4,7 @@
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="38.000000pt" height="38.000000pt" viewBox="0 0 172.000000 172.000000"
  preserveAspectRatio="xMidYMid meet">
-  <defs>
-  <filter id="svg_5_blur">
-   <feGaussianBlur stdDeviation="2.7" in="SourceGraphic"/>
-  </filter>
- </defs>
 <g>
-  <rect rx="24" height="82" width="140" y="45.5" x="16" stroke-width="0" stroke="#000" fill-opacity="0.80" fill="#fff" filter="url(#svg_5_blur)" id="svg_5"/>
-  <text xml:space="preserve" y="93.32" x="32.375" text-anchor="start" stroke-width="0" stroke="#000" fill="#3d3dff" style="cursor: move; pointer-events: inherit;" font-style="italic" font-size="24px" font-family="Helvetica,Arial,sans-serif" id="svg_6">Rapide</text>
-  <text xml:space="preserve" y="93.32" x="108.625" text-anchor="start" stroke-width="0" stroke-opacity="null" stroke="#000" fill="#3d3dff" style="cursor: move; pointer-events: inherit;" font-size="24px" font-family="Helvetica,Arial,sans-serif" id="svg_7">Fix</text>
+  <text xml:space="preserve" y="120" x="43" text-anchor="start" stroke-width="0" stroke="#000" fill="#ffffff" style="cursor: pointer; pointer-events: inherit;" font-style="normal" font-weight="bold" font-size="128px" font-family="Courier New,Courier,monospace" id="svg_6">R</text>
 </g>
 </svg>

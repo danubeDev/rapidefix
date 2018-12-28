@@ -53,7 +53,7 @@ namespace RapideFix.Business
 
     private void Map(Type type, Stack<TagMapNode> parents)
     {
-      if(_mappedTypes.Contains(type))
+      if(_mappedTypes.Contains(type) || type == typeof(object))
       {
         return;
       }

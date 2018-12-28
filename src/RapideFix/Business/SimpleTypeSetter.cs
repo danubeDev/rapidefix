@@ -211,7 +211,6 @@ namespace RapideFix.Business
       var propertyType = !(mappingDetails.IsEnumerable) ?
         mappingDetails.Current.PropertyType : mappingDetails.InnerType;
 
-
       if(propertyType == typeof(int))
       {
         if(int.TryParse(valueChars, out var parsedValue))
