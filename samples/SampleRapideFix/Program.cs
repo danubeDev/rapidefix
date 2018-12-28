@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Threading;
 using RapideFix;
 using RapideFix.Business;
+using RapideFix.MessageBuilders;
 using RapideFix.Parsers;
 using RapideFix.Validation;
 using RapideFixFixture;
 using RapideFixFixture.TestTypes;
+using SampleRapideFix.Samples;
 
 namespace SampleRapideFix
 {
@@ -14,6 +16,8 @@ namespace SampleRapideFix
   {
     static void Main(string[] args)
     {
+      new GettingStarted().ParserSample();
+
       //var settings = new FixParserSettings();
       //settings.RegisterMessageTypes<Order>();
 
@@ -21,7 +25,7 @@ namespace SampleRapideFix
       //parser.Parse<Order>("8=FIX.4.2|9=19|35=D|55=AAPL|54=1|10=186|1=account1|44=12.5|");
 
       string sampleInput = "35=A|55=TestTag55|62=35|67=56.123|";
-      var message = new TestFixMessageBuilder(sampleInput).Build();
+      var message = new MessageBuilder().AddRaw(sampleInput).Build();
       var propertyMapper = new TagToPropertyMapper();
       propertyMapper.Map<TestTypeParent>();
       var compositeSetter = new CompositePropertySetter(new SubPropertySetterFactory());

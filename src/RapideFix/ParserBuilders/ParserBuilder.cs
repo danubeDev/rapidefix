@@ -19,7 +19,7 @@ namespace RapideFix.ParserBuilders
     private MessageParserOptions _options;
 
     /// <summary>
-    /// Sets a property mapper object to configure the <see cref="IMessageParser"/> instances built by ParserBuilder.
+    /// Sets a property mapper object to configure the <see cref="RapideFix.Parsers.IMessageParser{TOutput, TData}"/> instances built by ParserBuilder.
     /// </summary>
     /// <returns>The builder instance.</returns>
     public ParserBuilder<TOutput> SetPropertyMapper(ITagToPropertyMapper propertyMapper)
@@ -47,7 +47,7 @@ namespace RapideFix.ParserBuilders
     }
 
     /// <summary>
-    /// Sets a property setter object to configure the <see cref="IMessageParser"/> instances built by ParserBuilder.
+    /// Sets a property setter object to configure the <see cref="RapideFix.Parsers.IMessageParser{TOutput, TData}"/> instances built by ParserBuilder.
     /// </summary>
     /// <returns>The builder instance.</returns>
     public ParserBuilder<TOutput> SetPropertySetter(ITypedPropertySetter propertySetter)
@@ -75,7 +75,7 @@ namespace RapideFix.ParserBuilders
     }
 
     /// <summary>
-    /// Sets a validator collection to configure the <see cref="IMessageParser"/> instances built by ParserBuilder.
+    /// Sets a validator collection to configure the <see cref="RapideFix.Parsers.IMessageParser{TOutput, TData}"/> instances built by ParserBuilder.
     /// </summary>
     /// <returns>The builder instance.</returns>
     public ParserBuilder<TOutput> SetValidators(IValidator validatorCollection)
@@ -89,7 +89,7 @@ namespace RapideFix.ParserBuilders
     }
 
     /// <summary>
-    /// Sets message parsing options to configure the <see cref="IMessageParser"/> instances built by ParserBuilder.
+    /// Sets message parsing options to configure the <see cref="RapideFix.Parsers.IMessageParser{TOutput, TData}"/> instances built by ParserBuilder.
     /// </summary>
     /// <returns>The builder instance.</returns>
     public ParserBuilder<TOutput> SetOptions(MessageParserOptions options)

@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Getting started | RapideFix </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Getting started | RapideFix ">
+    <meta name="generator" content="docfx 2.40.5.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/icon.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h2 id="getting-started">Getting started</h2>
+
+<h3 id="installation">Installation</h3>
+<p>Create a new dotnet core 2.2 application and install <a href="https://www.nuget.org/packages/DanubeDev.RapideFix/">DanubeDev.RapideFix</a> nuget package.
+RapideFix classes and structs will be available under <code>RapideFix</code> default namespace.</p>
+<h3 id="what-to-parse">What to parse</h3>
+<p>RapideFix primary goal is to parse FIX messages into POCO classes or structs. For this reason, our data source can be a low-level data type like <em>byte</em> or <em>char</em>. As we do not parse individual bytes or chars, the parsers can work with <code>ReadOnlySpan</code>&#39;s or <code>ReadOnlyMemory</code>&#39;s of bytes or chars. This way we can easily parse a byte array or a string, as both have an extension method for <a href="https://docs.microsoft.com/en-us/dotnet/api/system.memoryextensions.asspan">AsSpan()</a>.</p>
+<p>In some use-cases we do not only want to parse a single message, but many messages. RapideFix provides a solution for this: <em>individual messages</em> or <em>data streams</em> can be parsed with the library. For individual messages we can simply use the <a href="MessageParsers.html">message parsers</a>, and for stream we use the <a href="StreamParsers.html">stream parsers</a>, both located under the Parsers namespace.</p>
+<h3 id="how-to-parse">How to parse</h3>
+<p>When parsing into POCO, RapideFix distinguishes two scenarios:</p>
+<ol>
+<li>parsing all messages (stream or individual) into the same C# type</li>
+<li>parsing different type messages into different C# types</li>
+</ol>
+<p>In the first case the output type of the parser is the user selected type, while in the second case it is most like to be type of <code>object</code>. As messages parser are generic to both input and output types, this is an important distinction between them.</p>
+<h3 id="build-your-first-fixparser">Build your first FixParser</h3>
+<p>To get started we build a really simple parser, which can parse a <code>string</code> into a struct. To build such a parser we can use the help of a <code>ParserBuilder</code>. ParserBuilders can build multiple similar parsers using the same configuration.</p>
+<h4 id="step-1-add-required-usings">Step 1. Add required usings</h4>
+<pre><code class="lang-csharp">using RapideFix.Business.Data;
+using RapideFix.ParserBuilders;
+using RapideFix.Parsers;
+</code></pre><h4 id="step-2-create-a-parser">Step 2. Create a parser</h4>
+<p>In this step we can provide the SOH character, which is the delimiter char for the fix tags.</p>
+<pre><code class="lang-csharp">IMessageParser&lt;Quote, char&gt; parser = new ParserBuilder&lt;Quote&gt;()
+        .Build&lt;char&gt;(new MessageParserOptions() { SOHChar = &#39;|&#39; });
+</code></pre><h4 id="step-3-call-the-parser-method">Step 3. Call the parser method</h4>
+<pre><code class="lang-csharp">Quote quote = parser.Parse(message);
+</code></pre><h4 id="the-final-example">The final example</h4>
+<pre><code class="lang-csharp">using System;
+using RapideFix.Business.Data;
+using RapideFix.ParserBuilders;
+using RapideFix.Parsers;
+using SampleRapideFix.Data;
+
+namespace SampleRapideFix.Samples
+{
+  public class GettingStarted
+  {
+    public void ParserSample()
+    {
+      string message = &quot;134=10|132=145|62=20190112-23:34:12|&quot;;
+      IMessageParser&lt;Quote, char&gt; parser = new ParserBuilder&lt;Quote&gt;()
+        .Build&lt;char&gt;(new MessageParserOptions() { SOHChar = &#39;|&#39; });
+
+      Quote quote = parser.Parse(message);
+
+      Console.WriteLine($&quot;Quote Px {quote.Price}, Qty {quote.Quantity}, @{quote.Expiry.Hour}:{quote.Expiry.Minute}&quot;);
+    }
+  }
+}
+</code></pre><p>Notice that in the example above, we parse into <code>Quote</code> struct, which is a user defined type. This is defined in a separate file. Quote needs to mark its properties with <code>FixTag</code> attribute with the tag number:</p>
+<pre><code class="lang-csharp">using System;
+using RapideFix.Attributes;
+
+namespace SampleRapideFix.Data
+{
+  public struct Quote
+  {
+    [FixTag(134)]
+    public int Quantity { get; set; }
+
+    [FixTag(132)]
+    public double Price { get; set; }
+
+    [FixTag(62)]
+    public DateTimeOffset Expiry { get; set; }
+  }
+}
+</code></pre><p>The output of the sample:</p>
+<pre><code>Quote Px 145, Qty 10, @23:34
+</code></pre><h3 id="next-steps">Next Steps</h3>
+<p>In the next steps take a look at creating custom <a href="MessageParsers.html">message parsers</a> or <a href="StreamParsers.html">stream parsers</a>.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/danubeDev/rapidefix/blob/ldeak-documentation/samples/Documentation.DocFx/articles/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            DanubeDev.RapideFix - Documentation
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
