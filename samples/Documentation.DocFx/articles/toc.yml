@@ -1,3 +1,11 @@
 - name: Introduction
   href: index.md
   homepage: index.md
+- name: Message Parsers
+  href: MessageParsers.md
+- name: Parser Builder
+  href: ParserBuilder.md
+- name: Stream Parsers
+  href: StreamParsers.md
+- name: Message Builder
+  href: MessageBuilder.md

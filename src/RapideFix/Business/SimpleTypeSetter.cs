@@ -288,7 +288,7 @@ namespace RapideFix.Business
       {
         if(DateTimeOffset.TryParseExact(valueChars, DateTimeFormat, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AssumeUniversal, out var parsedValue))
         {
-          SetValue<DateTimeOffset>(mappingDetails, fixMessageContext, targetObject, parsedValue);
+          SetValue<TTarget, DateTimeOffset>(mappingDetails, fixMessageContext, ref targetObject, parsedValue);
         }
       }
       else if(propertyType == typeof(int?))
@@ -363,7 +363,7 @@ namespace RapideFix.Business
       {
         if(DateTimeOffset.TryParseExact(valueChars, DateTimeFormat, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.AssumeUniversal, out var parsedValue))
         {
-          SetValue<DateTimeOffset?>(mappingDetails, fixMessageContext, targetObject, parsedValue);
+          SetValue<TTarget, DateTimeOffset?>(mappingDetails, fixMessageContext, ref targetObject, parsedValue);
         }
       }
 

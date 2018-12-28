@@ -6,8 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\tests\RapideFixFixture\TestTypes\TestChild.cs" Link="Data\TestChild.cs" />
+    <Compile Include="..\..\tests\RapideFixFixture\TestTypes\TestConvertable.cs" Link="Data\TestConvertable.cs" />
+    <Compile Include="..\..\tests\RapideFixFixture\TestTypes\TestConverter.cs" Link="Data\TestConverter.cs" />
+    <Compile Include="..\..\tests\RapideFixFixture\TestTypes\TestMany.cs" Link="Data\TestMany.cs" />
+    <Compile Include="..\..\tests\RapideFixFixture\TestTypes\TestTypeParent.cs" Link="Data\TestTypeParent.cs" />
+    <Compile Include="..\..\tests\RapideFixFixture\TestTypes\TestTypeStruct.cs" Link="Data\TestTypeStruct.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\RapideFix\RapideFix.csproj" />
-    <ProjectReference Include="..\..\tests\RapideFixFixture\RapideFixFixture.csproj" />
   </ItemGroup>
 
 </Project>

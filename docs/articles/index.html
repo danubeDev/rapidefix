@@ -77,10 +77,78 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="getting-started">Getting started</h1>
+<h2 id="getting-started">Getting started</h2>
 
-<h2 id="installation">Installation</h2>
-<p>Create a new dotnet core 2.2 application and intall <a href="https://www.nuget.org/packages/DanubeDev.RapideFix/">DanubeDev.RapideFix</a> nuget package.</p>
+<h3 id="installation">Installation</h3>
+<p>Create a new dotnet core 2.2 application and install <a href="https://www.nuget.org/packages/DanubeDev.RapideFix/">DanubeDev.RapideFix</a> nuget package.
+RapideFix classes and structs will be available under <code>RapideFix</code> default namespace.</p>
+<h3 id="what-to-parse">What to parse</h3>
+<p>RapideFix primary goal is to parse FIX messages into POCO classes or structs. For this reason, our data source can be a low-level data type like <em>byte</em> or <em>char</em>. As we do not parse individual bytes or chars, the parsers can work with <code>ReadOnlySpan</code>&#39;s or <code>ReadOnlyMemory</code>&#39;s of bytes or chars. This way we can easily parse a byte array or a string, as both have an extension method for <a href="https://docs.microsoft.com/en-us/dotnet/api/system.memoryextensions.asspan">AsSpan()</a>.</p>
+<p>In some use-cases we do not only want to parse a single message, but many messages. RapideFix provides a solution for this: <em>individual messages</em> or <em>data streams</em> can be parsed with the library. For individual messages we can simply use the <a href="MessageParsers.html">message parsers</a>, and for stream we use the <a href="StreamParsers.html">stream parsers</a>, both located under the Parsers namespace.</p>
+<h3 id="how-to-parse">How to parse</h3>
+<p>When parsing into POCO, RapideFix distinguishes two scenarios:</p>
+<ol>
+<li>parsing all messages (stream or individual) into the same C# type</li>
+<li>parsing different type messages into different C# types</li>
+</ol>
+<p>In the first case the output type of the parser is the user selected type, while in the second case it is most like to be type of <code>object</code>. As messages parser are generic to both input and output types, this is an important distinction between them.</p>
+<h3 id="build-your-first-fixparser">Build your first FixParser</h3>
+<p>To get started we build a really simple parser, which can parse a <code>string</code> into a struct. To build such a parser we can use the help of a <code>ParserBuilder</code>. ParserBuilders can build multiple similar parsers using the same configuration.</p>
+<h4 id="step-1-add-required-usings">Step 1. Add required usings</h4>
+<pre><code class="lang-csharp">using RapideFix.Business.Data;
+using RapideFix.ParserBuilders;
+using RapideFix.Parsers;
+</code></pre><h4 id="step-2-create-a-parser">Step 2. Create a parser</h4>
+<p>In this step we can provide the SOH character, which is the delimiter char for the fix tags.</p>
+<pre><code class="lang-csharp">IMessageParser&lt;Quote, char&gt; parser = new ParserBuilder&lt;Quote&gt;()
+        .Build&lt;char&gt;(new MessageParserOptions() { SOHChar = &#39;|&#39; });
+</code></pre><h4 id="step-3-call-the-parser-method">Step 3. Call the parser method</h4>
+<pre><code class="lang-csharp">Quote quote = parser.Parse(message);
+</code></pre><h4 id="the-final-example">The final example</h4>
+<pre><code class="lang-csharp">using System;
+using RapideFix.Business.Data;
+using RapideFix.ParserBuilders;
+using RapideFix.Parsers;
+using SampleRapideFix.Data;
+
+namespace SampleRapideFix.Samples
+{
+  public class GettingStarted
+  {
+    public void ParserSample()
+    {
+      string message = &quot;134=10|132=145|62=20190112-23:34:12|&quot;;
+      IMessageParser&lt;Quote, char&gt; parser = new ParserBuilder&lt;Quote&gt;()
+        .Build&lt;char&gt;(new MessageParserOptions() { SOHChar = &#39;|&#39; });
+
+      Quote quote = parser.Parse(message);
+
+      Console.WriteLine($&quot;Quote Px {quote.Price}, Qty {quote.Quantity}, @{quote.Expiry.Hour}:{quote.Expiry.Minute}&quot;);
+    }
+  }
+}
+</code></pre><p>Notice that in the example above, we parse into <code>Quote</code> struct, which is a user defined type. This is defined in a separate file. Quote needs to mark its properties with <code>FixTag</code> attribute with the tag number:</p>
+<pre><code class="lang-csharp">using System;
+using RapideFix.Attributes;
+
+namespace SampleRapideFix.Data
+{
+  public struct Quote
+  {
+    [FixTag(134)]
+    public int Quantity { get; set; }
+
+    [FixTag(132)]
+    public double Price { get; set; }
+
+    [FixTag(62)]
+    public DateTimeOffset Expiry { get; set; }
+  }
+}
+</code></pre><p>The output of the sample:</p>
+<pre><code>Quote Px 145, Qty 10, @23:34
+</code></pre><h3 id="next-steps">Next Steps</h3>
+<p>In the next steps take a look at creating custom <a href="MessageParsers.html">message parsers</a> or <a href="StreamParsers.html">stream parsers</a>.</p>
 </article>
           </div>
           

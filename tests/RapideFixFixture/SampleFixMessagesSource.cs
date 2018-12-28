@@ -22,7 +22,6 @@ namespace RapideFixFixture
       yield return new[] { "35=A|55=TestTag55|59=2|60=35|601=36|60=37|" };
       yield return new[] { "35=A|55=TestTag55|61=35|" };
       yield return new[] { "35=A|55=TestTag55|64=2|65=1|65=2|" };
-      yield return new[] { Sample1 };
     }
 
   }

@@ -1,4 +1,6 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿using System.Collections.Generic;
+using BenchmarkDotNet.Attributes;
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using RapideFix;
 using RapideFix.Business;
 using RapideFix.Parsers;
@@ -25,10 +27,12 @@ namespace RapideFixBenchmarks
       _parser = new TypedStringMessageParser<TestTypeParent>(propertyMapper, compositeSetter, new ValidatorCollection(IntegerToFixConverter.Instance), new RapideFix.Business.Data.MessageParserOptions());
     }
 
-    [Params(SampleFixMessagesSource.Sample0, SampleFixMessagesSource.Sample1)]
-    public string Message { get; set; }
+    [ParamsSource(nameof(Params))]
+    public DisplayParam Message { get; set; }
+
+    public IEnumerable<DisplayParam> Params => new[] { new DisplayParam(SampleFixMessagesSource.Sample0), new DisplayParam(SampleFixMessagesSource.Sample1) };
 
     [Benchmark]
-    public void ParseString() => _parser.Parse(Message);
+    public void ParseString() => _parser.Parse(Message.Value);
   }
 }

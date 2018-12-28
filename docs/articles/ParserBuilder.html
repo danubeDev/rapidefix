@@ -5,19 +5,19 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>RapideFix | RapideFix </title>
+    <title>Parser Builder | RapideFix </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="RapideFix | RapideFix ">
+    <meta name="title" content="Parser Builder | RapideFix ">
     <meta name="generator" content="docfx 2.40.5.0">
     
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="styles/docfx.vendor.css">
-    <link rel="stylesheet" href="styles/docfx.css">
-    <link rel="stylesheet" href="styles/main.css">
-    <meta property="docfx:navrel" content="toc.html">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
-    <meta property="docfx:rel" content="">
+    <meta property="docfx:rel" content="../">
     
   </head>
   <body data-spy="scroll" data-target="#affix" data-offset="120">
@@ -34,8 +34,8 @@
                 <span class="icon-bar"></span>
               </button>
               
-              <a class="navbar-brand" href="index.html">
-                <img id="logo" class="svg" src="images/icon.svg" alt="">
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/icon.svg" alt="">
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar">
@@ -67,19 +67,19 @@
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
-        <div class="article row grid">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="rapidefix">RapideFix</h1>
+<h2 id="parser-builder">Parser Builder</h2>
 
-<p>A superb FIX message parser library.</p>
-<h3 id="whats-the-area">What&#39;s the area?</h3>
-<p>FIX messages: Financial world has standard to define the interface of pre-trade and trade communications, <a href="https://en.wikipedia.org/wiki/Financial_Information_eXchange">FIX</a>. Billions of these messages are exchanged every day. Considering the amount of messages can arrive to a trading application/engine, it is not hard to say, we are going to end up with enormous amount of data, where parsing efficiently is crucial.</p>
-<h4 id="whats-the-main-purpose">What&#39;s the main purpose?</h4>
-<p>Save unnecessary memory allocations: Generally, the application will have to parse the string stream FIX message to it&#39;s internal representation. Parsing such a string stream, most of the time, results a significant amount of substring operation. From the nature of string in C#, as a consequence, there will be a big amount of temporary string object. It is not ideal, as we could avoid to create such temporary data, assuming that the incoming message we are actually parsing won&#39;t change.</p>
-<h3 id="how-to-achieve-this">How to achieve this?</h3>
-<p>Using Span<t> and Memory<t>: Take advantage of newly introduced structures in C#, Span<t> and Memory<t>. At every possible cases, where a substring, subset of indexible immutable collection of elements needed, use these structures to avoid the overhead of creating the subset. Instead wrap them into the advanced structure, that will provide an easy interface and hide the logical complexity of dealing with pointers, references.<p>
-</t></t></t></t></article>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -87,7 +87,7 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/danubeDev/rapidefix/blob/ldeak-documentation/samples/Documentation.DocFx/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/danubeDev/rapidefix/blob/ldeak-documentation/samples/Documentation.DocFx/articles/ParserBuilder.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
@@ -113,8 +113,8 @@
       </footer>
     </div>
     
-    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
-    <script type="text/javascript" src="styles/docfx.js"></script>
-    <script type="text/javascript" src="styles/main.js"></script>
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
   </body>
 </html>
