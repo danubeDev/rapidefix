@@ -13,7 +13,7 @@ Using Span<T> and Memory<T>: Take advantage of newly introduced structures in C#
 
 ## Getting started and Documentation
 
-Getting started and a full api documentation is available [here](https://danubedev.github.io/rapidefix/docs/index.html).
+Getting started and a full api documentation is available [here](https://danubedev.github.io/rapidefix/).
 
 ### Contribution
 
@@ -28,7 +28,7 @@ When issuing a pull-request, please make sure to cover new features with unit te
 
 ### Nuget Package
 
-[![](https://img.shields.io/nuget/v/DanubeDev.RapideFix.svg)](DanubeDev.RapideFix)
+[![](https://img.shields.io/nuget/v/DanubeDev.RapideFix.svg)](https://www.nuget.org/packages/DanubeDev.RapideFix/)
 
 
 

@@ -3,6 +3,7 @@ using RapideFix.Attributes;
 
 namespace SampleRapideFix.Data
 {
+  [MessageType("Q")]
   public struct Quote
   {
     [FixTag(134)]

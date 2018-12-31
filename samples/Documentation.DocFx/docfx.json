@@ -12,7 +12,8 @@
           ]
         }
       ],
-      "dest": "obj/api"
+      "dest": "obj/api",
+      "disableGitFeatures": true
     }
   ],
   "build": {
@@ -65,6 +66,7 @@
     "template": [
       "default"
     ],
+    "disableGitFeatures": false,
     "globalMetadata": {
       "_appTitle": "RapideFix",
       "_appFooter": "DanubeDev.RapideFix - Documentation",

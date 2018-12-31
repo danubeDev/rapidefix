@@ -18,8 +18,8 @@ namespace RapideFixBenchmarks
         customConfig = customConfig.WithArtifactsPath(DocumentationPath);
       }
 
-      //var summaryTyped = BenchmarkRunner.Run<TypedMessageParserBenchmark>(customConfig);
-      //var summary = BenchmarkRunner.Run<MessageParserBenchmark>(customConfig);
+      var summaryTyped = BenchmarkRunner.Run<TypedMessageParserBenchmark>(customConfig);
+      var summary = BenchmarkRunner.Run<MessageParserBenchmark>(customConfig);
       var summaryString = BenchmarkRunner.Run<TypedStringMessageParserBenchmark>(customConfig);
       TestTypeSize();
     }

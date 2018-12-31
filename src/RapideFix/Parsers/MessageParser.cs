@@ -74,7 +74,7 @@ namespace RapideFix.Parsers
         message.Slice(messageTypeValueStart, lengthOfMessageType));
       object targetObject = Activator.CreateInstance(targetObjectType);
 
-      return Parse(message.Slice(messageTypeEnd + 1), _messageContext, targetObject);
+      return Parse(message.Slice(messageTypeStart + messageTypeEnd - 1), _messageContext, targetObject);
     }
 
     public object Parse(ReadOnlySpan<byte> message, object targetObject)

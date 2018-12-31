@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using BenchmarkDotNet.Attributes;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using RapideFix;
 using RapideFix.Business;
 using RapideFix.Parsers;

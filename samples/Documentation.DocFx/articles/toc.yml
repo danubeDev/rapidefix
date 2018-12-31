@@ -1,4 +1,4 @@
-- name: Introduction
+- name: Getting Started
   href: index.md
   homepage: index.md
 - name: Message Parsers
