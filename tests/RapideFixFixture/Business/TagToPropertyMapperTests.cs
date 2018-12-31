@@ -22,7 +22,7 @@ namespace RapideFixFixture.Business
     {
       var uut = new TagToPropertyMapper();
       uut.Map<TestTypeParent>();
-      uut.TryGet(58.ToKnownTag(), out TagMapLeaf result);
+      uut.TryGet(58.ToKnownTag(), typeof(TestTypeParent).GetHashCode(), out TagMapLeaf result);
 
       Assert.False(result.IsEncoded);
       Assert.False(result.IsEnumerable);
@@ -36,7 +36,7 @@ namespace RapideFixFixture.Business
     {
       var uut = new TagToPropertyMapper();
       uut.Map<TestTypeParent>();
-      uut.TryGet(55.ToKnownTag(), out TagMapLeaf result);
+      uut.TryGet(55.ToKnownTag(), typeof(TestTypeParent).GetHashCode(), out TagMapLeaf result);
 
       Assert.False(result.IsEncoded);
       Assert.False(result.IsEnumerable);
@@ -49,7 +49,7 @@ namespace RapideFixFixture.Business
     {
       var uut = new TagToPropertyMapper();
       uut.Map<TestTypeParent>();
-      uut.TryGet(61.ToKnownTag(), out TagMapLeaf result);
+      uut.TryGet(61.ToKnownTag(), typeof(TestTypeParent).GetHashCode(), out TagMapLeaf result);
 
       Assert.False(result.IsEncoded);
       Assert.False(result.IsEnumerable);
@@ -63,8 +63,8 @@ namespace RapideFixFixture.Business
     {
       var uut = new TagToPropertyMapper();
       uut.Map<TestTypeParent>();
-      uut.TryGet(56.ToKnownTag(), out TagMapLeaf repeatingTag);
-      uut.TryGet(57.ToKnownTag(), out TagMapLeaf actualTag);
+      uut.TryGet(56.ToKnownTag(), typeof(TestTypeParent).GetHashCode(), out TagMapLeaf repeatingTag);
+      uut.TryGet(57.ToKnownTag(), typeof(TestTypeParent).GetHashCode(), out TagMapLeaf actualTag);
 
       Assert.False(repeatingTag.IsEncoded);
       Assert.False(repeatingTag.IsEnumerable);
@@ -85,8 +85,8 @@ namespace RapideFixFixture.Business
     {
       var uut = new TagToPropertyMapper();
       uut.Map<TestTypeParent>();
-      uut.TryGet(59.ToKnownTag(), out TagMapLeaf repeatingTag);
-      uut.TryGet(60.ToKnownTag(), out TagMapLeaf actualTag);
+      uut.TryGet(59.ToKnownTag(), typeof(TestTypeParent).GetHashCode(), out TagMapLeaf repeatingTag);
+      uut.TryGet(60.ToKnownTag(), typeof(TestTypeParent).GetHashCode(), out TagMapLeaf actualTag);
 
       Assert.False(repeatingTag.IsEncoded);
       Assert.False(repeatingTag.IsEnumerable);

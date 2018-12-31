@@ -5,9 +5,11 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using RapideFix.Attributes;
 using RapideFix.Business.Data;
+using RapideFix.Business.PropertySetters;
 
 namespace RapideFix.Business
 {
@@ -18,20 +20,20 @@ namespace RapideFix.Business
     private HashSet<Type> _mappedTypes = new HashSet<Type>();
     private static NumberFormatInfo _numberFormatInfo = CultureInfo.CurrentCulture.NumberFormat;
 
-    public bool TryGet(ReadOnlySpan<byte> tag, out TagMapLeaf result)
+    public bool TryGet(ReadOnlySpan<byte> tag, int messageTypeKey, out TagMapLeaf result)
     {
-      int key = IntegerToFixConverter.Instance.ConvertBack(tag);
+      int key = IntegerToFixConverter.Instance.ConvertBack(tag) * messageTypeKey;
       return _map.TryGetValue(key, out result);
     }
 
-    public bool TryGet(ReadOnlySpan<char> tag, out TagMapLeaf result)
+    public bool TryGet(ReadOnlySpan<char> tag, int messageTypeKey, out TagMapLeaf result)
     {
       if(!int.TryParse(tag, NumberStyles.Integer, _numberFormatInfo, out int key))
       {
         result = null;
         return false;
       }
-      return _map.TryGetValue(key, out result);
+      return _map.TryGetValue(key * messageTypeKey, out result);
     }
 
     public Type TryGetMessageType(ReadOnlySpan<byte> tag)
@@ -48,10 +50,10 @@ namespace RapideFix.Business
 
     public void Map(Type type)
     {
-      Map(type, new Stack<TagMapNode>());
+      Map(type, new Stack<TagMapNode>(), type.GetHashCode());
     }
 
-    private void Map(Type type, Stack<TagMapNode> parents)
+    private void Map(Type type, Stack<TagMapNode> parents, int messageTypeKey)
     {
       if(_mappedTypes.Contains(type) || type == typeof(object))
       {
@@ -61,7 +63,7 @@ namespace RapideFix.Business
       var messageType = type.GetCustomAttribute<MessageTypeAttribute>();
       if(messageType != null)
       {
-        var key = GetTypeKey(Encoding.ASCII.GetBytes(messageType.Value));
+        int key = GetTypeKey(Encoding.ASCII.GetBytes(messageType.Value));
         _mapMessageType.TryAdd(key, type);
       }
 
@@ -75,7 +77,7 @@ namespace RapideFix.Business
         Type innerType = null;
         if(repeatingGroup != null)
         {
-          AddRepeatingGroupLeaf(parents, property, repeatingGroup, GetInnerTypeOfEnumerable(property));
+          AddRepeatingGroupLeaf(parents, property, repeatingGroup, GetInnerTypeOfEnumerable(property), repeatingGroup.Tag * messageTypeKey);
         }
 
         //If there is no fix tag attribute, we expand custom types and enumerated types with repeating group attribute
@@ -88,7 +90,7 @@ namespace RapideFix.Business
             if(!AllowedType(innerType))
             {
               parents.Push(CreateParentNode(property));
-              Map(innerType, parents);
+              Map(innerType, parents, messageTypeKey);
               parents.Pop();
             }
           }
@@ -99,7 +101,7 @@ namespace RapideFix.Business
             if(!AllowedType(innerType))
             {
               parents.Push(CreateRepeatingParentNode(property, repeatingGroup, innerType));
-              Map(innerType, parents);
+              Map(innerType, parents, messageTypeKey);
               parents.Pop();
             }
           }
@@ -115,7 +117,7 @@ namespace RapideFix.Business
             innerType = GetInnerTypeOfEnumerable(property);
             if(AllowedType(innerType) || typeConverter != null)
             {
-              value = AddEnumerableLeaf(parents, property, fixTagAttribute, repeatingGroup, typeConverter, fixTagAttribute.Tag, innerType);
+              value = AddEnumerableLeaf(parents, property, fixTagAttribute, repeatingGroup, typeConverter, fixTagAttribute.Tag * messageTypeKey, innerType);
             }
             else
             {
@@ -124,13 +126,13 @@ namespace RapideFix.Business
           }
           else if(!isEnumerable)
           {
-            //TODO: Nullable<Types>, IsValueType, IsSerializable
+            //Nullable<Types>, IsValueType, IsSerializable
             innerType = property.PropertyType;
             if(AllowedType(innerType)
               || AllowedType(GetInnerTypeOfNullable(property, typeof(Nullable<>)))
               || typeConverter != null)
             {
-              value = AddLeafNode(parents, property, fixTagAttribute, typeConverter, fixTagAttribute.Tag);
+              value = AddLeafNode(parents, property, fixTagAttribute, typeConverter, fixTagAttribute.Tag * messageTypeKey);
             }
             else
             {
@@ -163,9 +165,16 @@ namespace RapideFix.Business
       {
         Current = property,
         Parents = parents.ToList(),
-        TypeConverterName = typeConverter?.ConverterTypeName,
         IsEncoded = fixTagAttribute.Encoded
       };
+      if(typeConverter != null)
+      {
+        value.TypeConverterName = typeConverter.ConverterTypeName;
+      }
+      else
+      {
+        value.Setter = GetSetter(property.PropertyType);
+      }
       _map.TryAdd(key, value);
       return value;
     }
@@ -174,19 +183,26 @@ namespace RapideFix.Business
     {
       var value = TagMapNode.CreateEnumerable<TagMapLeaf>(property, repeatingGroup.Tag, innerType);
       value.Parents = parents.ToList();
-      value.TypeConverterName = typeConverter?.ConverterTypeName;
+      if(typeConverter != null)
+      {
+        value.TypeConverterName = typeConverter.ConverterTypeName;
+      }
+      else
+      {
+        value.Setter = GetSetter(innerType);
+      }
       value.IsEncoded = fixTagAttribute.Encoded;
       _map.TryAdd(key, value);
       return value;
     }
 
-    private void AddRepeatingGroupLeaf(Stack<TagMapNode> parents, PropertyInfo property, RepeatingGroupAttribute repeatingGroup, Type innerType)
+    private void AddRepeatingGroupLeaf(Stack<TagMapNode> parents, PropertyInfo property, RepeatingGroupAttribute repeatingGroup, Type innerType, int key)
     {
       var value = TagMapLeaf.CreateRepeatingTag<TagMapLeaf>(property, innerType);
       value.Parents = parents.ToList();
       value.IsEncoded = false;
       value.TypeConverterName = null;
-      _map.TryAdd(repeatingGroup.Tag, value);
+      _map.TryAdd(key, value);
     }
 
     private Type GetInnerTypeOfEnumerable(PropertyInfo property)
@@ -221,6 +237,55 @@ namespace RapideFix.Business
         result *= b;
       }
       return result;
+    }
+
+    private ITypedPropertySetter GetSetter(Type typeOfActualProperty)
+    {
+      if(typeOfActualProperty == typeof(int))
+        return new IntegerSetter();
+      if(typeOfActualProperty == typeof(double))
+        return new DoubleSetter();
+      if(typeOfActualProperty == typeof(string))
+        return new StringSetter();
+      if(typeOfActualProperty == typeof(bool))
+        return new BooleanSetter();
+      if(typeOfActualProperty == typeof(byte))
+        return new ByteSetter();
+      if(typeOfActualProperty == typeof(char))
+        return new CharSetter();
+      if(typeOfActualProperty == typeof(DateTimeOffset))
+        return new DateTimeOffsetSetter();
+      if(typeOfActualProperty == typeof(decimal))
+        return new DecimalSetter();
+      if(typeOfActualProperty == typeof(float))
+        return new FloatSetter();
+      if(typeOfActualProperty == typeof(short))
+        return new ShortSetter();
+      if(typeOfActualProperty == typeof(long))
+        return new LongSetter();
+
+      if(typeOfActualProperty == typeof(int?))
+        return new NullableIntegerSetter();
+      if(typeOfActualProperty == typeof(double?))
+        return new NullableDoubleSetter();
+      if(typeOfActualProperty == typeof(bool?))
+        return new NullableBooleanSetter();
+      if(typeOfActualProperty == typeof(byte?))
+        return new NullableByteSetter();
+      if(typeOfActualProperty == typeof(char?))
+        return new NullableCharSetter();
+      if(typeOfActualProperty == typeof(DateTimeOffset?))
+        return new NullableDateTimeOffsetSetter();
+      if(typeOfActualProperty == typeof(decimal?))
+        return new NullableDecimalSetter();
+      if(typeOfActualProperty == typeof(float?))
+        return new NullableFloatSetter();
+      if(typeOfActualProperty == typeof(short?))
+        return new NullableShortSetter();
+      if(typeOfActualProperty == typeof(long?))
+        return new NullableLongSetter();
+
+      throw new NotSupportedException(typeOfActualProperty.Name);
     }
   }
 }

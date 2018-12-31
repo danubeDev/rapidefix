@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using RapideFix.Business.Data;
+using RapideFix.Business.PropertySetters;
 using RapideFix.DataTypes;
 
 namespace RapideFix.Business

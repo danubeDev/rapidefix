@@ -10,6 +10,8 @@ namespace RapideFix.Business.Data
 
     public string TypeConverterName { get; set; }
 
+    public ITypedPropertySetter Setter { get; set; }
+
     public bool IsEncoded { get; set; }
 
     public bool IsRepeatingGroupTag { get; set; }

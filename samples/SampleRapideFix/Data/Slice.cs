@@ -5,13 +5,13 @@ namespace SampleRapideFix.Data
   [MessageType("S")]
   public class Slice
   {
-    [FixTag(153)]
+    [FixTag(53)]
     public int Quantity { get; set; }
 
-    [FixTag(144)]
+    [FixTag(44)]
     public double Price { get; set; }
 
-    [FixTag(155)]
+    [FixTag(55)]
     public string Symbol { get; set; }
   }
 }

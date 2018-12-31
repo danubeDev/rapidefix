@@ -37,7 +37,7 @@ namespace RapideFix.Business
       {
         parentTarget = _repeatingGroupSetter.Set(value, mappingDetails, fixMessageContext, parentTarget);
       }
-      else if(mappingDetails.TypeConverterName == null)
+      else if(mappingDetails.Setter != null)
       {
         parentTarget = _simpleTypeSetter.Set(value, mappingDetails, fixMessageContext, parentTarget);
       }
@@ -60,7 +60,7 @@ namespace RapideFix.Business
       {
         parentTarget = _repeatingGroupSetter.Set(value, mappingDetails, fixMessageContext, parentTarget);
       }
-      else if(mappingDetails.TypeConverterName == null)
+      else if(mappingDetails.Setter != null)
       {
         parentTarget = _simpleTypeSetter.Set(value, mappingDetails, fixMessageContext, parentTarget);
       }
@@ -82,7 +82,7 @@ namespace RapideFix.Business
       {
         _repeatingGroupSetter.Set(value, mappingDetails, fixMessageContext, targetObject);
       }
-      else if(mappingDetails.TypeConverterName == null)
+      else if(mappingDetails.Setter != null)
       {
         targetObject = _typedPropertySetter.SetTarget(value, mappingDetails, fixMessageContext, ref targetObject);
       }
@@ -104,7 +104,7 @@ namespace RapideFix.Business
       {
         _repeatingGroupSetter.Set(value, mappingDetails, fixMessageContext, targetObject);
       }
-      else if(mappingDetails.TypeConverterName == null)
+      else if(mappingDetails.Setter != null)
       {
         targetObject = _typedPropertySetter.SetTarget(value, mappingDetails, fixMessageContext, ref targetObject);
       }

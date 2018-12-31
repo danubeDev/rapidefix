@@ -49,7 +49,7 @@ namespace SampleRapideFix.Samples
     public void ParserMultipleMessageTypes()
     {
       byte[] message0 = new MessageBuilder().AddRaw("35=D|53=10|44=145|55=ABC|").Build();
-      byte[] message1 = new MessageBuilder().AddRaw("35=S|53=1|144=120|155=ABC.S|").Build();
+      byte[] message1 = new MessageBuilder().AddRaw("35=S|53=1|44=120|55=ABC.S|").Build();
 
       // Registering both Slice and Order message types when building the message parser.
       var parser = new ParserBuilder<object>()

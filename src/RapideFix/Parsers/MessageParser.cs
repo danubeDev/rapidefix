@@ -49,7 +49,7 @@ namespace RapideFix.Parsers
         }
         return default;
       }
-      return (T)Parse(message, _messageContext, targetObject);
+      return (T)Parse(message, _messageContext, targetObject, typeof(T).GetHashCode());
     }
 
     public object Parse(ReadOnlySpan<byte> message)
@@ -74,7 +74,7 @@ namespace RapideFix.Parsers
         message.Slice(messageTypeValueStart, lengthOfMessageType));
       object targetObject = Activator.CreateInstance(targetObjectType);
 
-      return Parse(message.Slice(messageTypeStart + messageTypeEnd - 1), _messageContext, targetObject);
+      return Parse(message.Slice(messageTypeStart + messageTypeEnd - 1), _messageContext, targetObject, targetObjectType.GetHashCode());
     }
 
     public object Parse(ReadOnlySpan<byte> message, object targetObject)
@@ -92,7 +92,7 @@ namespace RapideFix.Parsers
         }
         return default;
       }
-      return Parse(message, _messageContext, targetObject);
+      return Parse(message, _messageContext, targetObject, targetObject.GetType().GetHashCode());
     }
 
     public object Parse(ReadOnlyMemory<byte> message, Func<ReadOnlyMemory<byte>, object> targetObjectFactory)
@@ -108,7 +108,7 @@ namespace RapideFix.Parsers
       }
       object targetObject = targetObjectFactory(message);
 
-      return Parse(message.Span, _messageContext, targetObject);
+      return Parse(message.Span, _messageContext, targetObject, targetObject.GetType().GetHashCode());
     }
 
     public T Parse<T>(ReadOnlyMemory<byte> message, Func<ReadOnlyMemory<byte>, T> targetObjectFactory)
@@ -124,10 +124,10 @@ namespace RapideFix.Parsers
       }
       T targetObject = targetObjectFactory(message);
 
-      return (T)Parse(message.Span, _messageContext, targetObject);
+      return (T)Parse(message.Span, _messageContext, targetObject, typeof(T).GetHashCode());
     }
 
-    private object Parse(ReadOnlySpan<byte> message, FixMessageContext messageContext, object targetObject)
+    private object Parse(ReadOnlySpan<byte> message, FixMessageContext messageContext, object targetObject, int messageTypeKey)
     {
       int checksumLength = message.Length - messageContext.ChecksumTagStartIndex - 1;
       ReadOnlySpan<byte> messagePart = message;
@@ -138,7 +138,7 @@ namespace RapideFix.Parsers
       {
         if(TraverseMessageBody(messagePart, out indexEquals, out indexSOH, ref checksumValue))
         {
-          if(_propertyMapper.TryGet(messagePart.Slice(0, indexEquals), out var propertyLeaf))
+          if(_propertyMapper.TryGet(messagePart.Slice(0, indexEquals), messageTypeKey, out var propertyLeaf))
           {
             indexEquals++;
             var valueSlice = messagePart.Slice(indexEquals, indexSOH - indexEquals);

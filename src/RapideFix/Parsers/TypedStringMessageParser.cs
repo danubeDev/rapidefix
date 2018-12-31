@@ -62,7 +62,7 @@ namespace RapideFix.Parsers
       {
         if(TraverseMessageBody(messagePart, out indexEquals, out indexSOH))
         {
-          if(_propertyMapper.TryGet(messagePart.Slice(0, indexEquals), out var propertyLeaf))
+          if(_propertyMapper.TryGet(messagePart.Slice(0, indexEquals), typeof(TTarget).GetHashCode(), out var propertyLeaf))
           {
             indexEquals++;
             var valueSlice = messagePart.Slice(indexEquals, indexSOH - indexEquals);

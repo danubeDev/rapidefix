@@ -34,7 +34,7 @@ namespace RapideFixFixture.Business
       mockPropertyFactory.Setup(x => x.GetSimplePropertySetter()).Returns(mockSimpleTypeSetter);
 
       var uut = new CompositePropertySetter(mockPropertyFactory.Object);
-      uut.Set(testValue, new TagMapLeaf() { Parents = new List<TagMapNode>() { new TagMapNode() } }, new FixMessageContext(), new object());
+      uut.Set(testValue, new TagMapLeaf() { Parents = new List<TagMapNode>() { new TagMapNode() }, Setter = mockSimpleTypeSetter }, new FixMessageContext(), new object());
 
       Assert.True(mockParentSetter.IsVerified);
       Assert.True(mockSimpleTypeSetter.IsVerified);
@@ -49,7 +49,7 @@ namespace RapideFixFixture.Business
       mockPropertyFactory.Setup(x => x.GetSimplePropertySetter()).Returns(mockSimpleTypeSetter);
 
       var uut = new CompositePropertySetter(mockPropertyFactory.Object);
-      uut.Set(testValue, new TagMapLeaf(), new FixMessageContext(), new object());
+      uut.Set(testValue, new TagMapLeaf() { Setter = mockSimpleTypeSetter }, new FixMessageContext(), new object());
 
       Assert.True(mockSimpleTypeSetter.IsVerified);
     }
@@ -92,7 +92,7 @@ namespace RapideFixFixture.Business
 
       var uut = new CompositePropertySetter(mockPropertyFactory.Object);
       var targetObject = new object();
-      uut.SetTarget(testValue, new TagMapLeaf(), new FixMessageContext(), ref targetObject);
+      uut.SetTarget(testValue, new TagMapLeaf() { Setter = mockSimpleTypeSetter }, new FixMessageContext(), ref targetObject);
 
       Assert.True(mockSimpleTypeSetter.IsVerified);
     }
@@ -108,7 +108,7 @@ namespace RapideFixFixture.Business
       mockPropertyFactory.Setup(x => x.GetSimplePropertySetter()).Returns(mockSimpleTypeSetter);
 
       var uut = new CompositePropertySetter(mockPropertyFactory.Object);
-      uut.Set(testValue, new TagMapLeaf() { Parents = new List<TagMapNode>() { new TagMapNode() } }, new FixMessageContext(), new object());
+      uut.Set(testValue, new TagMapLeaf() { Parents = new List<TagMapNode>() { new TagMapNode() }, Setter = mockSimpleTypeSetter }, new FixMessageContext(), new object());
 
       Assert.True(mockParentSetter.IsVerified);
       Assert.True(mockSimpleTypeSetter.IsVerified);
@@ -123,7 +123,7 @@ namespace RapideFixFixture.Business
       mockPropertyFactory.Setup(x => x.GetSimplePropertySetter()).Returns(mockSimpleTypeSetter);
 
       var uut = new CompositePropertySetter(mockPropertyFactory.Object);
-      uut.Set(testValue, new TagMapLeaf(), new FixMessageContext(), new object());
+      uut.Set(testValue, new TagMapLeaf() { Setter = mockSimpleTypeSetter }, new FixMessageContext(), new object());
 
       Assert.True(mockSimpleTypeSetter.IsVerified);
     }
@@ -166,7 +166,7 @@ namespace RapideFixFixture.Business
 
       var uut = new CompositePropertySetter(mockPropertyFactory.Object);
       var targetObject = new object();
-      uut.SetTarget(testValue, new TagMapLeaf(), new FixMessageContext(), ref targetObject);
+      uut.SetTarget(testValue, new TagMapLeaf() { Setter = mockSimpleTypeSetter }, new FixMessageContext(), ref targetObject);
 
       Assert.True(mockSimpleTypeSetter.IsVerified);
     }
