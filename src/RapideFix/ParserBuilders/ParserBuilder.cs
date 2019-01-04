@@ -40,7 +40,7 @@ namespace RapideFix.ParserBuilders
     {
       if(_propertyMapper == null)
       {
-        _propertyMapper = new TagToPropertyMapper();
+        _propertyMapper = new TagToPropertyMapper(new SubPropertySetterFactory());
       }
       _propertyMapper.Map<TAdditionalOutputType>();
       return this;
@@ -109,9 +109,9 @@ namespace RapideFix.ParserBuilders
     /// <returns>A message parser.</returns>
     public IMessageParser<TOutput, TInput> Build<TInput>() where TInput : struct
     {
-      var propertyMapper = _propertyMapper ?? new TagToPropertyMapper();
       var subPropertySetterFactory = _subPropertySetterFactory ?? new SubPropertySetterFactory();
-      var propertySetter = _propertySetter ?? new CompositePropertySetter(subPropertySetterFactory);
+      var propertyMapper = _propertyMapper ?? new TagToPropertyMapper(subPropertySetterFactory);   
+      var propertySetter = _propertySetter ?? new CompositePropertySetter();
       var validator = _validator ?? new ValidatorCollection(IntegerToFixConverter.Instance);
       var options = _options ?? new MessageParserOptions();
       return Build<TInput>(propertyMapper, propertySetter, validator, options);
@@ -125,9 +125,9 @@ namespace RapideFix.ParserBuilders
     /// <returns>A message parser.</returns>
     public IMessageParser<TOutput, TInput> Build<TInput>(MessageParserOptions options) where TInput : struct
     {
-      var propertyMapper = _propertyMapper ?? new TagToPropertyMapper();
       var subPropertySetterFactory = _subPropertySetterFactory ?? new SubPropertySetterFactory();
-      var propertySetter = _propertySetter ?? new CompositePropertySetter(subPropertySetterFactory);
+      var propertyMapper = _propertyMapper ?? new TagToPropertyMapper(subPropertySetterFactory);
+      var propertySetter = _propertySetter ?? new CompositePropertySetter();
       var validator = _validator ?? new ValidatorCollection(IntegerToFixConverter.Instance);
       return Build<TInput>(propertyMapper, propertySetter, validator, options);
     }
@@ -140,8 +140,7 @@ namespace RapideFix.ParserBuilders
     /// <returns>A message parser.</returns>
     public IMessageParser<TOutput, TInput> Build<TInput>(ITagToPropertyMapper propertyMapper) where TInput : struct
     {
-      var subPropertySetterFactory = _subPropertySetterFactory ?? new SubPropertySetterFactory();
-      var propertySetter = _propertySetter ?? new CompositePropertySetter(subPropertySetterFactory);
+      var propertySetter = _propertySetter ?? new CompositePropertySetter();
       var validator = _validator ?? new ValidatorCollection(IntegerToFixConverter.Instance);
       var options = _options ?? new MessageParserOptions();
       return Build<TInput>(propertyMapper, propertySetter, validator, options);

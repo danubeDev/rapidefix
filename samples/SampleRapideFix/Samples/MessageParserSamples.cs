@@ -25,13 +25,13 @@ namespace SampleRapideFix.Samples
     public void ParserByNewParser()
     {
       byte[] message = new MessageBuilder().AddRaw("35=D|53=10|44=145|55=ABC|").Build();
-      
-      // Create a property mapper and map types to be parsed
-      var propertyMapper = new TagToPropertyMapper();
+
+      // Create a property mapper and map types to be parsed. CompositePropertySetter is a composite of sub property setters.
+      var propertyMapper = new TagToPropertyMapper(new SubPropertySetterFactory());
       propertyMapper.Map<Order>();
 
-      // Create a property setter. CompositePropertySetter is a composite of sub property setters
-      var compositeSetter = new CompositePropertySetter(new SubPropertySetterFactory());
+      // Create a property setter
+      var compositeSetter = new CompositePropertySetter();
 
       // Create a validator collection to have all default validators
       var validators = new ValidatorCollection(IntegerToFixConverter.Instance);

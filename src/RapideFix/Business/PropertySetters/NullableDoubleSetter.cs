@@ -5,7 +5,7 @@ using RapideFix.DataTypes;
 
 namespace RapideFix.Business.PropertySetters
 {
-  public class NullableDoubleSetter : SinglePropertySetterBase, ITypedPropertySetter
+  public class NullableDoubleSetter : BaseSetter, ITypedPropertySetter
   {
     private static NumberFormatInfo _numberFormatInfo = CultureInfo.CurrentCulture.NumberFormat;
 

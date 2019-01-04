@@ -5,7 +5,7 @@ using RapideFix.DataTypes;
 
 namespace RapideFix.Business.PropertySetters
 {
-  public class NullableDateTimeOffsetSetter : SinglePropertySetterBase, ITypedPropertySetter
+  public class NullableDateTimeOffsetSetter : BaseSetter, ITypedPropertySetter
   {
     private const string DateTimeFormat = "yyyyMMdd-HH:mm:ss";
 

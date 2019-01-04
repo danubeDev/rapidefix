@@ -4,6 +4,12 @@ namespace RapideFix.DataTypes
 {
   public class FixMessageContext
   {
+    public FixMessageContext()
+    {
+      CreatedParentTypes = new HashSet<int>();
+      RepeatingGroupCounters = new Dictionary<int, RepeatingCounter>();
+    }
+
     public class RepeatingCounter
     {
       public RepeatingCounter(int firstTagKey)
@@ -32,9 +38,9 @@ namespace RapideFix.DataTypes
     /// <summary>
     /// Holds a counter for a given tag (first tag within a repeating group and the number of its appearences.
     /// </summary>
-    public Dictionary<int, RepeatingCounter> RepeatingGroupCounters { get; set; }
+    public Dictionary<int, RepeatingCounter> RepeatingGroupCounters { get; }
 
-    public HashSet<int> CreatedParentTypes { get; set; }
+    public HashSet<int> CreatedParentTypes { get; }
 
   }
 }

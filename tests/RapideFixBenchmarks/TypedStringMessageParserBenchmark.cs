@@ -19,11 +19,10 @@ namespace RapideFixBenchmarks
     [GlobalSetup]
     public void Setup()
     {
-      var propertyMapper = new TagToPropertyMapper();
+      var propertyMapper = new TagToPropertyMapper(new SubPropertySetterFactory());
       propertyMapper.Map<TestTypeParent>();
-      var compositeSetter = new CompositePropertySetter(new SubPropertySetterFactory());
 
-      _parser = new TypedStringMessageParser<TestTypeParent>(propertyMapper, compositeSetter, new ValidatorCollection(IntegerToFixConverter.Instance), new RapideFix.Business.Data.MessageParserOptions());
+      _parser = new TypedStringMessageParser<TestTypeParent>(propertyMapper, new CompositePropertySetter(), new ValidatorCollection(IntegerToFixConverter.Instance), new RapideFix.Business.Data.MessageParserOptions());
     }
 
     [ParamsSource(nameof(Params))]

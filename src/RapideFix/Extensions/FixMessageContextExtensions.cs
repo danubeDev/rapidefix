@@ -14,8 +14,8 @@ namespace RapideFix.Extensions
     {
       messageContext.FixVersion = null;
       messageContext.EncodedFields = encoding;
-      messageContext.RepeatingGroupCounters?.Clear();
-      messageContext.CreatedParentTypes?.Clear();
+      messageContext.RepeatingGroupCounters.Clear();
+      messageContext.CreatedParentTypes.Clear();
       messageContext.ChecksumValue = 0;
       messageContext.LengthTagStartIndex = data.IndexOf(KnownFixTags.Length);
       messageContext.MessageTypeTagStartIndex = data.IndexOf(KnownFixTags.MessageType);
@@ -25,8 +25,8 @@ namespace RapideFix.Extensions
 
     public static FixMessageContext Setup(this FixMessageContext messageContext, ReadOnlySpan<char> data)
     {
-      messageContext.RepeatingGroupCounters?.Clear();
-      messageContext.CreatedParentTypes?.Clear();
+      messageContext.RepeatingGroupCounters.Clear();
+      messageContext.CreatedParentTypes.Clear();
       return messageContext;
     }
   }

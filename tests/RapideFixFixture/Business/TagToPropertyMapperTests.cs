@@ -12,7 +12,7 @@ namespace RapideFixFixture.Business
     [Fact]
     public void GivenType_Map_DoesNotThrow()
     {
-      var uut = new TagToPropertyMapper();
+      var uut = new TagToPropertyMapper(new SubPropertySetterFactory());
       var exception = Record.Exception(() => uut.Map<TestTypeParent>());
       Assert.Null(exception);
     }
@@ -20,7 +20,7 @@ namespace RapideFixFixture.Business
     [Fact]
     public void GivenComplexChildType_Map_ReturnsChildsTag()
     {
-      var uut = new TagToPropertyMapper();
+      var uut = new TagToPropertyMapper(new SubPropertySetterFactory());
       uut.Map<TestTypeParent>();
       uut.TryGet(58.ToKnownTag(), typeof(TestTypeParent).GetHashCode(), out TagMapLeaf result);
 
@@ -34,7 +34,7 @@ namespace RapideFixFixture.Business
     [Fact]
     public void GivenSimpleTag_Map_ReturnsTagWithNoParents()
     {
-      var uut = new TagToPropertyMapper();
+      var uut = new TagToPropertyMapper(new SubPropertySetterFactory());
       uut.Map<TestTypeParent>();
       uut.TryGet(55.ToKnownTag(), typeof(TestTypeParent).GetHashCode(), out TagMapLeaf result);
 
@@ -47,7 +47,7 @@ namespace RapideFixFixture.Business
     [Fact]
     public void GivenTagWithConverter_Map_ReturnsAndTypeConverterName()
     {
-      var uut = new TagToPropertyMapper();
+      var uut = new TagToPropertyMapper(new SubPropertySetterFactory());
       uut.Map<TestTypeParent>();
       uut.TryGet(61.ToKnownTag(), typeof(TestTypeParent).GetHashCode(), out TagMapLeaf result);
 
@@ -61,7 +61,7 @@ namespace RapideFixFixture.Business
     [Fact]
     public void GivenRepeatingSimpleType_Map_ReturnsRepeating()
     {
-      var uut = new TagToPropertyMapper();
+      var uut = new TagToPropertyMapper(new SubPropertySetterFactory());
       uut.Map<TestTypeParent>();
       uut.TryGet(56.ToKnownTag(), typeof(TestTypeParent).GetHashCode(), out TagMapLeaf repeatingTag);
       uut.TryGet(57.ToKnownTag(), typeof(TestTypeParent).GetHashCode(), out TagMapLeaf actualTag);
@@ -83,7 +83,7 @@ namespace RapideFixFixture.Business
     [Fact]
     public void GivenRepeatingComplexType_Map_ReturnsRepeating()
     {
-      var uut = new TagToPropertyMapper();
+      var uut = new TagToPropertyMapper(new SubPropertySetterFactory());
       uut.Map<TestTypeParent>();
       uut.TryGet(59.ToKnownTag(), typeof(TestTypeParent).GetHashCode(), out TagMapLeaf repeatingTag);
       uut.TryGet(60.ToKnownTag(), typeof(TestTypeParent).GetHashCode(), out TagMapLeaf actualTag);

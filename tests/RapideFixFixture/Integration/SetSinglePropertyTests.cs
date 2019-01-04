@@ -14,9 +14,9 @@ namespace RapideFixFixture.Integration
   {
     public SetSinglePropertyTestsFixture()
     {
-      PropertyMapper = new TagToPropertyMapper();
+      PropertyMapper = new TagToPropertyMapper(new SubPropertySetterFactory());
       PropertyMapper.Map<TestTypeParent>();
-      CompositeSetter = new CompositePropertySetter(new SubPropertySetterFactory());
+      CompositeSetter = new CompositePropertySetter();
     }
 
     public CompositePropertySetter CompositeSetter { get; }

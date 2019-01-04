@@ -6,10 +6,8 @@ using RapideFix.DataTypes;
 
 namespace RapideFix.Business
 {
-  public class SimpleTypeSetter : BaseTypeSetter, ITypedPropertySetter
+  public class SimpleTypeSetter : ITypedPropertySetter
   {
-    private static NumberFormatInfo _numberFormatInfo = CultureInfo.CurrentCulture.NumberFormat;
-
     public object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
       int valueLength = value.Length;

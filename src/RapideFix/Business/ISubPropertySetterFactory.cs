@@ -1,4 +1,8 @@
-﻿namespace RapideFix.Business
+﻿using System;
+using System.Reflection;
+using RapideFix.Business.PropertySetters;
+
+namespace RapideFix.Business
 {
   /// <summary>
   /// Provides an extensibility point for property setters.
@@ -8,26 +12,24 @@
     /// <summary>
     /// Returns a property setter for parent properties.
     /// </summary>
-    IPropertySetter GetParentPropertySetter();
-
-    /// <summary>
-    /// Returns a property setter for simple and enumerated types.
-    /// </summary>
-    IPropertySetter GetSimplePropertySetter();
+    IParentSetter GetParentSetter(PropertyInfo property);
 
     /// <summary>
     /// Returns a property setter for repeating group tags.
     /// </summary>
-    IPropertySetter GetRepeatingGroupTagPropertySetter();
+    BaseSetter GetRepeatingGroupTagSetter(PropertyInfo property);
+
+    /// <summary>
+    /// Returns a setter based for a proeperty based on the type or generic type argument of it.
+    /// </summary>
+    /// <param name="property">The property info of the property to be set.</param>
+    /// <param name="typeOfActualProperty">The type or generic type argument of the property.</param>
+    /// <returns></returns>
+    BaseSetter GetSetter(PropertyInfo property, Type typeOfActualProperty);
 
     /// <summary>
     /// Returns a property setter for type converted properties.
     /// </summary>
-    IPropertySetter GetTypeConvertedPropertySetter();
-
-    /// <summary>
-    /// Returns a property setter for simple and enumerated types for strongly typed target objects.
-    /// </summary>
-    ITypedPropertySetter GetTypedPropertySetter();
+    BaseSetter GetTypeConvertingSetter(PropertyInfo property);
   }
 }

@@ -33,11 +33,10 @@ namespace RapideFixFixture.Parsers
     [Fact]
     public void GivenMessage_Parse_ParsesStruct()
     {
-      var propertyMapper = new TagToPropertyMapper();
+      var propertyMapper = new TagToPropertyMapper(new SubPropertySetterFactory());
       propertyMapper.Map<TestTypeStruct>();
-      var compositeSetter = new CompositePropertySetter(new SubPropertySetterFactory());
 
-      var uut = new TypedMessageParser<TestTypeStruct>(propertyMapper, compositeSetter, new MockValidator(), Mock.Of<MessageParserOptions>());
+      var uut = new TypedMessageParser<TestTypeStruct>(propertyMapper, new CompositePropertySetter(), new MockValidator(), Mock.Of<MessageParserOptions>());
       var result = uut.Parse(new TestFixMessageBuilder(SampleBody).Build());
 
       Assert.NotNull(result.Tag100);
@@ -65,9 +64,8 @@ namespace RapideFixFixture.Parsers
     public void GivenMessage_Parse_ParsesReferenceType(string input)
     {
       byte[] message = new TestFixMessageBuilder(input).Build();
-      var compositeSetter = new CompositePropertySetter(new SubPropertySetterFactory());
 
-      var uut = new TypedMessageParser<TestTypeParent>(new TagToPropertyMapper(), compositeSetter, new MockValidator(), Mock.Of<MessageParserOptions>());
+      var uut = new TypedMessageParser<TestTypeParent>(new TagToPropertyMapper(new SubPropertySetterFactory()), new CompositePropertySetter(), new MockValidator(), Mock.Of<MessageParserOptions>());
       var result = uut.Parse(message);
       Assert.NotNull(result);
       Assert.NotNull(result.Tag55);

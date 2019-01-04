@@ -4,7 +4,7 @@ using RapideFix.DataTypes;
 
 namespace RapideFix.Business.PropertySetters
 {
-  public class BooleanSetter : SinglePropertySetterBase, ITypedPropertySetter
+  public class BooleanSetter : BaseSetter, ITypedPropertySetter
   {
     public override object Set(ReadOnlySpan<char> valueChars, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {

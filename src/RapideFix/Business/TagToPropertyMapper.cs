@@ -15,10 +15,17 @@ namespace RapideFix.Business
 {
   public class TagToPropertyMapper : ITagToPropertyMapper
   {
+    private static NumberFormatInfo _numberFormatInfo = CultureInfo.CurrentCulture.NumberFormat;
+
     private Dictionary<int, TagMapLeaf> _map = new Dictionary<int, TagMapLeaf>();
     private Dictionary<int, Type> _mapMessageType = new Dictionary<int, Type>();
     private HashSet<Type> _mappedTypes = new HashSet<Type>();
-    private static NumberFormatInfo _numberFormatInfo = CultureInfo.CurrentCulture.NumberFormat;
+    private readonly ISubPropertySetterFactory _propertySetterFactory;
+
+    public TagToPropertyMapper(ISubPropertySetterFactory propertySetterFactory)
+    {
+      _propertySetterFactory = propertySetterFactory ?? throw new ArgumentNullException(nameof(propertySetterFactory));
+    }
 
     public bool TryGet(ReadOnlySpan<byte> tag, int messageTypeKey, out TagMapLeaf result)
     {
@@ -151,12 +158,14 @@ namespace RapideFix.Business
 
     private TagMapNode CreateParentNode(PropertyInfo property)
     {
-      return new TagMapNode() { Current = property };
+      return new TagMapNode() { Current = property, ParentSetter = _propertySetterFactory.GetParentSetter(property) };
     }
 
     private TagMapNode CreateRepeatingParentNode(PropertyInfo property, RepeatingGroupAttribute repeatingGroup, Type innerType)
     {
-      return TagMapNode.CreateEnumerable<TagMapNode>(property, repeatingGroup.Tag, innerType);
+      var node = TagMapNode.CreateEnumerable<TagMapNode>(property, repeatingGroup.Tag, innerType);
+      node.ParentSetter = _propertySetterFactory.GetParentSetter(property);
+      return node;
     }
 
     private TagMapLeaf AddLeafNode(Stack<TagMapNode> parents, PropertyInfo property, FixTagAttribute fixTagAttribute, TypeConverterAttribute typeConverter, int key)
@@ -170,10 +179,11 @@ namespace RapideFix.Business
       if(typeConverter != null)
       {
         value.TypeConverterName = typeConverter.ConverterTypeName;
+        value.Setter = _propertySetterFactory.GetTypeConvertingSetter(property);
       }
       else
       {
-        value.Setter = GetSetter(property.PropertyType);
+        value.Setter = _propertySetterFactory.GetSetter(property, property.PropertyType);
       }
       _map.TryAdd(key, value);
       return value;
@@ -186,10 +196,11 @@ namespace RapideFix.Business
       if(typeConverter != null)
       {
         value.TypeConverterName = typeConverter.ConverterTypeName;
+        value.Setter = _propertySetterFactory.GetTypeConvertingSetter(property);
       }
       else
       {
-        value.Setter = GetSetter(innerType);
+        value.Setter = _propertySetterFactory.GetSetter(property, innerType);
       }
       value.IsEncoded = fixTagAttribute.Encoded;
       _map.TryAdd(key, value);
@@ -198,7 +209,7 @@ namespace RapideFix.Business
 
     private void AddRepeatingGroupLeaf(Stack<TagMapNode> parents, PropertyInfo property, RepeatingGroupAttribute repeatingGroup, Type innerType, int key)
     {
-      var value = TagMapLeaf.CreateRepeatingTag<TagMapLeaf>(property, innerType);
+      var value = TagMapLeaf.CreateRepeatingTag<TagMapLeaf>(property, innerType, _propertySetterFactory.GetRepeatingGroupTagSetter(property));
       value.Parents = parents.ToList();
       value.IsEncoded = false;
       value.TypeConverterName = null;
@@ -239,53 +250,5 @@ namespace RapideFix.Business
       return result;
     }
 
-    private ITypedPropertySetter GetSetter(Type typeOfActualProperty)
-    {
-      if(typeOfActualProperty == typeof(int))
-        return new IntegerSetter();
-      if(typeOfActualProperty == typeof(double))
-        return new DoubleSetter();
-      if(typeOfActualProperty == typeof(string))
-        return new StringSetter();
-      if(typeOfActualProperty == typeof(bool))
-        return new BooleanSetter();
-      if(typeOfActualProperty == typeof(byte))
-        return new ByteSetter();
-      if(typeOfActualProperty == typeof(char))
-        return new CharSetter();
-      if(typeOfActualProperty == typeof(DateTimeOffset))
-        return new DateTimeOffsetSetter();
-      if(typeOfActualProperty == typeof(decimal))
-        return new DecimalSetter();
-      if(typeOfActualProperty == typeof(float))
-        return new FloatSetter();
-      if(typeOfActualProperty == typeof(short))
-        return new ShortSetter();
-      if(typeOfActualProperty == typeof(long))
-        return new LongSetter();
-
-      if(typeOfActualProperty == typeof(int?))
-        return new NullableIntegerSetter();
-      if(typeOfActualProperty == typeof(double?))
-        return new NullableDoubleSetter();
-      if(typeOfActualProperty == typeof(bool?))
-        return new NullableBooleanSetter();
-      if(typeOfActualProperty == typeof(byte?))
-        return new NullableByteSetter();
-      if(typeOfActualProperty == typeof(char?))
-        return new NullableCharSetter();
-      if(typeOfActualProperty == typeof(DateTimeOffset?))
-        return new NullableDateTimeOffsetSetter();
-      if(typeOfActualProperty == typeof(decimal?))
-        return new NullableDecimalSetter();
-      if(typeOfActualProperty == typeof(float?))
-        return new NullableFloatSetter();
-      if(typeOfActualProperty == typeof(short?))
-        return new NullableShortSetter();
-      if(typeOfActualProperty == typeof(long?))
-        return new NullableLongSetter();
-
-      throw new NotSupportedException(typeOfActualProperty.Name);
-    }
   }
 }

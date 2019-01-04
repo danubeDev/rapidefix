@@ -33,11 +33,10 @@ namespace SampleRapideFix
 
       string sampleInput = "35=A|55=TestTag55|62=35|67=56.123|";
       var message = new MessageBuilder().AddRaw(sampleInput).Build();
-      var propertyMapper = new TagToPropertyMapper();
+      var propertyMapper = new TagToPropertyMapper(new SubPropertySetterFactory());
       propertyMapper.Map<TestTypeParent>();
-      var compositeSetter = new CompositePropertySetter(new SubPropertySetterFactory());
 
-      var parser = new MessageParser(propertyMapper, compositeSetter, new ValidatorCollection(IntegerToFixConverter.Instance), new RapideFix.Business.Data.MessageParserOptions());
+      var parser = new MessageParser(propertyMapper, new CompositePropertySetter(), new ValidatorCollection(IntegerToFixConverter.Instance), new RapideFix.Business.Data.MessageParserOptions());
       parser.Parse<TestTypeParent>(message);
       parser.Parse<TestTypeParent>(message);
       parser.Parse<TestTypeParent>(message);

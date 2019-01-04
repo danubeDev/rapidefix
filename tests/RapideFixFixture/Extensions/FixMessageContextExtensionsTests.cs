@@ -37,7 +37,7 @@ namespace RapideFixFixture.Extensions
     public void GivenMessageContext_SetupTwice_ResetsProperties()
     {
       var message = new TestFixMessageBuilder(TestFixMessageBuilder.DefaultBody).Build();
-      var uut = new FixMessageContext() { CreatedParentTypes = new HashSet<int>(), RepeatingGroupCounters = new Dictionary<int, FixMessageContext.RepeatingCounter>() };
+      var uut = new FixMessageContext();
       uut.CreatedParentTypes.Add(1);
       uut.RepeatingGroupCounters.Add(1, new FixMessageContext.RepeatingCounter(1));
       var result = uut.Setup(message.AsSpan(), MessageEncoding.JIS).Setup(message.AsSpan(), MessageEncoding.EUC);

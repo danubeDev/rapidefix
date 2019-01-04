@@ -11,4 +11,4 @@ Job=Core  Runtime=Core
 ```
 |      Method |     Mean |     Error |    StdDev | Gen 0/1k Op | Gen 1/1k Op | Gen 2/1k Op | Allocated Memory/Op |
 |------------ |---------:|----------:|----------:|------------:|------------:|------------:|--------------------:|
-| ParseStruct | 1.248 us | 0.0241 us | 0.0305 us |           - |           - |           - |                   - |
+| ParseStruct | 1.245 us | 0.0249 us | 0.0287 us |           - |           - |           - |                   - |

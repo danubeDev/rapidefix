@@ -1,53 +1,30 @@
 ﻿using System;
 using System.Buffers;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
-using System.Text;
 using RapideFix.Business.Data;
+using RapideFix.Business.PropertySetters;
 using RapideFix.DataTypes;
 
 namespace RapideFix.Business
 {
-  public class TypeConvertedSetter : BaseTypeSetter, IPropertySetter
+  public class TypeConvertedSetter : BaseSetter, IPropertySetter
   {
-    private readonly Dictionary<string, TypeConverter> _typeConverters = new Dictionary<string, TypeConverter>();
-    private readonly Dictionary<int, Delegate> _delegateFactory = new Dictionary<int, Delegate>();
+    private TypeConverter _typeConverter;
+    private Delegate _delegateFactory;
 
-    public object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
+    public override object Set(ReadOnlySpan<char> valueChars, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
       if(mappingDetails.TypeConverterName is null)
       {
         return targetObject;
       }
-      int valueLength = value.Length;
-      Span<char> valueChars = stackalloc char[valueLength];
-      if(mappingDetails.IsEncoded)
-      {
-        valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, valueChars);
-        valueChars = valueChars.Slice(0, valueLength);
-      }
-      else
-      {
-        valueLength = Encoding.ASCII.GetChars(value, valueChars);
-      }
-      return Set(valueChars, mappingDetails, fixMessageContext, targetObject);
-    }
-
-    public object Set(ReadOnlySpan<char> valueChars, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
-    {
-      if(mappingDetails.TypeConverterName is null)
-      {
-        return targetObject;
-      }
-      TypeConverter converter;
-      if(!_typeConverters.TryGetValue(mappingDetails.TypeConverterName, out converter))
+      if(_typeConverter == null)
       {
         Type typeOfConverter = Type.GetType(mappingDetails.TypeConverterName);
-        converter = (TypeConverter)Activator.CreateInstance(typeOfConverter);
-        _typeConverters.TryAdd(mappingDetails.TypeConverterName, converter);
+        _typeConverter = (TypeConverter)Activator.CreateInstance(typeOfConverter);
       }
-      if(!converter.CanConvertFrom(typeof(char[])))
+      if(!_typeConverter.CanConvertFrom(typeof(char[])))
       {
         return targetObject;
       }
@@ -55,27 +32,25 @@ namespace RapideFix.Business
       try
       {
         valueChars.CopyTo(tempCharsArray.AsSpan());
-        object converted = converter.ConvertFrom(tempCharsArray);
+        object converted = _typeConverter.ConvertFrom(tempCharsArray);
         var convertedType = converted.GetType();
-        if(!_delegateFactory.TryGetValue(GetKey(mappingDetails.Current), out Delegate delegateMethod))
+        if(_delegateFactory == null)
         {
           string methodGeneratingMethodName = mappingDetails.IsEnumerable ? "GetEnumeratedILSetterAction" : "GetILSetterAction";
 
-          var methodInfo = typeof(SimpleTypeSetter).GetMethod(methodGeneratingMethodName, BindingFlags.NonPublic | BindingFlags.Instance);
-          delegateMethod = (Delegate)methodInfo
+          var methodInfo = typeof(BaseSetter).GetMethod(methodGeneratingMethodName, BindingFlags.NonPublic | BindingFlags.Instance);
+          _delegateFactory = (Delegate)methodInfo
             .MakeGenericMethod(convertedType)
             .Invoke(this, new[] { mappingDetails.Current });
-          _delegateFactory.TryAdd(GetKey(mappingDetails.Current), delegateMethod);
-
         }
         if(mappingDetails.IsEnumerable)
         {
           int index = GetAdvancedIndex(mappingDetails, fixMessageContext);
-          delegateMethod.DynamicInvoke(targetObject, converted, index);
+          _delegateFactory.DynamicInvoke(targetObject, converted, index);
         }
         else
         {
-          delegateMethod.DynamicInvoke(targetObject, converted);
+          _delegateFactory.DynamicInvoke(targetObject, converted);
         }
       }
       finally
@@ -86,5 +61,9 @@ namespace RapideFix.Business
       return targetObject;
     }
 
+    public override TTarget SetTarget<TTarget>(ReadOnlySpan<char> valueChars, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject)
+    {
+      throw new NotSupportedException();
+    }
   }
 }

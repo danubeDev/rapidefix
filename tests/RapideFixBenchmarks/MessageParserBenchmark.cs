@@ -22,11 +22,10 @@ namespace RapideFixBenchmarks
     {
       string sampleInput = SampleFixMessagesSource.GetTestTypeParentMessageBodies().First().First() as string;
       _message = new TestFixMessageBuilder(sampleInput).Build();
-      var propertyMapper = new TagToPropertyMapper();
+      var propertyMapper = new TagToPropertyMapper(new SubPropertySetterFactory());
       propertyMapper.Map<TestTypeParent>();
-      var compositeSetter = new CompositePropertySetter(new SubPropertySetterFactory());
 
-      _parser = new MessageParser(propertyMapper, compositeSetter, new ValidatorCollection(IntegerToFixConverter.Instance), new RapideFix.Business.Data.MessageParserOptions());
+      _parser = new MessageParser(propertyMapper, new CompositePropertySetter(), new ValidatorCollection(IntegerToFixConverter.Instance), new RapideFix.Business.Data.MessageParserOptions());
     }
 
     [Benchmark]
