@@ -83,7 +83,9 @@
   
   <h1 id="RapideFix_Business_ITagToPropertyMapper" data-uid="RapideFix.Business.ITagToPropertyMapper" class="text-break">Interface ITagToPropertyMapper
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Tag to Property Mapper contract provides operations to map and retrieve mappings between properties of 
+types marked with FixTag attributes and Tag keys.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="RapideFix.Business.html">RapideFix.Business</a></h6>
   <h6><strong>Assembly</strong>: RapideFix.dll</h6>
@@ -150,13 +152,13 @@
   
   
   <a id="RapideFix_Business_ITagToPropertyMapper_TryGet_" data-uid="RapideFix.Business.ITagToPropertyMapper.TryGet*"></a>
-  <h4 id="RapideFix_Business_ITagToPropertyMapper_TryGet_System_ReadOnlySpan_System_Byte__RapideFix_Business_Data_TagMapLeaf__" data-uid="RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Byte},RapideFix.Business.Data.TagMapLeaf@)">TryGet(ReadOnlySpan&lt;Byte&gt;, out TagMapLeaf)</h4>
+  <h4 id="RapideFix_Business_ITagToPropertyMapper_TryGet_System_ReadOnlySpan_System_Byte__System_Int32_RapideFix_Business_Data_TagMapLeaf__" data-uid="RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Byte},System.Int32,RapideFix.Business.Data.TagMapLeaf@)">TryGet(ReadOnlySpan&lt;Byte&gt;, Int32, out TagMapLeaf)</h4>
   <div class="markdown level1 summary"><p>Gets a tag setter descriptor or null.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool TryGet(ReadOnlySpan&lt;byte&gt; tag, out TagMapLeaf result)</code></pre>
+    <pre><code class="lang-csharp hljs">bool TryGet(ReadOnlySpan&lt;byte&gt; tag, int messageTypeKey, out TagMapLeaf result)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -172,6 +174,12 @@
         <td><span class="xref">System.ReadOnlySpan</span>&lt;<span class="xref">System.Byte</span>&gt;</td>
         <td><span class="parametername">tag</span></td>
         <td><p>The byte representation of the tag.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">messageTypeKey</span></td>
+        <td><p>An integer key value for the message type</p>
 </td>
       </tr>
       <tr>
@@ -200,13 +208,13 @@
   
   
   <a id="RapideFix_Business_ITagToPropertyMapper_TryGet_" data-uid="RapideFix.Business.ITagToPropertyMapper.TryGet*"></a>
-  <h4 id="RapideFix_Business_ITagToPropertyMapper_TryGet_System_ReadOnlySpan_System_Char__RapideFix_Business_Data_TagMapLeaf__" data-uid="RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Char},RapideFix.Business.Data.TagMapLeaf@)">TryGet(ReadOnlySpan&lt;Char&gt;, out TagMapLeaf)</h4>
+  <h4 id="RapideFix_Business_ITagToPropertyMapper_TryGet_System_ReadOnlySpan_System_Char__System_Int32_RapideFix_Business_Data_TagMapLeaf__" data-uid="RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Char},System.Int32,RapideFix.Business.Data.TagMapLeaf@)">TryGet(ReadOnlySpan&lt;Char&gt;, Int32, out TagMapLeaf)</h4>
   <div class="markdown level1 summary"><p>Gets a tag setter descriptor or null.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool TryGet(ReadOnlySpan&lt;char&gt; tag, out TagMapLeaf result)</code></pre>
+    <pre><code class="lang-csharp hljs">bool TryGet(ReadOnlySpan&lt;char&gt; tag, int messageTypeKey, out TagMapLeaf result)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -222,6 +230,12 @@
         <td><span class="xref">System.ReadOnlySpan</span>&lt;<span class="xref">System.Char</span>&gt;</td>
         <td><span class="parametername">tag</span></td>
         <td><p>The byte representation of the tag.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">messageTypeKey</span></td>
+        <td><p>An integer key value for the message type</p>
 </td>
       </tr>
       <tr>

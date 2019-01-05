@@ -9,4 +9,4 @@ Job=Core  Runtime=Core
 
  Method |     Mean |     Error |    StdDev | Gen 0/1k Op | Gen 1/1k Op | Gen 2/1k Op | Allocated Memory/Op |
 ------- |---------:|----------:|----------:|------------:|------------:|------------:|--------------------:|
-  Parse | 1.248 us | 0.0245 us | 0.0229 us |      0.0248 |           - |           - |               184 B |
+  Parse | 1.287 us | 0.0254 us | 0.0364 us |      0.0248 |           - |           - |               184 B |

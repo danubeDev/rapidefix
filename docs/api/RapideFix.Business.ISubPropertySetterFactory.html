@@ -96,15 +96,32 @@
   </h3>
   
   
-  <a id="RapideFix_Business_ISubPropertySetterFactory_GetParentPropertySetter_" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetParentPropertySetter*"></a>
-  <h4 id="RapideFix_Business_ISubPropertySetterFactory_GetParentPropertySetter" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetParentPropertySetter">GetParentPropertySetter()</h4>
+  <a id="RapideFix_Business_ISubPropertySetterFactory_GetParentSetter_" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetParentSetter*"></a>
+  <h4 id="RapideFix_Business_ISubPropertySetterFactory_GetParentSetter_System_Reflection_PropertyInfo_" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetParentSetter(System.Reflection.PropertyInfo)">GetParentSetter(PropertyInfo)</h4>
   <div class="markdown level1 summary"><p>Returns a property setter for parent properties.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IPropertySetter GetParentPropertySetter()</code></pre>
+    <pre><code class="lang-csharp hljs">IParentSetter GetParentSetter(PropertyInfo property)</code></pre>
   </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Reflection.PropertyInfo</span></td>
+        <td><span class="parametername">property</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
@@ -115,22 +132,39 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="RapideFix.Business.IPropertySetter.html">IPropertySetter</a></td>
+        <td><a class="xref" href="RapideFix.Business.IParentSetter.html">IParentSetter</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   
   
-  <a id="RapideFix_Business_ISubPropertySetterFactory_GetRepeatingGroupTagPropertySetter_" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetRepeatingGroupTagPropertySetter*"></a>
-  <h4 id="RapideFix_Business_ISubPropertySetterFactory_GetRepeatingGroupTagPropertySetter" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetRepeatingGroupTagPropertySetter">GetRepeatingGroupTagPropertySetter()</h4>
+  <a id="RapideFix_Business_ISubPropertySetterFactory_GetRepeatingGroupTagSetter_" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetRepeatingGroupTagSetter*"></a>
+  <h4 id="RapideFix_Business_ISubPropertySetterFactory_GetRepeatingGroupTagSetter_System_Reflection_PropertyInfo_" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetRepeatingGroupTagSetter(System.Reflection.PropertyInfo)">GetRepeatingGroupTagSetter(PropertyInfo)</h4>
   <div class="markdown level1 summary"><p>Returns a property setter for repeating group tags.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IPropertySetter GetRepeatingGroupTagPropertySetter()</code></pre>
+    <pre><code class="lang-csharp hljs">BaseSetter GetRepeatingGroupTagSetter(PropertyInfo property)</code></pre>
   </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Reflection.PropertyInfo</span></td>
+        <td><span class="parametername">property</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
@@ -141,22 +175,46 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="RapideFix.Business.IPropertySetter.html">IPropertySetter</a></td>
+        <td><a class="xref" href="RapideFix.Business.PropertySetters.BaseSetter.html">BaseSetter</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   
   
-  <a id="RapideFix_Business_ISubPropertySetterFactory_GetSimplePropertySetter_" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetSimplePropertySetter*"></a>
-  <h4 id="RapideFix_Business_ISubPropertySetterFactory_GetSimplePropertySetter" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetSimplePropertySetter">GetSimplePropertySetter()</h4>
-  <div class="markdown level1 summary"><p>Returns a property setter for simple and enumerated types.</p>
+  <a id="RapideFix_Business_ISubPropertySetterFactory_GetSetter_" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetSetter*"></a>
+  <h4 id="RapideFix_Business_ISubPropertySetterFactory_GetSetter_System_Reflection_PropertyInfo_System_Type_" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetSetter(System.Reflection.PropertyInfo,System.Type)">GetSetter(PropertyInfo, Type)</h4>
+  <div class="markdown level1 summary"><p>Returns a setter based for a proeperty based on the type or generic type argument of it.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IPropertySetter GetSimplePropertySetter()</code></pre>
+    <pre><code class="lang-csharp hljs">BaseSetter GetSetter(PropertyInfo property, Type typeOfActualProperty)</code></pre>
   </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Reflection.PropertyInfo</span></td>
+        <td><span class="parametername">property</span></td>
+        <td><p>The property info of the property to be set.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Type</span></td>
+        <td><span class="parametername">typeOfActualProperty</span></td>
+        <td><p>The type or generic type argument of the property.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
@@ -167,48 +225,39 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="RapideFix.Business.IPropertySetter.html">IPropertySetter</a></td>
+        <td><a class="xref" href="RapideFix.Business.PropertySetters.BaseSetter.html">BaseSetter</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   
   
-  <a id="RapideFix_Business_ISubPropertySetterFactory_GetTypeConvertedPropertySetter_" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetTypeConvertedPropertySetter*"></a>
-  <h4 id="RapideFix_Business_ISubPropertySetterFactory_GetTypeConvertedPropertySetter" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetTypeConvertedPropertySetter">GetTypeConvertedPropertySetter()</h4>
+  <a id="RapideFix_Business_ISubPropertySetterFactory_GetTypeConvertingSetter_" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetTypeConvertingSetter*"></a>
+  <h4 id="RapideFix_Business_ISubPropertySetterFactory_GetTypeConvertingSetter_System_Reflection_PropertyInfo_" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetTypeConvertingSetter(System.Reflection.PropertyInfo)">GetTypeConvertingSetter(PropertyInfo)</h4>
   <div class="markdown level1 summary"><p>Returns a property setter for type converted properties.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IPropertySetter GetTypeConvertedPropertySetter()</code></pre>
+    <pre><code class="lang-csharp hljs">BaseSetter GetTypeConvertingSetter(PropertyInfo property)</code></pre>
   </div>
-  <h5 class="returns">Returns</h5>
+  <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
+        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="RapideFix.Business.IPropertySetter.html">IPropertySetter</a></td>
+        <td><span class="xref">System.Reflection.PropertyInfo</span></td>
+        <td><span class="parametername">property</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  
-  
-  <a id="RapideFix_Business_ISubPropertySetterFactory_GetTypedPropertySetter_" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetTypedPropertySetter*"></a>
-  <h4 id="RapideFix_Business_ISubPropertySetterFactory_GetTypedPropertySetter" data-uid="RapideFix.Business.ISubPropertySetterFactory.GetTypedPropertySetter">GetTypedPropertySetter()</h4>
-  <div class="markdown level1 summary"><p>Returns a property setter for simple and enumerated types for strongly typed target objects.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">ITypedPropertySetter GetTypedPropertySetter()</code></pre>
-  </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
@@ -219,7 +268,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="RapideFix.Business.ITypedPropertySetter.html">ITypedPropertySetter</a></td>
+        <td><a class="xref" href="RapideFix.Business.PropertySetters.BaseSetter.html">BaseSetter</a></td>
         <td></td>
       </tr>
     </tbody>

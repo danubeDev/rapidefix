@@ -29,11 +29,11 @@ new ParserBuilder<object>().AddOutputType<Order>().Build<byte>() as MessageParse
 We can also create one by manually providing the dependencies:
 
 ```csharp
-// Create a property mapper and map types to be parsed
-var propertyMapper = new TagToPropertyMapper();
+// Create a property mapper and map types to be parsed. SubPropertySetterFactory is responsible creating the actual property setters.
+var propertyMapper = new TagToPropertyMapper(new SubPropertySetterFactory());
 propertyMapper.Map<Order>();
-// Create a property setter. CompositePropertySetter is a compositof sub property setters
-var compositeSetter = new CompositePropertySetter(neSubPropertySetterFactory());
+// Create the composite property setter. CompositePropertySetter is the delegator of the sub property setters.
+var compositeSetter = new CompositePropertySetter();
 // Create a validator collection to have all default validators
 var validators = new ValidatorCollecti(IntegerToFixConverter.Instance)
 // Passing empty options
