@@ -3,21 +3,27 @@ using RapideFix.Business.Data;
 
 namespace RapideFix.Business
 {
+  /// <summary>
+  /// Tag to Property Mapper contract provides operations to map and retrieve mappings between properties of 
+  /// types marked with FixTag attributes and Tag keys.
+  /// </summary>
   public interface ITagToPropertyMapper
   {
     /// <summary>
     /// Gets a tag setter descriptor or null.
     /// </summary>
     /// <param name="tag">The byte representation of the tag.</param>
+    /// <param name="messageTypeKey">An integer key value for the message type</param>
     /// <returns>A tagmap leaf with optional parents.</returns>
-    bool TryGet(ReadOnlySpan<byte> tag, out TagMapLeaf result);
+    bool TryGet(ReadOnlySpan<byte> tag, int messageTypeKey, out TagMapLeaf result);
 
     /// <summary>
     /// Gets a tag setter descriptor or null.
     /// </summary>
     /// <param name="tag">The byte representation of the tag.</param>
+    /// <param name="messageTypeKey">An integer key value for the message type</param>
     /// <returns>A tagmap leaf with optional parents.</returns>
-    bool TryGet(ReadOnlySpan<char> tag, out TagMapLeaf result);
+    bool TryGet(ReadOnlySpan<char> tag, int messageTypeKey, out TagMapLeaf result);
 
     /// <summary>
     /// Gets the type to use for deserialization or null.

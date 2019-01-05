@@ -25,13 +25,13 @@ namespace SampleRapideFix.Samples
     public void ParserByNewParser()
     {
       byte[] message = new MessageBuilder().AddRaw("35=D|53=10|44=145|55=ABC|").Build();
-      
-      // Create a property mapper and map types to be parsed
-      var propertyMapper = new TagToPropertyMapper();
+
+      // Create a property mapper and map types to be parsed. SubPropertySetterFactory is responsible creating the actual property setters.
+      var propertyMapper = new TagToPropertyMapper(new SubPropertySetterFactory());
       propertyMapper.Map<Order>();
 
-      // Create a property setter. CompositePropertySetter is a composite of sub property setters
-      var compositeSetter = new CompositePropertySetter(new SubPropertySetterFactory());
+      // Create the composite property setter. CompositePropertySetter is the delegator of the sub property setters.
+      var compositeSetter = new CompositePropertySetter();
 
       // Create a validator collection to have all default validators
       var validators = new ValidatorCollection(IntegerToFixConverter.Instance);
@@ -49,7 +49,7 @@ namespace SampleRapideFix.Samples
     public void ParserMultipleMessageTypes()
     {
       byte[] message0 = new MessageBuilder().AddRaw("35=D|53=10|44=145|55=ABC|").Build();
-      byte[] message1 = new MessageBuilder().AddRaw("35=S|53=1|144=120|155=ABC.S|").Build();
+      byte[] message1 = new MessageBuilder().AddRaw("35=S|53=1|44=120|55=ABC.S|").Build();
 
       // Registering both Slice and Order message types when building the message parser.
       var parser = new ParserBuilder<object>()

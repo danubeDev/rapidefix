@@ -106,6 +106,9 @@
       <a class="xref" href="RapideFix.Business.Data.TagMapNode.html#RapideFix_Business_Data_TagMapNode_IsEnumerable">TagMapNode.IsEnumerable</a>
     </div>
     <div>
+      <a class="xref" href="RapideFix.Business.Data.TagMapNode.html#RapideFix_Business_Data_TagMapNode_ParentSetter">TagMapNode.ParentSetter</a>
+    </div>
+    <div>
       <a class="xref" href="RapideFix.Business.Data.TagMapNode.html#RapideFix_Business_Data_TagMapNode_CreateEnumerable__1_System_Reflection_PropertyInfo_System_Int32_System_Type_">TagMapNode.CreateEnumerable&lt;T&gt;(PropertyInfo, Int32, Type)</a>
     </div>
     <div>
@@ -215,6 +218,31 @@
   </table>
   
   
+  <a id="RapideFix_Business_Data_TagMapLeaf_Setter_" data-uid="RapideFix.Business.Data.TagMapLeaf.Setter*"></a>
+  <h4 id="RapideFix_Business_Data_TagMapLeaf_Setter" data-uid="RapideFix.Business.Data.TagMapLeaf.Setter">Setter</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BaseSetter Setter { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RapideFix.Business.PropertySetters.BaseSetter.html">BaseSetter</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="RapideFix_Business_Data_TagMapLeaf_TypeConverterName_" data-uid="RapideFix.Business.Data.TagMapLeaf.TypeConverterName*"></a>
   <h4 id="RapideFix_Business_Data_TagMapLeaf_TypeConverterName" data-uid="RapideFix.Business.Data.TagMapLeaf.TypeConverterName">TypeConverterName</h4>
   <div class="markdown level1 summary"></div>
@@ -243,12 +271,12 @@
   
   
   <a id="RapideFix_Business_Data_TagMapLeaf_CreateRepeatingTag_" data-uid="RapideFix.Business.Data.TagMapLeaf.CreateRepeatingTag*"></a>
-  <h4 id="RapideFix_Business_Data_TagMapLeaf_CreateRepeatingTag__1_System_Reflection_PropertyInfo_System_Type_" data-uid="RapideFix.Business.Data.TagMapLeaf.CreateRepeatingTag``1(System.Reflection.PropertyInfo,System.Type)">CreateRepeatingTag&lt;T&gt;(PropertyInfo, Type)</h4>
+  <h4 id="RapideFix_Business_Data_TagMapLeaf_CreateRepeatingTag__1_System_Reflection_PropertyInfo_System_Type_RapideFix_Business_PropertySetters_BaseSetter_" data-uid="RapideFix.Business.Data.TagMapLeaf.CreateRepeatingTag``1(System.Reflection.PropertyInfo,System.Type,RapideFix.Business.PropertySetters.BaseSetter)">CreateRepeatingTag&lt;T&gt;(PropertyInfo, Type, BaseSetter)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static T CreateRepeatingTag&lt;T&gt;(PropertyInfo property, Type innerType)
+    <pre><code class="lang-csharp hljs">public static T CreateRepeatingTag&lt;T&gt;(PropertyInfo property, Type innerType, BaseSetter propertySetter)
     where T : TagMapLeaf, new()</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -269,6 +297,11 @@
       <tr>
         <td><span class="xref">System.Type</span></td>
         <td><span class="parametername">innerType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RapideFix.Business.PropertySetters.BaseSetter.html">BaseSetter</a></td>
+        <td><span class="parametername">propertySetter</span></td>
         <td></td>
       </tr>
     </tbody>

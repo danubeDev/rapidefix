@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Moq;
 using RapideFix.Business;
 using RapideFix.Business.Data;
+using RapideFix.Business.PropertySetters;
 using RapideFix.DataTypes;
 using Xunit;
 
@@ -11,30 +12,14 @@ namespace RapideFixFixture.Business
   public class CompositePropertySetterTests
   {
     [Fact]
-    public void GivenNullPropertySetterFactory_Construct_ThrowsArgumentNullException()
-    {
-      Assert.Throws<ArgumentNullException>(() => new CompositePropertySetter(null));
-    }
-
-    [Fact]
-    public void GivenPropertySetterFactory_Construct_DoesNotThrow()
-    {
-      var ex = Record.Exception(() => new CompositePropertySetter(Mock.Of<ISubPropertySetterFactory>()));
-      Assert.Null(ex);
-    }
-
-    [Fact]
     public void GivenParent_Set_CallsParentsSetter()
     {
       var testValue = new byte[0];
-      var mockPropertyFactory = new Mock<ISubPropertySetterFactory>();
       var mockParentSetter = new MockPropertySetter();
-      mockPropertyFactory.Setup(x => x.GetParentPropertySetter()).Returns(mockParentSetter);
       var mockSimpleTypeSetter = new MockPropertySetter();
-      mockPropertyFactory.Setup(x => x.GetSimplePropertySetter()).Returns(mockSimpleTypeSetter);
 
-      var uut = new CompositePropertySetter(mockPropertyFactory.Object);
-      uut.Set(testValue, new TagMapLeaf() { Parents = new List<TagMapNode>() { new TagMapNode() } }, new FixMessageContext(), new object());
+      var uut = new CompositePropertySetter();
+      uut.Set(testValue, new TagMapLeaf() { Parents = new List<TagMapNode>() { new TagMapNode() { ParentSetter = mockParentSetter } }, Setter = mockSimpleTypeSetter }, new FixMessageContext(), new object());
 
       Assert.True(mockParentSetter.IsVerified);
       Assert.True(mockSimpleTypeSetter.IsVerified);
@@ -44,12 +29,10 @@ namespace RapideFixFixture.Business
     public void GivenSimpleValue_Set_CallsSimpleSetter()
     {
       var testValue = new byte[0];
-      var mockPropertyFactory = new Mock<ISubPropertySetterFactory>();
       var mockSimpleTypeSetter = new MockPropertySetter();
-      mockPropertyFactory.Setup(x => x.GetSimplePropertySetter()).Returns(mockSimpleTypeSetter);
 
-      var uut = new CompositePropertySetter(mockPropertyFactory.Object);
-      uut.Set(testValue, new TagMapLeaf(), new FixMessageContext(), new object());
+      var uut = new CompositePropertySetter();
+      uut.Set(testValue, new TagMapLeaf() { Setter = mockSimpleTypeSetter }, new FixMessageContext(), new object());
 
       Assert.True(mockSimpleTypeSetter.IsVerified);
     }
@@ -58,12 +41,10 @@ namespace RapideFixFixture.Business
     public void GivenRepeatingGroup_Set_CallsRepeatingSetter()
     {
       var testValue = new byte[0];
-      var mockPropertyFactory = new Mock<ISubPropertySetterFactory>();
       var mockSetter = new MockPropertySetter();
-      mockPropertyFactory.Setup(x => x.GetRepeatingGroupTagPropertySetter()).Returns(mockSetter);
 
-      var uut = new CompositePropertySetter(mockPropertyFactory.Object);
-      uut.Set(testValue, TagMapLeaf.CreateRepeatingTag<TagMapLeaf>(null, null), new FixMessageContext(), new object());
+      var uut = new CompositePropertySetter();
+      uut.Set(testValue, TagMapLeaf.CreateRepeatingTag<TagMapLeaf>(null, null, mockSetter), new FixMessageContext(), new object());
 
       Assert.True(mockSetter.IsVerified);
     }
@@ -72,12 +53,10 @@ namespace RapideFixFixture.Business
     public void GivenTypeConvertedSetter_Set_CallsConvertingSetter()
     {
       var testValue = new byte[0];
-      var mockPropertyFactory = new Mock<ISubPropertySetterFactory>();
       var mockSetter = new MockPropertySetter();
-      mockPropertyFactory.Setup(x => x.GetTypeConvertedPropertySetter()).Returns(mockSetter);
 
-      var uut = new CompositePropertySetter(mockPropertyFactory.Object);
-      uut.Set(testValue, new TagMapLeaf() { TypeConverterName = "name" }, new FixMessageContext(), new object());
+      var uut = new CompositePropertySetter();
+      uut.Set(testValue, new TagMapLeaf() { TypeConverterName = "name", Setter = mockSetter }, new FixMessageContext(), new object());
 
       Assert.True(mockSetter.IsVerified);
     }
@@ -86,13 +65,11 @@ namespace RapideFixFixture.Business
     public void GivenTypedSimpleValue_SetTarget_CallsTypedSetter()
     {
       var testValue = new byte[0];
-      var mockPropertyFactory = new Mock<ISubPropertySetterFactory>();
       var mockSimpleTypeSetter = new MockPropertySetter();
-      mockPropertyFactory.Setup(x => x.GetTypedPropertySetter()).Returns(mockSimpleTypeSetter);
 
-      var uut = new CompositePropertySetter(mockPropertyFactory.Object);
+      var uut = new CompositePropertySetter();
       var targetObject = new object();
-      uut.SetTarget(testValue, new TagMapLeaf(), new FixMessageContext(), ref targetObject);
+      uut.SetTarget(testValue, new TagMapLeaf() { Setter = mockSimpleTypeSetter }, new FixMessageContext(), ref targetObject);
 
       Assert.True(mockSimpleTypeSetter.IsVerified);
     }
@@ -101,14 +78,11 @@ namespace RapideFixFixture.Business
     public void GivenParentAsString_Set_CallsParentsSetter()
     {
       var testValue = "test".AsSpan();
-      var mockPropertyFactory = new Mock<ISubPropertySetterFactory>();
       var mockParentSetter = new MockPropertySetter();
-      mockPropertyFactory.Setup(x => x.GetParentPropertySetter()).Returns(mockParentSetter);
       var mockSimpleTypeSetter = new MockPropertySetter();
-      mockPropertyFactory.Setup(x => x.GetSimplePropertySetter()).Returns(mockSimpleTypeSetter);
 
-      var uut = new CompositePropertySetter(mockPropertyFactory.Object);
-      uut.Set(testValue, new TagMapLeaf() { Parents = new List<TagMapNode>() { new TagMapNode() } }, new FixMessageContext(), new object());
+      var uut = new CompositePropertySetter();
+      uut.Set(testValue, new TagMapLeaf() { Parents = new List<TagMapNode>() { new TagMapNode() { ParentSetter = mockParentSetter } }, Setter = mockSimpleTypeSetter }, new FixMessageContext(), new object());
 
       Assert.True(mockParentSetter.IsVerified);
       Assert.True(mockSimpleTypeSetter.IsVerified);
@@ -118,12 +92,10 @@ namespace RapideFixFixture.Business
     public void GivenSimpleValueAsString_Set_CallsSimpleSetter()
     {
       var testValue = "test".AsSpan();
-      var mockPropertyFactory = new Mock<ISubPropertySetterFactory>();
       var mockSimpleTypeSetter = new MockPropertySetter();
-      mockPropertyFactory.Setup(x => x.GetSimplePropertySetter()).Returns(mockSimpleTypeSetter);
 
-      var uut = new CompositePropertySetter(mockPropertyFactory.Object);
-      uut.Set(testValue, new TagMapLeaf(), new FixMessageContext(), new object());
+      var uut = new CompositePropertySetter();
+      uut.Set(testValue, new TagMapLeaf() { Setter = mockSimpleTypeSetter }, new FixMessageContext(), new object());
 
       Assert.True(mockSimpleTypeSetter.IsVerified);
     }
@@ -132,12 +104,10 @@ namespace RapideFixFixture.Business
     public void GivenRepeatingGroupAsString_Set_CallsRepeatingSetter()
     {
       var testValue = "test".AsSpan();
-      var mockPropertyFactory = new Mock<ISubPropertySetterFactory>();
       var mockSetter = new MockPropertySetter();
-      mockPropertyFactory.Setup(x => x.GetRepeatingGroupTagPropertySetter()).Returns(mockSetter);
 
-      var uut = new CompositePropertySetter(mockPropertyFactory.Object);
-      uut.Set(testValue, TagMapLeaf.CreateRepeatingTag<TagMapLeaf>(null, null), new FixMessageContext(), new object());
+      var uut = new CompositePropertySetter();
+      uut.Set(testValue, TagMapLeaf.CreateRepeatingTag<TagMapLeaf>(null, null, mockSetter), new FixMessageContext(), new object());
 
       Assert.True(mockSetter.IsVerified);
     }
@@ -146,12 +116,10 @@ namespace RapideFixFixture.Business
     public void GivenTypeConvertedSetterAsString_Set_CallsConvertingSetter()
     {
       var testValue = "test".AsSpan();
-      var mockPropertyFactory = new Mock<ISubPropertySetterFactory>();
       var mockSetter = new MockPropertySetter();
-      mockPropertyFactory.Setup(x => x.GetTypeConvertedPropertySetter()).Returns(mockSetter);
 
-      var uut = new CompositePropertySetter(mockPropertyFactory.Object);
-      uut.Set(testValue, new TagMapLeaf() { TypeConverterName = "name" }, new FixMessageContext(), new object());
+      var uut = new CompositePropertySetter();
+      uut.Set(testValue, new TagMapLeaf() { TypeConverterName = "name", Setter = mockSetter }, new FixMessageContext(), new object());
 
       Assert.True(mockSetter.IsVerified);
     }
@@ -160,39 +128,43 @@ namespace RapideFixFixture.Business
     public void GivenTypedSimpleValueAsString_SetTarget_CallsTypedSetter()
     {
       var testValue = "test".AsSpan();
-      var mockPropertyFactory = new Mock<ISubPropertySetterFactory>();
       var mockSimpleTypeSetter = new MockPropertySetter();
-      mockPropertyFactory.Setup(x => x.GetTypedPropertySetter()).Returns(mockSimpleTypeSetter);
 
-      var uut = new CompositePropertySetter(mockPropertyFactory.Object);
+      var uut = new CompositePropertySetter();
       var targetObject = new object();
-      uut.SetTarget(testValue, new TagMapLeaf(), new FixMessageContext(), ref targetObject);
+      uut.SetTarget(testValue, new TagMapLeaf() { Setter = mockSimpleTypeSetter }, new FixMessageContext(), ref targetObject);
 
       Assert.True(mockSimpleTypeSetter.IsVerified);
     }
 
-    private class MockPropertySetter : ITypedPropertySetter
+    private class MockPropertySetter : BaseSetter, ITypedPropertySetter, IParentSetter
     {
       public bool IsVerified { get; private set; }
-      public object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
+      public new object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
       {
         IsVerified = true;
         return targetObject;
       }
 
-      public TTarget SetTarget<TTarget>(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject)
+      public new TTarget SetTarget<TTarget>(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject)
       {
         IsVerified = true;
         return targetObject;
       }
 
-      public object Set(ReadOnlySpan<char> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
+      public override object Set(ReadOnlySpan<char> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
       {
         IsVerified = true;
         return targetObject;
       }
 
-      public TTarget SetTarget<TTarget>(ReadOnlySpan<char> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject)
+      public override TTarget SetTarget<TTarget>(ReadOnlySpan<char> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject)
+      {
+        IsVerified = true;
+        return targetObject;
+      }
+
+      public object Set(TagMapLeaf leaf, TagMapNode parent, FixMessageContext fixMessageContext, object targetObject)
       {
         IsVerified = true;
         return targetObject;

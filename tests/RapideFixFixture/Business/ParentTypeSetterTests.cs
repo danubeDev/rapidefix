@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RapideFix.Business;
 using RapideFix.Business.Data;
+using RapideFix.Business.PropertySetters;
 using RapideFix.DataTypes;
 using RapideFixFixture.TestTypes;
 using Xunit;
@@ -21,7 +22,7 @@ namespace RapideFixFixture.Business
       {
         Parents = new List<TagMapNode>
         {
-          new TagMapNode() { Current = targetObject.GetType().GetProperty(nameof(targetObject.CustomType)) }
+          new TagMapNode() { Current = targetObject.GetType().GetProperty(nameof(targetObject.CustomType)), ParentSetter = new ParentPropertySetter() }
         }
       };
       var messageContext = new FixMessageContext();
@@ -41,7 +42,7 @@ namespace RapideFixFixture.Business
       {
         Parents = new List<TagMapNode>
         {
-          new TagMapNode() { Current = targetObject.GetType().GetProperty(nameof(targetObject.CustomType)) }
+          new TagMapNode() { Current = targetObject.GetType().GetProperty(nameof(targetObject.CustomType)), ParentSetter = new ParentPropertySetter() }
         }
       };
       var messageContext = new FixMessageContext();
@@ -67,7 +68,8 @@ namespace RapideFixFixture.Business
           {
             IsEnumerable = true,
             Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag59s)),
-            InnerType = typeof(TestMany)
+            InnerType = typeof(TestMany),
+            ParentSetter = new ParentPropertySetter()
           }
         }
       };
@@ -93,7 +95,8 @@ namespace RapideFixFixture.Business
           {
             IsEnumerable = true,
             Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag59s)),
-            InnerType = typeof(TestMany)
+            InnerType = typeof(TestMany),
+            ParentSetter = new ParentPropertySetter()
           }
         }
       };
@@ -106,7 +109,8 @@ namespace RapideFixFixture.Business
           {
             IsEnumerable = true,
             Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag59s)),
-            InnerType = typeof(TestMany)
+            InnerType = typeof(TestMany),
+            ParentSetter = new ParentPropertySetter()
           }
         }
       };
@@ -133,7 +137,8 @@ namespace RapideFixFixture.Business
           {
             IsEnumerable = true,
             Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag59s)),
-            InnerType = typeof(TestMany)
+            InnerType = typeof(TestMany),
+            ParentSetter = new ParentPropertySetter()
           }
         }
       };
@@ -155,7 +160,11 @@ namespace RapideFixFixture.Business
       {
         Parents = new List<TagMapNode>
         {
-          new TagMapNode() { Current = targetObject.GetType().GetProperty(nameof(targetObject.CustomType)) }
+          new TagMapNode()
+          {
+            Current = targetObject.GetType().GetProperty(nameof(targetObject.CustomType)),
+            ParentSetter = new ParentPropertySetter()
+          }
         }
       };
       var messageContext = new FixMessageContext();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using RapideFix.Business.PropertySetters;
 
 namespace RapideFix.Business.Data
 {
@@ -14,7 +15,9 @@ namespace RapideFix.Business.Data
 
     public bool IsRepeatingGroupTag { get; set; }
 
-    public static T CreateRepeatingTag<T>(PropertyInfo property, Type innerType)
+    public BaseSetter Setter { get; set; }
+
+    public static T CreateRepeatingTag<T>(PropertyInfo property, Type innerType, BaseSetter propertySetter)
       where T : TagMapLeaf, new()
     {
       return new T()
@@ -22,7 +25,8 @@ namespace RapideFix.Business.Data
         Current = property,
         IsEnumerable = false,
         IsRepeatingGroupTag = true,
-        InnerType = innerType
+        InnerType = innerType,
+        Setter = propertySetter
       };
     }
   }

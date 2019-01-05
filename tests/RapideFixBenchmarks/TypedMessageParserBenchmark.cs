@@ -20,11 +20,10 @@ namespace RapideFixBenchmarks
     public void Setup()
     {
       _message = new TestFixMessageBuilder("35=A|101=345|102=128.79|").Build();
-      var propertyMapper = new TagToPropertyMapper();
+      var propertyMapper = new TagToPropertyMapper(new SubPropertySetterFactory());
       propertyMapper.Map<TestTypeStruct>();
-      var compositeSetter = new CompositePropertySetter(new SubPropertySetterFactory());
 
-      _parser = new TypedMessageParser<TestTypeStruct>(propertyMapper, compositeSetter, new ValidatorCollection(IntegerToFixConverter.Instance), new RapideFix.Business.Data.MessageParserOptions());
+      _parser = new TypedMessageParser<TestTypeStruct>(propertyMapper, new CompositePropertySetter(), new ValidatorCollection(IntegerToFixConverter.Instance), new RapideFix.Business.Data.MessageParserOptions());
     }
 
     [Benchmark]

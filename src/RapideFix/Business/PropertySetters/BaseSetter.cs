@@ -3,42 +3,41 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+using System.Text;
 using RapideFix.Business.Data;
 using RapideFix.DataTypes;
 
-namespace RapideFix.Business
+namespace RapideFix.Business.PropertySetters
 {
-  public abstract class BaseTypeSetter
+  public abstract class BaseSetter
   {
     protected delegate void ActionRef<TTarget, TValue0>(ref TTarget target, TValue0 value0);
 
     protected delegate void ActionRef<TTarget, TValue0, TValue1>(ref TTarget target, TValue0 value0, TValue1 value1);
 
-    protected readonly Dictionary<int, Delegate> _propertySetters = new Dictionary<int, Delegate>();
+    protected Delegate _propertySetter;
 
     /// <summary>
     /// Returns an action to set a given typed value on a given property
     /// </summary>
     protected Action<object, TypeOfProperty> GetILSetterAction<TypeOfProperty>(PropertyInfo property)
     {
-      Delegate generatedDelegate;
-      if(!_propertySetters.TryGetValue(GetKey(property), out generatedDelegate))
+      if(_propertySetter == null)
       {
         var sourceType = typeof(TypeOfProperty);
         if(!property.PropertyType.IsAssignableFrom(sourceType))
         {
           throw new ArgumentException($"Property {property.Name}'s type is not assignable from type {sourceType.Name}");
         }
-        var dynamicMethod = new DynamicMethod("SetValueFor" + property.DeclaringType.FullName + property.Name, null, new[] { typeof(object), sourceType }, typeof(SimpleTypeSetter));
+        var dynamicMethod = new DynamicMethod("SetValueFor" + property.DeclaringType.FullName + property.Name, null, new[] { typeof(object), sourceType }, typeof(BaseSetter));
         var ilGenerator = dynamicMethod.GetILGenerator();
         ilGenerator.Emit(OpCodes.Ldarg_0);
         ilGenerator.Emit(OpCodes.Ldarg_1);
         ilGenerator.Emit(OpCodes.Call, property.SetMethod);
         ilGenerator.Emit(OpCodes.Ret);
-        generatedDelegate = dynamicMethod.CreateDelegate(typeof(Action<object, TypeOfProperty>));
-        _propertySetters.TryAdd(GetKey(property), generatedDelegate);
+        _propertySetter = dynamicMethod.CreateDelegate(typeof(Action<object, TypeOfProperty>));
       }
-      return (Action<object, TypeOfProperty>)generatedDelegate;
+      return (Action<object, TypeOfProperty>)_propertySetter;
     }
 
     /// <summary>
@@ -46,24 +45,22 @@ namespace RapideFix.Business
     /// </summary>
     protected ActionRef<TTarget, TypeOfProperty> GetTypedILSetterAction<TTarget, TypeOfProperty>(PropertyInfo property)
     {
-      Delegate generatedDelegate;
-      if(!_propertySetters.TryGetValue(GetKey(property), out generatedDelegate))
+      if(_propertySetter == null)
       {
         var sourceType = typeof(TypeOfProperty);
         if(!property.PropertyType.IsAssignableFrom(sourceType))
         {
           throw new ArgumentException($"Property {property.Name}'s type is not assignable from type {sourceType.Name}");
         }
-        var dynamicMethod = new DynamicMethod("SetTypedValueFor" + property.DeclaringType.FullName + property.Name, null, new[] { typeof(TTarget).MakeByRefType(), sourceType }, typeof(SimpleTypeSetter));
+        var dynamicMethod = new DynamicMethod("SetTypedValueFor" + property.DeclaringType.FullName + property.Name, null, new[] { typeof(TTarget).MakeByRefType(), sourceType }, typeof(BaseSetter));
         var ilGenerator = dynamicMethod.GetILGenerator();
         ilGenerator.Emit(OpCodes.Ldarg_0);
         ilGenerator.Emit(OpCodes.Ldarg_1);
         ilGenerator.Emit(OpCodes.Call, property.SetMethod);
         ilGenerator.Emit(OpCodes.Ret);
-        generatedDelegate = dynamicMethod.CreateDelegate(typeof(ActionRef<TTarget, TypeOfProperty>));
-        _propertySetters.TryAdd(GetKey(property), generatedDelegate);
+        _propertySetter = dynamicMethod.CreateDelegate(typeof(ActionRef<TTarget, TypeOfProperty>));
       }
-      return (ActionRef<TTarget, TypeOfProperty>)generatedDelegate;
+      return (ActionRef<TTarget, TypeOfProperty>)_propertySetter;
     }
 
     /// <summary>
@@ -71,11 +68,10 @@ namespace RapideFix.Business
     /// </summary>
     protected Action<object, TypeOfProperty, int> GetEnumeratedILSetterAction<TypeOfProperty>(PropertyInfo property)
     {
-      Delegate generatedDelegate;
-      if(!_propertySetters.TryGetValue(GetKey(property), out generatedDelegate))
+      if(_propertySetter == null)
       {
         var sourceType = typeof(TypeOfProperty);
-        var dynamicMethod = new DynamicMethod("SetArrayIndexFor" + property.DeclaringType.FullName + property.Name, null, new[] { typeof(object), sourceType, typeof(int) }, typeof(SimpleTypeSetter));
+        var dynamicMethod = new DynamicMethod("SetArrayIndexFor" + property.DeclaringType.FullName + property.Name, null, new[] { typeof(object), sourceType, typeof(int) }, typeof(BaseSetter));
         var ilGenerator = dynamicMethod.GetILGenerator();
         ilGenerator.Emit(OpCodes.Ldarg_0);
         ilGenerator.Emit(OpCodes.Call, property.GetMethod);
@@ -83,10 +79,9 @@ namespace RapideFix.Business
         ilGenerator.Emit(OpCodes.Ldarg_1);
         ilGenerator.Emit(OpCodes.Stelem_I);
         ilGenerator.Emit(OpCodes.Ret);
-        generatedDelegate = dynamicMethod.CreateDelegate(typeof(Action<object, TypeOfProperty, int>));
-        _propertySetters.TryAdd(GetKey(property), generatedDelegate);
+        _propertySetter = dynamicMethod.CreateDelegate(typeof(Action<object, TypeOfProperty, int>));
       }
-      return (Action<object, TypeOfProperty, int>)generatedDelegate;
+      return (Action<object, TypeOfProperty, int>)_propertySetter;
     }
 
     /// <summary>
@@ -94,11 +89,10 @@ namespace RapideFix.Business
     /// </summary>
     protected ActionRef<TTarget, TypeOfProperty, int> GetTypedEnumeratedILSetterAction<TTarget, TypeOfProperty>(PropertyInfo property)
     {
-      Delegate generatedDelegate;
-      if(!_propertySetters.TryGetValue(GetKey(property), out generatedDelegate))
+      if(_propertySetter == null)
       {
         var sourceType = typeof(TypeOfProperty);
-        var dynamicMethod = new DynamicMethod("SetArrayIndexFor" + property.DeclaringType.FullName + property.Name, null, new[] { typeof(TTarget).MakeByRefType(), sourceType, typeof(int) }, typeof(SimpleTypeSetter));
+        var dynamicMethod = new DynamicMethod("SetArrayIndexFor" + property.DeclaringType.FullName + property.Name, null, new[] { typeof(TTarget).MakeByRefType(), sourceType, typeof(int) }, typeof(BaseSetter));
         var ilGenerator = dynamicMethod.GetILGenerator();
         ilGenerator.Emit(OpCodes.Ldarg_0);
         ilGenerator.Emit(OpCodes.Call, property.GetMethod);
@@ -106,10 +100,9 @@ namespace RapideFix.Business
         ilGenerator.Emit(OpCodes.Ldarg_1);
         ilGenerator.Emit(OpCodes.Stelem_I);
         ilGenerator.Emit(OpCodes.Ret);
-        generatedDelegate = dynamicMethod.CreateDelegate(typeof(ActionRef<TTarget, TypeOfProperty, int>));
-        _propertySetters.TryAdd(GetKey(property), generatedDelegate);
+        _propertySetter = dynamicMethod.CreateDelegate(typeof(ActionRef<TTarget, TypeOfProperty, int>));
       }
-      return (ActionRef<TTarget, TypeOfProperty, int>)generatedDelegate;
+      return (ActionRef<TTarget, TypeOfProperty, int>)_propertySetter;
     }
 
     /// <summary>
@@ -159,10 +152,6 @@ namespace RapideFix.Business
     /// </summary>
     protected int GetAdvancedIndex(int leafPropertyKey, TagMapNode mappingDetails, FixMessageContext fixMessageContext, out bool isAdvanced)
     {
-      if(fixMessageContext.RepeatingGroupCounters is null)
-      {
-        fixMessageContext.RepeatingGroupCounters = new Dictionary<int, FixMessageContext.RepeatingCounter>();
-      }
       isAdvanced = false;
       if(!fixMessageContext.RepeatingGroupCounters.TryGetValue(mappingDetails.RepeatingTagNumber, out FixMessageContext.RepeatingCounter value))
       {
@@ -186,5 +175,41 @@ namespace RapideFix.Business
     {
       return property.GetHashCode();
     }
+
+    public object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
+    {
+      int valueLength = value.Length;
+      Span<char> valueChars = stackalloc char[valueLength];
+      if(mappingDetails.IsEncoded)
+      {
+        valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, valueChars);
+        valueChars = valueChars.Slice(0, valueLength);
+      }
+      else
+      {
+        valueLength = Encoding.ASCII.GetChars(value, valueChars);
+      }
+      return Set(valueChars, mappingDetails, fixMessageContext, targetObject);
+    }
+
+    public TTarget SetTarget<TTarget>(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject)
+    {
+      int valueLength = value.Length;
+      Span<char> valueChars = stackalloc char[valueLength];
+      if(mappingDetails.IsEncoded)
+      {
+        valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, valueChars);
+        valueChars = valueChars.Slice(0, valueLength);
+      }
+      else
+      {
+        valueLength = Encoding.ASCII.GetChars(value, valueChars);
+      }
+      return SetTarget<TTarget>(valueChars, mappingDetails, fixMessageContext, ref targetObject);
+    }
+
+    public abstract object Set(ReadOnlySpan<char> valueChars, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject);
+
+    public abstract TTarget SetTarget<TTarget>(ReadOnlySpan<char> valueChars, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject);
   }
 }

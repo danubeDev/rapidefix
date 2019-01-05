@@ -13,6 +13,8 @@ namespace RapideFix.Business.Data
 
     public bool IsEnumerable { get; internal set; }
 
+    public IParentSetter ParentSetter { get; set; }
+
     public static T CreateEnumerable<T>(PropertyInfo property, int repeatingTagNumber, Type innerType)
       where T : TagMapNode, new()
     {

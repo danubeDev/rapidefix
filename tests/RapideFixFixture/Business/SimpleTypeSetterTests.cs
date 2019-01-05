@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using RapideFix.Business;
 using RapideFix.Business.Data;
+using RapideFix.Business.PropertySetters;
 using RapideFix.DataTypes;
 using RapideFixFixture.TestTypes;
 using Xunit;
@@ -17,7 +18,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new SimpleTypeSetter();
       var valueToSet = Encoding.ASCII.GetBytes("12357").AsSpan();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag62)) };
+      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag62)), Setter = new IntegerSetter() };
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
 
@@ -30,7 +31,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new SimpleTypeSetter();
       var valueToSet = Encoding.ASCII.GetBytes("12357").AsSpan();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag63)) };
+      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag63)), Setter = new IntegerSetter() };
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
 
@@ -48,7 +49,8 @@ namespace RapideFixFixture.Business
         IsEnumerable = true,
         Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag57s)),
         RepeatingTagNumber = 56,
-        InnerType = typeof(string)
+        InnerType = typeof(string),
+        Setter = new StringSetter()
       };
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
@@ -67,7 +69,8 @@ namespace RapideFixFixture.Business
         IsEnumerable = true,
         Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag57s)),
         RepeatingTagNumber = 56,
-        InnerType = typeof(string)
+        InnerType = typeof(string),
+        Setter = new StringSetter()
       };
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
@@ -85,9 +88,9 @@ namespace RapideFixFixture.Business
       var integerToSet = Encoding.ASCII.GetBytes("12357").AsSpan();
       var stringToSet = Encoding.ASCII.GetBytes("message").AsSpan();
       var doubleToSet = Encoding.ASCII.GetBytes("123.456").AsSpan();
-      var mappingDetailsInt = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag101)) };
-      var mappingDetailsString = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag100)) };
-      var mappingDetailsDouble = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag102)) };
+      var mappingDetailsInt = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag101)), Setter = new IntegerSetter() };
+      var mappingDetailsString = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag100)), Setter = new StringSetter() };
+      var mappingDetailsDouble = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag102)), Setter = new DoubleSetter() };
       var messageContext = new FixMessageContext();
       uut.SetTarget(integerToSet, mappingDetailsInt, messageContext, ref targetObject);
       uut.SetTarget(stringToSet, mappingDetailsString, messageContext, ref targetObject);
@@ -108,6 +111,7 @@ namespace RapideFixFixture.Business
       {
         IsEnumerable = true,
         Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag104)),
+        Setter = new StringSetter(),
         RepeatingTagNumber = 103,
         InnerType = typeof(string)
       };
@@ -125,7 +129,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new SimpleTypeSetter();
       var valueToSet = "12357".AsSpan();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag62)) };
+      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag62)), Setter = new IntegerSetter() };
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
 
@@ -138,7 +142,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new SimpleTypeSetter();
       ReadOnlySpan<char> valueToSet = "12357".AsSpan();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag63)) };
+      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag63)), Setter = new IntegerSetter() };
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
 
@@ -157,7 +161,8 @@ namespace RapideFixFixture.Business
         IsEnumerable = true,
         Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag57s)),
         RepeatingTagNumber = 56,
-        InnerType = typeof(string)
+        InnerType = typeof(string),
+        Setter = new StringSetter()
       };
       var messageContext = new FixMessageContext();
       // Setting the 1st element
@@ -177,9 +182,9 @@ namespace RapideFixFixture.Business
       var integerToSet = "12357".AsSpan();
       var stringToSet = "message".AsSpan();
       var doubleToSet = "123.456".AsSpan();
-      var mappingDetailsInt = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag101)) };
-      var mappingDetailsString = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag100)) };
-      var mappingDetailsDouble = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag102)) };
+      var mappingDetailsInt = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag101)), Setter = new IntegerSetter() };
+      var mappingDetailsString = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag100)), Setter = new StringSetter() };
+      var mappingDetailsDouble = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag102)), Setter = new DoubleSetter() };
       var messageContext = new FixMessageContext();
       uut.SetTarget(integerToSet, mappingDetailsInt, messageContext, ref targetObject);
       uut.SetTarget(stringToSet, mappingDetailsString, messageContext, ref targetObject);
@@ -200,6 +205,7 @@ namespace RapideFixFixture.Business
       {
         IsEnumerable = true,
         Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag104)),
+        Setter = new StringSetter(),
         RepeatingTagNumber = 103,
         InnerType = typeof(string)
       };
@@ -217,7 +223,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new SimpleTypeSetter();
       var valueToSet = Encoding.ASCII.GetBytes("Y").AsSpan();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag68)) };
+      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag68)), Setter = new BooleanSetter() };
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
       Assert.True(targetObject.Tag68);
@@ -229,7 +235,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new SimpleTypeSetter();
       var valueToSet = Encoding.ASCII.GetBytes("Y").AsSpan();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag69)) };
+      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag69)), Setter = new NullableBooleanSetter() };
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
       Assert.True(targetObject.Tag69);
@@ -242,7 +248,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new SimpleTypeSetter();
       var valueToSet = "Y";
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag68)) };
+      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag68)), Setter = new BooleanSetter() };
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet.AsSpan(), mappingDetails, messageContext, targetObject);
       Assert.True(targetObject.Tag68);
@@ -254,7 +260,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new SimpleTypeSetter();
       var valueToSet = "Y";
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag69)) };
+      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag69)), Setter = new NullableBooleanSetter() };
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet.AsSpan(), mappingDetails, messageContext, targetObject);
       Assert.True(targetObject.Tag69);
@@ -267,7 +273,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new SimpleTypeSetter();
       var valueToSet = "20181219-18:14:23";
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag70)) };
+      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag70)), Setter = new DateTimeOffsetSetter() };
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet.AsSpan(), mappingDetails, messageContext, targetObject);
       Assert.Equal(new DateTimeOffset(2018, 12, 19, 18, 14, 23, 0, TimeSpan.Zero), targetObject.Tag70);
@@ -279,7 +285,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new SimpleTypeSetter();
       var valueToSet = "20181219-18:14:23";
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag71)) };
+      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag71)), Setter = new NullableDateTimeOffsetSetter() };
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet.AsSpan(), mappingDetails, messageContext, targetObject);
       Assert.Equal(new DateTimeOffset(2018, 12, 19, 18, 14, 23, 0, TimeSpan.Zero), targetObject.Tag71.Value);
