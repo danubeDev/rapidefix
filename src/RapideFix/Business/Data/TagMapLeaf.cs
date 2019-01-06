@@ -13,8 +13,6 @@ namespace RapideFix.Business.Data
 
     public bool IsEncoded { get; set; }
 
-    public bool IsRepeatingGroupTag { get; set; }
-
     public BaseSetter Setter { get; set; }
 
     public static T CreateRepeatingTag<T>(PropertyInfo property, Type innerType, BaseSetter propertySetter)
@@ -24,7 +22,6 @@ namespace RapideFix.Business.Data
       {
         Current = property,
         IsEnumerable = false,
-        IsRepeatingGroupTag = true,
         InnerType = innerType,
         Setter = propertySetter
       };

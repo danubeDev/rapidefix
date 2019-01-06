@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using RapideFix.Business.Data;
 using RapideFix.DataTypes;
 
@@ -9,7 +10,7 @@ namespace RapideFix.Business
     public object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
       object parentTarget = targetObject;
-      if(mappingDetails.Parents != null && mappingDetails.Parents.Count > 0)
+      if(mappingDetails.Parents != null)
       {
         foreach(var parent in mappingDetails.Parents)
         {
@@ -17,14 +18,26 @@ namespace RapideFix.Business
         }
       }
 
-      parentTarget = mappingDetails.Setter.Set(value, mappingDetails, fixMessageContext, parentTarget);
+      int valueLength = value.Length;
+      Span<char> valueChars = stackalloc char[valueLength];
+      if(mappingDetails.IsEncoded)
+      {
+        valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, valueChars);
+        valueChars = valueChars.Slice(0, valueLength);
+      }
+      else
+      {
+        Encoding.ASCII.GetChars(value, valueChars);
+      }
+
+      parentTarget = mappingDetails.Setter.Set(valueChars, mappingDetails, fixMessageContext, parentTarget);
       return parentTarget;
     }
 
     public object Set(ReadOnlySpan<char> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
       object parentTarget = targetObject;
-      if(mappingDetails.Parents != null && mappingDetails.Parents.Count > 0)
+      if(mappingDetails.Parents != null)
       {
         foreach(var parent in mappingDetails.Parents)
         {
@@ -38,7 +51,18 @@ namespace RapideFix.Business
 
     public TTarget SetTarget<TTarget>(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject)
     {
-      targetObject = mappingDetails.Setter.SetTarget(value, mappingDetails, fixMessageContext, ref targetObject);
+      int valueLength = value.Length;
+      Span<char> valueChars = stackalloc char[valueLength];
+      if(mappingDetails.IsEncoded)
+      {
+        valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, valueChars);
+        valueChars = valueChars.Slice(0, valueLength);
+      }
+      else
+      {
+        Encoding.ASCII.GetChars(value, valueChars);
+      }
+      targetObject = mappingDetails.Setter.SetTarget(valueChars, mappingDetails, fixMessageContext, ref targetObject);
       return targetObject;
     }
 
