@@ -18,10 +18,10 @@ namespace RapideFix.Validation
         return false;
       }
       messageContext.FixVersion = version;
-      var slice = data.Slice(beginStringLength);
       bool isValid = true;
       if(version == SupportedFixVersion.Fix50)
       {
+        var slice = data.Slice(beginStringLength);
         isValid &= slice.IndexOf(KnownFixTags.SenderCompId) >= 0
           && slice.IndexOf(KnownFixTags.TargetCompId) >= 0;
       }

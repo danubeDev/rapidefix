@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using RapideFix.Business;
 using RapideFix.Business.Data;
 using RapideFix.Business.PropertySetters;

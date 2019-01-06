@@ -24,7 +24,7 @@
           "hash": "OcxDs+Gn/jrbCgk/rSfCmw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -36,7 +36,7 @@
           "hash": "O7Ne4NPrT86SXWYyxh1YKw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ParserBuilder.html",
-          "hash": "1UZAQ6+dRBFswV2JwN9pnA=="
+          "hash": "fKVmENrFTF5kutxoIlRsiA=="
         }
       },
       "is_incremental": false,
@@ -60,7 +60,7 @@
           "hash": "3YyAYCANkcyqqzwTIzUddA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -72,7 +72,7 @@
           "hash": "aFF+Ljx2L0u9nazx82UZkA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -93,7 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "benchmarks/results/RapideFixBenchmarks.MessageParserBenchmark-report-github.html",
-          "hash": "sd99IvDeU0aNehIzkumT/Q=="
+          "hash": "IJOB55ITS8v7YfOHUP3fpQ=="
         }
       },
       "is_incremental": false,
@@ -105,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "benchmarks/results/RapideFixBenchmarks.TypedMessageParserBenchmark-report-github.html",
-          "hash": "sPMs/ONSA/KvEPzE3aOqiw=="
+          "hash": "S3cDcDfLKkC9G9xgblzkZQ=="
         }
       },
       "is_incremental": false,
@@ -117,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "benchmarks/results/RapideFixBenchmarks.TypedStringMessageParserBenchmark-report-github.html",
-          "hash": "cFSkXtyh40BtilDwnGceZA=="
+          "hash": "lbMj1BuKfqVDvTnuKWfwGg=="
         }
       },
       "is_incremental": false,
@@ -155,7 +155,7 @@
           "hash": "DJSCdnaBg7rLH9DzxjDrTA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -236,7 +236,7 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.Data.TagMapLeaf.html",
-          "hash": "0VAaB+0KA6alyvkvL8SvGw=="
+          "hash": "PL3pyzUouxp+i7fRMT9jjg=="
         }
       },
       "is_incremental": false,
@@ -321,18 +321,6 @@
         ".html": {
           "relative_path": "api/RapideFix.Business.ITypedPropertySetter.html",
           "hash": "12oy3L98dd02gnMJhDN+Tg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "obj/api/RapideFix.Business.ParentTypeSetter.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/RapideFix.Business.ParentTypeSetter.html",
-          "hash": "mMYixUDBrlfmAbLaznFULA=="
         }
       },
       "is_incremental": false,
@@ -664,18 +652,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "obj/api/RapideFix.Business.SimpleTypeSetter.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/RapideFix.Business.SimpleTypeSetter.html",
-          "hash": "2oAgLqownDfQS/eVbKtE+w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "obj/api/RapideFix.Business.SubPropertySetterFactory.yml",
       "output": {
         ".html": {
@@ -716,7 +692,7 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.html",
-          "hash": "dUtIrm0H0+DJiukvZIuBwQ=="
+          "hash": "oxCk7tqqAkQTB55HHYz/qg=="
         }
       },
       "is_incremental": false,
@@ -1172,7 +1148,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "Sbyb3eRMn1cW8piKIDvD4A=="
+          "hash": "/dLcSIqyEfiEAOkqZJZLtg=="
         }
       },
       "is_incremental": false,
@@ -1194,17 +1170,16 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": false,
-        "details": "Disable incremental build by force rebuild option.",
+        "can_incremental": true,
         "incrementalPhase": "build"
       },
       "processors": {
         "ConceptualDocumentProcessor": {
-          "can_incremental": false,
+          "can_incremental": true,
           "incrementalPhase": "build"
         },
         "ManagedReferenceDocumentProcessor": {
-          "can_incremental": false,
+          "can_incremental": true,
           "incrementalPhase": "build"
         },
         "TocDocumentProcessor": {
@@ -1221,8 +1196,8 @@
     },
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot support incremental post processing, the reason is: it's disabled.",
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
         "incrementalPhase": "postProcessing"
       },
       "processors": {}

@@ -50,25 +50,18 @@ namespace RapideFix
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int ConvertBack(ReadOnlySpan<byte> data)
     {
-      int digit;
       if(data.Length == 3)
       {
-        int digit0 = (data[0] - _zero) * 100;
-        int digit1 = (data[1] - _zero) * 10;
-        int digit2 = (data[2] - _zero);
-        return digit0 + digit1 + digit2;
+        return (data[0] - _zero) * 100 + (data[1] - _zero) * 10 + (data[2] - _zero);
       }
       if(data.Length == 2)
       {
-        int digit0 = (data[0] - _zero) * 10;
-        int digit1 = (data[1] - _zero);
-        return digit0 + digit1;
+        return (data[0] - _zero) * 10 + (data[1] - _zero);
       }
       int result = 0;
-      foreach(byte b in data)
+      for(int i = 0; i < data.Length; i++)
       {
-        digit = b - _zero;
-        result = result * 10 + digit;
+        result = result * 10 + (data[i] - _zero);
       }
       return result;
     }

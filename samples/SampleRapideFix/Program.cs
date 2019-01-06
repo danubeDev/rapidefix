@@ -24,6 +24,10 @@ namespace SampleRapideFix
       new TypedMessageParserSamples().ParserByParserBuilder();
       new TypedMessageParserSamples().ParserByNewParser();
       new TypedMessageParserSamples().ParserValueType();
+      new MessageBuilderSamples().AddTag();
+      new MessageBuilderSamples().AddTagRaw();
+      new MessageBuilderSamples().AddFixVersion();
+      new MessageBuilderSamples().BuildSpan();
 
       //var settings = new FixParserSettings();
       //settings.RegisterMessageTypes<Order>();

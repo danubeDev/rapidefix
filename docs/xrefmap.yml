@@ -289,19 +289,6 @@ references:
   isSpec: "True"
   fullName: RapideFix.Business.Data.TagMapLeaf.IsEncoded
   nameWithType: TagMapLeaf.IsEncoded
-- uid: RapideFix.Business.Data.TagMapLeaf.IsRepeatingGroupTag
-  name: IsRepeatingGroupTag
-  href: api/RapideFix.Business.Data.TagMapLeaf.html#RapideFix_Business_Data_TagMapLeaf_IsRepeatingGroupTag
-  commentId: P:RapideFix.Business.Data.TagMapLeaf.IsRepeatingGroupTag
-  fullName: RapideFix.Business.Data.TagMapLeaf.IsRepeatingGroupTag
-  nameWithType: TagMapLeaf.IsRepeatingGroupTag
-- uid: RapideFix.Business.Data.TagMapLeaf.IsRepeatingGroupTag*
-  name: IsRepeatingGroupTag
-  href: api/RapideFix.Business.Data.TagMapLeaf.html#RapideFix_Business_Data_TagMapLeaf_IsRepeatingGroupTag_
-  commentId: Overload:RapideFix.Business.Data.TagMapLeaf.IsRepeatingGroupTag
-  isSpec: "True"
-  fullName: RapideFix.Business.Data.TagMapLeaf.IsRepeatingGroupTag
-  nameWithType: TagMapLeaf.IsRepeatingGroupTag
 - uid: RapideFix.Business.Data.TagMapLeaf.Parents
   name: Parents
   href: api/RapideFix.Business.Data.TagMapLeaf.html#RapideFix_Business_Data_TagMapLeaf_Parents
@@ -636,37 +623,6 @@ references:
   fullName.vb: RapideFix.Business.ITypedPropertySetter.SetTarget(Of TTarget)(System.ReadOnlySpan(Of System.Char), RapideFix.Business.Data.TagMapLeaf, RapideFix.DataTypes.FixMessageContext, ByRef TTarget)
   nameWithType: ITypedPropertySetter.SetTarget<TTarget>(ReadOnlySpan<Char>, TagMapLeaf, FixMessageContext, ref TTarget)
   nameWithType.vb: ITypedPropertySetter.SetTarget(Of TTarget)(ReadOnlySpan(Of Char), TagMapLeaf, FixMessageContext, ByRef TTarget)
-- uid: RapideFix.Business.ParentTypeSetter
-  name: ParentTypeSetter
-  href: api/RapideFix.Business.ParentTypeSetter.html
-  commentId: T:RapideFix.Business.ParentTypeSetter
-  fullName: RapideFix.Business.ParentTypeSetter
-  nameWithType: ParentTypeSetter
-- uid: RapideFix.Business.ParentTypeSetter.Set(System.ReadOnlySpan{System.Byte},RapideFix.Business.Data.TagMapLeaf,RapideFix.DataTypes.FixMessageContext,System.Object)
-  name: Set(ReadOnlySpan<Byte>, TagMapLeaf, FixMessageContext, Object)
-  href: api/RapideFix.Business.ParentTypeSetter.html#RapideFix_Business_ParentTypeSetter_Set_System_ReadOnlySpan_System_Byte__RapideFix_Business_Data_TagMapLeaf_RapideFix_DataTypes_FixMessageContext_System_Object_
-  commentId: M:RapideFix.Business.ParentTypeSetter.Set(System.ReadOnlySpan{System.Byte},RapideFix.Business.Data.TagMapLeaf,RapideFix.DataTypes.FixMessageContext,System.Object)
-  name.vb: Set(ReadOnlySpan(Of Byte), TagMapLeaf, FixMessageContext, Object)
-  fullName: RapideFix.Business.ParentTypeSetter.Set(System.ReadOnlySpan<System.Byte>, RapideFix.Business.Data.TagMapLeaf, RapideFix.DataTypes.FixMessageContext, System.Object)
-  fullName.vb: RapideFix.Business.ParentTypeSetter.Set(System.ReadOnlySpan(Of System.Byte), RapideFix.Business.Data.TagMapLeaf, RapideFix.DataTypes.FixMessageContext, System.Object)
-  nameWithType: ParentTypeSetter.Set(ReadOnlySpan<Byte>, TagMapLeaf, FixMessageContext, Object)
-  nameWithType.vb: ParentTypeSetter.Set(ReadOnlySpan(Of Byte), TagMapLeaf, FixMessageContext, Object)
-- uid: RapideFix.Business.ParentTypeSetter.Set(System.ReadOnlySpan{System.Char},RapideFix.Business.Data.TagMapLeaf,RapideFix.DataTypes.FixMessageContext,System.Object)
-  name: Set(ReadOnlySpan<Char>, TagMapLeaf, FixMessageContext, Object)
-  href: api/RapideFix.Business.ParentTypeSetter.html#RapideFix_Business_ParentTypeSetter_Set_System_ReadOnlySpan_System_Char__RapideFix_Business_Data_TagMapLeaf_RapideFix_DataTypes_FixMessageContext_System_Object_
-  commentId: M:RapideFix.Business.ParentTypeSetter.Set(System.ReadOnlySpan{System.Char},RapideFix.Business.Data.TagMapLeaf,RapideFix.DataTypes.FixMessageContext,System.Object)
-  name.vb: Set(ReadOnlySpan(Of Char), TagMapLeaf, FixMessageContext, Object)
-  fullName: RapideFix.Business.ParentTypeSetter.Set(System.ReadOnlySpan<System.Char>, RapideFix.Business.Data.TagMapLeaf, RapideFix.DataTypes.FixMessageContext, System.Object)
-  fullName.vb: RapideFix.Business.ParentTypeSetter.Set(System.ReadOnlySpan(Of System.Char), RapideFix.Business.Data.TagMapLeaf, RapideFix.DataTypes.FixMessageContext, System.Object)
-  nameWithType: ParentTypeSetter.Set(ReadOnlySpan<Char>, TagMapLeaf, FixMessageContext, Object)
-  nameWithType.vb: ParentTypeSetter.Set(ReadOnlySpan(Of Char), TagMapLeaf, FixMessageContext, Object)
-- uid: RapideFix.Business.ParentTypeSetter.Set*
-  name: Set
-  href: api/RapideFix.Business.ParentTypeSetter.html#RapideFix_Business_ParentTypeSetter_Set_
-  commentId: Overload:RapideFix.Business.ParentTypeSetter.Set
-  isSpec: "True"
-  fullName: RapideFix.Business.ParentTypeSetter.Set
-  nameWithType: ParentTypeSetter.Set
 - uid: RapideFix.Business.PropertySetters
   name: RapideFix.Business.PropertySetters
   href: api/RapideFix.Business.PropertySetters.html
@@ -1757,62 +1713,6 @@ references:
   fullName.vb: RapideFix.Business.RepeatingGroupTagSetter.SetTarget(Of TTarget)(System.ReadOnlySpan(Of System.Char), RapideFix.Business.Data.TagMapLeaf, RapideFix.DataTypes.FixMessageContext, ByRef TTarget)
   nameWithType: RepeatingGroupTagSetter.SetTarget<TTarget>(ReadOnlySpan<Char>, TagMapLeaf, FixMessageContext, ref TTarget)
   nameWithType.vb: RepeatingGroupTagSetter.SetTarget(Of TTarget)(ReadOnlySpan(Of Char), TagMapLeaf, FixMessageContext, ByRef TTarget)
-- uid: RapideFix.Business.SimpleTypeSetter
-  name: SimpleTypeSetter
-  href: api/RapideFix.Business.SimpleTypeSetter.html
-  commentId: T:RapideFix.Business.SimpleTypeSetter
-  fullName: RapideFix.Business.SimpleTypeSetter
-  nameWithType: SimpleTypeSetter
-- uid: RapideFix.Business.SimpleTypeSetter.Set(System.ReadOnlySpan{System.Byte},RapideFix.Business.Data.TagMapLeaf,RapideFix.DataTypes.FixMessageContext,System.Object)
-  name: Set(ReadOnlySpan<Byte>, TagMapLeaf, FixMessageContext, Object)
-  href: api/RapideFix.Business.SimpleTypeSetter.html#RapideFix_Business_SimpleTypeSetter_Set_System_ReadOnlySpan_System_Byte__RapideFix_Business_Data_TagMapLeaf_RapideFix_DataTypes_FixMessageContext_System_Object_
-  commentId: M:RapideFix.Business.SimpleTypeSetter.Set(System.ReadOnlySpan{System.Byte},RapideFix.Business.Data.TagMapLeaf,RapideFix.DataTypes.FixMessageContext,System.Object)
-  name.vb: Set(ReadOnlySpan(Of Byte), TagMapLeaf, FixMessageContext, Object)
-  fullName: RapideFix.Business.SimpleTypeSetter.Set(System.ReadOnlySpan<System.Byte>, RapideFix.Business.Data.TagMapLeaf, RapideFix.DataTypes.FixMessageContext, System.Object)
-  fullName.vb: RapideFix.Business.SimpleTypeSetter.Set(System.ReadOnlySpan(Of System.Byte), RapideFix.Business.Data.TagMapLeaf, RapideFix.DataTypes.FixMessageContext, System.Object)
-  nameWithType: SimpleTypeSetter.Set(ReadOnlySpan<Byte>, TagMapLeaf, FixMessageContext, Object)
-  nameWithType.vb: SimpleTypeSetter.Set(ReadOnlySpan(Of Byte), TagMapLeaf, FixMessageContext, Object)
-- uid: RapideFix.Business.SimpleTypeSetter.Set(System.ReadOnlySpan{System.Char},RapideFix.Business.Data.TagMapLeaf,RapideFix.DataTypes.FixMessageContext,System.Object)
-  name: Set(ReadOnlySpan<Char>, TagMapLeaf, FixMessageContext, Object)
-  href: api/RapideFix.Business.SimpleTypeSetter.html#RapideFix_Business_SimpleTypeSetter_Set_System_ReadOnlySpan_System_Char__RapideFix_Business_Data_TagMapLeaf_RapideFix_DataTypes_FixMessageContext_System_Object_
-  commentId: M:RapideFix.Business.SimpleTypeSetter.Set(System.ReadOnlySpan{System.Char},RapideFix.Business.Data.TagMapLeaf,RapideFix.DataTypes.FixMessageContext,System.Object)
-  name.vb: Set(ReadOnlySpan(Of Char), TagMapLeaf, FixMessageContext, Object)
-  fullName: RapideFix.Business.SimpleTypeSetter.Set(System.ReadOnlySpan<System.Char>, RapideFix.Business.Data.TagMapLeaf, RapideFix.DataTypes.FixMessageContext, System.Object)
-  fullName.vb: RapideFix.Business.SimpleTypeSetter.Set(System.ReadOnlySpan(Of System.Char), RapideFix.Business.Data.TagMapLeaf, RapideFix.DataTypes.FixMessageContext, System.Object)
-  nameWithType: SimpleTypeSetter.Set(ReadOnlySpan<Char>, TagMapLeaf, FixMessageContext, Object)
-  nameWithType.vb: SimpleTypeSetter.Set(ReadOnlySpan(Of Char), TagMapLeaf, FixMessageContext, Object)
-- uid: RapideFix.Business.SimpleTypeSetter.Set*
-  name: Set
-  href: api/RapideFix.Business.SimpleTypeSetter.html#RapideFix_Business_SimpleTypeSetter_Set_
-  commentId: Overload:RapideFix.Business.SimpleTypeSetter.Set
-  isSpec: "True"
-  fullName: RapideFix.Business.SimpleTypeSetter.Set
-  nameWithType: SimpleTypeSetter.Set
-- uid: RapideFix.Business.SimpleTypeSetter.SetTarget*
-  name: SetTarget
-  href: api/RapideFix.Business.SimpleTypeSetter.html#RapideFix_Business_SimpleTypeSetter_SetTarget_
-  commentId: Overload:RapideFix.Business.SimpleTypeSetter.SetTarget
-  isSpec: "True"
-  fullName: RapideFix.Business.SimpleTypeSetter.SetTarget
-  nameWithType: SimpleTypeSetter.SetTarget
-- uid: RapideFix.Business.SimpleTypeSetter.SetTarget``1(System.ReadOnlySpan{System.Byte},RapideFix.Business.Data.TagMapLeaf,RapideFix.DataTypes.FixMessageContext,``0@)
-  name: SetTarget<TTarget>(ReadOnlySpan<Byte>, TagMapLeaf, FixMessageContext, ref TTarget)
-  href: api/RapideFix.Business.SimpleTypeSetter.html#RapideFix_Business_SimpleTypeSetter_SetTarget__1_System_ReadOnlySpan_System_Byte__RapideFix_Business_Data_TagMapLeaf_RapideFix_DataTypes_FixMessageContext___0__
-  commentId: M:RapideFix.Business.SimpleTypeSetter.SetTarget``1(System.ReadOnlySpan{System.Byte},RapideFix.Business.Data.TagMapLeaf,RapideFix.DataTypes.FixMessageContext,``0@)
-  name.vb: SetTarget(Of TTarget)(ReadOnlySpan(Of Byte), TagMapLeaf, FixMessageContext, ByRef TTarget)
-  fullName: RapideFix.Business.SimpleTypeSetter.SetTarget<TTarget>(System.ReadOnlySpan<System.Byte>, RapideFix.Business.Data.TagMapLeaf, RapideFix.DataTypes.FixMessageContext, ref TTarget)
-  fullName.vb: RapideFix.Business.SimpleTypeSetter.SetTarget(Of TTarget)(System.ReadOnlySpan(Of System.Byte), RapideFix.Business.Data.TagMapLeaf, RapideFix.DataTypes.FixMessageContext, ByRef TTarget)
-  nameWithType: SimpleTypeSetter.SetTarget<TTarget>(ReadOnlySpan<Byte>, TagMapLeaf, FixMessageContext, ref TTarget)
-  nameWithType.vb: SimpleTypeSetter.SetTarget(Of TTarget)(ReadOnlySpan(Of Byte), TagMapLeaf, FixMessageContext, ByRef TTarget)
-- uid: RapideFix.Business.SimpleTypeSetter.SetTarget``1(System.ReadOnlySpan{System.Char},RapideFix.Business.Data.TagMapLeaf,RapideFix.DataTypes.FixMessageContext,``0@)
-  name: SetTarget<TTarget>(ReadOnlySpan<Char>, TagMapLeaf, FixMessageContext, ref TTarget)
-  href: api/RapideFix.Business.SimpleTypeSetter.html#RapideFix_Business_SimpleTypeSetter_SetTarget__1_System_ReadOnlySpan_System_Char__RapideFix_Business_Data_TagMapLeaf_RapideFix_DataTypes_FixMessageContext___0__
-  commentId: M:RapideFix.Business.SimpleTypeSetter.SetTarget``1(System.ReadOnlySpan{System.Char},RapideFix.Business.Data.TagMapLeaf,RapideFix.DataTypes.FixMessageContext,``0@)
-  name.vb: SetTarget(Of TTarget)(ReadOnlySpan(Of Char), TagMapLeaf, FixMessageContext, ByRef TTarget)
-  fullName: RapideFix.Business.SimpleTypeSetter.SetTarget<TTarget>(System.ReadOnlySpan<System.Char>, RapideFix.Business.Data.TagMapLeaf, RapideFix.DataTypes.FixMessageContext, ref TTarget)
-  fullName.vb: RapideFix.Business.SimpleTypeSetter.SetTarget(Of TTarget)(System.ReadOnlySpan(Of System.Char), RapideFix.Business.Data.TagMapLeaf, RapideFix.DataTypes.FixMessageContext, ByRef TTarget)
-  nameWithType: SimpleTypeSetter.SetTarget<TTarget>(ReadOnlySpan<Char>, TagMapLeaf, FixMessageContext, ref TTarget)
-  nameWithType.vb: SimpleTypeSetter.SetTarget(Of TTarget)(ReadOnlySpan(Of Char), TagMapLeaf, FixMessageContext, ByRef TTarget)
 - uid: RapideFix.Business.SubPropertySetterFactory
   name: SubPropertySetterFactory
   href: api/RapideFix.Business.SubPropertySetterFactory.html

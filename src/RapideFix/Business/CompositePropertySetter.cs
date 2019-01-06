@@ -9,12 +9,11 @@ namespace RapideFix.Business
   {
     public object Set(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
-      object parentTarget = targetObject;
       if(mappingDetails.Parents != null)
       {
         foreach(var parent in mappingDetails.Parents)
         {
-          parentTarget = parent.ParentSetter.Set(mappingDetails, parent, fixMessageContext, targetObject);
+          targetObject = parent.ParentSetter.Set(mappingDetails, parent, fixMessageContext, targetObject);
         }
       }
 
@@ -30,23 +29,22 @@ namespace RapideFix.Business
         Encoding.ASCII.GetChars(value, valueChars);
       }
 
-      parentTarget = mappingDetails.Setter.Set(valueChars, mappingDetails, fixMessageContext, parentTarget);
-      return parentTarget;
+      targetObject = mappingDetails.Setter.Set(valueChars, mappingDetails, fixMessageContext, targetObject);
+      return targetObject;
     }
 
     public object Set(ReadOnlySpan<char> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
-      object parentTarget = targetObject;
       if(mappingDetails.Parents != null)
       {
         foreach(var parent in mappingDetails.Parents)
         {
-          parentTarget = parent.ParentSetter.Set(mappingDetails, parent, fixMessageContext, targetObject);
+          targetObject = parent.ParentSetter.Set(mappingDetails, parent, fixMessageContext, targetObject);
         }
       }
 
-      parentTarget = mappingDetails.Setter.Set(value, mappingDetails, fixMessageContext, parentTarget);
-      return parentTarget;
+      targetObject = mappingDetails.Setter.Set(value, mappingDetails, fixMessageContext, targetObject);
+      return targetObject;
     }
 
     public TTarget SetTarget<TTarget>(ReadOnlySpan<byte> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject)
