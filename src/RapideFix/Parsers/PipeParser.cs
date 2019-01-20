@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Buffers;
 using System.IO.Pipelines;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using RapideFix.Extensions;
 
 namespace RapideFix.Parsers
 {
@@ -10,7 +12,7 @@ namespace RapideFix.Parsers
   {
     private readonly PipeReader _reader;
     private readonly IMessageParser<T, byte> _messageParser;
-    private readonly SupportedFixVersion _fixVersion;
+    private readonly byte[] _fixVersion;
     private readonly Func<ReadOnlyMemory<byte>, T> _targetObjectFactory;
 
     public PipeParser(PipeReader pipeReader, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion)
@@ -29,7 +31,9 @@ namespace RapideFix.Parsers
       _reader = pipeReader ?? throw new ArgumentNullException(nameof(pipeReader));
       _messageParser = singleMessageParser ?? throw new ArgumentNullException(nameof(singleMessageParser));
       _targetObjectFactory = targetObjectFactory;
-      _fixVersion = fixVersion;
+      _fixVersion = new byte[fixVersion.Value.Length + 2];
+      int offset = Encoding.ASCII.GetBytes("8=".AsSpan(), _fixVersion);
+      fixVersion.Value.CopyTo(_fixVersion.AsSpan().Slice(offset));
     }
 
     protected Pipe Pipe { get; }
@@ -40,22 +44,22 @@ namespace RapideFix.Parsers
       {
         ReadResult result = await _reader.ReadAsync(token);
         ReadOnlySequence<byte> buffer = result.Buffer;
-        SequencePosition? position = null;
-        do
+        SequencePosition? position = PositionOf(buffer.Slice(buffer.GetPosition(1)), _fixVersion);
+        while(position != null && !token.IsCancellationRequested)
         {
-          position = PositionOf(buffer, _fixVersion.Value);
-          if(position != null)
-          {
-            ProcessLine(buffer.Slice(0, position.Value));
-            // Skip to the next message
-            buffer = buffer.Slice(buffer.GetPosition(1, position.Value));
-          }
+          ProcessLine(buffer.Slice(0, position.Value));
+          // Skip to the next message
+          buffer = buffer.Slice(buffer.GetPosition(0, position.Value));
+          position = PositionOf(buffer.Slice(1), _fixVersion);
         }
-        while(position != null && !token.IsCancellationRequested);
 
         _reader.AdvanceTo(buffer.Start, buffer.End);
         if(result.IsCompleted)
         {
+          if(buffer.Length > 0)
+          {
+            ProcessLine(buffer);
+          }
           break;
         }
       }
@@ -67,6 +71,10 @@ namespace RapideFix.Parsers
 
     private void ProcessLine(ReadOnlySequence<byte> messageSequence)
     {
+      if(messageSequence.Length == 0)
+      {
+        return;
+      }
       T parsedObject = default;
       try
       {

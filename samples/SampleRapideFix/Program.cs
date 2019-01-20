@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using RapideFix;
 using RapideFix.Business;
 using RapideFix.MessageBuilders;
 using RapideFix.Parsers;
 using RapideFix.Validation;
-using RapideFixFixture;
 using RapideFixFixture.TestTypes;
 using SampleRapideFix.Samples;
 
 namespace SampleRapideFix
 {
-  class Program
+  public class Program
   {
-    static void Main(string[] args)
+    public async static Task Main(string[] args)
     {
       new GettingStarted().ParserSample();
       new TypedStringMessageParserSamples().Parser();
@@ -28,6 +27,7 @@ namespace SampleRapideFix
       new MessageBuilderSamples().AddTagRaw();
       new MessageBuilderSamples().AddFixVersion();
       new MessageBuilderSamples().BuildSpan();
+      await new PipeParserSamples().ParseMultipleMessages();
 
       //var settings = new FixParserSettings();
       //settings.RegisterMessageTypes<Order>();
@@ -60,8 +60,4 @@ namespace SampleRapideFix
     }
   }
 
-  public class T
-  {
-    public IEnumerable<int> A { get; set; }
-  }
 }

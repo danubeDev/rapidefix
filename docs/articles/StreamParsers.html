@@ -79,7 +79,33 @@
             <article class="content wrap" id="_content" data-uid="">
 <h2 id="stream-parsers">Stream Parsers</h2>
 
-</article>
+<p>This article introduces the context of streamed parsers. The goal of a stream parser to process a continuous stream of input data into one or more parsed messages.</p>
+<p>Streamed parsers are Observable. To receive the messages an observer must subscribe to the parser. Once a parsed message is available the observable will push it to the subscribed observers.</p>
+<p>There are two type of streamed parsers available in the library, the <code>StreamParser</code> and the <code>PipeParser</code>. Both using the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.io.pipelines">System.IO.Pipelines</a> in their implementation. Usage of the two parsers are very similar, hence this article is introducing it through the <code>PipeParser</code>.</p>
+<blockquote><p>Note, that stream parsers are designed to return the same type of messages.</p>
+</blockquote>
+<h3 id="pipeparser">PipeParser</h3>
+<p>The public interface of a <code>PipeParser</code> is simple. In the constructor it is given a <code>Pipe</code> or a <code>PipeReader</code>, an <code>IMessageParser&lt;T, byte&gt;</code> to parse messages from bytes to type of <em>T</em>, and a <em>SupportedFixVersion</em> to indicate that each message must support a given fix version.</p>
+<p>Optionally, a <code>Func&lt;ReadOnlyMemory&lt;byte&gt;, T&gt;</code> function can be passed to let the user create the target object given the input.</p>
+<p><code>PipeParser</code> provides a <em>Subscribe</em> method for its observables, and a <em>ListenAsync</em> to start listening the input stream of data. ListenAsync will complete once the input has ended or cancellation has been triggered.</p>
+<p>The example below shows how to process data with the <code>PipeParser</code>:</p>
+<pre><code class="lang-csharp">// Construct the pipe
+var pipe = new Pipe();
+
+// Create a message parser that can parser bytes into Order
+var messageParser = new ParserBuilder&lt;Order&gt;().Build&lt;byte&gt;(newMessageParserOptions() { ThrowIfInvalidMessage = false });
+
+// Create the piped parser, providing the pipe and an IMessageParser
+var parser = new PipeParser&lt;Order&gt;(pipe.Reader, messageParser,SupportedFixVersion.Fix44);
+
+// We subscribe to the observable to print the parsed messages
+parser.Subscribe(
+  order =&gt; Console.WriteLine($&quot;Order {order.Symbol} - Px{order.Price}, Qty {order.Quantity}&quot;),
+  ex =&gt; Console.WriteLine($&quot;Error: {ex.Message}&quot;));
+
+// Start observing and await until all messages observed
+await parser.ListenAsync();
+</code></pre></article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -87,7 +113,7 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/danubeDev/rapidefix/blob/ladeak-tagtopropertymapper/samples/Documentation.DocFx/articles/StreamParsers.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/danubeDev/rapidefix/blob/ladeak-docs/samples/Documentation.DocFx/articles/StreamParsers.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

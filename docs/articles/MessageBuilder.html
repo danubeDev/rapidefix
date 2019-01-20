@@ -79,6 +79,39 @@
             <article class="content wrap" id="_content" data-uid="">
 <h2 id="message-builder">Message Builder</h2>
 
+<p>Message builders are available for building FIX messages. Currently the library supports a low-level <code>MessageBuilder</code>, which means it can build messages from <em>string</em> and <em>int</em> typed parameters, but it cannot build a message from POCO classes.</p>
+<p><code>MessageBuilder</code> is designed to be re-used. It means that after a message is built, the same instance can be used to build further messages. For all message, it remembers the maximum length of them. For the next message to be built it allocates arrays with the using this value. This way when message is being built, it can avoid unnecessary array copies, making the whole process faster.</p>
+<blockquote><p>Note, that currently <code>MessageBuilder</code> does not support building messages with raw byte data as a value for a tag.</p>
+</blockquote>
+<h3 id="building-messages">Building messages</h3>
+<h4 id="adding-tags-and-values">Adding tags and values</h4>
+<p><code>MessageBuilder</code> provides a couple of overloads add individual tags to a message. It does a very basic validation on the input message only.</p>
+<p>We can add (with <code>AddTag</code> method) a tag and value by providing parameters tag as an integer and value as a string. We can also provide custom message encoding to the value. Once a message encoding is chosen for a message, it cannot be changed. We can also provide a single string parameter for the tag and the value as <code>23=CustomValue|</code>. In this case use &#39;=&#39; <em>char</em> to separate the tag from the value and &#39;|&#39; <em>char</em> to indicate the SOH byte. If any of these characters are missing an <code>ArgumentException</code> is thrown. These methods can be chained with fluent syntax so a more comples message can be built.</p>
+<pre><code class="lang-csharp">byte[] message0 = new MessageBuilder().AddTag(23, &quot;CustomValue&quot;).Build();
+//or
+byte[] message1 = new MessageBuilder().AddTag(&quot;23=CustomValue|&quot;).Build();
+</code></pre><p>Finally, an <code>AddRaw</code> method is available to provide multiple tags and values within a single string, for example: <code>51=23|23=CustomValue|</code>. In this case no validation is happening, and &#39;|&#39; <em>char</em> has to be used as the SOH character.</p>
+<pre><code class="lang-csharp">byte[] message = new MessageBuilder().AddRaw(&quot;23=CustomValue0|24=CustomValue1|&quot;).Build();
+</code></pre><p>When building a message, we can also define the <code>FixVersion</code> to be used by setting with the <code>AddBeginString</code> method.</p>
+<pre><code class="lang-csharp">byte[] message = new MessageBuilder().AddBeginString(SupportedFixVersion.Fix42).AddTag(23, &quot;CustomValue&quot;).Build();
+</code></pre><h4 id="build-phase">Build phase</h4>
+<p>During the build phase the <code>MessageBuilder</code> assembles the rest of the message by prepending the version and the length tags and by calculating and suffixing the message with the checksum.</p>
+<p>There are two overloads of the Build method. The first has no input arguments and returns a <em>byte[]</em>. This method allocates a byte array with the exact size of the message for each message.</p>
+<blockquote><p>Note, that the <code>MessageBuilder</code> may internally use further arrays to maintain the message being built, but these are cached.</p>
+</blockquote>
+<p>The second overload has a <code>Span&lt;byte&gt;</code> input argument and a <em>int</em> return type. In this case the span is filled with the message, and the length of the message is returned by the method.</p>
+<pre><code class="lang-csharp">Span&lt;byte&gt; message = stackalloc byte[40];
+int length = new MessageBuilder().AddTag(23, &quot;CustomValue&quot;).Build(message);
+message = message.Slice(0, length);
+</code></pre><h3 id="extending-the-messagebuilder">Extending the MessageBuilder</h3>
+<p><code>MessageBuilder</code> has protected methods to override for extension. All of them are invoked during the build phase in the given order:</p>
+<ul>
+<li>CalculateRequiredSize to calculate the byte size of the message required (when a <em>byte[]</em> is being returned)</li>
+<li>AddVersion to override the default FixVersion</li>
+<li>AddLength to override the default length</li>
+<li>AddChecksum to override the default checksum</li>
+<li>Clear to reset the state of the message builder once the message is built</li>
+</ul>
 </article>
           </div>
           
@@ -87,7 +120,7 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/danubeDev/rapidefix/blob/ladeak-tagtopropertymapper/samples/Documentation.DocFx/articles/MessageBuilder.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/danubeDev/rapidefix/blob/ladeak-docs/samples/Documentation.DocFx/articles/MessageBuilder.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
