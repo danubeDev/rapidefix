@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Text;
 using RapideFix.Attributes;
 using RapideFix.Business.Data;
-using RapideFix.Business.PropertySetters;
 
 namespace RapideFix.Business
 {
@@ -173,9 +170,12 @@ namespace RapideFix.Business
       TagMapLeaf value = new TagMapLeaf()
       {
         Current = property,
-        Parents = parents.ToList(),
         IsEncoded = fixTagAttribute.Encoded
       };
+      if(parents.Any())
+      {
+        value.Parents = parents.ToList();
+      }
       if(typeConverter != null)
       {
         value.TypeConverterName = typeConverter.ConverterTypeName;
@@ -192,7 +192,10 @@ namespace RapideFix.Business
     private TagMapLeaf AddEnumerableLeaf(Stack<TagMapNode> parents, PropertyInfo property, FixTagAttribute fixTagAttribute, RepeatingGroupAttribute repeatingGroup, TypeConverterAttribute typeConverter, int key, Type innerType)
     {
       var value = TagMapNode.CreateEnumerable<TagMapLeaf>(property, repeatingGroup.Tag, innerType);
-      value.Parents = parents.ToList();
+      if(parents.Any())
+      {
+        value.Parents = parents.ToList();
+      }
       if(typeConverter != null)
       {
         value.TypeConverterName = typeConverter.ConverterTypeName;
@@ -210,7 +213,10 @@ namespace RapideFix.Business
     private void AddRepeatingGroupLeaf(Stack<TagMapNode> parents, PropertyInfo property, RepeatingGroupAttribute repeatingGroup, Type innerType, int key)
     {
       var value = TagMapLeaf.CreateRepeatingTag<TagMapLeaf>(property, innerType, _propertySetterFactory.GetRepeatingGroupTagSetter(property));
-      value.Parents = parents.ToList();
+      if(parents.Any())
+      {
+        value.Parents = parents.ToList();
+      }
       value.IsEncoded = false;
       value.TypeConverterName = null;
       _map.TryAdd(key, value);

@@ -41,7 +41,7 @@ namespace RapideFixFixture.Business
       Assert.False(result.IsEncoded);
       Assert.False(result.IsEnumerable);
       Assert.NotNull(result.Current);
-      Assert.Empty(result.Parents);
+      Assert.Null(result.Parents);
     }
 
     [Fact]
@@ -54,7 +54,7 @@ namespace RapideFixFixture.Business
       Assert.False(result.IsEncoded);
       Assert.False(result.IsEnumerable);
       Assert.NotNull(result.Current);
-      Assert.Empty(result.Parents);
+      Assert.Null(result.Parents);
       Assert.NotNull(result.TypeConverterName);
     }
 
@@ -68,15 +68,14 @@ namespace RapideFixFixture.Business
 
       Assert.False(repeatingTag.IsEncoded);
       Assert.False(repeatingTag.IsEnumerable);
-      Assert.True(repeatingTag.IsRepeatingGroupTag);
       Assert.NotNull(repeatingTag.Current);
-      Assert.Empty(repeatingTag.Parents);
+      Assert.Null(repeatingTag.Parents);
       Assert.Null(repeatingTag.TypeConverterName);
 
       Assert.False(actualTag.IsEncoded);
       Assert.True(actualTag.IsEnumerable);
       Assert.NotNull(actualTag.Current);
-      Assert.Empty(actualTag.Parents);
+      Assert.Null(actualTag.Parents);
       Assert.NotEqual(0, actualTag.RepeatingTagNumber);
     }
 
@@ -90,9 +89,8 @@ namespace RapideFixFixture.Business
 
       Assert.False(repeatingTag.IsEncoded);
       Assert.False(repeatingTag.IsEnumerable);
-      Assert.True(repeatingTag.IsRepeatingGroupTag);
       Assert.NotNull(repeatingTag.Current);
-      Assert.Empty(repeatingTag.Parents);
+      Assert.Null(repeatingTag.Parents);
       Assert.Null(repeatingTag.TypeConverterName);
 
       Assert.False(actualTag.IsEncoded);

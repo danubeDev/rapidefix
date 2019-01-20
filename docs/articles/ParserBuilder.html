@@ -79,7 +79,30 @@
             <article class="content wrap" id="_content" data-uid="">
 <h2 id="parser-builder">Parser Builder</h2>
 
-</article>
+<p><code>ParserBuilder&lt;TOutput&gt;</code> type can be used to create message parsers with builder pattern. ParserBuilder can return three different type of Parsers depending on the selected <code>TOutput</code> and <code>TInput</code> generic type arguments.</p>
+<ol>
+<li>MessageParser</li>
+<li>TypedMessageParser<ttarget></ttarget></li>
+<li>TypedStringMessageParser<ttarget></ttarget></li>
+</ol>
+<p>When the selected output type argument is type of <em>object</em> a MessageParser will be created. Otherwise, depending on the input type argument, if it is <em>byte</em> <code>TypedMessageParser&lt;TOutput&gt;</code>, if it is <em>char</em> a  <code>TypedStringMessageParser&lt;TOutput&gt;</code> will be returned.</p>
+<h3 id="parser-builder-modes">Parser Builder Modes</h3>
+<p>When a ParserBuilder is created it can be pre-configured by setting dependencies of the built parsers. This preconfigured ParserBuilder can be then shared across the application. When an actual parser is being built by any of the <code>Build</code> overload methods, the default configuration can be changed. During the build phase we can override or substitute missing dependencies of the parser built. While the pre-configured dependencies are available for all parser built, the dependencies overridden or substituted at build time will only be used for the actual parser. When no pre-configuration or build time dependencies are provided, each parser will be given its own dependencies per instance. </p>
+<h4 id="pre-configuration">Pre-configuration</h4>
+<p>The idea behind pre-configuration is that dependences that can be shared across all parser can be set once, during an initialization phase. For example, to share types registered to a <code>TagToPropertyMapper</code>, we can pre-configure this dependency to a <code>ParserBuilder</code> instance. Then every parser instance created by this ParserBuilder will opt to use the pre-configured registrations, unless it is overridden at the build time. ParserBuilder has a <code>SetXXXX</code> method to pre-configure a given dependency. It also has an <code>AddOutputType</code> method to <em>Map</em> a type to the pre-configured <code>TagToPropertyMapper</code>.</p>
+<p>In the following example we pre-configure an <em>Order</em> output type with the <code>TagToPropertyMapper</code> and we build a <code>MessageParser</code> returning objects from input type of <code>ReadOnlySpan&lt;byte&gt;</code>:</p>
+<pre><code class="lang-csharp">var parser = new ParserBuilder&lt;object&gt;().AddOutputType&lt;Order&gt;().Build&lt;byte&gt;() as MessageParser;
+</code></pre><h4 id="build-phase">Build phase</h4>
+<p>During the build phase we can override common parameters:</p>
+<ol>
+<li>MessageParserOptions</li>
+<li>ITagToPropertyMapper</li>
+<li>Or all parameters</li>
+</ol>
+<p>During the build phase, the output type of the ParserBuilder is always <em>mapped</em> with the <code>TagToPropertyMapper</code> being used.</p>
+<p>In the following example we override the MessageParserOptions at build time:</p>
+<pre><code class="lang-csharp">IMessageParser&lt;Quote, char&gt; parser = new ParserBuilder&lt;Quote&gt;().Build&lt;char&gt;(new MessageParserOptions() { SOHChar = &#39;|&#39; });
+</code></pre></article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -87,7 +110,7 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/danubeDev/rapidefix/blob/ladeak-tagtopropertymapper/samples/Documentation.DocFx/articles/ParserBuilder.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/danubeDev/rapidefix/blob/ladeak-docs/samples/Documentation.DocFx/articles/ParserBuilder.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

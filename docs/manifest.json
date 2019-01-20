@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "3DbkbXsGe2gpOyTAcHGYGA=="
+          "hash": "ztoqbzKWHWWkJJkELRWQgQ=="
         }
       },
       "is_incremental": false,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/MessageBuilder.html",
-          "hash": "OcxDs+Gn/jrbCgk/rSfCmw=="
+          "hash": "g8vWLHKWzwmuQ14dgJk35Q=="
         }
       },
       "is_incremental": false,
@@ -33,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/MessageParsers.html",
-          "hash": "O7Ne4NPrT86SXWYyxh1YKw=="
+          "hash": "f0Hi6I9Q6gOqUt1Vkha3Zg=="
         }
       },
       "is_incremental": false,
@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/ParserBuilder.html",
-          "hash": "1UZAQ6+dRBFswV2JwN9pnA=="
+          "hash": "fKVmENrFTF5kutxoIlRsiA=="
         }
       },
       "is_incremental": false,
@@ -57,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/StreamParsers.html",
-          "hash": "3YyAYCANkcyqqzwTIzUddA=="
+          "hash": "TdyYxeOOcJuZ+FNMlcP71Q=="
         }
       },
       "is_incremental": false,
@@ -69,7 +69,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/index.html",
-          "hash": "aFF+Ljx2L0u9nazx82UZkA=="
+          "hash": "X9ecF9JaImq94EwI44nc1g=="
         }
       },
       "is_incremental": false,
@@ -93,7 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "benchmarks/results/RapideFixBenchmarks.MessageParserBenchmark-report-github.html",
-          "hash": "sd99IvDeU0aNehIzkumT/Q=="
+          "hash": "IJOB55ITS8v7YfOHUP3fpQ=="
         }
       },
       "is_incremental": false,
@@ -105,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "benchmarks/results/RapideFixBenchmarks.TypedMessageParserBenchmark-report-github.html",
-          "hash": "sPMs/ONSA/KvEPzE3aOqiw=="
+          "hash": "S3cDcDfLKkC9G9xgblzkZQ=="
         }
       },
       "is_incremental": false,
@@ -117,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "benchmarks/results/RapideFixBenchmarks.TypedStringMessageParserBenchmark-report-github.html",
-          "hash": "cFSkXtyh40BtilDwnGceZA=="
+          "hash": "lbMj1BuKfqVDvTnuKWfwGg=="
         }
       },
       "is_incremental": false,
@@ -152,7 +152,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "DJSCdnaBg7rLH9DzxjDrTA=="
+          "hash": "3NdyTlnMcs5QgiYQukilKw=="
         }
       },
       "is_incremental": false,
@@ -236,7 +236,7 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.Data.TagMapLeaf.html",
-          "hash": "0VAaB+0KA6alyvkvL8SvGw=="
+          "hash": "PL3pyzUouxp+i7fRMT9jjg=="
         }
       },
       "is_incremental": false,
@@ -321,18 +321,6 @@
         ".html": {
           "relative_path": "api/RapideFix.Business.ITypedPropertySetter.html",
           "hash": "12oy3L98dd02gnMJhDN+Tg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "obj/api/RapideFix.Business.ParentTypeSetter.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/RapideFix.Business.ParentTypeSetter.html",
-          "hash": "mMYixUDBrlfmAbLaznFULA=="
         }
       },
       "is_incremental": false,
@@ -664,18 +652,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "obj/api/RapideFix.Business.SimpleTypeSetter.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/RapideFix.Business.SimpleTypeSetter.html",
-          "hash": "2oAgLqownDfQS/eVbKtE+w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "obj/api/RapideFix.Business.SubPropertySetterFactory.yml",
       "output": {
         ".html": {
@@ -716,7 +692,7 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.html",
-          "hash": "dUtIrm0H0+DJiukvZIuBwQ=="
+          "hash": "oxCk7tqqAkQTB55HHYz/qg=="
         }
       },
       "is_incremental": false,
@@ -1172,7 +1148,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "Sbyb3eRMn1cW8piKIDvD4A=="
+          "hash": "/dLcSIqyEfiEAOkqZJZLtg=="
         }
       },
       "is_incremental": false,
@@ -1207,14 +1183,14 @@
           "can_incremental": false,
           "incrementalPhase": "build"
         },
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
-        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         }
       }

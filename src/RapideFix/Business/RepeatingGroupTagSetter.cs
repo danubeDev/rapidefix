@@ -20,20 +20,15 @@ namespace RapideFix.Business
     {
       // mappingDetails is a leaf node for the repeating tag
       // parents are expected to be set by parents setter
-      if(mappingDetails.IsRepeatingGroupTag)
+      //This is handled as a parent. The incremental counting is set by the first tag of the repeating group.
+      if(!fixMessageContext.CreatedParentTypes.Contains(GetKey(mappingDetails.Current)))
       {
-        //This is handled as a parent. The incremental counting is set by the first tag of the repeating group.
-        if(!fixMessageContext.CreatedParentTypes.Contains(GetKey(mappingDetails.Current)))
-        {
-          targetObject = CreateEnumerable(value, mappingDetails, fixMessageContext, targetObject);
-        }
-        else
-        {
-          targetObject = mappingDetails.Current.GetValue(targetObject);
-        }
-        return targetObject;
+        targetObject = CreateEnumerable(value, mappingDetails, fixMessageContext, targetObject);
       }
-
+      else
+      {
+        targetObject = mappingDetails.Current.GetValue(targetObject);
+      }
       return targetObject;
     }
 
