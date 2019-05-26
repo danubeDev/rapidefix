@@ -15,7 +15,7 @@ namespace RapideFix.Business
     /// <param name="tag">The byte representation of the tag.</param>
     /// <param name="messageTypeKey">An integer key value for the message type</param>
     /// <returns>A tagmap leaf with optional parents.</returns>
-    bool TryGet(ReadOnlySpan<byte> tag, int messageTypeKey, out TagMapLeaf result);
+    bool TryGet(ReadOnlySpan<byte> tag, int messageTypeKey, out TagMapLeaf? result);
 
     /// <summary>
     /// Gets a tag setter descriptor or null.
@@ -23,7 +23,7 @@ namespace RapideFix.Business
     /// <param name="tag">The byte representation of the tag.</param>
     /// <param name="messageTypeKey">An integer key value for the message type</param>
     /// <returns>A tagmap leaf with optional parents.</returns>
-    bool TryGet(ReadOnlySpan<char> tag, int messageTypeKey, out TagMapLeaf result);
+    bool TryGet(ReadOnlySpan<char> tag, int messageTypeKey, out TagMapLeaf? result);
 
     /// <summary>
     /// Gets the type to use for deserialization or null.

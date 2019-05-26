@@ -10,8 +10,8 @@ namespace RapideFix.Business
 {
   public class TypeConvertedSetter : BaseSetter, IPropertySetter
   {
-    private TypeConverter _typeConverter;
-    private Delegate _delegateFactory;
+    private TypeConverter? _typeConverter;
+    private Delegate? _delegateFactory;
 
     public override object Set(ReadOnlySpan<char> valueChars, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {

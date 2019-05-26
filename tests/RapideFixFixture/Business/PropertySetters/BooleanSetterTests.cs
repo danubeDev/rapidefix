@@ -16,7 +16,7 @@ namespace RapideFixFixture.Business.PropertySetters
     {
       var targetObject = new TestTypeParent();
       var uut = new BooleanSetter();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag68)), Setter = uut };
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag68)), uut);
       var messageContext = new FixMessageContext();
       uut.Set(value, mappingDetails, messageContext, targetObject);
       Assert.True(targetObject.Tag68);
@@ -30,7 +30,7 @@ namespace RapideFixFixture.Business.PropertySetters
     {
       var targetObject = new TestTypeParent();
       var uut = new BooleanSetter();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag68)), Setter = uut };
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag68)), uut);
       var messageContext = new FixMessageContext();
       uut.Set(value, mappingDetails, messageContext, targetObject);
       Assert.False(targetObject.Tag68);

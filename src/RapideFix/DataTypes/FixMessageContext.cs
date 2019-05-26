@@ -23,7 +23,7 @@ namespace RapideFix.DataTypes
       public int Index { get; set; }
     }
 
-    public SupportedFixVersion FixVersion { get; set; }
+    public SupportedFixVersion? FixVersion { get; set; }
 
     public int LengthTagStartIndex { get; set; }
 
@@ -33,7 +33,7 @@ namespace RapideFix.DataTypes
 
     public byte ChecksumValue { get; set; }
 
-    public MessageEncoding EncodedFields { get; set; }
+    public MessageEncoding? EncodedFields { get; set; }
 
     /// <summary>
     /// Holds a counter for a given tag (first tag within a repeating group and the number of its appearences.

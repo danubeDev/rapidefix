@@ -47,7 +47,7 @@ namespace RapideFix.Parsers
         {
           throw new ArgumentException("Invalid message");
         }
-        return default;
+        return default!;
       }
       return (T)Parse(message, _messageContext, targetObject, typeof(T).GetHashCode());
     }
@@ -61,7 +61,7 @@ namespace RapideFix.Parsers
         {
           throw new ArgumentException("Invalid message");
         }
-        return default;
+        return default!;
       }
 
       var messageTypeStart = _messageContext.MessageTypeTagStartIndex;
@@ -90,7 +90,7 @@ namespace RapideFix.Parsers
         {
           throw new ArgumentException("Invalid message");
         }
-        return default;
+        return default!;
       }
       return Parse(message, _messageContext, targetObject, targetObject.GetType().GetHashCode());
     }
@@ -104,7 +104,7 @@ namespace RapideFix.Parsers
         {
           throw new ArgumentException("Invalid message");
         }
-        return default;
+        return default!;
       }
       object targetObject = targetObjectFactory(message);
 
@@ -120,11 +120,11 @@ namespace RapideFix.Parsers
         {
           throw new ArgumentException("Invalid message");
         }
-        return default;
+        return default!;
       }
       T targetObject = targetObjectFactory(message);
 
-      return (T)Parse(message.Span, _messageContext, targetObject, typeof(T).GetHashCode());
+      return (T)Parse(message.Span, _messageContext, targetObject!, typeof(T).GetHashCode());
     }
 
     private object Parse(ReadOnlySpan<byte> message, FixMessageContext messageContext, object targetObject, int messageTypeKey)
@@ -142,7 +142,7 @@ namespace RapideFix.Parsers
           {
             indexEquals++;
             var valueSlice = messagePart.Slice(indexEquals, indexSOH - indexEquals);
-            _compositeSetter.Set(valueSlice, propertyLeaf, messageContext, targetObject);
+            _compositeSetter.Set(valueSlice, propertyLeaf!, messageContext, targetObject);
           }
         }
         else

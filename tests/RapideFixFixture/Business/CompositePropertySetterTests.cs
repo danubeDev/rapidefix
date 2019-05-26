@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using RapideFix.Business;
 using RapideFix.Business.Data;
@@ -21,7 +22,7 @@ namespace RapideFixFixture.Business
       var mockSimpleTypeSetter = new MockPropertySetter();
 
       var uut = new CompositePropertySetter();
-      uut.Set(testValue, new TagMapLeaf() { Parents = new List<TagMapNode>() { new TagMapNode() { ParentSetter = mockParentSetter } }, Setter = mockSimpleTypeSetter }, new FixMessageContext(), new object());
+      uut.Set(testValue, new TagMapLeaf(MockPropertyInfo.Get, mockSimpleTypeSetter) { Parents = new List<TagMapParent>() { new TagMapParent(MockPropertyInfo.Get, mockParentSetter) } }, new FixMessageContext(), new object());
 
       Assert.True(mockParentSetter.IsVerified);
       Assert.True(mockSimpleTypeSetter.IsVerified);
@@ -34,7 +35,7 @@ namespace RapideFixFixture.Business
       var mockSimpleTypeSetter = new MockPropertySetter();
 
       var uut = new CompositePropertySetter();
-      uut.Set(testValue, new TagMapLeaf() { Setter = mockSimpleTypeSetter }, new FixMessageContext(), new object());
+      uut.Set(testValue, new TagMapLeaf(MockPropertyInfo.Get, mockSimpleTypeSetter), new FixMessageContext(), new object());
 
       Assert.True(mockSimpleTypeSetter.IsVerified);
     }
@@ -46,7 +47,7 @@ namespace RapideFixFixture.Business
       var mockSetter = new MockPropertySetter();
 
       var uut = new CompositePropertySetter();
-      uut.Set(testValue, TagMapLeaf.CreateRepeatingTag<TagMapLeaf>(null, null, mockSetter), new FixMessageContext(), new object());
+      uut.Set(testValue, TagMapLeaf.CreateRepeatingTag(null, null, mockSetter), new FixMessageContext(), new object());
 
       Assert.True(mockSetter.IsVerified);
     }
@@ -58,7 +59,7 @@ namespace RapideFixFixture.Business
       var mockSetter = new MockPropertySetter();
 
       var uut = new CompositePropertySetter();
-      uut.Set(testValue, new TagMapLeaf() { TypeConverterName = "name", Setter = mockSetter }, new FixMessageContext(), new object());
+      uut.Set(testValue, new TagMapLeaf(MockPropertyInfo.Get, mockSetter) { TypeConverterName = "name" }, new FixMessageContext(), new object());
 
       Assert.True(mockSetter.IsVerified);
     }
@@ -71,7 +72,7 @@ namespace RapideFixFixture.Business
 
       var uut = new CompositePropertySetter();
       var targetObject = new object();
-      uut.SetTarget(testValue, new TagMapLeaf() { Setter = mockSimpleTypeSetter }, new FixMessageContext(), ref targetObject);
+      uut.SetTarget(testValue, new TagMapLeaf(MockPropertyInfo.Get, mockSimpleTypeSetter), new FixMessageContext(), ref targetObject);
 
       Assert.True(mockSimpleTypeSetter.IsVerified);
     }
@@ -84,7 +85,7 @@ namespace RapideFixFixture.Business
       var mockSimpleTypeSetter = new MockPropertySetter();
 
       var uut = new CompositePropertySetter();
-      uut.Set(testValue, new TagMapLeaf() { Parents = new List<TagMapNode>() { new TagMapNode() { ParentSetter = mockParentSetter } }, Setter = mockSimpleTypeSetter }, new FixMessageContext(), new object());
+      uut.Set(testValue, new TagMapLeaf(MockPropertyInfo.Get, mockSimpleTypeSetter) { Parents = new List<TagMapParent>() { new TagMapParent(MockPropertyInfo.Get, mockParentSetter) } }, new FixMessageContext(), new object());
 
       Assert.True(mockParentSetter.IsVerified);
       Assert.True(mockSimpleTypeSetter.IsVerified);
@@ -97,7 +98,7 @@ namespace RapideFixFixture.Business
       var mockSimpleTypeSetter = new MockPropertySetter();
 
       var uut = new CompositePropertySetter();
-      uut.Set(testValue, new TagMapLeaf() { Setter = mockSimpleTypeSetter }, new FixMessageContext(), new object());
+      uut.Set(testValue, new TagMapLeaf(MockPropertyInfo.Get, mockSimpleTypeSetter), new FixMessageContext(), new object());
 
       Assert.True(mockSimpleTypeSetter.IsVerified);
     }
@@ -109,7 +110,7 @@ namespace RapideFixFixture.Business
       var mockSetter = new MockPropertySetter();
 
       var uut = new CompositePropertySetter();
-      uut.Set(testValue, TagMapLeaf.CreateRepeatingTag<TagMapLeaf>(null, null, mockSetter), new FixMessageContext(), new object());
+      uut.Set(testValue, TagMapLeaf.CreateRepeatingTag(null, null, mockSetter), new FixMessageContext(), new object());
 
       Assert.True(mockSetter.IsVerified);
     }
@@ -121,7 +122,7 @@ namespace RapideFixFixture.Business
       var mockSetter = new MockPropertySetter();
 
       var uut = new CompositePropertySetter();
-      uut.Set(testValue, new TagMapLeaf() { TypeConverterName = "name", Setter = mockSetter }, new FixMessageContext(), new object());
+      uut.Set(testValue, new TagMapLeaf(MockPropertyInfo.Get, mockSetter) { TypeConverterName = "name" }, new FixMessageContext(), new object());
 
       Assert.True(mockSetter.IsVerified);
     }
@@ -130,13 +131,13 @@ namespace RapideFixFixture.Business
     public void GivenTypedSimpleValueAsString_SetTarget_CallsTypedSetter()
     {
       var testValue = "test".AsSpan();
-      var mockSimpleTypeSetter = new MockPropertySetter();
+      var mockSetter = new MockPropertySetter();
 
       var uut = new CompositePropertySetter();
       var targetObject = new object();
-      uut.SetTarget(testValue, new TagMapLeaf() { Setter = mockSimpleTypeSetter }, new FixMessageContext(), ref targetObject);
+      uut.SetTarget(testValue, new TagMapLeaf(MockPropertyInfo.Get, mockSetter), new FixMessageContext(), ref targetObject);
 
-      Assert.True(mockSimpleTypeSetter.IsVerified);
+      Assert.True(mockSetter.IsVerified);
     }
 
     [Fact]
@@ -145,12 +146,11 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new CompositePropertySetter();
       var valueToSet = new byte[1].AsSpan();
-      var mappingDetails = new TagMapLeaf()
+      var mappingDetails = new TagMapLeaf(MockPropertyInfo.Get, new MockPropertySetter())
       {
-        Setter = new MockPropertySetter(),
-        Parents = new List<TagMapNode>
+        Parents = new List<TagMapParent>
         {
-          new TagMapNode() { Current = targetObject.GetType().GetProperty(nameof(targetObject.CustomType)), ParentSetter = new ParentPropertySetter() }
+          new TagMapParent(targetObject.GetType().GetProperty(nameof(targetObject.CustomType)), new ParentPropertySetter())
         }
       };
       var messageContext = new FixMessageContext();
@@ -166,13 +166,12 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new CompositePropertySetter();
       var valueToSet = new byte[1].AsSpan();
-      var mappingDetails = new TagMapLeaf()
+      var mappingDetails = new TagMapLeaf(MockPropertyInfo.Get, new MockPropertySetter())
       {
-        Parents = new List<TagMapNode>
+        Parents = new List<TagMapParent>
         {
-          new TagMapNode() { Current = targetObject.GetType().GetProperty(nameof(targetObject.CustomType)), ParentSetter = new ParentPropertySetter() }
+          new TagMapParent(targetObject.GetType().GetProperty(nameof(targetObject.CustomType)), new ParentPropertySetter())
         },
-        Setter = new MockPropertySetter()
       };
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
@@ -188,18 +187,14 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent() { Tag59s = new TestMany[3] };
       var uut = new CompositePropertySetter();
       var valueToSet = new byte[1].AsSpan();
-      var mappingDetails = new TagMapLeaf()
+      var mappingDetails = new TagMapLeaf(typeof(TestMany).GetProperty("Tag60"), new MockPropertySetter())
       {
-        Current = typeof(TestMany).GetProperty("Tag60"),
-        Setter = new MockPropertySetter(),
-        Parents = new List<TagMapNode>
+        Parents = new List<TagMapParent>
         {
-          new TagMapNode()
+          new TagMapParent(targetObject.GetType().GetProperty(nameof(targetObject.Tag59s)), new ParentPropertySetter())
           {
             IsEnumerable = true,
-            Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag59s)),
             InnerType = typeof(TestMany),
-            ParentSetter = new ParentPropertySetter()
           }
         }
       };
@@ -216,33 +211,25 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent() { Tag59s = new TestMany[3] };
       var uut = new CompositePropertySetter();
       var valueToSet = new byte[1].AsSpan();
-      var mappingTag60 = new TagMapLeaf()
+      var mappingTag60 = new TagMapLeaf(typeof(TestMany).GetProperty("Tag60"), new MockPropertySetter())
       {
-        Current = typeof(TestMany).GetProperty("Tag60"),
-        Setter = new MockPropertySetter(),
-        Parents = new List<TagMapNode>
+        Parents = new List<TagMapParent>
        {
-          new TagMapNode()
+          new TagMapParent(targetObject.GetType().GetProperty(nameof(targetObject.Tag59s)),new ParentPropertySetter())
           {
             IsEnumerable = true,
-            Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag59s)),
             InnerType = typeof(TestMany),
-            ParentSetter = new ParentPropertySetter()
           }
         }
       };
-      var mappingTag601 = new TagMapLeaf()
+      var mappingTag601 = new TagMapLeaf(typeof(TestMany).GetProperty("Tag601"), new MockPropertySetter())
       {
-        Current = typeof(TestMany).GetProperty("Tag601"),
-        Setter = new MockPropertySetter(),
-        Parents = new List<TagMapNode>
+        Parents = new List<TagMapParent>
         {
-          new TagMapNode()
+          new TagMapParent(targetObject.GetType().GetProperty(nameof(targetObject.Tag59s)),new ParentPropertySetter())
           {
             IsEnumerable = true,
-            Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag59s)),
             InnerType = typeof(TestMany),
-            ParentSetter = new ParentPropertySetter()
           }
         }
       };
@@ -260,18 +247,14 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent() { Tag59s = new TestMany[3] };
       var uut = new CompositePropertySetter();
       var valueToSet = new byte[1].AsSpan();
-      var mappingDetails = new TagMapLeaf()
+      var mappingDetails = new TagMapLeaf(typeof(TestMany).GetProperty("Tag60"), new MockPropertySetter())
       {
-        Current = typeof(TestMany).GetProperty("Tag60"),
-        Setter = new MockPropertySetter(),
-        Parents = new List<TagMapNode>
+        Parents = new List<TagMapParent>
         {
-          new TagMapNode()
+          new TagMapParent(targetObject.GetType().GetProperty(nameof(targetObject.Tag59s)),new ParentPropertySetter())
           {
             IsEnumerable = true,
-            Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag59s)),
             InnerType = typeof(TestMany),
-            ParentSetter = new ParentPropertySetter()
           }
         }
       };
@@ -289,16 +272,11 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new CompositePropertySetter();
       var valueToSet = "test";
-      var mappingDetails = new TagMapLeaf()
+      var mappingDetails = new TagMapLeaf(MockPropertyInfo.Get, new MockPropertySetter())
       {
-        Setter = new MockPropertySetter(),
-        Parents = new List<TagMapNode>
+        Parents = new List<TagMapParent>
         {
-          new TagMapNode()
-          {
-            Current = targetObject.GetType().GetProperty(nameof(targetObject.CustomType)),
-            ParentSetter = new ParentPropertySetter()
-          }
+          new TagMapParent(targetObject.GetType().GetProperty(nameof(targetObject.CustomType)), new ParentPropertySetter())
         }
       };
       var messageContext = new FixMessageContext();
@@ -315,7 +293,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new CompositePropertySetter();
       var valueToSet = Encoding.ASCII.GetBytes("12357").AsSpan();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag62)), Setter = new IntegerSetter() };
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag62)), new IntegerSetter());
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
 
@@ -328,7 +306,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new CompositePropertySetter();
       var valueToSet = Encoding.ASCII.GetBytes("12357").AsSpan();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag63)), Setter = new IntegerSetter() };
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag63)), new IntegerSetter());
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
 
@@ -341,13 +319,11 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent() { Tag57s = new string[3] };
       var uut = new CompositePropertySetter();
       var valueToSet = Encoding.ASCII.GetBytes("12357").AsSpan();
-      var mappingDetails = new TagMapLeaf()
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag57s)), new StringSetter())
       {
         IsEnumerable = true,
-        Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag57s)),
         RepeatingTagNumber = 56,
         InnerType = typeof(string),
-        Setter = new StringSetter()
       };
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
@@ -361,13 +337,11 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent() { Tag57s = new string[3] };
       var uut = new CompositePropertySetter();
       var valueToSet = Encoding.ASCII.GetBytes("12357").AsSpan();
-      var mappingDetails = new TagMapLeaf()
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag57s)), new StringSetter())
       {
         IsEnumerable = true,
-        Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag57s)),
         RepeatingTagNumber = 56,
         InnerType = typeof(string),
-        Setter = new StringSetter()
       };
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
@@ -385,9 +359,9 @@ namespace RapideFixFixture.Business
       var integerToSet = Encoding.ASCII.GetBytes("12357").AsSpan();
       var stringToSet = Encoding.ASCII.GetBytes("message").AsSpan();
       var doubleToSet = Encoding.ASCII.GetBytes("123.456").AsSpan();
-      var mappingDetailsInt = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag101)), Setter = new IntegerSetter() };
-      var mappingDetailsString = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag100)), Setter = new StringSetter() };
-      var mappingDetailsDouble = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag102)), Setter = new DoubleSetter() };
+      var mappingDetailsInt = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag101)), new IntegerSetter());
+      var mappingDetailsString = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag100)), new StringSetter());
+      var mappingDetailsDouble = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag102)), new DoubleSetter());
       var messageContext = new FixMessageContext();
       uut.SetTarget(integerToSet, mappingDetailsInt, messageContext, ref targetObject);
       uut.SetTarget(stringToSet, mappingDetailsString, messageContext, ref targetObject);
@@ -404,11 +378,9 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeStruct() { Tag104 = new string[2] };
       var uut = new CompositePropertySetter();
       var valueToSet = Encoding.ASCII.GetBytes("message").AsSpan();
-      var mappingDetails = new TagMapLeaf()
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag104)), new StringSetter())
       {
         IsEnumerable = true,
-        Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag104)),
-        Setter = new StringSetter(),
         RepeatingTagNumber = 103,
         InnerType = typeof(string)
       };
@@ -426,7 +398,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new CompositePropertySetter();
       var valueToSet = "12357".AsSpan();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag62)), Setter = new IntegerSetter() };
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag62)), new IntegerSetter());
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
 
@@ -439,7 +411,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new CompositePropertySetter();
       ReadOnlySpan<char> valueToSet = "12357".AsSpan();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag63)), Setter = new IntegerSetter() };
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag63)), new IntegerSetter());
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
 
@@ -453,13 +425,11 @@ namespace RapideFixFixture.Business
       var uut = new CompositePropertySetter();
       var firstValueToSet = "12357";
       var secondValueToSet = "12358";
-      var mappingDetails = new TagMapLeaf()
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag57s)), new StringSetter())
       {
         IsEnumerable = true,
-        Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag57s)),
         RepeatingTagNumber = 56,
         InnerType = typeof(string),
-        Setter = new StringSetter()
       };
       var messageContext = new FixMessageContext();
       // Setting the 1st element
@@ -479,9 +449,9 @@ namespace RapideFixFixture.Business
       var integerToSet = "12357".AsSpan();
       var stringToSet = "message".AsSpan();
       var doubleToSet = "123.456".AsSpan();
-      var mappingDetailsInt = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag101)), Setter = new IntegerSetter() };
-      var mappingDetailsString = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag100)), Setter = new StringSetter() };
-      var mappingDetailsDouble = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag102)), Setter = new DoubleSetter() };
+      var mappingDetailsInt = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag101)), new IntegerSetter());
+      var mappingDetailsString = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag100)), new StringSetter());
+      var mappingDetailsDouble = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag102)), new DoubleSetter());
       var messageContext = new FixMessageContext();
       uut.SetTarget(integerToSet, mappingDetailsInt, messageContext, ref targetObject);
       uut.SetTarget(stringToSet, mappingDetailsString, messageContext, ref targetObject);
@@ -498,11 +468,9 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeStruct() { Tag104 = new string[2] };
       var uut = new CompositePropertySetter();
       var valueToSet = "message";
-      var mappingDetails = new TagMapLeaf()
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag104)), new StringSetter())
       {
         IsEnumerable = true,
-        Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag104)),
-        Setter = new StringSetter(),
         RepeatingTagNumber = 103,
         InnerType = typeof(string)
       };
@@ -520,7 +488,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new CompositePropertySetter();
       var valueToSet = Encoding.ASCII.GetBytes("Y").AsSpan();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag68)), Setter = new BooleanSetter() };
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag68)), new BooleanSetter());
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
       Assert.True(targetObject.Tag68);
@@ -532,7 +500,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new CompositePropertySetter();
       var valueToSet = Encoding.ASCII.GetBytes("Y").AsSpan();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag69)), Setter = new NullableBooleanSetter() };
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag69)), new NullableBooleanSetter());
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet, mappingDetails, messageContext, targetObject);
       Assert.True(targetObject.Tag69);
@@ -545,7 +513,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new CompositePropertySetter();
       var valueToSet = "Y";
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag68)), Setter = new BooleanSetter() };
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag68)), new BooleanSetter());
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet.AsSpan(), mappingDetails, messageContext, targetObject);
       Assert.True(targetObject.Tag68);
@@ -557,7 +525,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new CompositePropertySetter();
       var valueToSet = "Y";
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag69)), Setter = new NullableBooleanSetter() };
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag69)), new NullableBooleanSetter());
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet.AsSpan(), mappingDetails, messageContext, targetObject);
       Assert.True(targetObject.Tag69);
@@ -570,7 +538,7 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new CompositePropertySetter();
       var valueToSet = "20181219-18:14:23";
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag70)), Setter = new DateTimeOffsetSetter() };
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag70)), new DateTimeOffsetSetter());
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet.AsSpan(), mappingDetails, messageContext, targetObject);
       Assert.Equal(new DateTimeOffset(2018, 12, 19, 18, 14, 23, 0, TimeSpan.Zero), targetObject.Tag70);
@@ -582,10 +550,16 @@ namespace RapideFixFixture.Business
       var targetObject = new TestTypeParent();
       var uut = new CompositePropertySetter();
       var valueToSet = "20181219-18:14:23";
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag71)), Setter = new NullableDateTimeOffsetSetter() };
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag71)), new NullableDateTimeOffsetSetter());
       var messageContext = new FixMessageContext();
       uut.Set(valueToSet.AsSpan(), mappingDetails, messageContext, targetObject);
       Assert.Equal(new DateTimeOffset(2018, 12, 19, 18, 14, 23, 0, TimeSpan.Zero), targetObject.Tag71.Value);
+    }
+
+    private class MockPropertyInfo
+    {
+      //This could be any propertyInfo.
+      public static PropertyInfo Get => typeof(MockPropertyInfo).GetProperty("Get");
     }
 
     private class MockPropertySetter : BaseSetter, ITypedPropertySetter, IParentSetter
@@ -615,7 +589,7 @@ namespace RapideFixFixture.Business
         return targetObject;
       }
 
-      public object Set(TagMapLeaf leaf, TagMapNode parent, FixMessageContext fixMessageContext, object targetObject)
+      public object Set(TagMapLeaf leaf, TagMapParent parent, FixMessageContext fixMessageContext, object targetObject)
       {
         IsVerified = true;
         return targetObject;

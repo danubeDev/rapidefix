@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using RapideFix.Business.Data;
 using RapideFix.Business.PropertySetters;
 using RapideFix.DataTypes;
@@ -14,7 +11,7 @@ namespace RapideFix.Business
   /// </summary>
   public class RepeatingGroupTagSetter : BaseSetter, IPropertySetter
   {
-    private Delegate _delegateFactoryCache;
+    private Delegate? _delegateFactoryCache;
 
     public override object Set(ReadOnlySpan<char> value, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {

@@ -21,7 +21,7 @@ namespace RapideFix.Business
       Span<char> valueChars = stackalloc char[valueLength];
       if(mappingDetails.IsEncoded)
       {
-        valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, valueChars);
+        valueLength = fixMessageContext.EncodedFields!.GetEncoder().GetChars(value, valueChars);
         valueChars = valueChars.Slice(0, valueLength);
       }
       else
@@ -53,7 +53,7 @@ namespace RapideFix.Business
       Span<char> valueChars = stackalloc char[valueLength];
       if(mappingDetails.IsEncoded)
       {
-        valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, valueChars);
+        valueLength = fixMessageContext.EncodedFields!.GetEncoder().GetChars(value, valueChars);
         valueChars = valueChars.Slice(0, valueLength);
       }
       else

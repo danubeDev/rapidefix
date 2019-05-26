@@ -79,7 +79,7 @@ namespace RapideFix
       return fixTagPropertyInfoMap;
     }
 
-    private object Parse(Type type, ReadOnlyMemory<char> value)
+    private object? Parse(Type type, ReadOnlyMemory<char> value)
     {
       switch(type.Name)
       {

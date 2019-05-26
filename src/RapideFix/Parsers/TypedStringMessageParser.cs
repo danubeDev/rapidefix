@@ -37,7 +37,7 @@ namespace RapideFix.Parsers
       TTarget targetObject;
       if(_isValueType)
       {
-        targetObject = default;
+        targetObject = default!;
       }
       else
       {
@@ -68,11 +68,11 @@ namespace RapideFix.Parsers
             var valueSlice = messagePart.Slice(indexEquals, indexSOH - indexEquals);
             if(_isValueType)
             {
-              _typedPropertySetter.SetTarget(valueSlice, propertyLeaf, messageContext, ref targetObject);
+              _typedPropertySetter.SetTarget(valueSlice, propertyLeaf!, messageContext, ref targetObject);
             }
             else
             {
-              _typedPropertySetter.Set(valueSlice, propertyLeaf, messageContext, targetObject);
+              _typedPropertySetter.Set(valueSlice, propertyLeaf!, messageContext, targetObject!);
             }
           }
         }

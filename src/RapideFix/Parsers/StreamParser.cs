@@ -16,11 +16,11 @@ namespace RapideFix.Parsers
     {
     }
 
-    public StreamParser(Stream stream, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion, Func<ReadOnlyMemory<byte>, T> targetObjectFactory)
+    public StreamParser(Stream stream, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion, Func<ReadOnlyMemory<byte>, T>? targetObjectFactory)
       : base(new Pipe(), singleMessageParser, fixVersion, targetObjectFactory)
     {
       _stream = stream ?? throw new ArgumentNullException(nameof(stream));
-      _pipeWriter = base.Pipe.Writer;
+      _pipeWriter = base.Pipe!.Writer;
     }
 
     public override async Task ListenAsync(CancellationToken token)

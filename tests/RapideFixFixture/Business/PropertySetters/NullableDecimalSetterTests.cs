@@ -25,7 +25,7 @@ namespace RapideFixFixture.Business.PropertySetters
     {
       var targetObject = new MockClass();
       var uut = new NullableDecimalSetter();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag1)), Setter = uut };
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag1)), uut);
       var messageContext = new FixMessageContext();
       uut.Set(1M.ToString(), mappingDetails, messageContext, targetObject);
       Assert.True(targetObject.Tag1.HasValue);
@@ -36,7 +36,7 @@ namespace RapideFixFixture.Business.PropertySetters
     {
       var targetObject = new MockStruct();
       var uut = new NullableDecimalSetter();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag1)), Setter = uut };
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag1)), uut);
       var messageContext = new FixMessageContext();
       uut.SetTarget<MockStruct>(1M.ToString(), mappingDetails, messageContext, ref targetObject);
       Assert.True(targetObject.Tag1.HasValue);

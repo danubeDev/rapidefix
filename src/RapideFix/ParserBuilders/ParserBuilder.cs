@@ -12,11 +12,11 @@ namespace RapideFix.ParserBuilders
   /// <typeparam name="TOutput">Output type of the message parser built.</typeparam>
   public class ParserBuilder<TOutput>
   {
-    private IValidator _validator;
-    private ITagToPropertyMapper _propertyMapper;
-    private ITypedPropertySetter _propertySetter;
-    private ISubPropertySetterFactory _subPropertySetterFactory;
-    private MessageParserOptions _options;
+    private IValidator? _validator;
+    private ITagToPropertyMapper? _propertyMapper;
+    private ITypedPropertySetter? _propertySetter;
+    private ISubPropertySetterFactory? _subPropertySetterFactory;
+    private MessageParserOptions? _options;
 
     /// <summary>
     /// Sets a property mapper object to configure the <see cref="RapideFix.Parsers.IMessageParser{TOutput, TData}"/> instances built by ParserBuilder.
@@ -178,21 +178,21 @@ namespace RapideFix.ParserBuilders
       propertyMapper.Map<TOutput>();
       if(typeof(TInput) == typeof(char))
       {
-        return new TypedStringMessageParser<TOutput>(propertyMapper, propertySetter, validatorCollection, options)
-          as IMessageParser<TOutput, TInput>;
+        return (new TypedStringMessageParser<TOutput>(propertyMapper, propertySetter, validatorCollection, options)
+          as IMessageParser<TOutput, TInput>)!;
       }
 
       if(typeof(TInput) == typeof(byte))
       {
         if(typeof(TOutput) == typeof(object))
         {
-          return new MessageParser(propertyMapper, propertySetter, validatorCollection, options)
-            as IMessageParser<TOutput, TInput>;
+          return (new MessageParser(propertyMapper, propertySetter, validatorCollection, options)
+            as IMessageParser<TOutput, TInput>)!;
         }
         else
         {
-          return new TypedMessageParser<TOutput>(propertyMapper, propertySetter, validatorCollection, options)
-            as IMessageParser<TOutput, TInput>;
+          return (new TypedMessageParser<TOutput>(propertyMapper, propertySetter, validatorCollection, options)
+            as IMessageParser<TOutput, TInput>)!;
         }
       }
       throw new NotSupportedException("Input type is not supported");

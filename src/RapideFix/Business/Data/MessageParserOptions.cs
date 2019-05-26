@@ -17,7 +17,7 @@ namespace RapideFix.Business.Data
     /// <summary>
     /// Gets or sets the encoding type for the encoded fix tags.
     /// </summary>
-    public MessageEncoding Encoding { get; set; }
+    public MessageEncoding? Encoding { get; set; }
 
     /// <summary>
     /// Gets or sets the delimiter character

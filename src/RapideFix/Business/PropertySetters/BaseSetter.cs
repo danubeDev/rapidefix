@@ -15,7 +15,7 @@ namespace RapideFix.Business.PropertySetters
 
     protected delegate void ActionRef<TTarget, TValue0, TValue1>(ref TTarget target, TValue0 value0, TValue1 value1);
 
-    protected Delegate _propertySetter;
+    protected Delegate? _propertySetter;
 
     /// <summary>
     /// Returns an action to set a given typed value on a given property
@@ -182,7 +182,7 @@ namespace RapideFix.Business.PropertySetters
       Span<char> valueChars = stackalloc char[valueLength];
       if(mappingDetails.IsEncoded)
       {
-        valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, valueChars);
+        valueLength = fixMessageContext.EncodedFields!.GetEncoder().GetChars(value, valueChars);
         valueChars = valueChars.Slice(0, valueLength);
       }
       else
@@ -198,7 +198,7 @@ namespace RapideFix.Business.PropertySetters
       Span<char> valueChars = stackalloc char[valueLength];
       if(mappingDetails.IsEncoded)
       {
-        valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, valueChars);
+        valueLength = fixMessageContext.EncodedFields!.GetEncoder().GetChars(value, valueChars);
         valueChars = valueChars.Slice(0, valueLength);
       }
       else

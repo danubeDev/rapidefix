@@ -9,14 +9,14 @@ namespace RapideFix.Business.PropertySetters
 {
   public class ParentPropertySetter : BaseSetter, IParentSetter
   {
-    private Delegate _delegateFactoryCache;
+    private Delegate? _delegateFactoryCache;
 
     public override object Set(ReadOnlySpan<char> valueChars, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
       throw new NotSupportedException();
     }
 
-    public object Set(TagMapLeaf mappingDetails, TagMapNode parent, FixMessageContext fixMessageContext, object targetObject)
+    public object Set(TagMapLeaf mappingDetails, TagMapParent parent, FixMessageContext fixMessageContext, object targetObject)
     {
       if(parent.IsEnumerable)
       {
@@ -34,14 +34,14 @@ namespace RapideFix.Business.PropertySetters
       throw new NotSupportedException();
     }
 
-    private object SetRepeatingTypeParent(TagMapLeaf leaf, TagMapNode parent, FixMessageContext fixMessageContext, object targetObject)
+    private object SetRepeatingTypeParent(TagMapLeaf leaf, TagMapParent parent, FixMessageContext fixMessageContext, object targetObject)
     {
       int index = GetAdvancedIndex(GetKey(leaf.Current), parent, fixMessageContext, out bool isAdvanced);
 
       if(isAdvanced)
       {
         object childObject = Activator.CreateInstance(parent.InnerType);
-        Type typeOfParent = parent.InnerType;
+        Type typeOfParent = parent.InnerType!;
         if(_delegateFactoryCache == null)
         {
           var methodInfo = typeof(BaseSetter).GetMethod("GetEnumeratedILSetterAction", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -57,7 +57,7 @@ namespace RapideFix.Business.PropertySetters
       return targetObject;
     }
 
-    private object SetSimpleTypeParent(TagMapNode parent, FixMessageContext fixMessageContext, object targetObject)
+    private object SetSimpleTypeParent(TagMapParent parent, FixMessageContext fixMessageContext, object targetObject)
     {
       if(!fixMessageContext.CreatedParentTypes.Contains(GetKey(parent.Current)))
       {

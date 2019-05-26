@@ -32,12 +32,12 @@ namespace RapideFix
     {
       if(TryParse(fixValue, out var result))
       {
-        return result;
+        return result!;
       }
       throw new NotSupportedException("Given Message Version is not supported.");
     }
 
-    public static bool TryParse(ReadOnlySpan<byte> fixValue, out SupportedFixVersion parsedValue)
+    public static bool TryParse(ReadOnlySpan<byte> fixValue, out SupportedFixVersion? parsedValue)
     {
       if(fixValue.SequenceEqual(Fix44._byteValue))
       {
@@ -63,7 +63,7 @@ namespace RapideFix
       return false;
     }
 
-    public static bool TryParseEnd(ReadOnlySpan<byte> fixValue, out SupportedFixVersion parsedValue)
+    public static bool TryParseEnd(ReadOnlySpan<byte> fixValue, out SupportedFixVersion? parsedValue)
     {
       if(fixValue.SequenceEqual(F44))
       {
