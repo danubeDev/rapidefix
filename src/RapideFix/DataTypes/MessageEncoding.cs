@@ -27,12 +27,12 @@ namespace RapideFix.DataTypes
     {
       if(TryParse(fixValue, out var result))
       {
-        return result!;
+        return result;
       }
       throw new NotSupportedException("Given Message Encoding is not supported.");
     }
 
-    public static bool TryParse(ReadOnlySpan<byte> fixValue, out MessageEncoding? parsedValue)
+    public static bool TryParse(ReadOnlySpan<byte> fixValue, out MessageEncoding parsedValue)
     {
       if(fixValue.SequenceEqual(UTF8._byteValue))
       {
@@ -49,7 +49,7 @@ namespace RapideFix.DataTypes
         parsedValue = EUC;
         return true;
       }
-      parsedValue = default;
+      parsedValue = default!;
       return false;
     }
 
