@@ -25,17 +25,17 @@ namespace RapideFix.Business
       _propertySetterFactory = propertySetterFactory ?? throw new ArgumentNullException(nameof(propertySetterFactory));
     }
 
-    public bool TryGet(ReadOnlySpan<byte> tag, int messageTypeKey, out TagMapLeaf? result)
+    public bool TryGet(ReadOnlySpan<byte> tag, int messageTypeKey, out TagMapLeaf result)
     {
       int key = IntegerToFixConverter.Instance.ConvertBack(tag) * messageTypeKey;
       return _map.TryGetValue(key, out result);
     }
 
-    public bool TryGet(ReadOnlySpan<char> tag, int messageTypeKey, out TagMapLeaf? result)
+    public bool TryGet(ReadOnlySpan<char> tag, int messageTypeKey, out TagMapLeaf result)
     {
       if(!int.TryParse(tag, NumberStyles.Integer, _numberFormatInfo, out int key))
       {
-        result = null;
+        result = null!;
         return false;
       }
       return _map.TryGetValue(key * messageTypeKey, out result);

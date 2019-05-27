@@ -13,7 +13,7 @@ namespace RapideFix.Extensions
     public static FixMessageContext Setup(this FixMessageContext messageContext, ReadOnlySpan<byte> data, MessageEncoding? encoding)
     {
       messageContext.FixVersion = null;
-      messageContext.EncodedFields = encoding;
+      messageContext.EncodedFields = encoding ?? MessageEncoding.UTF8;
       messageContext.RepeatingGroupCounters.Clear();
       messageContext.CreatedParentTypes.Clear();
       messageContext.ChecksumValue = 0;

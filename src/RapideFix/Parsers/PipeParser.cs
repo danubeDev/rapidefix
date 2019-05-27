@@ -22,7 +22,6 @@ namespace RapideFix.Parsers
     public PipeParser(Pipe pipe, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion, Func<ReadOnlyMemory<byte>, T>? targetObjectFactory)
       : this(pipe.Reader, singleMessageParser, fixVersion, targetObjectFactory)
     {
-      Pipe = pipe ?? throw new ArgumentNullException(nameof(pipe));
     }
 
     public PipeParser(PipeReader pipeReader, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion, Func<ReadOnlyMemory<byte>, T>? targetObjectFactory)
@@ -34,8 +33,6 @@ namespace RapideFix.Parsers
       int offset = Encoding.ASCII.GetBytes("8=".AsSpan(), _fixVersion);
       fixVersion.Value.CopyTo(_fixVersion.AsSpan().Slice(offset));
     }
-
-    protected Pipe? Pipe { get; }
 
     public override async Task ListenAsync(CancellationToken token)
     {

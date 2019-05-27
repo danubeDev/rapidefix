@@ -8,13 +8,14 @@ namespace RapideFix.Business.Data
     public TagMapNode(PropertyInfo current)
     {
       Current = current;
+      InnerType = typeof(object);
     }
 
     public PropertyInfo Current { get; }
 
     public int RepeatingTagNumber { get; internal set; }
 
-    public Type? InnerType { get; internal set; }
+    public Type InnerType { get; internal set; }
 
     public bool IsEnumerable { get; internal set; }
   }

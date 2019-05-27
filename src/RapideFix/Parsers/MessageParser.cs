@@ -142,7 +142,7 @@ namespace RapideFix.Parsers
           {
             indexEquals++;
             var valueSlice = messagePart.Slice(indexEquals, indexSOH - indexEquals);
-            _compositeSetter.Set(valueSlice, propertyLeaf!, messageContext, targetObject);
+            _compositeSetter.Set(valueSlice, propertyLeaf, messageContext, targetObject);
           }
         }
         else

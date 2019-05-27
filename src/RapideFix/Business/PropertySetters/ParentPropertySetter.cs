@@ -41,7 +41,7 @@ namespace RapideFix.Business.PropertySetters
       if(isAdvanced)
       {
         object childObject = Activator.CreateInstance(parent.InnerType);
-        Type typeOfParent = parent.InnerType!;
+        Type typeOfParent = parent.InnerType;
         if(_delegateFactoryCache == null)
         {
           var methodInfo = typeof(BaseSetter).GetMethod("GetEnumeratedILSetterAction", BindingFlags.NonPublic | BindingFlags.Instance);

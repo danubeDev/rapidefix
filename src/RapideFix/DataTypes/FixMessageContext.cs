@@ -8,6 +8,7 @@ namespace RapideFix.DataTypes
     {
       CreatedParentTypes = new HashSet<int>();
       RepeatingGroupCounters = new Dictionary<int, RepeatingCounter>();
+      EncodedFields = MessageEncoding.UTF8;
     }
 
     public class RepeatingCounter
@@ -33,7 +34,7 @@ namespace RapideFix.DataTypes
 
     public byte ChecksumValue { get; set; }
 
-    public MessageEncoding? EncodedFields { get; set; }
+    public MessageEncoding EncodedFields { get; set; }
 
     /// <summary>
     /// Holds a counter for a given tag (first tag within a repeating group and the number of its appearences.
