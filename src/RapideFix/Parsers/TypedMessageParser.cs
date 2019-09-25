@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using RapideFix.Business;
 using RapideFix.Business.Data;
 using RapideFix.DataTypes;
@@ -32,6 +33,7 @@ namespace RapideFix.Parsers
       _isValueType = typeof(TTarget).IsValueType;
     }
 
+    [return: MaybeNull]
     public TTarget Parse(ReadOnlySpan<byte> message)
     {
       _messageContext.Setup(message, _options.Encoding);
@@ -50,9 +52,8 @@ namespace RapideFix.Parsers
 
       var messageTypeValueStart = messageTypeStart + KnownFixTags.MessageType.Length;
 
-      Type targetObjectType = _propertyMapper.TryGetMessageType(
-        message.Slice(messageTypeValueStart, lengthOfMessageType));
-      if(targetObjectType != typeof(TTarget))
+      Type? targetObjectType = _propertyMapper.TryGetMessageType(message.Slice(messageTypeValueStart, lengthOfMessageType));
+      if (targetObjectType != typeof(TTarget))
       {
         throw new InvalidCastException("MessageType on type does not match TTarget");
       }
@@ -69,6 +70,7 @@ namespace RapideFix.Parsers
       return Parse(message.Slice(messageTypeEnd + 1), _messageContext, ref targetObject);
     }
 
+    [return: MaybeNull]
     public TTarget Parse(ReadOnlyMemory<byte> message, Func<ReadOnlyMemory<byte>, TTarget> targetObjectFactory)
     {
       _messageContext.Setup(message.Span, _options.Encoding);

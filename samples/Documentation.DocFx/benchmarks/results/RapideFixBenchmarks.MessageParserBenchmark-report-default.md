@@ -9,4 +9,4 @@ Job=Core  Runtime=Core
 
  Method |     Mean |    Error |   StdDev |  Gen 0 | Gen 1 | Gen 2 | Allocated |
 ------- |---------:|---------:|---------:|-------:|------:|------:|----------:|
-  Parse | 931.2 ns | 16.40 ns | 15.34 ns | 0.0105 |     - |     - |     176 B |
+  Parse | 930.7 ns | 18.38 ns | 20.42 ns | 0.0105 |     - |     - |     176 B |

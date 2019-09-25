@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using RapideFix.Business;
 using RapideFix.Business.Data;
 using RapideFix.Parsers;
@@ -178,21 +179,18 @@ namespace RapideFix.ParserBuilders
       propertyMapper.Map<TOutput>();
       if(typeof(TInput) == typeof(char))
       {
-        return (new TypedStringMessageParser<TOutput>(propertyMapper, propertySetter, validatorCollection, options)
-          as IMessageParser<TOutput, TInput>)!;
+        return (IMessageParser<TOutput, TInput>)new TypedStringMessageParser<TOutput>(propertyMapper, propertySetter, validatorCollection, options);
       }
 
       if(typeof(TInput) == typeof(byte))
       {
         if(typeof(TOutput) == typeof(object))
         {
-          return (new MessageParser(propertyMapper, propertySetter, validatorCollection, options)
-            as IMessageParser<TOutput, TInput>)!;
+          return (IMessageParser<TOutput, TInput>)new MessageParser(propertyMapper, propertySetter, validatorCollection, options);
         }
         else
         {
-          return (new TypedMessageParser<TOutput>(propertyMapper, propertySetter, validatorCollection, options)
-            as IMessageParser<TOutput, TInput>)!;
+          return (IMessageParser<TOutput, TInput>)new TypedMessageParser<TOutput>(propertyMapper, propertySetter, validatorCollection, options);
         }
       }
       throw new NotSupportedException("Input type is not supported");

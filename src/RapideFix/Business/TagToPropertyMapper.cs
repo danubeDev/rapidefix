@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -25,23 +26,23 @@ namespace RapideFix.Business
       _propertySetterFactory = propertySetterFactory ?? throw new ArgumentNullException(nameof(propertySetterFactory));
     }
 
-    public bool TryGet(ReadOnlySpan<byte> tag, int messageTypeKey, out TagMapLeaf result)
+    public bool TryGet(ReadOnlySpan<byte> tag, int messageTypeKey, [NotNullWhen(true)] out TagMapLeaf? result)
     {
       int key = IntegerToFixConverter.Instance.ConvertBack(tag) * messageTypeKey;
       return _map.TryGetValue(key, out result);
     }
 
-    public bool TryGet(ReadOnlySpan<char> tag, int messageTypeKey, out TagMapLeaf result)
+    public bool TryGet(ReadOnlySpan<char> tag, int messageTypeKey, [NotNullWhen(true)] out TagMapLeaf? result)
     {
       if(!int.TryParse(tag, NumberStyles.Integer, _numberFormatInfo, out int key))
       {
-        result = null!;
+        result = null;
         return false;
       }
       return _map.TryGetValue(key * messageTypeKey, out result);
     }
 
-    public Type TryGetMessageType(ReadOnlySpan<byte> tag)
+    public Type? TryGetMessageType(ReadOnlySpan<byte> tag)
     {
       _mapMessageType.TryGetValue(GetTypeKey(tag), out var result);
       return result;
@@ -74,7 +75,7 @@ namespace RapideFix.Business
 
       foreach(PropertyInfo property in type.GetProperties())
       {
-        FixTagAttribute fixTagAttribute = property.GetCustomAttribute<FixTagAttribute>();
+        FixTagAttribute? fixTagAttribute = property.GetCustomAttribute<FixTagAttribute>();
         var repeatingGroup = property.GetCustomAttribute<RepeatingGroupAttribute>();
         var isEnumerable = property.PropertyType.GetInterfaces()
                .Any(x => x == typeof(System.Collections.IEnumerable))
@@ -164,7 +165,7 @@ namespace RapideFix.Business
       return TagMapParent.CreateEnumerable(property, repeatingGroup.Tag, innerType, _propertySetterFactory.GetParentSetter(property));
     }
 
-    private TagMapLeaf AddLeafNode(Stack<TagMapParent> parents, PropertyInfo property, FixTagAttribute fixTagAttribute, TypeConverterAttribute typeConverter, int key)
+    private TagMapLeaf AddLeafNode(Stack<TagMapParent> parents, PropertyInfo property, FixTagAttribute fixTagAttribute, TypeConverterAttribute? typeConverter, int key)
     {
       BaseSetter setter;
       if(typeConverter != null)
@@ -191,7 +192,7 @@ namespace RapideFix.Business
       return value;
     }
 
-    private TagMapLeaf AddEnumerableLeaf(Stack<TagMapParent> parents, PropertyInfo property, FixTagAttribute fixTagAttribute, RepeatingGroupAttribute repeatingGroup, TypeConverterAttribute typeConverter, int key, Type innerType)
+    private TagMapLeaf AddEnumerableLeaf(Stack<TagMapParent> parents, PropertyInfo property, FixTagAttribute fixTagAttribute, RepeatingGroupAttribute repeatingGroup, TypeConverterAttribute? typeConverter, int key, Type innerType)
     {
       BaseSetter setter;
       if(typeConverter != null)

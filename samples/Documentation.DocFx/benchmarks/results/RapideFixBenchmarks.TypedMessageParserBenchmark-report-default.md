@@ -9,4 +9,4 @@ Job=Core  Runtime=Core
 
       Method |     Mean |    Error |   StdDev | Gen 0 | Gen 1 | Gen 2 | Allocated |
 ------------ |---------:|---------:|---------:|------:|------:|------:|----------:|
- ParseStruct | 848.6 ns | 8.470 ns | 7.923 ns |     - |     - |     - |         - |
+ ParseStruct | 852.1 ns | 16.40 ns | 15.34 ns |     - |     - |     - |         - |
