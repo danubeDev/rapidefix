@@ -8,6 +8,7 @@ namespace RapideFix.DataTypes
     {
       CreatedParentTypes = new HashSet<int>();
       RepeatingGroupCounters = new Dictionary<int, RepeatingCounter>();
+      EncodedFields = MessageEncoding.UTF8;
     }
 
     public class RepeatingCounter
@@ -23,7 +24,7 @@ namespace RapideFix.DataTypes
       public int Index { get; set; }
     }
 
-    public SupportedFixVersion FixVersion { get; set; }
+    public SupportedFixVersion? FixVersion { get; set; }
 
     public int LengthTagStartIndex { get; set; }
 

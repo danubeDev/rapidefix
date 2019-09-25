@@ -10,21 +10,25 @@ namespace RapideFix.Business
 {
   public class TypeConvertedSetter : BaseSetter, IPropertySetter
   {
-    private TypeConverter _typeConverter;
-    private Delegate _delegateFactory;
+    private TypeConverter? _typeConverter;
+    private Delegate? _delegateFactory;
 
     public override object Set(ReadOnlySpan<char> valueChars, TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject)
     {
-      if(mappingDetails.TypeConverterName is null)
+      if (mappingDetails.TypeConverterName is null)
       {
         return targetObject;
       }
-      if(_typeConverter == null)
+      if (_typeConverter is null)
       {
-        Type typeOfConverter = Type.GetType(mappingDetails.TypeConverterName);
-        _typeConverter = (TypeConverter)Activator.CreateInstance(typeOfConverter);
+        Type? typeOfConverter = Type.GetType(mappingDetails.TypeConverterName);
+        if (typeOfConverter == null)
+          throw new ArgumentException("Invalid TypeConverterName");
+        _typeConverter = (TypeConverter?)Activator.CreateInstance(typeOfConverter);
+        if (_typeConverter == null)
+          throw new ArgumentException("Invalid TypeConverterConstructor for");
       }
-      if(!_typeConverter.CanConvertFrom(typeof(char[])))
+      if (!_typeConverter.CanConvertFrom(typeof(char[])))
       {
         return targetObject;
       }
@@ -34,16 +38,15 @@ namespace RapideFix.Business
         valueChars.CopyTo(tempCharsArray.AsSpan());
         object converted = _typeConverter.ConvertFrom(tempCharsArray);
         var convertedType = converted.GetType();
-        if(_delegateFactory == null)
+        if (_delegateFactory == null)
         {
           string methodGeneratingMethodName = mappingDetails.IsEnumerable ? "GetEnumeratedILSetterAction" : "GetILSetterAction";
 
           var methodInfo = typeof(BaseSetter).GetMethod(methodGeneratingMethodName, BindingFlags.NonPublic | BindingFlags.Instance);
-          _delegateFactory = (Delegate)methodInfo
-            .MakeGenericMethod(convertedType)
-            .Invoke(this, new[] { mappingDetails.Current });
+          var generatedDelegate = (Delegate?)methodInfo?.MakeGenericMethod(convertedType).Invoke(this, new[] { mappingDetails.Current });
+          _delegateFactory = generatedDelegate ?? throw new ArgumentNullException();
         }
-        if(mappingDetails.IsEnumerable)
+        if (mappingDetails.IsEnumerable)
         {
           int index = GetAdvancedIndex(mappingDetails, fixMessageContext);
           _delegateFactory.DynamicInvoke(targetObject, converted, index);

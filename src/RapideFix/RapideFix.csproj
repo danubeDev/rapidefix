@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-    <LangVersion>latest</LangVersion>
+    <TargetFramework>netcoreapp3</TargetFramework>
+    <LangVersion>preview</LangVersion>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <PackageId>DanubeDev.RapideFix</PackageId>
@@ -17,11 +17,12 @@
     <PackageTags>FIX;parser;financial;exchange;message;</PackageTags>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Buffers" Version="4.5.0" />
-    <PackageReference Include="System.IO.Pipelines" Version="4.5.2" />
+    <PackageReference Include="System.IO.Pipelines" Version="4.6.0" />
   </ItemGroup>
 
 </Project>

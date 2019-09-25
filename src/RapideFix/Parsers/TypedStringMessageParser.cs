@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using RapideFix.Business;
 using RapideFix.Business.Data;
 using RapideFix.DataTypes;
@@ -30,6 +31,7 @@ namespace RapideFix.Parsers
       _isValueType = typeof(TTarget).IsValueType;
     }
 
+    [return: MaybeNull]
     public TTarget Parse(ReadOnlySpan<char> message)
     {
       _messageContext.Setup(message);
@@ -37,7 +39,7 @@ namespace RapideFix.Parsers
       TTarget targetObject;
       if(_isValueType)
       {
-        targetObject = default;
+        targetObject = default!;
       }
       else
       {
@@ -72,7 +74,7 @@ namespace RapideFix.Parsers
             }
             else
             {
-              _typedPropertySetter.Set(valueSlice, propertyLeaf, messageContext, targetObject);
+              _typedPropertySetter.Set(valueSlice, propertyLeaf, messageContext, targetObject!);
             }
           }
         }

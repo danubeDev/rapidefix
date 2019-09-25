@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
 <meta charset='utf-8' />
-<title>RapideFixBenchmarks.MessageParserBenchmark</title>
+<title>RapideFixBenchmarks.MessageParserBenchmark-20190925-051854</title>
 
 <style type="text/css">
 	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
@@ -13,19 +13,19 @@
 </head>
 <body>
 <pre><code>
-BenchmarkDotNet=v0.11.3, OS=Windows 10.0.17134.523 (1803/April2018Update/Redstone4), VM=Hyper-V
+BenchmarkDotNet=v0.11.5, OS=Windows 10.0.17134.950 (1803/April2018Update/Redstone4)
 Intel Xeon CPU E5-2673 v3 2.40GHz, 1 CPU, 2 logical and 2 physical cores
-.NET Core SDK=2.2.101
-  [Host] : .NET Core 2.2.0 (CoreCLR 4.6.27110.04, CoreFX 4.6.27110.04), 64bit RyuJIT
-  Core   : .NET Core 2.2.0 (CoreCLR 4.6.27110.04, CoreFX 4.6.27110.04), 64bit RyuJIT
+.NET Core SDK=3.0.100
+  [Host] : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), 64bit RyuJIT
+  Core   : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), 64bit RyuJIT
 </code></pre>
 <pre><code>Job=Core  Runtime=Core  
 </code></pre>
 
 <table>
-<thead><tr><th>Method</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Gen 0/1k Op</th><th>Gen 1/1k Op</th><th>Gen 2/1k Op</th><th>Allocated Memory/Op</th>
+<thead><tr><th>Method</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Gen 0</th><th>Gen 1</th><th>Gen 2</th><th>Allocated</th>
 </tr>
-</thead><tbody><tr><td>Parse</td><td>1.256 us</td><td>0.0252 us</td><td>0.0377 us</td><td>0.0248</td><td>-</td><td>-</td><td>184 B</td>
+</thead><tbody><tr><td>Parse</td><td>930.7 ns</td><td>18.38 ns</td><td>20.42 ns</td><td>0.0105</td><td>-</td><td>-</td><td>176 B</td>
 </tr></tbody></table>
 </body>
 </html>

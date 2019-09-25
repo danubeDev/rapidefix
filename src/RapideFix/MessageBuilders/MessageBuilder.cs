@@ -11,7 +11,7 @@ namespace RapideFix.MessageBuilders
   public class MessageBuilder
   {
     protected readonly FixTagValueConverter _converter;
-    private MessageEncoding _encoding;
+    private MessageEncoding? _encoding;
     protected SupportedFixVersion _version;
     private byte[] _builderArray;
     protected int _currentLength;

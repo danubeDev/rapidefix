@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using RapideFix.Business;
 using RapideFix.Business.Data;
 using RapideFix.DataTypes;
@@ -29,39 +30,39 @@ namespace RapideFix.Parsers
       _messageContext = new FixMessageContext();
     }
 
-    public T Parse<T>(ReadOnlySpan<byte> message)
-    {
-      return (T)Parse(message);
-    }
+    [return: MaybeNull]
+    public T Parse<T>(ReadOnlySpan<byte> message) => (T)Parse(message)!;
 
+    [return: MaybeNull]
     public T Parse<T>(ReadOnlySpan<byte> message, T targetObject)
     {
-      if(targetObject == null)
+      if (targetObject == null)
       {
         throw new ArgumentNullException(nameof(targetObject));
       }
       _messageContext.Setup(message, _options.Encoding);
-      if(!_validators.PreValidate(message, _messageContext))
+      if (!_validators.PreValidate(message, _messageContext))
       {
-        if(_options.ThrowIfInvalidMessage)
+        if (_options.ThrowIfInvalidMessage)
         {
           throw new ArgumentException("Invalid message");
         }
-        return default;
+        return default!;
       }
       return (T)Parse(message, _messageContext, targetObject, typeof(T).GetHashCode());
     }
 
+    [return: MaybeNull]
     public object Parse(ReadOnlySpan<byte> message)
     {
       _messageContext.Setup(message, _options.Encoding);
-      if(!_validators.PreValidate(message, _messageContext))
+      if (!_validators.PreValidate(message, _messageContext))
       {
-        if(_options.ThrowIfInvalidMessage)
+        if (_options.ThrowIfInvalidMessage)
         {
           throw new ArgumentException("Invalid message");
         }
-        return default;
+        return default!;
       }
 
       var messageTypeStart = _messageContext.MessageTypeTagStartIndex;
@@ -70,61 +71,67 @@ namespace RapideFix.Parsers
 
       var messageTypeValueStart = messageTypeStart + KnownFixTags.MessageType.Length;
 
-      Type targetObjectType = _propertyMapper.TryGetMessageType(
-        message.Slice(messageTypeValueStart, lengthOfMessageType));
-      object targetObject = Activator.CreateInstance(targetObjectType);
+      Type? targetObjectType = _propertyMapper.TryGetMessageType(message.Slice(messageTypeValueStart, lengthOfMessageType));
+      if (targetObjectType is null)
+        throw new InvalidOperationException();
+      object? targetObject = Activator.CreateInstance(targetObjectType);
+      if (targetObject is null)
+        throw new InvalidOperationException();
 
       return Parse(message.Slice(messageTypeStart + messageTypeEnd - 1), _messageContext, targetObject, targetObjectType.GetHashCode());
     }
 
+    [return: MaybeNull]
     public object Parse(ReadOnlySpan<byte> message, object targetObject)
     {
-      if(targetObject == null)
+      if (targetObject == null)
       {
         throw new ArgumentNullException(nameof(targetObject));
       }
       _messageContext.Setup(message, _options.Encoding);
-      if(!_validators.PreValidate(message, _messageContext))
+      if (!_validators.PreValidate(message, _messageContext))
       {
-        if(_options.ThrowIfInvalidMessage)
+        if (_options.ThrowIfInvalidMessage)
         {
           throw new ArgumentException("Invalid message");
         }
-        return default;
+        return default!;
       }
       return Parse(message, _messageContext, targetObject, targetObject.GetType().GetHashCode());
     }
 
+    [return: MaybeNull]
     public object Parse(ReadOnlyMemory<byte> message, Func<ReadOnlyMemory<byte>, object> targetObjectFactory)
     {
       _messageContext.Setup(message.Span, _options.Encoding);
-      if(!_validators.PreValidate(message.Span, _messageContext))
+      if (!_validators.PreValidate(message.Span, _messageContext))
       {
-        if(_options.ThrowIfInvalidMessage)
+        if (_options.ThrowIfInvalidMessage)
         {
           throw new ArgumentException("Invalid message");
         }
-        return default;
+        return default!;
       }
       object targetObject = targetObjectFactory(message);
 
       return Parse(message.Span, _messageContext, targetObject, targetObject.GetType().GetHashCode());
     }
 
+    [return: MaybeNull]
     public T Parse<T>(ReadOnlyMemory<byte> message, Func<ReadOnlyMemory<byte>, T> targetObjectFactory)
     {
       _messageContext.Setup(message.Span, _options.Encoding);
-      if(!_validators.PreValidate(message.Span, _messageContext))
+      if (!_validators.PreValidate(message.Span, _messageContext))
       {
-        if(_options.ThrowIfInvalidMessage)
+        if (_options.ThrowIfInvalidMessage)
         {
           throw new ArgumentException("Invalid message");
         }
-        return default;
+        return default!;
       }
       T targetObject = targetObjectFactory(message);
 
-      return (T)Parse(message.Span, _messageContext, targetObject, typeof(T).GetHashCode());
+      return (T)Parse(message.Span, _messageContext, targetObject!, typeof(T).GetHashCode());
     }
 
     private object Parse(ReadOnlySpan<byte> message, FixMessageContext messageContext, object targetObject, int messageTypeKey)
@@ -134,11 +141,11 @@ namespace RapideFix.Parsers
       int indexSOH = 0;
       int indexEquals = 0;
       byte checksumValue = 0;
-      while(messagePart.Length > checksumLength)
+      while (messagePart.Length > checksumLength)
       {
-        if(TraverseMessageBody(messagePart, out indexEquals, out indexSOH, ref checksumValue))
+        if (TraverseMessageBody(messagePart, out indexEquals, out indexSOH, ref checksumValue))
         {
-          if(_propertyMapper.TryGet(messagePart.Slice(0, indexEquals), messageTypeKey, out var propertyLeaf))
+          if (_propertyMapper.TryGet(messagePart.Slice(0, indexEquals), messageTypeKey, out var propertyLeaf))
           {
             indexEquals++;
             var valueSlice = messagePart.Slice(indexEquals, indexSOH - indexEquals);
@@ -162,19 +169,19 @@ namespace RapideFix.Parsers
       indexSOH = -1;
       byte checksum = 0;
       int i;
-      for(i = 0; i < messagePart.Length; i++)
+      for (i = 0; i < messagePart.Length; i++)
       {
         checksum += messagePart[i];
-        if(messagePart[i] == Constants.EqualsByte)
+        if (messagePart[i] == Constants.EqualsByte)
         {
           indexEquals = i;
           break;
         }
       }
-      for(i++; i < messagePart.Length; i++)
+      for (i++; i < messagePart.Length; i++)
       {
         checksum += messagePart[i];
-        if(messagePart[i] == Constants.SOHByte)
+        if (messagePart[i] == Constants.SOHByte)
         {
           indexSOH = i;
           break;

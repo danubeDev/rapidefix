@@ -4,7 +4,6 @@ using System.IO.Pipelines;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using RapideFix.Extensions;
 
 namespace RapideFix.Parsers
 {
@@ -13,20 +12,19 @@ namespace RapideFix.Parsers
     private readonly PipeReader _reader;
     private readonly IMessageParser<T, byte> _messageParser;
     private readonly byte[] _fixVersion;
-    private readonly Func<ReadOnlyMemory<byte>, T> _targetObjectFactory;
+    private readonly Func<ReadOnlyMemory<byte>, T>? _targetObjectFactory;
 
     public PipeParser(PipeReader pipeReader, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion)
        : this(pipeReader, singleMessageParser, fixVersion, null)
     {
     }
 
-    public PipeParser(Pipe pipe, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion, Func<ReadOnlyMemory<byte>, T> targetObjectFactory)
+    public PipeParser(Pipe pipe, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion, Func<ReadOnlyMemory<byte>, T>? targetObjectFactory)
       : this(pipe.Reader, singleMessageParser, fixVersion, targetObjectFactory)
     {
-      Pipe = pipe ?? throw new ArgumentNullException(nameof(pipe));
     }
 
-    public PipeParser(PipeReader pipeReader, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion, Func<ReadOnlyMemory<byte>, T> targetObjectFactory)
+    public PipeParser(PipeReader pipeReader, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion, Func<ReadOnlyMemory<byte>, T>? targetObjectFactory)
     {
       _reader = pipeReader ?? throw new ArgumentNullException(nameof(pipeReader));
       _messageParser = singleMessageParser ?? throw new ArgumentNullException(nameof(singleMessageParser));
@@ -35,8 +33,6 @@ namespace RapideFix.Parsers
       int offset = Encoding.ASCII.GetBytes("8=".AsSpan(), _fixVersion);
       fixVersion.Value.CopyTo(_fixVersion.AsSpan().Slice(offset));
     }
-
-    protected Pipe Pipe { get; }
 
     public override async Task ListenAsync(CancellationToken token)
     {
@@ -75,7 +71,7 @@ namespace RapideFix.Parsers
       {
         return;
       }
-      T parsedObject = default;
+      T parsedObject = default!;
       try
       {
         if(_targetObjectFactory == null && messageSequence.IsSingleSegment)

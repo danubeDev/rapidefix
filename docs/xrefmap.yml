@@ -260,6 +260,38 @@ references:
   commentId: T:RapideFix.Business.Data.TagMapLeaf
   fullName: RapideFix.Business.Data.TagMapLeaf
   nameWithType: TagMapLeaf
+- uid: RapideFix.Business.Data.TagMapLeaf.#ctor(System.Reflection.PropertyInfo,RapideFix.Business.PropertySetters.BaseSetter)
+  name: TagMapLeaf(PropertyInfo, BaseSetter)
+  href: api/RapideFix.Business.Data.TagMapLeaf.html#RapideFix_Business_Data_TagMapLeaf__ctor_System_Reflection_PropertyInfo_RapideFix_Business_PropertySetters_BaseSetter_
+  commentId: M:RapideFix.Business.Data.TagMapLeaf.#ctor(System.Reflection.PropertyInfo,RapideFix.Business.PropertySetters.BaseSetter)
+  fullName: RapideFix.Business.Data.TagMapLeaf.TagMapLeaf(System.Reflection.PropertyInfo, RapideFix.Business.PropertySetters.BaseSetter)
+  nameWithType: TagMapLeaf.TagMapLeaf(PropertyInfo, BaseSetter)
+- uid: RapideFix.Business.Data.TagMapLeaf.#ctor*
+  name: TagMapLeaf
+  href: api/RapideFix.Business.Data.TagMapLeaf.html#RapideFix_Business_Data_TagMapLeaf__ctor_
+  commentId: Overload:RapideFix.Business.Data.TagMapLeaf.#ctor
+  isSpec: "True"
+  fullName: RapideFix.Business.Data.TagMapLeaf.TagMapLeaf
+  nameWithType: TagMapLeaf.TagMapLeaf
+- uid: RapideFix.Business.Data.TagMapLeaf.CreateEnumerable(System.Reflection.PropertyInfo,System.Int32,System.Type,RapideFix.Business.PropertySetters.BaseSetter)
+  name: CreateEnumerable(PropertyInfo, Int32, Type, BaseSetter)
+  href: api/RapideFix.Business.Data.TagMapLeaf.html#RapideFix_Business_Data_TagMapLeaf_CreateEnumerable_System_Reflection_PropertyInfo_System_Int32_System_Type_RapideFix_Business_PropertySetters_BaseSetter_
+  commentId: M:RapideFix.Business.Data.TagMapLeaf.CreateEnumerable(System.Reflection.PropertyInfo,System.Int32,System.Type,RapideFix.Business.PropertySetters.BaseSetter)
+  fullName: RapideFix.Business.Data.TagMapLeaf.CreateEnumerable(System.Reflection.PropertyInfo, System.Int32, System.Type, RapideFix.Business.PropertySetters.BaseSetter)
+  nameWithType: TagMapLeaf.CreateEnumerable(PropertyInfo, Int32, Type, BaseSetter)
+- uid: RapideFix.Business.Data.TagMapLeaf.CreateEnumerable*
+  name: CreateEnumerable
+  href: api/RapideFix.Business.Data.TagMapLeaf.html#RapideFix_Business_Data_TagMapLeaf_CreateEnumerable_
+  commentId: Overload:RapideFix.Business.Data.TagMapLeaf.CreateEnumerable
+  isSpec: "True"
+  fullName: RapideFix.Business.Data.TagMapLeaf.CreateEnumerable
+  nameWithType: TagMapLeaf.CreateEnumerable
+- uid: RapideFix.Business.Data.TagMapLeaf.CreateRepeatingTag(System.Reflection.PropertyInfo,System.Type,RapideFix.Business.PropertySetters.BaseSetter)
+  name: CreateRepeatingTag(PropertyInfo, Type, BaseSetter)
+  href: api/RapideFix.Business.Data.TagMapLeaf.html#RapideFix_Business_Data_TagMapLeaf_CreateRepeatingTag_System_Reflection_PropertyInfo_System_Type_RapideFix_Business_PropertySetters_BaseSetter_
+  commentId: M:RapideFix.Business.Data.TagMapLeaf.CreateRepeatingTag(System.Reflection.PropertyInfo,System.Type,RapideFix.Business.PropertySetters.BaseSetter)
+  fullName: RapideFix.Business.Data.TagMapLeaf.CreateRepeatingTag(System.Reflection.PropertyInfo, System.Type, RapideFix.Business.PropertySetters.BaseSetter)
+  nameWithType: TagMapLeaf.CreateRepeatingTag(PropertyInfo, Type, BaseSetter)
 - uid: RapideFix.Business.Data.TagMapLeaf.CreateRepeatingTag*
   name: CreateRepeatingTag
   href: api/RapideFix.Business.Data.TagMapLeaf.html#RapideFix_Business_Data_TagMapLeaf_CreateRepeatingTag_
@@ -267,15 +299,6 @@ references:
   isSpec: "True"
   fullName: RapideFix.Business.Data.TagMapLeaf.CreateRepeatingTag
   nameWithType: TagMapLeaf.CreateRepeatingTag
-- uid: RapideFix.Business.Data.TagMapLeaf.CreateRepeatingTag``1(System.Reflection.PropertyInfo,System.Type,RapideFix.Business.PropertySetters.BaseSetter)
-  name: CreateRepeatingTag<T>(PropertyInfo, Type, BaseSetter)
-  href: api/RapideFix.Business.Data.TagMapLeaf.html#RapideFix_Business_Data_TagMapLeaf_CreateRepeatingTag__1_System_Reflection_PropertyInfo_System_Type_RapideFix_Business_PropertySetters_BaseSetter_
-  commentId: M:RapideFix.Business.Data.TagMapLeaf.CreateRepeatingTag``1(System.Reflection.PropertyInfo,System.Type,RapideFix.Business.PropertySetters.BaseSetter)
-  name.vb: CreateRepeatingTag(Of T)(PropertyInfo, Type, BaseSetter)
-  fullName: RapideFix.Business.Data.TagMapLeaf.CreateRepeatingTag<T>(System.Reflection.PropertyInfo, System.Type, RapideFix.Business.PropertySetters.BaseSetter)
-  fullName.vb: RapideFix.Business.Data.TagMapLeaf.CreateRepeatingTag(Of T)(System.Reflection.PropertyInfo, System.Type, RapideFix.Business.PropertySetters.BaseSetter)
-  nameWithType: TagMapLeaf.CreateRepeatingTag<T>(PropertyInfo, Type, BaseSetter)
-  nameWithType.vb: TagMapLeaf.CreateRepeatingTag(Of T)(PropertyInfo, Type, BaseSetter)
 - uid: RapideFix.Business.Data.TagMapLeaf.IsEncoded
   name: IsEncoded
   href: api/RapideFix.Business.Data.TagMapLeaf.html#RapideFix_Business_Data_TagMapLeaf_IsEncoded
@@ -334,22 +357,19 @@ references:
   commentId: T:RapideFix.Business.Data.TagMapNode
   fullName: RapideFix.Business.Data.TagMapNode
   nameWithType: TagMapNode
-- uid: RapideFix.Business.Data.TagMapNode.CreateEnumerable*
-  name: CreateEnumerable
-  href: api/RapideFix.Business.Data.TagMapNode.html#RapideFix_Business_Data_TagMapNode_CreateEnumerable_
-  commentId: Overload:RapideFix.Business.Data.TagMapNode.CreateEnumerable
+- uid: RapideFix.Business.Data.TagMapNode.#ctor(System.Reflection.PropertyInfo)
+  name: TagMapNode(PropertyInfo)
+  href: api/RapideFix.Business.Data.TagMapNode.html#RapideFix_Business_Data_TagMapNode__ctor_System_Reflection_PropertyInfo_
+  commentId: M:RapideFix.Business.Data.TagMapNode.#ctor(System.Reflection.PropertyInfo)
+  fullName: RapideFix.Business.Data.TagMapNode.TagMapNode(System.Reflection.PropertyInfo)
+  nameWithType: TagMapNode.TagMapNode(PropertyInfo)
+- uid: RapideFix.Business.Data.TagMapNode.#ctor*
+  name: TagMapNode
+  href: api/RapideFix.Business.Data.TagMapNode.html#RapideFix_Business_Data_TagMapNode__ctor_
+  commentId: Overload:RapideFix.Business.Data.TagMapNode.#ctor
   isSpec: "True"
-  fullName: RapideFix.Business.Data.TagMapNode.CreateEnumerable
-  nameWithType: TagMapNode.CreateEnumerable
-- uid: RapideFix.Business.Data.TagMapNode.CreateEnumerable``1(System.Reflection.PropertyInfo,System.Int32,System.Type)
-  name: CreateEnumerable<T>(PropertyInfo, Int32, Type)
-  href: api/RapideFix.Business.Data.TagMapNode.html#RapideFix_Business_Data_TagMapNode_CreateEnumerable__1_System_Reflection_PropertyInfo_System_Int32_System_Type_
-  commentId: M:RapideFix.Business.Data.TagMapNode.CreateEnumerable``1(System.Reflection.PropertyInfo,System.Int32,System.Type)
-  name.vb: CreateEnumerable(Of T)(PropertyInfo, Int32, Type)
-  fullName: RapideFix.Business.Data.TagMapNode.CreateEnumerable<T>(System.Reflection.PropertyInfo, System.Int32, System.Type)
-  fullName.vb: RapideFix.Business.Data.TagMapNode.CreateEnumerable(Of T)(System.Reflection.PropertyInfo, System.Int32, System.Type)
-  nameWithType: TagMapNode.CreateEnumerable<T>(PropertyInfo, Int32, Type)
-  nameWithType.vb: TagMapNode.CreateEnumerable(Of T)(PropertyInfo, Int32, Type)
+  fullName: RapideFix.Business.Data.TagMapNode.TagMapNode
+  nameWithType: TagMapNode.TagMapNode
 - uid: RapideFix.Business.Data.TagMapNode.Current
   name: Current
   href: api/RapideFix.Business.Data.TagMapNode.html#RapideFix_Business_Data_TagMapNode_Current
@@ -389,19 +409,6 @@ references:
   isSpec: "True"
   fullName: RapideFix.Business.Data.TagMapNode.IsEnumerable
   nameWithType: TagMapNode.IsEnumerable
-- uid: RapideFix.Business.Data.TagMapNode.ParentSetter
-  name: ParentSetter
-  href: api/RapideFix.Business.Data.TagMapNode.html#RapideFix_Business_Data_TagMapNode_ParentSetter
-  commentId: P:RapideFix.Business.Data.TagMapNode.ParentSetter
-  fullName: RapideFix.Business.Data.TagMapNode.ParentSetter
-  nameWithType: TagMapNode.ParentSetter
-- uid: RapideFix.Business.Data.TagMapNode.ParentSetter*
-  name: ParentSetter
-  href: api/RapideFix.Business.Data.TagMapNode.html#RapideFix_Business_Data_TagMapNode_ParentSetter_
-  commentId: Overload:RapideFix.Business.Data.TagMapNode.ParentSetter
-  isSpec: "True"
-  fullName: RapideFix.Business.Data.TagMapNode.ParentSetter
-  nameWithType: TagMapNode.ParentSetter
 - uid: RapideFix.Business.Data.TagMapNode.RepeatingTagNumber
   name: RepeatingTagNumber
   href: api/RapideFix.Business.Data.TagMapNode.html#RapideFix_Business_Data_TagMapNode_RepeatingTagNumber
@@ -415,18 +422,63 @@ references:
   isSpec: "True"
   fullName: RapideFix.Business.Data.TagMapNode.RepeatingTagNumber
   nameWithType: TagMapNode.RepeatingTagNumber
+- uid: RapideFix.Business.Data.TagMapParent
+  name: TagMapParent
+  href: api/RapideFix.Business.Data.TagMapParent.html
+  commentId: T:RapideFix.Business.Data.TagMapParent
+  fullName: RapideFix.Business.Data.TagMapParent
+  nameWithType: TagMapParent
+- uid: RapideFix.Business.Data.TagMapParent.#ctor(System.Reflection.PropertyInfo,RapideFix.Business.IParentSetter)
+  name: TagMapParent(PropertyInfo, IParentSetter)
+  href: api/RapideFix.Business.Data.TagMapParent.html#RapideFix_Business_Data_TagMapParent__ctor_System_Reflection_PropertyInfo_RapideFix_Business_IParentSetter_
+  commentId: M:RapideFix.Business.Data.TagMapParent.#ctor(System.Reflection.PropertyInfo,RapideFix.Business.IParentSetter)
+  fullName: RapideFix.Business.Data.TagMapParent.TagMapParent(System.Reflection.PropertyInfo, RapideFix.Business.IParentSetter)
+  nameWithType: TagMapParent.TagMapParent(PropertyInfo, IParentSetter)
+- uid: RapideFix.Business.Data.TagMapParent.#ctor*
+  name: TagMapParent
+  href: api/RapideFix.Business.Data.TagMapParent.html#RapideFix_Business_Data_TagMapParent__ctor_
+  commentId: Overload:RapideFix.Business.Data.TagMapParent.#ctor
+  isSpec: "True"
+  fullName: RapideFix.Business.Data.TagMapParent.TagMapParent
+  nameWithType: TagMapParent.TagMapParent
+- uid: RapideFix.Business.Data.TagMapParent.CreateEnumerable(System.Reflection.PropertyInfo,System.Int32,System.Type,RapideFix.Business.IParentSetter)
+  name: CreateEnumerable(PropertyInfo, Int32, Type, IParentSetter)
+  href: api/RapideFix.Business.Data.TagMapParent.html#RapideFix_Business_Data_TagMapParent_CreateEnumerable_System_Reflection_PropertyInfo_System_Int32_System_Type_RapideFix_Business_IParentSetter_
+  commentId: M:RapideFix.Business.Data.TagMapParent.CreateEnumerable(System.Reflection.PropertyInfo,System.Int32,System.Type,RapideFix.Business.IParentSetter)
+  fullName: RapideFix.Business.Data.TagMapParent.CreateEnumerable(System.Reflection.PropertyInfo, System.Int32, System.Type, RapideFix.Business.IParentSetter)
+  nameWithType: TagMapParent.CreateEnumerable(PropertyInfo, Int32, Type, IParentSetter)
+- uid: RapideFix.Business.Data.TagMapParent.CreateEnumerable*
+  name: CreateEnumerable
+  href: api/RapideFix.Business.Data.TagMapParent.html#RapideFix_Business_Data_TagMapParent_CreateEnumerable_
+  commentId: Overload:RapideFix.Business.Data.TagMapParent.CreateEnumerable
+  isSpec: "True"
+  fullName: RapideFix.Business.Data.TagMapParent.CreateEnumerable
+  nameWithType: TagMapParent.CreateEnumerable
+- uid: RapideFix.Business.Data.TagMapParent.ParentSetter
+  name: ParentSetter
+  href: api/RapideFix.Business.Data.TagMapParent.html#RapideFix_Business_Data_TagMapParent_ParentSetter
+  commentId: P:RapideFix.Business.Data.TagMapParent.ParentSetter
+  fullName: RapideFix.Business.Data.TagMapParent.ParentSetter
+  nameWithType: TagMapParent.ParentSetter
+- uid: RapideFix.Business.Data.TagMapParent.ParentSetter*
+  name: ParentSetter
+  href: api/RapideFix.Business.Data.TagMapParent.html#RapideFix_Business_Data_TagMapParent_ParentSetter_
+  commentId: Overload:RapideFix.Business.Data.TagMapParent.ParentSetter
+  isSpec: "True"
+  fullName: RapideFix.Business.Data.TagMapParent.ParentSetter
+  nameWithType: TagMapParent.ParentSetter
 - uid: RapideFix.Business.IParentSetter
   name: IParentSetter
   href: api/RapideFix.Business.IParentSetter.html
   commentId: T:RapideFix.Business.IParentSetter
   fullName: RapideFix.Business.IParentSetter
   nameWithType: IParentSetter
-- uid: RapideFix.Business.IParentSetter.Set(RapideFix.Business.Data.TagMapLeaf,RapideFix.Business.Data.TagMapNode,RapideFix.DataTypes.FixMessageContext,System.Object)
-  name: Set(TagMapLeaf, TagMapNode, FixMessageContext, Object)
-  href: api/RapideFix.Business.IParentSetter.html#RapideFix_Business_IParentSetter_Set_RapideFix_Business_Data_TagMapLeaf_RapideFix_Business_Data_TagMapNode_RapideFix_DataTypes_FixMessageContext_System_Object_
-  commentId: M:RapideFix.Business.IParentSetter.Set(RapideFix.Business.Data.TagMapLeaf,RapideFix.Business.Data.TagMapNode,RapideFix.DataTypes.FixMessageContext,System.Object)
-  fullName: RapideFix.Business.IParentSetter.Set(RapideFix.Business.Data.TagMapLeaf, RapideFix.Business.Data.TagMapNode, RapideFix.DataTypes.FixMessageContext, System.Object)
-  nameWithType: IParentSetter.Set(TagMapLeaf, TagMapNode, FixMessageContext, Object)
+- uid: RapideFix.Business.IParentSetter.Set(RapideFix.Business.Data.TagMapLeaf,RapideFix.Business.Data.TagMapParent,RapideFix.DataTypes.FixMessageContext,System.Object)
+  name: Set(TagMapLeaf, TagMapParent, FixMessageContext, Object)
+  href: api/RapideFix.Business.IParentSetter.html#RapideFix_Business_IParentSetter_Set_RapideFix_Business_Data_TagMapLeaf_RapideFix_Business_Data_TagMapParent_RapideFix_DataTypes_FixMessageContext_System_Object_
+  commentId: M:RapideFix.Business.IParentSetter.Set(RapideFix.Business.Data.TagMapLeaf,RapideFix.Business.Data.TagMapParent,RapideFix.DataTypes.FixMessageContext,System.Object)
+  fullName: RapideFix.Business.IParentSetter.Set(RapideFix.Business.Data.TagMapLeaf, RapideFix.Business.Data.TagMapParent, RapideFix.DataTypes.FixMessageContext, System.Object)
+  nameWithType: IParentSetter.Set(TagMapLeaf, TagMapParent, FixMessageContext, Object)
 - uid: RapideFix.Business.IParentSetter.Set*
   name: Set
   href: api/RapideFix.Business.IParentSetter.html#RapideFix_Business_IParentSetter_Set_
@@ -551,24 +603,24 @@ references:
   fullName.vb: RapideFix.Business.ITagToPropertyMapper.Map(Of T)()
   nameWithType: ITagToPropertyMapper.Map<T>()
   nameWithType.vb: ITagToPropertyMapper.Map(Of T)()
-- uid: RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Byte},System.Int32,RapideFix.Business.Data.TagMapLeaf@)
-  name: TryGet(ReadOnlySpan<Byte>, Int32, out TagMapLeaf)
-  href: api/RapideFix.Business.ITagToPropertyMapper.html#RapideFix_Business_ITagToPropertyMapper_TryGet_System_ReadOnlySpan_System_Byte__System_Int32_RapideFix_Business_Data_TagMapLeaf__
-  commentId: M:RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Byte},System.Int32,RapideFix.Business.Data.TagMapLeaf@)
-  name.vb: TryGet(ReadOnlySpan(Of Byte), Int32, ByRef TagMapLeaf)
-  fullName: RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan<System.Byte>, System.Int32, out RapideFix.Business.Data.TagMapLeaf)
-  fullName.vb: RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan(Of System.Byte), System.Int32, ByRef RapideFix.Business.Data.TagMapLeaf)
-  nameWithType: ITagToPropertyMapper.TryGet(ReadOnlySpan<Byte>, Int32, out TagMapLeaf)
-  nameWithType.vb: ITagToPropertyMapper.TryGet(ReadOnlySpan(Of Byte), Int32, ByRef TagMapLeaf)
-- uid: RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Char},System.Int32,RapideFix.Business.Data.TagMapLeaf@)
-  name: TryGet(ReadOnlySpan<Char>, Int32, out TagMapLeaf)
-  href: api/RapideFix.Business.ITagToPropertyMapper.html#RapideFix_Business_ITagToPropertyMapper_TryGet_System_ReadOnlySpan_System_Char__System_Int32_RapideFix_Business_Data_TagMapLeaf__
-  commentId: M:RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Char},System.Int32,RapideFix.Business.Data.TagMapLeaf@)
-  name.vb: TryGet(ReadOnlySpan(Of Char), Int32, ByRef TagMapLeaf)
-  fullName: RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan<System.Char>, System.Int32, out RapideFix.Business.Data.TagMapLeaf)
-  fullName.vb: RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan(Of System.Char), System.Int32, ByRef RapideFix.Business.Data.TagMapLeaf)
-  nameWithType: ITagToPropertyMapper.TryGet(ReadOnlySpan<Char>, Int32, out TagMapLeaf)
-  nameWithType.vb: ITagToPropertyMapper.TryGet(ReadOnlySpan(Of Char), Int32, ByRef TagMapLeaf)
+- uid: RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Byte},System.Int32,System.Nullable{RapideFix.Business.Data.TagMapLeaf}@)
+  name: TryGet(ReadOnlySpan<Byte>, Int32, out Nullable<TagMapLeaf>)
+  href: api/RapideFix.Business.ITagToPropertyMapper.html#RapideFix_Business_ITagToPropertyMapper_TryGet_System_ReadOnlySpan_System_Byte__System_Int32_System_Nullable_RapideFix_Business_Data_TagMapLeaf___
+  commentId: M:RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Byte},System.Int32,System.Nullable{RapideFix.Business.Data.TagMapLeaf}@)
+  name.vb: TryGet(ReadOnlySpan(Of Byte), Int32, ByRef Nullable(Of TagMapLeaf))
+  fullName: RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan<System.Byte>, System.Int32, out System.Nullable<RapideFix.Business.Data.TagMapLeaf>)
+  fullName.vb: RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan(Of System.Byte), System.Int32, ByRef System.Nullable(Of RapideFix.Business.Data.TagMapLeaf))
+  nameWithType: ITagToPropertyMapper.TryGet(ReadOnlySpan<Byte>, Int32, out Nullable<TagMapLeaf>)
+  nameWithType.vb: ITagToPropertyMapper.TryGet(ReadOnlySpan(Of Byte), Int32, ByRef Nullable(Of TagMapLeaf))
+- uid: RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Char},System.Int32,System.Nullable{RapideFix.Business.Data.TagMapLeaf}@)
+  name: TryGet(ReadOnlySpan<Char>, Int32, out Nullable<TagMapLeaf>)
+  href: api/RapideFix.Business.ITagToPropertyMapper.html#RapideFix_Business_ITagToPropertyMapper_TryGet_System_ReadOnlySpan_System_Char__System_Int32_System_Nullable_RapideFix_Business_Data_TagMapLeaf___
+  commentId: M:RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Char},System.Int32,System.Nullable{RapideFix.Business.Data.TagMapLeaf}@)
+  name.vb: TryGet(ReadOnlySpan(Of Char), Int32, ByRef Nullable(Of TagMapLeaf))
+  fullName: RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan<System.Char>, System.Int32, out System.Nullable<RapideFix.Business.Data.TagMapLeaf>)
+  fullName.vb: RapideFix.Business.ITagToPropertyMapper.TryGet(System.ReadOnlySpan(Of System.Char), System.Int32, ByRef System.Nullable(Of RapideFix.Business.Data.TagMapLeaf))
+  nameWithType: ITagToPropertyMapper.TryGet(ReadOnlySpan<Char>, Int32, out Nullable<TagMapLeaf>)
+  nameWithType.vb: ITagToPropertyMapper.TryGet(ReadOnlySpan(Of Char), Int32, ByRef Nullable(Of TagMapLeaf))
 - uid: RapideFix.Business.ITagToPropertyMapper.TryGet*
   name: TryGet
   href: api/RapideFix.Business.ITagToPropertyMapper.html#RapideFix_Business_ITagToPropertyMapper_TryGet_
@@ -1561,12 +1613,12 @@ references:
   commentId: T:RapideFix.Business.PropertySetters.ParentPropertySetter
   fullName: RapideFix.Business.PropertySetters.ParentPropertySetter
   nameWithType: ParentPropertySetter
-- uid: RapideFix.Business.PropertySetters.ParentPropertySetter.Set(RapideFix.Business.Data.TagMapLeaf,RapideFix.Business.Data.TagMapNode,RapideFix.DataTypes.FixMessageContext,System.Object)
-  name: Set(TagMapLeaf, TagMapNode, FixMessageContext, Object)
-  href: api/RapideFix.Business.PropertySetters.ParentPropertySetter.html#RapideFix_Business_PropertySetters_ParentPropertySetter_Set_RapideFix_Business_Data_TagMapLeaf_RapideFix_Business_Data_TagMapNode_RapideFix_DataTypes_FixMessageContext_System_Object_
-  commentId: M:RapideFix.Business.PropertySetters.ParentPropertySetter.Set(RapideFix.Business.Data.TagMapLeaf,RapideFix.Business.Data.TagMapNode,RapideFix.DataTypes.FixMessageContext,System.Object)
-  fullName: RapideFix.Business.PropertySetters.ParentPropertySetter.Set(RapideFix.Business.Data.TagMapLeaf, RapideFix.Business.Data.TagMapNode, RapideFix.DataTypes.FixMessageContext, System.Object)
-  nameWithType: ParentPropertySetter.Set(TagMapLeaf, TagMapNode, FixMessageContext, Object)
+- uid: RapideFix.Business.PropertySetters.ParentPropertySetter.Set(RapideFix.Business.Data.TagMapLeaf,RapideFix.Business.Data.TagMapParent,RapideFix.DataTypes.FixMessageContext,System.Object)
+  name: Set(TagMapLeaf, TagMapParent, FixMessageContext, Object)
+  href: api/RapideFix.Business.PropertySetters.ParentPropertySetter.html#RapideFix_Business_PropertySetters_ParentPropertySetter_Set_RapideFix_Business_Data_TagMapLeaf_RapideFix_Business_Data_TagMapParent_RapideFix_DataTypes_FixMessageContext_System_Object_
+  commentId: M:RapideFix.Business.PropertySetters.ParentPropertySetter.Set(RapideFix.Business.Data.TagMapLeaf,RapideFix.Business.Data.TagMapParent,RapideFix.DataTypes.FixMessageContext,System.Object)
+  fullName: RapideFix.Business.PropertySetters.ParentPropertySetter.Set(RapideFix.Business.Data.TagMapLeaf, RapideFix.Business.Data.TagMapParent, RapideFix.DataTypes.FixMessageContext, System.Object)
+  nameWithType: ParentPropertySetter.Set(TagMapLeaf, TagMapParent, FixMessageContext, Object)
 - uid: RapideFix.Business.PropertySetters.ParentPropertySetter.Set(System.ReadOnlySpan{System.Char},RapideFix.Business.Data.TagMapLeaf,RapideFix.DataTypes.FixMessageContext,System.Object)
   name: Set(ReadOnlySpan<Char>, TagMapLeaf, FixMessageContext, Object)
   href: api/RapideFix.Business.PropertySetters.ParentPropertySetter.html#RapideFix_Business_PropertySetters_ParentPropertySetter_Set_System_ReadOnlySpan_System_Char__RapideFix_Business_Data_TagMapLeaf_RapideFix_DataTypes_FixMessageContext_System_Object_
@@ -1812,24 +1864,24 @@ references:
   fullName.vb: RapideFix.Business.TagToPropertyMapper.Map(Of T)()
   nameWithType: TagToPropertyMapper.Map<T>()
   nameWithType.vb: TagToPropertyMapper.Map(Of T)()
-- uid: RapideFix.Business.TagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Byte},System.Int32,RapideFix.Business.Data.TagMapLeaf@)
-  name: TryGet(ReadOnlySpan<Byte>, Int32, out TagMapLeaf)
-  href: api/RapideFix.Business.TagToPropertyMapper.html#RapideFix_Business_TagToPropertyMapper_TryGet_System_ReadOnlySpan_System_Byte__System_Int32_RapideFix_Business_Data_TagMapLeaf__
-  commentId: M:RapideFix.Business.TagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Byte},System.Int32,RapideFix.Business.Data.TagMapLeaf@)
-  name.vb: TryGet(ReadOnlySpan(Of Byte), Int32, ByRef TagMapLeaf)
-  fullName: RapideFix.Business.TagToPropertyMapper.TryGet(System.ReadOnlySpan<System.Byte>, System.Int32, out RapideFix.Business.Data.TagMapLeaf)
-  fullName.vb: RapideFix.Business.TagToPropertyMapper.TryGet(System.ReadOnlySpan(Of System.Byte), System.Int32, ByRef RapideFix.Business.Data.TagMapLeaf)
-  nameWithType: TagToPropertyMapper.TryGet(ReadOnlySpan<Byte>, Int32, out TagMapLeaf)
-  nameWithType.vb: TagToPropertyMapper.TryGet(ReadOnlySpan(Of Byte), Int32, ByRef TagMapLeaf)
-- uid: RapideFix.Business.TagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Char},System.Int32,RapideFix.Business.Data.TagMapLeaf@)
-  name: TryGet(ReadOnlySpan<Char>, Int32, out TagMapLeaf)
-  href: api/RapideFix.Business.TagToPropertyMapper.html#RapideFix_Business_TagToPropertyMapper_TryGet_System_ReadOnlySpan_System_Char__System_Int32_RapideFix_Business_Data_TagMapLeaf__
-  commentId: M:RapideFix.Business.TagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Char},System.Int32,RapideFix.Business.Data.TagMapLeaf@)
-  name.vb: TryGet(ReadOnlySpan(Of Char), Int32, ByRef TagMapLeaf)
-  fullName: RapideFix.Business.TagToPropertyMapper.TryGet(System.ReadOnlySpan<System.Char>, System.Int32, out RapideFix.Business.Data.TagMapLeaf)
-  fullName.vb: RapideFix.Business.TagToPropertyMapper.TryGet(System.ReadOnlySpan(Of System.Char), System.Int32, ByRef RapideFix.Business.Data.TagMapLeaf)
-  nameWithType: TagToPropertyMapper.TryGet(ReadOnlySpan<Char>, Int32, out TagMapLeaf)
-  nameWithType.vb: TagToPropertyMapper.TryGet(ReadOnlySpan(Of Char), Int32, ByRef TagMapLeaf)
+- uid: RapideFix.Business.TagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Byte},System.Int32,System.Nullable{RapideFix.Business.Data.TagMapLeaf}@)
+  name: TryGet(ReadOnlySpan<Byte>, Int32, out Nullable<TagMapLeaf>)
+  href: api/RapideFix.Business.TagToPropertyMapper.html#RapideFix_Business_TagToPropertyMapper_TryGet_System_ReadOnlySpan_System_Byte__System_Int32_System_Nullable_RapideFix_Business_Data_TagMapLeaf___
+  commentId: M:RapideFix.Business.TagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Byte},System.Int32,System.Nullable{RapideFix.Business.Data.TagMapLeaf}@)
+  name.vb: TryGet(ReadOnlySpan(Of Byte), Int32, ByRef Nullable(Of TagMapLeaf))
+  fullName: RapideFix.Business.TagToPropertyMapper.TryGet(System.ReadOnlySpan<System.Byte>, System.Int32, out System.Nullable<RapideFix.Business.Data.TagMapLeaf>)
+  fullName.vb: RapideFix.Business.TagToPropertyMapper.TryGet(System.ReadOnlySpan(Of System.Byte), System.Int32, ByRef System.Nullable(Of RapideFix.Business.Data.TagMapLeaf))
+  nameWithType: TagToPropertyMapper.TryGet(ReadOnlySpan<Byte>, Int32, out Nullable<TagMapLeaf>)
+  nameWithType.vb: TagToPropertyMapper.TryGet(ReadOnlySpan(Of Byte), Int32, ByRef Nullable(Of TagMapLeaf))
+- uid: RapideFix.Business.TagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Char},System.Int32,System.Nullable{RapideFix.Business.Data.TagMapLeaf}@)
+  name: TryGet(ReadOnlySpan<Char>, Int32, out Nullable<TagMapLeaf>)
+  href: api/RapideFix.Business.TagToPropertyMapper.html#RapideFix_Business_TagToPropertyMapper_TryGet_System_ReadOnlySpan_System_Char__System_Int32_System_Nullable_RapideFix_Business_Data_TagMapLeaf___
+  commentId: M:RapideFix.Business.TagToPropertyMapper.TryGet(System.ReadOnlySpan{System.Char},System.Int32,System.Nullable{RapideFix.Business.Data.TagMapLeaf}@)
+  name.vb: TryGet(ReadOnlySpan(Of Char), Int32, ByRef Nullable(Of TagMapLeaf))
+  fullName: RapideFix.Business.TagToPropertyMapper.TryGet(System.ReadOnlySpan<System.Char>, System.Int32, out System.Nullable<RapideFix.Business.Data.TagMapLeaf>)
+  fullName.vb: RapideFix.Business.TagToPropertyMapper.TryGet(System.ReadOnlySpan(Of System.Char), System.Int32, ByRef System.Nullable(Of RapideFix.Business.Data.TagMapLeaf))
+  nameWithType: TagToPropertyMapper.TryGet(ReadOnlySpan<Char>, Int32, out Nullable<TagMapLeaf>)
+  nameWithType.vb: TagToPropertyMapper.TryGet(ReadOnlySpan(Of Char), Int32, ByRef Nullable(Of TagMapLeaf))
 - uid: RapideFix.Business.TagToPropertyMapper.TryGet*
   name: TryGet
   href: api/RapideFix.Business.TagToPropertyMapper.html#RapideFix_Business_TagToPropertyMapper_TryGet_
@@ -2138,15 +2190,15 @@ references:
   isSpec: "True"
   fullName: RapideFix.DataTypes.MessageEncoding.ToString
   nameWithType: MessageEncoding.ToString
-- uid: RapideFix.DataTypes.MessageEncoding.TryParse(System.ReadOnlySpan{System.Byte},RapideFix.DataTypes.MessageEncoding@)
-  name: TryParse(ReadOnlySpan<Byte>, out MessageEncoding)
-  href: api/RapideFix.DataTypes.MessageEncoding.html#RapideFix_DataTypes_MessageEncoding_TryParse_System_ReadOnlySpan_System_Byte__RapideFix_DataTypes_MessageEncoding__
-  commentId: M:RapideFix.DataTypes.MessageEncoding.TryParse(System.ReadOnlySpan{System.Byte},RapideFix.DataTypes.MessageEncoding@)
-  name.vb: TryParse(ReadOnlySpan(Of Byte), ByRef MessageEncoding)
-  fullName: RapideFix.DataTypes.MessageEncoding.TryParse(System.ReadOnlySpan<System.Byte>, out RapideFix.DataTypes.MessageEncoding)
-  fullName.vb: RapideFix.DataTypes.MessageEncoding.TryParse(System.ReadOnlySpan(Of System.Byte), ByRef RapideFix.DataTypes.MessageEncoding)
-  nameWithType: MessageEncoding.TryParse(ReadOnlySpan<Byte>, out MessageEncoding)
-  nameWithType.vb: MessageEncoding.TryParse(ReadOnlySpan(Of Byte), ByRef MessageEncoding)
+- uid: RapideFix.DataTypes.MessageEncoding.TryParse(System.ReadOnlySpan{System.Byte},System.Nullable{RapideFix.DataTypes.MessageEncoding}@)
+  name: TryParse(ReadOnlySpan<Byte>, out Nullable<MessageEncoding>)
+  href: api/RapideFix.DataTypes.MessageEncoding.html#RapideFix_DataTypes_MessageEncoding_TryParse_System_ReadOnlySpan_System_Byte__System_Nullable_RapideFix_DataTypes_MessageEncoding___
+  commentId: M:RapideFix.DataTypes.MessageEncoding.TryParse(System.ReadOnlySpan{System.Byte},System.Nullable{RapideFix.DataTypes.MessageEncoding}@)
+  name.vb: TryParse(ReadOnlySpan(Of Byte), ByRef Nullable(Of MessageEncoding))
+  fullName: RapideFix.DataTypes.MessageEncoding.TryParse(System.ReadOnlySpan<System.Byte>, out System.Nullable<RapideFix.DataTypes.MessageEncoding>)
+  fullName.vb: RapideFix.DataTypes.MessageEncoding.TryParse(System.ReadOnlySpan(Of System.Byte), ByRef System.Nullable(Of RapideFix.DataTypes.MessageEncoding))
+  nameWithType: MessageEncoding.TryParse(ReadOnlySpan<Byte>, out Nullable<MessageEncoding>)
+  nameWithType.vb: MessageEncoding.TryParse(ReadOnlySpan(Of Byte), ByRef Nullable(Of MessageEncoding))
 - uid: RapideFix.DataTypes.MessageEncoding.TryParse*
   name: TryParse
   href: api/RapideFix.DataTypes.MessageEncoding.html#RapideFix_DataTypes_MessageEncoding_TryParse_
@@ -2181,15 +2233,15 @@ references:
   fullName.vb: RapideFix.Extensions.FixMessageContextExtensions.Setup(RapideFix.DataTypes.FixMessageContext, System.ReadOnlySpan(Of System.Byte))
   nameWithType: FixMessageContextExtensions.Setup(FixMessageContext, ReadOnlySpan<Byte>)
   nameWithType.vb: FixMessageContextExtensions.Setup(FixMessageContext, ReadOnlySpan(Of Byte))
-- uid: RapideFix.Extensions.FixMessageContextExtensions.Setup(RapideFix.DataTypes.FixMessageContext,System.ReadOnlySpan{System.Byte},RapideFix.DataTypes.MessageEncoding)
-  name: Setup(FixMessageContext, ReadOnlySpan<Byte>, MessageEncoding)
-  href: api/RapideFix.Extensions.FixMessageContextExtensions.html#RapideFix_Extensions_FixMessageContextExtensions_Setup_RapideFix_DataTypes_FixMessageContext_System_ReadOnlySpan_System_Byte__RapideFix_DataTypes_MessageEncoding_
-  commentId: M:RapideFix.Extensions.FixMessageContextExtensions.Setup(RapideFix.DataTypes.FixMessageContext,System.ReadOnlySpan{System.Byte},RapideFix.DataTypes.MessageEncoding)
-  name.vb: Setup(FixMessageContext, ReadOnlySpan(Of Byte), MessageEncoding)
-  fullName: RapideFix.Extensions.FixMessageContextExtensions.Setup(RapideFix.DataTypes.FixMessageContext, System.ReadOnlySpan<System.Byte>, RapideFix.DataTypes.MessageEncoding)
-  fullName.vb: RapideFix.Extensions.FixMessageContextExtensions.Setup(RapideFix.DataTypes.FixMessageContext, System.ReadOnlySpan(Of System.Byte), RapideFix.DataTypes.MessageEncoding)
-  nameWithType: FixMessageContextExtensions.Setup(FixMessageContext, ReadOnlySpan<Byte>, MessageEncoding)
-  nameWithType.vb: FixMessageContextExtensions.Setup(FixMessageContext, ReadOnlySpan(Of Byte), MessageEncoding)
+- uid: RapideFix.Extensions.FixMessageContextExtensions.Setup(RapideFix.DataTypes.FixMessageContext,System.ReadOnlySpan{System.Byte},System.Nullable{RapideFix.DataTypes.MessageEncoding})
+  name: Setup(FixMessageContext, ReadOnlySpan<Byte>, Nullable<MessageEncoding>)
+  href: api/RapideFix.Extensions.FixMessageContextExtensions.html#RapideFix_Extensions_FixMessageContextExtensions_Setup_RapideFix_DataTypes_FixMessageContext_System_ReadOnlySpan_System_Byte__System_Nullable_RapideFix_DataTypes_MessageEncoding__
+  commentId: M:RapideFix.Extensions.FixMessageContextExtensions.Setup(RapideFix.DataTypes.FixMessageContext,System.ReadOnlySpan{System.Byte},System.Nullable{RapideFix.DataTypes.MessageEncoding})
+  name.vb: Setup(FixMessageContext, ReadOnlySpan(Of Byte), Nullable(Of MessageEncoding))
+  fullName: RapideFix.Extensions.FixMessageContextExtensions.Setup(RapideFix.DataTypes.FixMessageContext, System.ReadOnlySpan<System.Byte>, System.Nullable<RapideFix.DataTypes.MessageEncoding>)
+  fullName.vb: RapideFix.Extensions.FixMessageContextExtensions.Setup(RapideFix.DataTypes.FixMessageContext, System.ReadOnlySpan(Of System.Byte), System.Nullable(Of RapideFix.DataTypes.MessageEncoding))
+  nameWithType: FixMessageContextExtensions.Setup(FixMessageContext, ReadOnlySpan<Byte>, Nullable<MessageEncoding>)
+  nameWithType.vb: FixMessageContextExtensions.Setup(FixMessageContext, ReadOnlySpan(Of Byte), Nullable(Of MessageEncoding))
 - uid: RapideFix.Extensions.FixMessageContextExtensions.Setup(RapideFix.DataTypes.FixMessageContext,System.ReadOnlySpan{System.Char})
   name: Setup(FixMessageContext, ReadOnlySpan<Char>)
   href: api/RapideFix.Extensions.FixMessageContextExtensions.html#RapideFix_Extensions_FixMessageContextExtensions_Setup_RapideFix_DataTypes_FixMessageContext_System_ReadOnlySpan_System_Char__
@@ -2283,97 +2335,6 @@ references:
   isSpec: "True"
   fullName: RapideFix.Extensions.StringExtensions.ToByteValueAndSOH
   nameWithType: StringExtensions.ToByteValueAndSOH
-- uid: RapideFix.FixParser
-  name: FixParser
-  href: api/RapideFix.FixParser.html
-  commentId: T:RapideFix.FixParser
-  fullName: RapideFix.FixParser
-  nameWithType: FixParser
-- uid: RapideFix.FixParser.#ctor(RapideFix.FixParserSettings)
-  name: FixParser(FixParserSettings)
-  href: api/RapideFix.FixParser.html#RapideFix_FixParser__ctor_RapideFix_FixParserSettings_
-  commentId: M:RapideFix.FixParser.#ctor(RapideFix.FixParserSettings)
-  fullName: RapideFix.FixParser.FixParser(RapideFix.FixParserSettings)
-  nameWithType: FixParser.FixParser(FixParserSettings)
-- uid: RapideFix.FixParser.#ctor*
-  name: FixParser
-  href: api/RapideFix.FixParser.html#RapideFix_FixParser__ctor_
-  commentId: Overload:RapideFix.FixParser.#ctor
-  isSpec: "True"
-  fullName: RapideFix.FixParser.FixParser
-  nameWithType: FixParser.FixParser
-- uid: RapideFix.FixParser.InitializeType*
-  name: InitializeType
-  href: api/RapideFix.FixParser.html#RapideFix_FixParser_InitializeType_
-  commentId: Overload:RapideFix.FixParser.InitializeType
-  isSpec: "True"
-  fullName: RapideFix.FixParser.InitializeType
-  nameWithType: FixParser.InitializeType
-- uid: RapideFix.FixParser.InitializeType``1
-  name: InitializeType<T>()
-  href: api/RapideFix.FixParser.html#RapideFix_FixParser_InitializeType__1
-  commentId: M:RapideFix.FixParser.InitializeType``1
-  name.vb: InitializeType(Of T)()
-  fullName: RapideFix.FixParser.InitializeType<T>()
-  fullName.vb: RapideFix.FixParser.InitializeType(Of T)()
-  nameWithType: FixParser.InitializeType<T>()
-  nameWithType.vb: FixParser.InitializeType(Of T)()
-- uid: RapideFix.FixParser.Parse*
-  name: Parse
-  href: api/RapideFix.FixParser.html#RapideFix_FixParser_Parse_
-  commentId: Overload:RapideFix.FixParser.Parse
-  isSpec: "True"
-  fullName: RapideFix.FixParser.Parse
-  nameWithType: FixParser.Parse
-- uid: RapideFix.FixParser.Parse``1(System.Byte[])
-  name: Parse<TMessage>(Byte[])
-  href: api/RapideFix.FixParser.html#RapideFix_FixParser_Parse__1_System_Byte___
-  commentId: M:RapideFix.FixParser.Parse``1(System.Byte[])
-  name.vb: Parse(Of TMessage)(Byte())
-  fullName: RapideFix.FixParser.Parse<TMessage>(System.Byte[])
-  fullName.vb: RapideFix.FixParser.Parse(Of TMessage)(System.Byte())
-  nameWithType: FixParser.Parse<TMessage>(Byte[])
-  nameWithType.vb: FixParser.Parse(Of TMessage)(Byte())
-- uid: RapideFix.FixParser.Parse``1(System.IO.Stream)
-  name: Parse<TMessage>(Stream)
-  href: api/RapideFix.FixParser.html#RapideFix_FixParser_Parse__1_System_IO_Stream_
-  commentId: M:RapideFix.FixParser.Parse``1(System.IO.Stream)
-  name.vb: Parse(Of TMessage)(Stream)
-  fullName: RapideFix.FixParser.Parse<TMessage>(System.IO.Stream)
-  fullName.vb: RapideFix.FixParser.Parse(Of TMessage)(System.IO.Stream)
-  nameWithType: FixParser.Parse<TMessage>(Stream)
-  nameWithType.vb: FixParser.Parse(Of TMessage)(Stream)
-- uid: RapideFix.FixParser.Parse``1(System.String)
-  name: Parse<TMessage>(String)
-  href: api/RapideFix.FixParser.html#RapideFix_FixParser_Parse__1_System_String_
-  commentId: M:RapideFix.FixParser.Parse``1(System.String)
-  name.vb: Parse(Of TMessage)(String)
-  fullName: RapideFix.FixParser.Parse<TMessage>(System.String)
-  fullName.vb: RapideFix.FixParser.Parse(Of TMessage)(System.String)
-  nameWithType: FixParser.Parse<TMessage>(String)
-  nameWithType.vb: FixParser.Parse(Of TMessage)(String)
-- uid: RapideFix.FixParserSettings
-  name: FixParserSettings
-  href: api/RapideFix.FixParserSettings.html
-  commentId: T:RapideFix.FixParserSettings
-  fullName: RapideFix.FixParserSettings
-  nameWithType: FixParserSettings
-- uid: RapideFix.FixParserSettings.RegisterMessageTypes*
-  name: RegisterMessageTypes
-  href: api/RapideFix.FixParserSettings.html#RapideFix_FixParserSettings_RegisterMessageTypes_
-  commentId: Overload:RapideFix.FixParserSettings.RegisterMessageTypes
-  isSpec: "True"
-  fullName: RapideFix.FixParserSettings.RegisterMessageTypes
-  nameWithType: FixParserSettings.RegisterMessageTypes
-- uid: RapideFix.FixParserSettings.RegisterMessageTypes``1
-  name: RegisterMessageTypes<T>()
-  href: api/RapideFix.FixParserSettings.html#RapideFix_FixParserSettings_RegisterMessageTypes__1
-  commentId: M:RapideFix.FixParserSettings.RegisterMessageTypes``1
-  name.vb: RegisterMessageTypes(Of T)()
-  fullName: RapideFix.FixParserSettings.RegisterMessageTypes<T>()
-  fullName.vb: RapideFix.FixParserSettings.RegisterMessageTypes(Of T)()
-  nameWithType: FixParserSettings.RegisterMessageTypes<T>()
-  nameWithType.vb: FixParserSettings.RegisterMessageTypes(Of T)()
 - uid: RapideFix.IntegerToFixConverter
   name: IntegerToFixConverter
   href: api/RapideFix.IntegerToFixConverter.html
@@ -3124,15 +3085,15 @@ references:
   fullName.vb: RapideFix.Parsers.PipeParser(Of T)
   nameWithType: PipeParser<T>
   nameWithType.vb: PipeParser(Of T)
-- uid: RapideFix.Parsers.PipeParser`1.#ctor(System.IO.Pipelines.Pipe,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Func{System.ReadOnlyMemory{System.Byte},`0})
-  name: PipeParser(Pipe, IMessageParser<T, Byte>, SupportedFixVersion, Func<ReadOnlyMemory<Byte>, T>)
-  href: api/RapideFix.Parsers.PipeParser-1.html#RapideFix_Parsers_PipeParser_1__ctor_System_IO_Pipelines_Pipe_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_System_Func_System_ReadOnlyMemory_System_Byte___0__
-  commentId: M:RapideFix.Parsers.PipeParser`1.#ctor(System.IO.Pipelines.Pipe,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Func{System.ReadOnlyMemory{System.Byte},`0})
-  name.vb: PipeParser(Pipe, IMessageParser(Of T, Byte), SupportedFixVersion, Func(Of ReadOnlyMemory(Of Byte), T))
-  fullName: RapideFix.Parsers.PipeParser<T>.PipeParser(System.IO.Pipelines.Pipe, RapideFix.Parsers.IMessageParser<T, System.Byte>, RapideFix.SupportedFixVersion, System.Func<System.ReadOnlyMemory<System.Byte>, T>)
-  fullName.vb: RapideFix.Parsers.PipeParser(Of T).PipeParser(System.IO.Pipelines.Pipe, RapideFix.Parsers.IMessageParser(Of T, System.Byte), RapideFix.SupportedFixVersion, System.Func(Of System.ReadOnlyMemory(Of System.Byte), T))
-  nameWithType: PipeParser<T>.PipeParser(Pipe, IMessageParser<T, Byte>, SupportedFixVersion, Func<ReadOnlyMemory<Byte>, T>)
-  nameWithType.vb: PipeParser(Of T).PipeParser(Pipe, IMessageParser(Of T, Byte), SupportedFixVersion, Func(Of ReadOnlyMemory(Of Byte), T))
+- uid: RapideFix.Parsers.PipeParser`1.#ctor(System.IO.Pipelines.Pipe,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Nullable{System.Func{System.ReadOnlyMemory{System.Byte},`0}})
+  name: PipeParser(Pipe, IMessageParser<T, Byte>, SupportedFixVersion, Nullable<Func<ReadOnlyMemory<Byte>, T>>)
+  href: api/RapideFix.Parsers.PipeParser-1.html#RapideFix_Parsers_PipeParser_1__ctor_System_IO_Pipelines_Pipe_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_System_Nullable_System_Func_System_ReadOnlyMemory_System_Byte___0___
+  commentId: M:RapideFix.Parsers.PipeParser`1.#ctor(System.IO.Pipelines.Pipe,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Nullable{System.Func{System.ReadOnlyMemory{System.Byte},`0}})
+  name.vb: PipeParser(Pipe, IMessageParser(Of T, Byte), SupportedFixVersion, Nullable(Of Func(Of ReadOnlyMemory(Of Byte), T)))
+  fullName: RapideFix.Parsers.PipeParser<T>.PipeParser(System.IO.Pipelines.Pipe, RapideFix.Parsers.IMessageParser<T, System.Byte>, RapideFix.SupportedFixVersion, System.Nullable<System.Func<System.ReadOnlyMemory<System.Byte>, T>>)
+  fullName.vb: RapideFix.Parsers.PipeParser(Of T).PipeParser(System.IO.Pipelines.Pipe, RapideFix.Parsers.IMessageParser(Of T, System.Byte), RapideFix.SupportedFixVersion, System.Nullable(Of System.Func(Of System.ReadOnlyMemory(Of System.Byte), T)))
+  nameWithType: PipeParser<T>.PipeParser(Pipe, IMessageParser<T, Byte>, SupportedFixVersion, Nullable<Func<ReadOnlyMemory<Byte>, T>>)
+  nameWithType.vb: PipeParser(Of T).PipeParser(Pipe, IMessageParser(Of T, Byte), SupportedFixVersion, Nullable(Of Func(Of ReadOnlyMemory(Of Byte), T)))
 - uid: RapideFix.Parsers.PipeParser`1.#ctor(System.IO.Pipelines.PipeReader,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion)
   name: PipeParser(PipeReader, IMessageParser<T, Byte>, SupportedFixVersion)
   href: api/RapideFix.Parsers.PipeParser-1.html#RapideFix_Parsers_PipeParser_1__ctor_System_IO_Pipelines_PipeReader_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_
@@ -3142,15 +3103,15 @@ references:
   fullName.vb: RapideFix.Parsers.PipeParser(Of T).PipeParser(System.IO.Pipelines.PipeReader, RapideFix.Parsers.IMessageParser(Of T, System.Byte), RapideFix.SupportedFixVersion)
   nameWithType: PipeParser<T>.PipeParser(PipeReader, IMessageParser<T, Byte>, SupportedFixVersion)
   nameWithType.vb: PipeParser(Of T).PipeParser(PipeReader, IMessageParser(Of T, Byte), SupportedFixVersion)
-- uid: RapideFix.Parsers.PipeParser`1.#ctor(System.IO.Pipelines.PipeReader,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Func{System.ReadOnlyMemory{System.Byte},`0})
-  name: PipeParser(PipeReader, IMessageParser<T, Byte>, SupportedFixVersion, Func<ReadOnlyMemory<Byte>, T>)
-  href: api/RapideFix.Parsers.PipeParser-1.html#RapideFix_Parsers_PipeParser_1__ctor_System_IO_Pipelines_PipeReader_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_System_Func_System_ReadOnlyMemory_System_Byte___0__
-  commentId: M:RapideFix.Parsers.PipeParser`1.#ctor(System.IO.Pipelines.PipeReader,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Func{System.ReadOnlyMemory{System.Byte},`0})
-  name.vb: PipeParser(PipeReader, IMessageParser(Of T, Byte), SupportedFixVersion, Func(Of ReadOnlyMemory(Of Byte), T))
-  fullName: RapideFix.Parsers.PipeParser<T>.PipeParser(System.IO.Pipelines.PipeReader, RapideFix.Parsers.IMessageParser<T, System.Byte>, RapideFix.SupportedFixVersion, System.Func<System.ReadOnlyMemory<System.Byte>, T>)
-  fullName.vb: RapideFix.Parsers.PipeParser(Of T).PipeParser(System.IO.Pipelines.PipeReader, RapideFix.Parsers.IMessageParser(Of T, System.Byte), RapideFix.SupportedFixVersion, System.Func(Of System.ReadOnlyMemory(Of System.Byte), T))
-  nameWithType: PipeParser<T>.PipeParser(PipeReader, IMessageParser<T, Byte>, SupportedFixVersion, Func<ReadOnlyMemory<Byte>, T>)
-  nameWithType.vb: PipeParser(Of T).PipeParser(PipeReader, IMessageParser(Of T, Byte), SupportedFixVersion, Func(Of ReadOnlyMemory(Of Byte), T))
+- uid: RapideFix.Parsers.PipeParser`1.#ctor(System.IO.Pipelines.PipeReader,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Nullable{System.Func{System.ReadOnlyMemory{System.Byte},`0}})
+  name: PipeParser(PipeReader, IMessageParser<T, Byte>, SupportedFixVersion, Nullable<Func<ReadOnlyMemory<Byte>, T>>)
+  href: api/RapideFix.Parsers.PipeParser-1.html#RapideFix_Parsers_PipeParser_1__ctor_System_IO_Pipelines_PipeReader_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_System_Nullable_System_Func_System_ReadOnlyMemory_System_Byte___0___
+  commentId: M:RapideFix.Parsers.PipeParser`1.#ctor(System.IO.Pipelines.PipeReader,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Nullable{System.Func{System.ReadOnlyMemory{System.Byte},`0}})
+  name.vb: PipeParser(PipeReader, IMessageParser(Of T, Byte), SupportedFixVersion, Nullable(Of Func(Of ReadOnlyMemory(Of Byte), T)))
+  fullName: RapideFix.Parsers.PipeParser<T>.PipeParser(System.IO.Pipelines.PipeReader, RapideFix.Parsers.IMessageParser<T, System.Byte>, RapideFix.SupportedFixVersion, System.Nullable<System.Func<System.ReadOnlyMemory<System.Byte>, T>>)
+  fullName.vb: RapideFix.Parsers.PipeParser(Of T).PipeParser(System.IO.Pipelines.PipeReader, RapideFix.Parsers.IMessageParser(Of T, System.Byte), RapideFix.SupportedFixVersion, System.Nullable(Of System.Func(Of System.ReadOnlyMemory(Of System.Byte), T)))
+  nameWithType: PipeParser<T>.PipeParser(PipeReader, IMessageParser<T, Byte>, SupportedFixVersion, Nullable<Func<ReadOnlyMemory<Byte>, T>>)
+  nameWithType.vb: PipeParser(Of T).PipeParser(PipeReader, IMessageParser(Of T, Byte), SupportedFixVersion, Nullable(Of Func(Of ReadOnlyMemory(Of Byte), T)))
 - uid: RapideFix.Parsers.PipeParser`1.#ctor*
   name: PipeParser
   href: api/RapideFix.Parsers.PipeParser-1.html#RapideFix_Parsers_PipeParser_1__ctor_
@@ -3177,23 +3138,6 @@ references:
   fullName.vb: RapideFix.Parsers.PipeParser(Of T).ListenAsync
   nameWithType: PipeParser<T>.ListenAsync
   nameWithType.vb: PipeParser(Of T).ListenAsync
-- uid: RapideFix.Parsers.PipeParser`1.Pipe
-  name: Pipe
-  href: api/RapideFix.Parsers.PipeParser-1.html#RapideFix_Parsers_PipeParser_1_Pipe
-  commentId: P:RapideFix.Parsers.PipeParser`1.Pipe
-  fullName: RapideFix.Parsers.PipeParser<T>.Pipe
-  fullName.vb: RapideFix.Parsers.PipeParser(Of T).Pipe
-  nameWithType: PipeParser<T>.Pipe
-  nameWithType.vb: PipeParser(Of T).Pipe
-- uid: RapideFix.Parsers.PipeParser`1.Pipe*
-  name: Pipe
-  href: api/RapideFix.Parsers.PipeParser-1.html#RapideFix_Parsers_PipeParser_1_Pipe_
-  commentId: Overload:RapideFix.Parsers.PipeParser`1.Pipe
-  isSpec: "True"
-  fullName: RapideFix.Parsers.PipeParser<T>.Pipe
-  fullName.vb: RapideFix.Parsers.PipeParser(Of T).Pipe
-  nameWithType: PipeParser<T>.Pipe
-  nameWithType.vb: PipeParser(Of T).Pipe
 - uid: RapideFix.Parsers.StreamParser`1
   name: StreamParser<T>
   href: api/RapideFix.Parsers.StreamParser-1.html
@@ -3203,6 +3147,15 @@ references:
   fullName.vb: RapideFix.Parsers.StreamParser(Of T)
   nameWithType: StreamParser<T>
   nameWithType.vb: StreamParser(Of T)
+- uid: RapideFix.Parsers.StreamParser`1.#ctor(System.IO.Pipelines.Pipe,System.IO.Stream,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Nullable{System.Func{System.ReadOnlyMemory{System.Byte},`0}})
+  name: StreamParser(Pipe, Stream, IMessageParser<T, Byte>, SupportedFixVersion, Nullable<Func<ReadOnlyMemory<Byte>, T>>)
+  href: api/RapideFix.Parsers.StreamParser-1.html#RapideFix_Parsers_StreamParser_1__ctor_System_IO_Pipelines_Pipe_System_IO_Stream_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_System_Nullable_System_Func_System_ReadOnlyMemory_System_Byte___0___
+  commentId: M:RapideFix.Parsers.StreamParser`1.#ctor(System.IO.Pipelines.Pipe,System.IO.Stream,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Nullable{System.Func{System.ReadOnlyMemory{System.Byte},`0}})
+  name.vb: StreamParser(Pipe, Stream, IMessageParser(Of T, Byte), SupportedFixVersion, Nullable(Of Func(Of ReadOnlyMemory(Of Byte), T)))
+  fullName: RapideFix.Parsers.StreamParser<T>.StreamParser(System.IO.Pipelines.Pipe, System.IO.Stream, RapideFix.Parsers.IMessageParser<T, System.Byte>, RapideFix.SupportedFixVersion, System.Nullable<System.Func<System.ReadOnlyMemory<System.Byte>, T>>)
+  fullName.vb: RapideFix.Parsers.StreamParser(Of T).StreamParser(System.IO.Pipelines.Pipe, System.IO.Stream, RapideFix.Parsers.IMessageParser(Of T, System.Byte), RapideFix.SupportedFixVersion, System.Nullable(Of System.Func(Of System.ReadOnlyMemory(Of System.Byte), T)))
+  nameWithType: StreamParser<T>.StreamParser(Pipe, Stream, IMessageParser<T, Byte>, SupportedFixVersion, Nullable<Func<ReadOnlyMemory<Byte>, T>>)
+  nameWithType.vb: StreamParser(Of T).StreamParser(Pipe, Stream, IMessageParser(Of T, Byte), SupportedFixVersion, Nullable(Of Func(Of ReadOnlyMemory(Of Byte), T)))
 - uid: RapideFix.Parsers.StreamParser`1.#ctor(System.IO.Stream,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion)
   name: StreamParser(Stream, IMessageParser<T, Byte>, SupportedFixVersion)
   href: api/RapideFix.Parsers.StreamParser-1.html#RapideFix_Parsers_StreamParser_1__ctor_System_IO_Stream_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_
@@ -3212,15 +3165,15 @@ references:
   fullName.vb: RapideFix.Parsers.StreamParser(Of T).StreamParser(System.IO.Stream, RapideFix.Parsers.IMessageParser(Of T, System.Byte), RapideFix.SupportedFixVersion)
   nameWithType: StreamParser<T>.StreamParser(Stream, IMessageParser<T, Byte>, SupportedFixVersion)
   nameWithType.vb: StreamParser(Of T).StreamParser(Stream, IMessageParser(Of T, Byte), SupportedFixVersion)
-- uid: RapideFix.Parsers.StreamParser`1.#ctor(System.IO.Stream,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Func{System.ReadOnlyMemory{System.Byte},`0})
-  name: StreamParser(Stream, IMessageParser<T, Byte>, SupportedFixVersion, Func<ReadOnlyMemory<Byte>, T>)
-  href: api/RapideFix.Parsers.StreamParser-1.html#RapideFix_Parsers_StreamParser_1__ctor_System_IO_Stream_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_System_Func_System_ReadOnlyMemory_System_Byte___0__
-  commentId: M:RapideFix.Parsers.StreamParser`1.#ctor(System.IO.Stream,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Func{System.ReadOnlyMemory{System.Byte},`0})
-  name.vb: StreamParser(Stream, IMessageParser(Of T, Byte), SupportedFixVersion, Func(Of ReadOnlyMemory(Of Byte), T))
-  fullName: RapideFix.Parsers.StreamParser<T>.StreamParser(System.IO.Stream, RapideFix.Parsers.IMessageParser<T, System.Byte>, RapideFix.SupportedFixVersion, System.Func<System.ReadOnlyMemory<System.Byte>, T>)
-  fullName.vb: RapideFix.Parsers.StreamParser(Of T).StreamParser(System.IO.Stream, RapideFix.Parsers.IMessageParser(Of T, System.Byte), RapideFix.SupportedFixVersion, System.Func(Of System.ReadOnlyMemory(Of System.Byte), T))
-  nameWithType: StreamParser<T>.StreamParser(Stream, IMessageParser<T, Byte>, SupportedFixVersion, Func<ReadOnlyMemory<Byte>, T>)
-  nameWithType.vb: StreamParser(Of T).StreamParser(Stream, IMessageParser(Of T, Byte), SupportedFixVersion, Func(Of ReadOnlyMemory(Of Byte), T))
+- uid: RapideFix.Parsers.StreamParser`1.#ctor(System.IO.Stream,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Nullable{System.Func{System.ReadOnlyMemory{System.Byte},`0}})
+  name: StreamParser(Stream, IMessageParser<T, Byte>, SupportedFixVersion, Nullable<Func<ReadOnlyMemory<Byte>, T>>)
+  href: api/RapideFix.Parsers.StreamParser-1.html#RapideFix_Parsers_StreamParser_1__ctor_System_IO_Stream_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_System_Nullable_System_Func_System_ReadOnlyMemory_System_Byte___0___
+  commentId: M:RapideFix.Parsers.StreamParser`1.#ctor(System.IO.Stream,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Nullable{System.Func{System.ReadOnlyMemory{System.Byte},`0}})
+  name.vb: StreamParser(Stream, IMessageParser(Of T, Byte), SupportedFixVersion, Nullable(Of Func(Of ReadOnlyMemory(Of Byte), T)))
+  fullName: RapideFix.Parsers.StreamParser<T>.StreamParser(System.IO.Stream, RapideFix.Parsers.IMessageParser<T, System.Byte>, RapideFix.SupportedFixVersion, System.Nullable<System.Func<System.ReadOnlyMemory<System.Byte>, T>>)
+  fullName.vb: RapideFix.Parsers.StreamParser(Of T).StreamParser(System.IO.Stream, RapideFix.Parsers.IMessageParser(Of T, System.Byte), RapideFix.SupportedFixVersion, System.Nullable(Of System.Func(Of System.ReadOnlyMemory(Of System.Byte), T)))
+  nameWithType: StreamParser<T>.StreamParser(Stream, IMessageParser<T, Byte>, SupportedFixVersion, Nullable<Func<ReadOnlyMemory<Byte>, T>>)
+  nameWithType.vb: StreamParser(Of T).StreamParser(Stream, IMessageParser(Of T, Byte), SupportedFixVersion, Nullable(Of Func(Of ReadOnlyMemory(Of Byte), T)))
 - uid: RapideFix.Parsers.StreamParser`1.#ctor*
   name: StreamParser
   href: api/RapideFix.Parsers.StreamParser-1.html#RapideFix_Parsers_StreamParser_1__ctor_
@@ -3615,15 +3568,15 @@ references:
   isSpec: "True"
   fullName: RapideFix.SupportedFixVersion.ToString
   nameWithType: SupportedFixVersion.ToString
-- uid: RapideFix.SupportedFixVersion.TryParse(System.ReadOnlySpan{System.Byte},RapideFix.SupportedFixVersion@)
-  name: TryParse(ReadOnlySpan<Byte>, out SupportedFixVersion)
-  href: api/RapideFix.SupportedFixVersion.html#RapideFix_SupportedFixVersion_TryParse_System_ReadOnlySpan_System_Byte__RapideFix_SupportedFixVersion__
-  commentId: M:RapideFix.SupportedFixVersion.TryParse(System.ReadOnlySpan{System.Byte},RapideFix.SupportedFixVersion@)
-  name.vb: TryParse(ReadOnlySpan(Of Byte), ByRef SupportedFixVersion)
-  fullName: RapideFix.SupportedFixVersion.TryParse(System.ReadOnlySpan<System.Byte>, out RapideFix.SupportedFixVersion)
-  fullName.vb: RapideFix.SupportedFixVersion.TryParse(System.ReadOnlySpan(Of System.Byte), ByRef RapideFix.SupportedFixVersion)
-  nameWithType: SupportedFixVersion.TryParse(ReadOnlySpan<Byte>, out SupportedFixVersion)
-  nameWithType.vb: SupportedFixVersion.TryParse(ReadOnlySpan(Of Byte), ByRef SupportedFixVersion)
+- uid: RapideFix.SupportedFixVersion.TryParse(System.ReadOnlySpan{System.Byte},System.Nullable{RapideFix.SupportedFixVersion}@)
+  name: TryParse(ReadOnlySpan<Byte>, out Nullable<SupportedFixVersion>)
+  href: api/RapideFix.SupportedFixVersion.html#RapideFix_SupportedFixVersion_TryParse_System_ReadOnlySpan_System_Byte__System_Nullable_RapideFix_SupportedFixVersion___
+  commentId: M:RapideFix.SupportedFixVersion.TryParse(System.ReadOnlySpan{System.Byte},System.Nullable{RapideFix.SupportedFixVersion}@)
+  name.vb: TryParse(ReadOnlySpan(Of Byte), ByRef Nullable(Of SupportedFixVersion))
+  fullName: RapideFix.SupportedFixVersion.TryParse(System.ReadOnlySpan<System.Byte>, out System.Nullable<RapideFix.SupportedFixVersion>)
+  fullName.vb: RapideFix.SupportedFixVersion.TryParse(System.ReadOnlySpan(Of System.Byte), ByRef System.Nullable(Of RapideFix.SupportedFixVersion))
+  nameWithType: SupportedFixVersion.TryParse(ReadOnlySpan<Byte>, out Nullable<SupportedFixVersion>)
+  nameWithType.vb: SupportedFixVersion.TryParse(ReadOnlySpan(Of Byte), ByRef Nullable(Of SupportedFixVersion))
 - uid: RapideFix.SupportedFixVersion.TryParse*
   name: TryParse
   href: api/RapideFix.SupportedFixVersion.html#RapideFix_SupportedFixVersion_TryParse_
@@ -3631,15 +3584,15 @@ references:
   isSpec: "True"
   fullName: RapideFix.SupportedFixVersion.TryParse
   nameWithType: SupportedFixVersion.TryParse
-- uid: RapideFix.SupportedFixVersion.TryParseEnd(System.ReadOnlySpan{System.Byte},RapideFix.SupportedFixVersion@)
-  name: TryParseEnd(ReadOnlySpan<Byte>, out SupportedFixVersion)
-  href: api/RapideFix.SupportedFixVersion.html#RapideFix_SupportedFixVersion_TryParseEnd_System_ReadOnlySpan_System_Byte__RapideFix_SupportedFixVersion__
-  commentId: M:RapideFix.SupportedFixVersion.TryParseEnd(System.ReadOnlySpan{System.Byte},RapideFix.SupportedFixVersion@)
-  name.vb: TryParseEnd(ReadOnlySpan(Of Byte), ByRef SupportedFixVersion)
-  fullName: RapideFix.SupportedFixVersion.TryParseEnd(System.ReadOnlySpan<System.Byte>, out RapideFix.SupportedFixVersion)
-  fullName.vb: RapideFix.SupportedFixVersion.TryParseEnd(System.ReadOnlySpan(Of System.Byte), ByRef RapideFix.SupportedFixVersion)
-  nameWithType: SupportedFixVersion.TryParseEnd(ReadOnlySpan<Byte>, out SupportedFixVersion)
-  nameWithType.vb: SupportedFixVersion.TryParseEnd(ReadOnlySpan(Of Byte), ByRef SupportedFixVersion)
+- uid: RapideFix.SupportedFixVersion.TryParseEnd(System.ReadOnlySpan{System.Byte},System.Nullable{RapideFix.SupportedFixVersion}@)
+  name: TryParseEnd(ReadOnlySpan<Byte>, out Nullable<SupportedFixVersion>)
+  href: api/RapideFix.SupportedFixVersion.html#RapideFix_SupportedFixVersion_TryParseEnd_System_ReadOnlySpan_System_Byte__System_Nullable_RapideFix_SupportedFixVersion___
+  commentId: M:RapideFix.SupportedFixVersion.TryParseEnd(System.ReadOnlySpan{System.Byte},System.Nullable{RapideFix.SupportedFixVersion}@)
+  name.vb: TryParseEnd(ReadOnlySpan(Of Byte), ByRef Nullable(Of SupportedFixVersion))
+  fullName: RapideFix.SupportedFixVersion.TryParseEnd(System.ReadOnlySpan<System.Byte>, out System.Nullable<RapideFix.SupportedFixVersion>)
+  fullName.vb: RapideFix.SupportedFixVersion.TryParseEnd(System.ReadOnlySpan(Of System.Byte), ByRef System.Nullable(Of RapideFix.SupportedFixVersion))
+  nameWithType: SupportedFixVersion.TryParseEnd(ReadOnlySpan<Byte>, out Nullable<SupportedFixVersion>)
+  nameWithType.vb: SupportedFixVersion.TryParseEnd(ReadOnlySpan(Of Byte), ByRef Nullable(Of SupportedFixVersion))
 - uid: RapideFix.SupportedFixVersion.TryParseEnd*
   name: TryParseEnd
   href: api/RapideFix.SupportedFixVersion.html#RapideFix_SupportedFixVersion_TryParseEnd_

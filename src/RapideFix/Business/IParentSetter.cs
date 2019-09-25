@@ -16,6 +16,6 @@ namespace RapideFix.Business
     /// <param name="fixMessageContext">Message context</param>
     /// <param name="targetObject">Parent object, whose child is created</param>
     /// <returns>Returns the newly created child or an existing one</returns>
-    object Set(TagMapLeaf leaf, TagMapNode parent, FixMessageContext fixMessageContext, object targetObject);
+    object Set(TagMapLeaf leaf, TagMapParent parent, FixMessageContext fixMessageContext, object targetObject);
   }
 }

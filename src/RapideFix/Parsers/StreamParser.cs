@@ -9,43 +9,48 @@ namespace RapideFix.Parsers
   public class StreamParser<T> : PipeParser<T>
   {
     private readonly Stream _stream;
-    private readonly PipeWriter _pipeWriter;
+    private readonly Pipe _pipe;
 
     public StreamParser(Stream stream, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion)
        : this(stream, singleMessageParser, fixVersion, null)
     {
     }
 
-    public StreamParser(Stream stream, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion, Func<ReadOnlyMemory<byte>, T> targetObjectFactory)
-      : base(new Pipe(), singleMessageParser, fixVersion, targetObjectFactory)
+    public StreamParser(Stream stream, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion, Func<ReadOnlyMemory<byte>, T>? targetObjectFactory)
+      : this(new Pipe(), stream, singleMessageParser, fixVersion, targetObjectFactory)
+    {
+    }
+
+    protected StreamParser(Pipe pipe, Stream stream, IMessageParser<T, byte> singleMessageParser, SupportedFixVersion fixVersion, Func<ReadOnlyMemory<byte>, T>? targetObjectFactory)
+     : base(pipe.Reader, singleMessageParser, fixVersion, targetObjectFactory)
     {
       _stream = stream ?? throw new ArgumentNullException(nameof(stream));
-      _pipeWriter = base.Pipe.Writer;
+      _pipe = pipe ?? throw new ArgumentNullException(nameof(pipe)); 
     }
 
     public override async Task ListenAsync(CancellationToken token)
     {
       var pipeReaderTask = Task.Run(() => base.ListenAsync(token));
-
+      var pipeWriter = _pipe.Writer;
       const int minimumBufferSize = 1024;
-      while(!token.IsCancellationRequested)
+      while (!token.IsCancellationRequested)
       {
-        Memory<byte> memory = _pipeWriter.GetMemory(minimumBufferSize);
+        Memory<byte> memory = pipeWriter.GetMemory(minimumBufferSize);
         int bytesRead = await _stream.ReadAsync(memory, token);
-        if(bytesRead == 0)
+        if (bytesRead == 0)
         {
           break;
         }
-        _pipeWriter.Advance(bytesRead);
+        pipeWriter.Advance(bytesRead);
 
-        FlushResult result = await _pipeWriter.FlushAsync();
-        if(result.IsCompleted || !_stream.CanRead)
+        FlushResult result = await pipeWriter.FlushAsync();
+        if (result.IsCompleted || !_stream.CanRead)
         {
           break;
         }
       }
 
-      _pipeWriter.Complete();
+      pipeWriter.Complete();
       await pipeReaderTask;
       token.ThrowIfCancellationRequested();
     }

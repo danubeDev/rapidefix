@@ -8,7 +8,7 @@
     <title> | RapideFix </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content=" | RapideFix ">
-    <meta name="generator" content="docfx 2.40.5.0">
+    <meta name="generator" content="docfx 2.45.1.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -79,11 +79,11 @@
             <article class="content wrap" id="_content" data-uid="">
 
 <pre><code class="lang-ini">
-BenchmarkDotNet=v0.11.3, OS=Windows 10.0.17134.523 (1803/April2018Update/Redstone4), VM=Hyper-V
+BenchmarkDotNet=v0.11.5, OS=Windows 10.0.17134.950 (1803/April2018Update/Redstone4)
 Intel Xeon CPU E5-2673 v3 2.40GHz, 1 CPU, 2 logical and 2 physical cores
-.NET Core SDK=2.2.101
-  [Host] : .NET Core 2.2.0 (CoreCLR 4.6.27110.04, CoreFX 4.6.27110.04), 64bit RyuJIT
-  Core   : .NET Core 2.2.0 (CoreCLR 4.6.27110.04, CoreFX 4.6.27110.04), 64bit RyuJIT
+.NET Core SDK=3.0.100
+  [Host] : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), 64bit RyuJIT
+  Core   : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), 64bit RyuJIT
 
 Job=Core  Runtime=Core  
 </code></pre><table>
@@ -93,18 +93,18 @@ Job=Core  Runtime=Core
 <th style="text-align:right">Mean</th>
 <th style="text-align:right">Error</th>
 <th style="text-align:right">StdDev</th>
-<th style="text-align:right">Gen 0/1k Op</th>
-<th style="text-align:right">Gen 1/1k Op</th>
-<th style="text-align:right">Gen 2/1k Op</th>
-<th style="text-align:right">Allocated Memory/Op</th>
+<th style="text-align:right">Gen 0</th>
+<th style="text-align:right">Gen 1</th>
+<th style="text-align:right">Gen 2</th>
+<th style="text-align:right">Allocated</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>ParseStruct</td>
-<td style="text-align:right">1.148 us</td>
-<td style="text-align:right">0.0225 us</td>
-<td style="text-align:right">0.0323 us</td>
+<td style="text-align:right">852.1 ns</td>
+<td style="text-align:right">16.40 ns</td>
+<td style="text-align:right">15.34 ns</td>
 <td style="text-align:right">-</td>
 <td style="text-align:right">-</td>
 <td style="text-align:right">-</td>
@@ -120,7 +120,7 @@ Job=Core  Runtime=Core
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/danubeDev/rapidefix/blob/ladeak-docs/samples/Documentation.DocFx/benchmarks/results/RapideFixBenchmarks.TypedMessageParserBenchmark-report-github.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/danubeDev/rapidefix/blob/ldeak-nullability/samples/Documentation.DocFx/benchmarks/results/RapideFixBenchmarks.TypedMessageParserBenchmark-report-github.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

@@ -25,7 +25,7 @@ namespace RapideFixFixture.Business.PropertySetters
     {
       var targetObject = new MockClass();
       var uut = new ByteSetter();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag1)), Setter = uut };
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag1)), uut);
       var messageContext = new FixMessageContext();
       uut.Set("=", mappingDetails, messageContext, targetObject);
       Assert.Equal(61, targetObject.Tag1);
@@ -36,7 +36,7 @@ namespace RapideFixFixture.Business.PropertySetters
     {
       var targetObject = new MockStruct();
       var uut = new ByteSetter();
-      var mappingDetails = new TagMapLeaf() { Current = targetObject.GetType().GetProperty(nameof(targetObject.Tag1)), Setter = uut };
+      var mappingDetails = new TagMapLeaf(targetObject.GetType().GetProperty(nameof(targetObject.Tag1)), uut);
       var messageContext = new FixMessageContext();
       uut.SetTarget<MockStruct>("=", mappingDetails, messageContext, ref targetObject);
       Assert.Equal(61, targetObject.Tag1);

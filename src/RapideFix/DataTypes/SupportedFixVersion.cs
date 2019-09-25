@@ -1,7 +1,6 @@
-﻿using RapideFix.Extensions;
-using System;
-using System.Runtime.CompilerServices;
-using System.Text;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using RapideFix.Extensions;
 
 namespace RapideFix
 {
@@ -37,7 +36,7 @@ namespace RapideFix
       throw new NotSupportedException("Given Message Version is not supported.");
     }
 
-    public static bool TryParse(ReadOnlySpan<byte> fixValue, out SupportedFixVersion parsedValue)
+    public static bool TryParse(ReadOnlySpan<byte> fixValue, [NotNullWhen(true)] out SupportedFixVersion? parsedValue)
     {
       if(fixValue.SequenceEqual(Fix44._byteValue))
       {
@@ -63,7 +62,8 @@ namespace RapideFix
       return false;
     }
 
-    public static bool TryParseEnd(ReadOnlySpan<byte> fixValue, out SupportedFixVersion parsedValue)
+
+    public static bool TryParseEnd(ReadOnlySpan<byte> fixValue, [NotNullWhen(true)] out SupportedFixVersion? parsedValue)
     {
       if(fixValue.SequenceEqual(F44))
       {

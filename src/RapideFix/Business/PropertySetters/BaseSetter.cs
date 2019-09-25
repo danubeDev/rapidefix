@@ -15,21 +15,22 @@ namespace RapideFix.Business.PropertySetters
 
     protected delegate void ActionRef<TTarget, TValue0, TValue1>(ref TTarget target, TValue0 value0, TValue1 value1);
 
-    protected Delegate _propertySetter;
+    protected Delegate? _propertySetter;
 
     /// <summary>
     /// Returns an action to set a given typed value on a given property
     /// </summary>
     protected Action<object, TypeOfProperty> GetILSetterAction<TypeOfProperty>(PropertyInfo property)
     {
-      if(_propertySetter == null)
+      if (_propertySetter == null)
       {
         var sourceType = typeof(TypeOfProperty);
-        if(!property.PropertyType.IsAssignableFrom(sourceType))
+        if (!property.PropertyType.IsAssignableFrom(sourceType) || property.SetMethod == null)
         {
           throw new ArgumentException($"Property {property.Name}'s type is not assignable from type {sourceType.Name}");
         }
-        var dynamicMethod = new DynamicMethod("SetValueFor" + property.DeclaringType.FullName + property.Name, null, new[] { typeof(object), sourceType }, typeof(BaseSetter));
+        string name = $"SetValueFor{property.DeclaringType?.FullName ?? "NoType"}{property.Name}";
+        var dynamicMethod = new DynamicMethod(name, null, new[] { typeof(object), sourceType }, typeof(BaseSetter));
         var ilGenerator = dynamicMethod.GetILGenerator();
         ilGenerator.Emit(OpCodes.Ldarg_0);
         ilGenerator.Emit(OpCodes.Ldarg_1);
@@ -45,14 +46,15 @@ namespace RapideFix.Business.PropertySetters
     /// </summary>
     protected ActionRef<TTarget, TypeOfProperty> GetTypedILSetterAction<TTarget, TypeOfProperty>(PropertyInfo property)
     {
-      if(_propertySetter == null)
+      if (_propertySetter == null)
       {
         var sourceType = typeof(TypeOfProperty);
-        if(!property.PropertyType.IsAssignableFrom(sourceType))
+        if (!property.PropertyType.IsAssignableFrom(sourceType) || property.SetMethod == null)
         {
           throw new ArgumentException($"Property {property.Name}'s type is not assignable from type {sourceType.Name}");
         }
-        var dynamicMethod = new DynamicMethod("SetTypedValueFor" + property.DeclaringType.FullName + property.Name, null, new[] { typeof(TTarget).MakeByRefType(), sourceType }, typeof(BaseSetter));
+        string name = $"SetTypedValueFor{property.DeclaringType?.FullName ?? "NoType"}{property.Name}";
+        var dynamicMethod = new DynamicMethod(name, null, new[] { typeof(TTarget).MakeByRefType(), sourceType }, typeof(BaseSetter));
         var ilGenerator = dynamicMethod.GetILGenerator();
         ilGenerator.Emit(OpCodes.Ldarg_0);
         ilGenerator.Emit(OpCodes.Ldarg_1);
@@ -68,10 +70,15 @@ namespace RapideFix.Business.PropertySetters
     /// </summary>
     protected Action<object, TypeOfProperty, int> GetEnumeratedILSetterAction<TypeOfProperty>(PropertyInfo property)
     {
-      if(_propertySetter == null)
+      if (_propertySetter == null)
       {
+        if (property.GetMethod == null)
+        {
+          throw new ArgumentException("Missing Getter");
+        }
         var sourceType = typeof(TypeOfProperty);
-        var dynamicMethod = new DynamicMethod("SetArrayIndexFor" + property.DeclaringType.FullName + property.Name, null, new[] { typeof(object), sourceType, typeof(int) }, typeof(BaseSetter));
+        string name = $"SetArrayIndexFor{property.DeclaringType?.FullName ?? "NoType"}{property.Name}";
+        var dynamicMethod = new DynamicMethod(name, null, new[] { typeof(object), sourceType, typeof(int) }, typeof(BaseSetter));
         var ilGenerator = dynamicMethod.GetILGenerator();
         ilGenerator.Emit(OpCodes.Ldarg_0);
         ilGenerator.Emit(OpCodes.Call, property.GetMethod);
@@ -89,10 +96,15 @@ namespace RapideFix.Business.PropertySetters
     /// </summary>
     protected ActionRef<TTarget, TypeOfProperty, int> GetTypedEnumeratedILSetterAction<TTarget, TypeOfProperty>(PropertyInfo property)
     {
-      if(_propertySetter == null)
+      if (_propertySetter == null)
       {
+        if (property.GetMethod == null)
+        {
+          throw new ArgumentException("Missing Getter");
+        }
         var sourceType = typeof(TypeOfProperty);
-        var dynamicMethod = new DynamicMethod("SetArrayIndexFor" + property.DeclaringType.FullName + property.Name, null, new[] { typeof(TTarget).MakeByRefType(), sourceType, typeof(int) }, typeof(BaseSetter));
+        string name = $"SetArrayIndexFor{property.DeclaringType?.FullName ?? "NoType"}{property.Name}";
+        var dynamicMethod = new DynamicMethod(name, null, new[] { typeof(TTarget).MakeByRefType(), sourceType, typeof(int) }, typeof(BaseSetter));
         var ilGenerator = dynamicMethod.GetILGenerator();
         ilGenerator.Emit(OpCodes.Ldarg_0);
         ilGenerator.Emit(OpCodes.Call, property.GetMethod);
@@ -111,7 +123,7 @@ namespace RapideFix.Business.PropertySetters
     /// </summary>
     protected void SetValue<T>(TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, object targetObject, T parsedValue)
     {
-      if(mappingDetails.IsEnumerable)
+      if (mappingDetails.IsEnumerable)
       {
         int index = GetAdvancedIndex(mappingDetails, fixMessageContext);
         GetEnumeratedILSetterAction<T>(mappingDetails.Current).Invoke(targetObject, parsedValue, index);
@@ -127,7 +139,7 @@ namespace RapideFix.Business.PropertySetters
     /// </summary>
     protected void SetValue<TTarget, T>(TagMapLeaf mappingDetails, FixMessageContext fixMessageContext, ref TTarget targetObject, T parsedValue)
     {
-      if(mappingDetails.IsEnumerable)
+      if (mappingDetails.IsEnumerable)
       {
         int index = GetAdvancedIndex(mappingDetails, fixMessageContext);
         GetTypedEnumeratedILSetterAction<TTarget, T>(mappingDetails.Current).Invoke(ref targetObject, parsedValue, index);
@@ -153,13 +165,13 @@ namespace RapideFix.Business.PropertySetters
     protected int GetAdvancedIndex(int leafPropertyKey, TagMapNode mappingDetails, FixMessageContext fixMessageContext, out bool isAdvanced)
     {
       isAdvanced = false;
-      if(!fixMessageContext.RepeatingGroupCounters.TryGetValue(mappingDetails.RepeatingTagNumber, out FixMessageContext.RepeatingCounter value))
+      if (!fixMessageContext.RepeatingGroupCounters.TryGetValue(mappingDetails.RepeatingTagNumber, out FixMessageContext.RepeatingCounter? value))
       {
         value = new FixMessageContext.RepeatingCounter(leafPropertyKey);
         fixMessageContext.RepeatingGroupCounters.Add(mappingDetails.RepeatingTagNumber, value);
         isAdvanced = true;
       }
-      if(leafPropertyKey == value.FirstTagKey)
+      if (leafPropertyKey == value.FirstTagKey)
       {
         value.Index++;
         isAdvanced = true;
@@ -180,7 +192,7 @@ namespace RapideFix.Business.PropertySetters
     {
       int valueLength = value.Length;
       Span<char> valueChars = stackalloc char[valueLength];
-      if(mappingDetails.IsEncoded)
+      if (mappingDetails.IsEncoded)
       {
         valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, valueChars);
         valueChars = valueChars.Slice(0, valueLength);
@@ -196,7 +208,7 @@ namespace RapideFix.Business.PropertySetters
     {
       int valueLength = value.Length;
       Span<char> valueChars = stackalloc char[valueLength];
-      if(mappingDetails.IsEncoded)
+      if (mappingDetails.IsEncoded)
       {
         valueLength = fixMessageContext.EncodedFields.GetEncoder().GetChars(value, valueChars);
         valueChars = valueChars.Slice(0, valueLength);

@@ -1,5 +1,6 @@
 ﻿using RapideFix.Extensions;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Threading;
 
@@ -32,7 +33,7 @@ namespace RapideFix.DataTypes
       throw new NotSupportedException("Given Message Encoding is not supported.");
     }
 
-    public static bool TryParse(ReadOnlySpan<byte> fixValue, out MessageEncoding parsedValue)
+    public static bool TryParse(ReadOnlySpan<byte> fixValue, [NotNullWhen(true)] out MessageEncoding? parsedValue)
     {
       if(fixValue.SequenceEqual(UTF8._byteValue))
       {

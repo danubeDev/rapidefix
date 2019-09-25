@@ -21,9 +21,8 @@ namespace RapideFixFixture.Business
       var valueToSet = Encoding.ASCII.GetBytes("12358").AsSpan();
       var property = targetObject.GetType().GetProperty(nameof(targetObject.Tag61));
       var typeConverter = property.GetCustomAttribute<TypeConverterAttribute>();
-      var mappingDetails = new TagMapLeaf()
+      var mappingDetails = new TagMapLeaf(property, uut)
       {
-        Current = property,
         TypeConverterName = typeConverter.ConverterTypeName
       };
       var messageContext = new FixMessageContext();
@@ -42,10 +41,9 @@ namespace RapideFixFixture.Business
       var valueToSet = Encoding.ASCII.GetBytes("12358").AsSpan();
       var property = targetObject.GetType().GetProperty(nameof(targetObject.Tag65s));
       var typeConverter = property.GetCustomAttribute<TypeConverterAttribute>();
-      var mappingDetails = new TagMapLeaf()
+      var mappingDetails = new TagMapLeaf(property, uut)
       {
         IsEnumerable = true,
-        Current = property,
         TypeConverterName = typeConverter.ConverterTypeName
       };
       var messageContext = new FixMessageContext();
@@ -62,9 +60,8 @@ namespace RapideFixFixture.Business
       var valueToSet = "12358";
       var property = targetObject.GetType().GetProperty(nameof(targetObject.Tag61));
       var typeConverter = property.GetCustomAttribute<TypeConverterAttribute>();
-      var mappingDetails = new TagMapLeaf()
+      var mappingDetails = new TagMapLeaf(property, uut)
       {
-        Current = property,
         TypeConverterName = typeConverter.ConverterTypeName
       };
       var messageContext = new FixMessageContext();
