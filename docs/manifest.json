@@ -9,10 +9,10 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "ztoqbzKWHWWkJJkELRWQgQ=="
+          "hash": "B4o0KJPdtjbasoAV13q64g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -21,10 +21,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/MessageBuilder.html",
-          "hash": "g8vWLHKWzwmuQ14dgJk35Q=="
+          "hash": "fUCwR9gAeLvdvu70FmMFdQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -33,10 +33,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/MessageParsers.html",
-          "hash": "f0Hi6I9Q6gOqUt1Vkha3Zg=="
+          "hash": "iDcMPgRKH53Cosw9VXSvTg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -45,10 +45,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/ParserBuilder.html",
-          "hash": "fKVmENrFTF5kutxoIlRsiA=="
+          "hash": "jEXXemEif87SKuyGj1hymA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -57,10 +57,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/StreamParsers.html",
-          "hash": "TdyYxeOOcJuZ+FNMlcP71Q=="
+          "hash": "f5IVcpGd+HfyoLFTjayfSw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -69,10 +69,10 @@
       "output": {
         ".html": {
           "relative_path": "articles/index.html",
-          "hash": "X9ecF9JaImq94EwI44nc1g=="
+          "hash": "/VDU12Z4gUxQRif6eAM9+g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -93,10 +93,10 @@
       "output": {
         ".html": {
           "relative_path": "benchmarks/results/RapideFixBenchmarks.MessageParserBenchmark-report-github.html",
-          "hash": "IJOB55ITS8v7YfOHUP3fpQ=="
+          "hash": "gS1do4VeRiwvfXRwn18seA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -105,10 +105,10 @@
       "output": {
         ".html": {
           "relative_path": "benchmarks/results/RapideFixBenchmarks.TypedMessageParserBenchmark-report-github.html",
-          "hash": "S3cDcDfLKkC9G9xgblzkZQ=="
+          "hash": "IbeelmN6Ai8dYjFPx42Y/Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -117,10 +117,10 @@
       "output": {
         ".html": {
           "relative_path": "benchmarks/results/RapideFixBenchmarks.TypedStringMessageParserBenchmark-report-github.html",
-          "hash": "lbMj1BuKfqVDvTnuKWfwGg=="
+          "hash": "mt8D6B/1SGbJPPWln1Ko3w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -152,7 +152,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "6wxZDCMn8G8SeVIA4bHxmw=="
+          "hash": "L6OVlOki0eYNnbzCX1Vc+w=="
         }
       },
       "is_incremental": false,
@@ -164,10 +164,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Attributes.FixTagAttribute.html",
-          "hash": "b+ZMTBWLZ09OXs/anonipQ=="
+          "hash": "E1BV650zEOWi7Df8ewAmyA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -176,10 +176,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Attributes.MessageTypeAttribute.html",
-          "hash": "i4nIvd1U3NtF4Cjvd6neOQ=="
+          "hash": "LNRXFQZmNX1qjy3aD5hJdA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -188,10 +188,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Attributes.RepeatingGroupAttribute.html",
-          "hash": "h69/zyxG8pskbjrTZx0oWg=="
+          "hash": "5iTPH7VHmiDH58Fmy8fFGA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -200,10 +200,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Attributes.html",
-          "hash": "g+MYCKwMMyJlZOPhKebeUw=="
+          "hash": "Q49Q1dYFQM3ceqhBLH/VwQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -212,10 +212,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.CompositePropertySetter.html",
-          "hash": "5fXD0tbNyWBIPppgqr4gqw=="
+          "hash": "KQ2NEVvr6Zo52NWab8ijow=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -224,10 +224,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.Data.MessageParserOptions.html",
-          "hash": "FoaPHpqdy0h11bg1P+TGlg=="
+          "hash": "Vcj9+h49joWR4bjxmlmnIA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -236,10 +236,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.Data.TagMapLeaf.html",
-          "hash": "PL3pyzUouxp+i7fRMT9jjg=="
+          "hash": "8wod2zZMpmTbVVe8yx+dRA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -248,10 +248,22 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.Data.TagMapNode.html",
-          "hash": "/CH9WahFuw0JvcSNSIK4LA=="
+          "hash": "AGxc63pjpdS3pY4yL82WLQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/RapideFix.Business.Data.TagMapParent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RapideFix.Business.Data.TagMapParent.html",
+          "hash": "Hkog4DvMpFAZIFFoIf37bA=="
+        }
+      },
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -260,10 +272,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.Data.html",
-          "hash": "C4ezkalzR7lYtMUaRoZ80g=="
+          "hash": "ZJzikD4OiIjzdNRs1yQ2HA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -272,10 +284,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.IParentSetter.html",
-          "hash": "9ECy30cCG5IOJw8KbomsZw=="
+          "hash": "P7EjJAEke/MvOALyJ80b2A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -284,10 +296,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.IPropertySetter.html",
-          "hash": "1PcRehrNY2LLHYS7g6UjSw=="
+          "hash": "QA1GuAc5gtuvIqqqw2y1/w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -296,10 +308,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.ISubPropertySetterFactory.html",
-          "hash": "H/u6P55n7U/Kr3eIGrNwgQ=="
+          "hash": "o0tNFOAB/LYG9XmvfchG2Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -308,10 +320,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.ITagToPropertyMapper.html",
-          "hash": "yQMElQYdE4ZrG6ObOFi7IQ=="
+          "hash": "QOk0glFPcnzq0dt2LksntA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -320,10 +332,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.ITypedPropertySetter.html",
-          "hash": "12oy3L98dd02gnMJhDN+Tg=="
+          "hash": "AQJCeWrfR3VoVzYRTp0fOA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -332,10 +344,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.BaseSetter.ActionRef-2.html",
-          "hash": "dUTOay1SYJBI8p31MCZFkA=="
+          "hash": "nTySuugT91c0BjNdGi9n+w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -344,10 +356,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.BaseSetter.ActionRef-3.html",
-          "hash": "kf8hoIkqUX6iJHEJhMoBAA=="
+          "hash": "Qpg79p13ERBRVtCo+9yihw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -356,10 +368,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.BaseSetter.html",
-          "hash": "yohoYkGw2G41/L3Yrb3t+w=="
+          "hash": "FQkARKBBTH9V7bbegunF6w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -368,10 +380,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.BooleanSetter.html",
-          "hash": "JmQjgmrKqw9dtlVEACrJ4g=="
+          "hash": "6UXcO4K+bFwhczZTobBZHg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -380,10 +392,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.ByteSetter.html",
-          "hash": "VHdQ4GRY3Tyj4fn3DmahmQ=="
+          "hash": "lkrEad5Vl2RcTLttCwX90Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -392,10 +404,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.CharSetter.html",
-          "hash": "mKqEDNk/hMsVmjr+C9bFYQ=="
+          "hash": "q0YViwyfDsqkPgVTQTb9Mw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -404,10 +416,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.DateTimeOffsetSetter.html",
-          "hash": "DMHoVK+LDWpxV7btoME2hA=="
+          "hash": "jvF/873BsR0Uz5+dqQPX0g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -416,10 +428,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.DecimalSetter.html",
-          "hash": "sdVYSpF/h5vSFzUKRnc9Ig=="
+          "hash": "udHTGRA4NiaRb4nMt8FnOQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -428,10 +440,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.DoubleSetter.html",
-          "hash": "MqX+XHk6krdvtFBDyi9B/A=="
+          "hash": "qrmmS6yKfenPGti2dt3OiQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -440,10 +452,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.FloatSetter.html",
-          "hash": "TzwLO28eZBNvyFfGcwBihw=="
+          "hash": "OlNtyz+KJR9+QSEO/rlSbQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -452,10 +464,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.IntegerSetter.html",
-          "hash": "PXkEJE+NsFn5w7X/6VhViw=="
+          "hash": "p9LQtYBdrzWIl0oh7BQrkQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -464,10 +476,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.LongSetter.html",
-          "hash": "2u0owiX4z8yx8V4YqOGSpA=="
+          "hash": "Q5mZGsmni5RSavpVdWwrvQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -476,10 +488,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.NullableBooleanSetter.html",
-          "hash": "Oc3B4dx6Fg7tfMrf38a7+w=="
+          "hash": "LEQ1YTgtdeIM82asSrDxVw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -488,10 +500,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.NullableByteSetter.html",
-          "hash": "sQgNhUYblaINBd5b8KtdAw=="
+          "hash": "Nr+I3bNDiNPbDY/Chgnt2Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -500,10 +512,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.NullableCharSetter.html",
-          "hash": "OpcTnUgrJSbm+IJ27SGt0g=="
+          "hash": "DgS51ly7HHc8Bma5+Jvnpw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -512,10 +524,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.NullableDateTimeOffsetSetter.html",
-          "hash": "91pdZtZzRz4ggfHK0zIt1w=="
+          "hash": "o4I/fd7dvUhRqngx9j/TwA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -524,10 +536,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.NullableDecimalSetter.html",
-          "hash": "LPmY6lifLdYHTt7Vr1dg6A=="
+          "hash": "lsH5FWyDYtlwjTbJQSlWEg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -536,10 +548,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.NullableDoubleSetter.html",
-          "hash": "dOdt6Ojvf1NsSJ7UJoi5Kw=="
+          "hash": "1CGJ79N3H0x4WpIK5B531Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -548,10 +560,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.NullableFloatSetter.html",
-          "hash": "hdh/yE+tpgMwAv16CPATeA=="
+          "hash": "PLguyhTknNwSCe+E5s5gZA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -560,10 +572,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.NullableIntegerSetter.html",
-          "hash": "LMN+hTt5GS3Qkkt6qLyDpA=="
+          "hash": "yFnmD8tIMCX79Rlqr6pCOg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -572,10 +584,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.NullableLongSetter.html",
-          "hash": "h2gnAIUi2hJo2DspZnoLdQ=="
+          "hash": "L7qM+6qM2oQCZWuWhw0xxw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -584,10 +596,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.NullableShortSetter.html",
-          "hash": "3QfOg1N0U/KZwZ1vD9TPmg=="
+          "hash": "7vPX0NhrbIt7r/x274UXZg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -596,10 +608,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.ParentPropertySetter.html",
-          "hash": "NDDFBvFjOI94iS+w2MH60A=="
+          "hash": "XfMRnL8+u0wKFtJoHTejIg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -608,10 +620,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.ShortSetter.html",
-          "hash": "TUmk2GzDnS8rJsBB8ZxpxQ=="
+          "hash": "up6fOExIzM3EhP1dWQ0IdA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -620,10 +632,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.StringSetter.html",
-          "hash": "PxOcDwASx0XGnVSyGqLuNw=="
+          "hash": "jxEFOD1W0LDt1xXMQdVVEA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -632,10 +644,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.PropertySetters.html",
-          "hash": "j6hG91u5NC2QvPiHItDRaA=="
+          "hash": "xm1XLYCpwBOmSjIHlXPvtQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -644,10 +656,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.RepeatingGroupTagSetter.html",
-          "hash": "Ung7I2zPNc1fsKqo3tyrVw=="
+          "hash": "2H9zHYdp8q7Qjr1axH7iVg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -656,10 +668,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.SubPropertySetterFactory.html",
-          "hash": "7wt0oXeh9zO9hLoPQbRSPA=="
+          "hash": "wdaKSLmseSyhap+CG0vJVg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -668,10 +680,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.TagToPropertyMapper.html",
-          "hash": "3nYjNo1anmFsr5qN2cknWw=="
+          "hash": "kleNfEEgx6Gnqq0BecKLeQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -680,10 +692,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.TypeConvertedSetter.html",
-          "hash": "s/o3lYyfMNVIR2cW5SFEuw=="
+          "hash": "GJ2rR496IqdlXRva7g/Mzw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -692,10 +704,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Business.html",
-          "hash": "oxCk7tqqAkQTB55HHYz/qg=="
+          "hash": "BC6YWBti+S77TdPiXZOSBg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -704,10 +716,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.DataTypes.FixMessageContext.RepeatingCounter.html",
-          "hash": "RSs5oSoVmE9UEN1a8Gv66g=="
+          "hash": "rPDX501ZBFlIqi5X27hcdw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -716,10 +728,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.DataTypes.FixMessageContext.html",
-          "hash": "Adbzlxse/+zmRhJrqIEpJg=="
+          "hash": "1O2R/nKGb0QIlDoYv9kn2Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -728,10 +740,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.DataTypes.MessageEncoding.html",
-          "hash": "xOhds8Wz72yGzS6/IhOC5w=="
+          "hash": "kqv8oQB4lEI4YQMVVgRLSg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -740,10 +752,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.DataTypes.html",
-          "hash": "fv0YBEpTj0Ey+bd2JBRBWA=="
+          "hash": "ObK9rsuupRviKXQRhHTeow=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -752,10 +764,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Extensions.FixMessageContextExtensions.html",
-          "hash": "8XM3/+gz5SeQH5FB/k5HRQ=="
+          "hash": "ESSnmZGIw6DU4ZGC6KcSiw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -764,10 +776,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Extensions.IntegerExtensions.html",
-          "hash": "oO04PEkh8jWIaB6w/9e1RA=="
+          "hash": "DlzutdDG7GEu6PTuXYDFdQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -776,10 +788,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Extensions.StringExtensions.html",
-          "hash": "+hV/IdECUzCflvKXjVHedQ=="
+          "hash": "gKTY1dVtxB1y2TUkfPOe+Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -788,34 +800,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Extensions.html",
-          "hash": "vpN501yNECyrWVWAN8epng=="
+          "hash": "sdSl50i9zUCp6hRby9wvtA=="
         }
       },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "obj/api/RapideFix.FixParser.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/RapideFix.FixParser.html",
-          "hash": "3qbnHH9RVMXh9mnx6KoFhw=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "obj/api/RapideFix.FixParserSettings.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/RapideFix.FixParserSettings.html",
-          "hash": "cx3bxwwoFtGlbBr2pNU8rg=="
-        }
-      },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -824,10 +812,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.IntegerToFixConverter.html",
-          "hash": "vrnqWGt60b/qtmv1XgqGhw=="
+          "hash": "iHtOIzD+my+0OJb7uXAhuA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -836,10 +824,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.MessageBuilders.FixTagValueConverter.html",
-          "hash": "bTdLI83682LFwhVkjsOAvQ=="
+          "hash": "JEghyks2y5dPLbYxjr683g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -848,10 +836,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.MessageBuilders.MessageBuilder.html",
-          "hash": "aB7Xndy/PYxy24+uNPmHOw=="
+          "hash": "qy+4f0a9wLCHWaWSXp8j8g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -860,10 +848,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.MessageBuilders.html",
-          "hash": "MT0EcAL3oLk8oIltgz0XQQ=="
+          "hash": "T4mnvXhe6ituidbZYT4LPg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -872,10 +860,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.ParserBuilders.ParserBuilder-1.html",
-          "hash": "qGTyi4RAck7fqe55lH/xBQ=="
+          "hash": "SfTTn6JBmgLQxdQvYSoaUA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -884,10 +872,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.ParserBuilders.html",
-          "hash": "i0uxlSAxJbx9Zjbr2Y0Rpg=="
+          "hash": "ywPOvtSUhbKkgVe88gcJ8Q=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -896,10 +884,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Parsers.IMessageParser-2.html",
-          "hash": "6+5HbPmahWg+2/C+41LkLA=="
+          "hash": "E931ne95Fn+jFBSWS6uffQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -908,10 +896,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Parsers.MessageParser.html",
-          "hash": "tjrobDG73+wnFTBZbiIeMg=="
+          "hash": "1mH3L4wD1R21mWz1dVco+w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -920,10 +908,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Parsers.ObservableParser-1.html",
-          "hash": "O92PsMhEr4NwFft6VMiT6A=="
+          "hash": "I/gLW12z32hJii+ZHMKeOQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -932,10 +920,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Parsers.PipeParser-1.html",
-          "hash": "yk/26CGk7Y3aXr/zg69KGA=="
+          "hash": "8ml5Irs6Zq3BzYIjkvbKHA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -944,10 +932,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Parsers.StreamParser-1.html",
-          "hash": "vulB85W1WUuaK9liw0y6cA=="
+          "hash": "KmC6GXrVPNtS3HgHUZrcVg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -956,10 +944,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Parsers.TypedMessageParser-1.html",
-          "hash": "n8A5I6DSMNakz+02SfUglw=="
+          "hash": "0n/RhhD9/PokkhkWiXIwuw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -968,10 +956,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Parsers.TypedStringMessageParser-1.html",
-          "hash": "XEKyqIC0lvvzC9bDqiERyA=="
+          "hash": "UvzgUTyZhTtZp0djGhYaYg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -980,10 +968,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Parsers.html",
-          "hash": "40i2rweuegdMxde7zoAuCQ=="
+          "hash": "jA40rhPL+FT0m7gUCUJL3w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -992,10 +980,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.StringProcessing.FixStringEnumerable.html",
-          "hash": "4xi3NmQkbqpJBzZ4+ALSHA=="
+          "hash": "kNicLKP3a8e8DWEtw2y/QA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1004,10 +992,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.StringProcessing.FixStringEnumerator.html",
-          "hash": "oaXe6gTKrlDqIpjhZo8ZFA=="
+          "hash": "7uXSDIPHcBB27zHr4GrZNg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1016,10 +1004,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.StringProcessing.ReadOnlyMemoryExtensions.html",
-          "hash": "W5/k/fkVdW7hjl7eWlb3ew=="
+          "hash": "2xIAsAPcz4yniJcigpBx0w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1028,10 +1016,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.StringProcessing.html",
-          "hash": "3XK28kd6QT3rtkb06eECHQ=="
+          "hash": "2MBcElj47RVxF7w87YR5Sg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1040,10 +1028,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.SupportedFixVersion.html",
-          "hash": "JEbzWG9JAqNCkN0alR0Ohg=="
+          "hash": "MJx2l2lTTFpD+Jt5nKg0wQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1052,10 +1040,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Validation.ChecksumValidator.html",
-          "hash": "cwu/Ua0pxTUJVL3WtpbTow=="
+          "hash": "PXWcaNv5DLhAOlRw7LQqFQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1064,10 +1052,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Validation.FixVersionValidator.html",
-          "hash": "WKUePpuNFoM1uTt3fcPUhw=="
+          "hash": "8i3vxQge76wnjGTeF/doLw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1076,10 +1064,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Validation.IValidator.html",
-          "hash": "xPGE9x/jamyPJSD+qQUQMQ=="
+          "hash": "/TpnKd3lRFcvs+T4F9UWhQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1088,10 +1076,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Validation.IValidatorInternal.html",
-          "hash": "CPmrk8IPpF7jqLIM1KsvZQ=="
+          "hash": "bz4nnJwfc8OdAdoLiyZZpg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1100,10 +1088,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Validation.LengthValidator.html",
-          "hash": "+Z0NtzMCwwgO0DPAOQwIIA=="
+          "hash": "DD9rvFPbuj4WjCsYMFG6OQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1112,10 +1100,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Validation.ValidatorCollection.html",
-          "hash": "6K0tzIc6v3rPL2iS2QgmJA=="
+          "hash": "WJrjiYqDkQAza73oIDcaOg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1124,10 +1112,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.Validation.html",
-          "hash": "murL5ZejmWQjqdd8IjuzPg=="
+          "hash": "IFRPn6qnSkF60fhb9xkvzg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1136,10 +1124,10 @@
       "output": {
         ".html": {
           "relative_path": "api/RapideFix.html",
-          "hash": "Cw9uqTgGL225j/oV6AZqAA=="
+          "hash": "s68zg/ENavJ63gCdzkoZiA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -1148,7 +1136,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "/dLcSIqyEfiEAOkqZJZLtg=="
+          "hash": "rRlJLzdQd4TBEbezO5nSGA=="
         }
       },
       "is_incremental": false,
@@ -1170,35 +1158,49 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": true,
-        "incrementalPhase": "build"
+        "can_incremental": false,
+        "details": "Disable incremental build by force rebuild option.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "ForceRebuild"
       },
       "processors": {
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
-        },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build"
-        },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build"
-        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 10,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 81,
+          "skipped_file_count": 0
         }
       }
     },
     {
       "status": {
-        "can_incremental": true,
-        "details": "Can support incremental post processing.",
-        "incrementalPhase": "postProcessing"
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: it's disabled.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
       },
       "processors": {}
     }

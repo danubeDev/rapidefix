@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class PipeParser&lt;T&gt;
    | RapideFix ">
-    <meta name="generator" content="docfx 2.40.5.0">
+    <meta name="generator" content="docfx 2.45.1.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -164,12 +164,12 @@
   
   
   <a id="RapideFix_Parsers_PipeParser_1__ctor_" data-uid="RapideFix.Parsers.PipeParser`1.#ctor*"></a>
-  <h4 id="RapideFix_Parsers_PipeParser_1__ctor_System_IO_Pipelines_Pipe_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_System_Func_System_ReadOnlyMemory_System_Byte___0__" data-uid="RapideFix.Parsers.PipeParser`1.#ctor(System.IO.Pipelines.Pipe,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Func{System.ReadOnlyMemory{System.Byte},`0})">PipeParser(Pipe, IMessageParser&lt;T, Byte&gt;, SupportedFixVersion, Func&lt;ReadOnlyMemory&lt;Byte&gt;, T&gt;)</h4>
+  <h4 id="RapideFix_Parsers_PipeParser_1__ctor_System_IO_Pipelines_Pipe_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_System_Nullable_System_Func_System_ReadOnlyMemory_System_Byte___0___" data-uid="RapideFix.Parsers.PipeParser`1.#ctor(System.IO.Pipelines.Pipe,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Nullable{System.Func{System.ReadOnlyMemory{System.Byte},`0}})">PipeParser(Pipe, IMessageParser&lt;T, Byte&gt;, SupportedFixVersion, Nullable&lt;Func&lt;ReadOnlyMemory&lt;Byte&gt;, T&gt;&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public PipeParser(Pipe pipe, IMessageParser&lt;T, byte&gt; singleMessageParser, SupportedFixVersion fixVersion, Func&lt;ReadOnlyMemory&lt;byte&gt;, T&gt; targetObjectFactory)</code></pre>
+    <pre><code class="lang-csharp hljs">public PipeParser(Pipe pipe, IMessageParser&lt;T, byte&gt; singleMessageParser, SupportedFixVersion fixVersion, Func&lt;ReadOnlyMemory&lt;byte&gt;, T&gt;? targetObjectFactory)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -197,7 +197,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.ReadOnlyMemory</span>&lt;<span class="xref">System.Byte</span>&gt;, T&gt;</td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">System.ReadOnlyMemory</span>&lt;<span class="xref">System.Byte</span>&gt;, T&gt;&gt;</td>
         <td><span class="parametername">targetObjectFactory</span></td>
         <td></td>
       </tr>
@@ -243,12 +243,12 @@
   
   
   <a id="RapideFix_Parsers_PipeParser_1__ctor_" data-uid="RapideFix.Parsers.PipeParser`1.#ctor*"></a>
-  <h4 id="RapideFix_Parsers_PipeParser_1__ctor_System_IO_Pipelines_PipeReader_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_System_Func_System_ReadOnlyMemory_System_Byte___0__" data-uid="RapideFix.Parsers.PipeParser`1.#ctor(System.IO.Pipelines.PipeReader,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Func{System.ReadOnlyMemory{System.Byte},`0})">PipeParser(PipeReader, IMessageParser&lt;T, Byte&gt;, SupportedFixVersion, Func&lt;ReadOnlyMemory&lt;Byte&gt;, T&gt;)</h4>
+  <h4 id="RapideFix_Parsers_PipeParser_1__ctor_System_IO_Pipelines_PipeReader_RapideFix_Parsers_IMessageParser__0_System_Byte__RapideFix_SupportedFixVersion_System_Nullable_System_Func_System_ReadOnlyMemory_System_Byte___0___" data-uid="RapideFix.Parsers.PipeParser`1.#ctor(System.IO.Pipelines.PipeReader,RapideFix.Parsers.IMessageParser{`0,System.Byte},RapideFix.SupportedFixVersion,System.Nullable{System.Func{System.ReadOnlyMemory{System.Byte},`0}})">PipeParser(PipeReader, IMessageParser&lt;T, Byte&gt;, SupportedFixVersion, Nullable&lt;Func&lt;ReadOnlyMemory&lt;Byte&gt;, T&gt;&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public PipeParser(PipeReader pipeReader, IMessageParser&lt;T, byte&gt; singleMessageParser, SupportedFixVersion fixVersion, Func&lt;ReadOnlyMemory&lt;byte&gt;, T&gt; targetObjectFactory)</code></pre>
+    <pre><code class="lang-csharp hljs">public PipeParser(PipeReader pipeReader, IMessageParser&lt;T, byte&gt; singleMessageParser, SupportedFixVersion fixVersion, Func&lt;ReadOnlyMemory&lt;byte&gt;, T&gt;? targetObjectFactory)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -276,35 +276,8 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.ReadOnlyMemory</span>&lt;<span class="xref">System.Byte</span>&gt;, T&gt;</td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Func</span>&lt;<span class="xref">System.ReadOnlyMemory</span>&lt;<span class="xref">System.Byte</span>&gt;, T&gt;&gt;</td>
         <td><span class="parametername">targetObjectFactory</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="properties">Properties
-  </h3>
-  
-  
-  <a id="RapideFix_Parsers_PipeParser_1_Pipe_" data-uid="RapideFix.Parsers.PipeParser`1.Pipe*"></a>
-  <h4 id="RapideFix_Parsers_PipeParser_1_Pipe" data-uid="RapideFix.Parsers.PipeParser`1.Pipe">Pipe</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected Pipe Pipe { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.IO.Pipelines.Pipe</span></td>
         <td></td>
       </tr>
     </tbody>
