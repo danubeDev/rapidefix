@@ -1,7 +1,5 @@
-﻿using RapideFix.Extensions;
-using System;
-using System.Runtime.CompilerServices;
-using System.Text;
+﻿using System;
+using RapideFix.Extensions;
 
 namespace RapideFix
 {
@@ -59,11 +57,12 @@ namespace RapideFix
         parsedValue = Fix42;
         return true;
       }
-      parsedValue = default!;
+      parsedValue = default;
       return false;
     }
 
-    public static bool TryParseEnd(ReadOnlySpan<byte> fixValue, out SupportedFixVersion? parsedValue)
+
+    public static bool TryParseEnd(ReadOnlySpan<byte> fixValue, out SupportedFixVersion parsedValue)
     {
       if(fixValue.SequenceEqual(F44))
       {
